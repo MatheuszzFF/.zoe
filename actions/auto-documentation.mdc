@@ -1,0 +1,55 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 📚 Documentação Automática
+
+## Trigger
+- Qualquer ajuste feito no código
+
+## Comportamento
+**Arquivo único por dia:** `progress/[YYYY-MM-DD]/README.md`
+
+**Estrutura do arquivo diário:**
+```markdown
+# 📈 Progresso - [DD/MM/YYYY]
+
+## 📊 Resumo
+- **Total de ajustes:** X
+- **Principais melhorias:** [lista]
+- **Stack:** React/Next + TypeScript + [Tailwind/Styled-components]
+
+---
+
+## [Tipo de Ajuste]
+
+**Solicitação:** [O que foi pedido]
+
+**Antes:**
+```[linguagem]
+[código original]
+```
+
+**Depois:**
+```[linguagem]
+[código ajustado]
+```
+
+**Melhorias:**
+- [lista das melhorias]
+
+---
+
+## [Próximo Ajuste]
+[Repetir estrutura para cada ajuste do dia]
+
+---
+```
+
+## Regras
+- Um arquivo README por dia
+- Resumo diário simples no topo
+- Cada ajuste como seção separada
+- Sem horários, estrutura limpa
+

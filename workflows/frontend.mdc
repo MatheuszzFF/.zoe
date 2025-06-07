@@ -1,0 +1,76 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Workflow: Frontend React/Next
+
+## 🎯 Fluxo Padrão
+
+### 1. **Criar Componente**
+1. Ler contexto atual (`context/stack-tech.mdc`)
+2. Detectar Tailwind (`commands/detect-style.mdc`)
+3. Criar pasta kebab-case: `components/[nome-do-componente]/`
+4. Gerar arquivos:
+   - `[nome].types.ts` → Interfaces
+   - `[nome].component.tsx` → Lógica
+   - `[nome].template.tsx` → Visual
+   - `[nome].classes.ts` → Classes (se Tailwind)
+   - `[nome].composite.tsx` → Subcomponentes (se necessário)
+5. Aplicar padrões TypeScript + React
+6. Documentar em progress/
+
+### 2. **Criar Página**
+1. Aplicar template (`templates/next-page.mdc`)
+2. Criar estrutura similar aos componentes
+3. Configurar SEO meta tags no `.page.tsx`
+4. Separar lógica (página) de visual (template)
+5. Adicionar getServerSideProps se necessário
+6. Testar responsividade
+7. Documentar alterações
+
+### 3. **Fix de Bug**
+1. Executar checklist (`commands/fix-bugs.mdc`)
+2. Aplicar correções padrão
+3. Verificar todos os arquivos da estrutura
+4. Manter separação lógica/visual
+5. Validar TypeScript
+6. Documentar correção
+
+### 4. **Otimização**
+1. Aplicar React.memo no `.component.tsx`
+2. Lazy loading de componentes
+3. Otimizar `.classes.ts` (Tailwind)
+4. Verificar re-renders
+5. Performance profiling
+6. Lighthouse audit
+
+## ⚡ Comandos Rápidos
+- `criar componente [nome-componente]` → Estrutura completa
+- `criar página [nome-pagina]` → Page + template + SEO
+- `fix bugs` → Correções automáticas
+- `otimizar performance` → Melhorias padrão
+
+## 📋 Estrutura Padrão Criada
+```
+[nome-do-item]/
+├── [nome].component.tsx    # Lógica
+├── [nome].template.tsx     # Visual
+├── [nome].classes.ts       # Classes Tailwind (se aplicável)
+├── [nome].types.ts         # Interfaces TypeScript
+└── [nome].composite.tsx    # Subcomponentes (opcional)
+```
+
+## ✅ Checklist Geral
+- [ ] Pasta kebab-case
+- [ ] Separação lógica (.component) vs visual (.template)
+- [ ] TypeScript interfaces (.types)
+- [ ] Classes organizadas (.classes) se Tailwind
+- [ ] Componentes funcionais
+- [ ] Props destructuring
+- [ ] Responsive design
+- [ ] Accessibility
+- [ ] Performance otimizada
+
+
+

@@ -1,0 +1,42 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 📄 Create Page
+
+## Comando
+`criar página [nome]`
+
+## Comportamento
+**Criar estrutura completa de página React:**
+
+### **Estrutura criada:**
+```
+pages/[nome-da-pagina]/
+├── [nome].page.tsx         # Página principal + Head/SEO
+├── [nome].template.tsx     # Estrutura visual da página
+├── [nome].classes.ts       # Classes Tailwind (se aplicável)
+├── [nome].types.ts         # Props interfaces
+└── [nome].composite.tsx    # Componentes específicos da página
+```
+
+## Processo
+1. **Detectar estilo** → `commands/detect-style.mdc`
+2. **Usar template** → `templates/react-page.mdc`
+3. **Criar estrutura** completa de arquivos
+4. **Aplicar padrões** React/TypeScript
+5. **Adicionar SEO/Head** se necessário
+6. **Documentar criação** no progresso
+
+## Separação de Responsabilidades
+- **.page.tsx** → Página principal e configurações
+- **.template.tsx** → Layout e estrutura visual
+- **.classes.ts** → Estilos (se Tailwind)
+- **.types.ts** → Interfaces da página
+- **.composite.tsx** → Componentes específicos
+
+## Objetivo
+Criar páginas com estrutura padronizada e SEO
+
+

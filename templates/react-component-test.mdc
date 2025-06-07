@@ -1,0 +1,294 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Template: Teste de Componente React
+
+## Instruções de Implementação
+
+### 1. Estrutura Básica do Arquivo [nome].test.tsx
+- Importar: vitest, @testing-library/react, userEvent
+- Setup padrão: beforeEach com cleanup e clearAllMocks
+- Organizar em 4 seções de describe: Renderização, Interações, Estados, Acessibilidade
+
+### 2. Setup Obrigatório
+- SEMPRE usar: `const user = userEvent.setup()` no início de cada teste de interação
+- NUNCA usar fireEvent diretamente
+- Configurar props padrão para reutilização
+
+### 3. Testes de Renderização
+- Verificar se elemento principal renderiza
+- Testar com props customizadas
+- Usar screen.getByRole() preferencialmente
+
+### 4. Testes de Interação (userEvent OBRIGATÓRIO)
+- Cliques: `await user.click(element)`
+- Digitação: `await user.type(input, 'texto')`
+- Formulários: preencher campos + submeter
+- Navegação: `await user.tab()` e `await user.keyboard('{Enter}')`
+
+### 5. Testes de Estados
+- Loading: verificar indicadores visuais
+- Erro: testar exibição de mensagens de erro
+- Sucessо: validar estados positivos
+
+### 6. Testes de Acessibilidade
+- ARIA labels: screen.getByLabelText()
+- Navegação por teclado
+- Focus management
+- Roles semânticos
+
+### 7. Mocks Necessários
+- Next.js router se aplicável
+- APIs externas
+- Dependências específicas do componente
+
+### 8. Configuração de Projeto
+- vitest.config.ts com jsdom environment
+- src/test/setup.ts com jest-dom matchers
+- Cleanup automático após cada teste
+
+### 9. Padrões de Verificação
+- toBeInTheDocument() para presença
+- toHaveValue() para inputs
+- toHaveBeenCalledTimes() para callbacks
+- toHaveFocus() para elementos focados
+
+### 10. Estrutura de Props
+- Definir defaultProps reutilizáveis
+- Testar variações importantes
+- Validar props obrigatórias vs opcionais
+
+```tsx
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { [ComponentName] } from './[nome].component';
+import type { [ComponentName]Props } from './[nome].types';
+
+// Mock de dependências se necessário
+vi.mock('next/router', () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+    pathname: '/',
+    query: {},
+  }),
+}));
+
+describe('[ComponentName]', () => {
+  // Props padrão para testes
+  const defaultProps: [ComponentName]Props = {
+    // Adicionar props necessárias
+  };
+
+  // Limpar após cada teste
+  beforeEach(() => {
+    cleanup();
+    vi.clearAllMocks();
+  });
+
+  describe('Renderização', () => {
+    it('deve renderizar corretamente', () => {
+      render(<[ComponentName] {...defaultProps} />);
+      
+      // Verificar se elemento principal existe
+      expect(screen.getByRole('', { name: '' })).toBeInTheDocument();
+    });
+
+    it('deve renderizar com props customizadas', () => {
+      const customProps = {
+        ...defaultProps,
+        // Adicionar props específicas para teste
+      };
+
+      render(<[ComponentName] {...customProps} />);
+      
+      // Verificações específicas
+    });
+  });
+
+  describe('Interações com userEvent', () => {
+    it('deve responder a cliques', async () => {
+      const user = userEvent.setup();
+      const mockCallback = vi.fn();
+      
+      render(<[ComponentName] {...defaultProps} onClick={mockCallback} />);
+      
+      const button = screen.getByRole('button');
+      await user.click(button);
+      
+      expect(mockCallback).toHaveBeenCalledTimes(1);
+    });
+
+    it('deve lidar com input de texto', async () => {
+      const user = userEvent.setup();
+      
+      render(<[ComponentName] {...defaultProps} />);
+      
+      const input = screen.getByRole('textbox');
+      await user.type(input, 'teste de texto');
+      
+      expect(input).toHaveValue('teste de texto');
+    });
+
+    it('deve lidar com formulários', async () => {
+      const user = userEvent.setup();
+      const mockSubmit = vi.fn();
+      
+      render(<[ComponentName] {...defaultProps} onSubmit={mockSubmit} />);
+      
+      // Preencher campos
+      const input = screen.getByLabelText(/nome/i);
+      await user.type(input, 'Teste');
+      
+      // Submeter formulário
+      const submitButton = screen.getByRole('button', { name: /enviar/i });
+      await user.click(submitButton);
+      
+      expect(mockSubmit).toHaveBeenCalledWith(
+        expect.objectContaining({
+          nome: 'Teste'
+        })
+      );
+    });
+  });
+
+  describe('Estados', () => {
+    it('deve lidar com estados de loading', () => {
+      render(<[ComponentName] {...defaultProps} loading={true} />);
+      
+      expect(screen.getByRole('status')).toBeInTheDocument();
+      expect(screen.getByText(/carregando/i)).toBeInTheDocument();
+    });
+
+    it('deve lidar com estados de erro', () => {
+      const errorMessage = 'Erro de teste';
+      
+      render(<[ComponentName] {...defaultProps} error={errorMessage} />);
+      
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+      expect(screen.getByText(errorMessage)).toBeInTheDocument();
+    });
+  });
+
+  describe('Acessibilidade', () => {
+    it('deve ter labels corretos', () => {
+      render(<[ComponentName] {...defaultProps} />);
+      
+      // Verificar ARIA labels
+      expect(screen.getByLabelText(/campo obrigatório/i)).toBeInTheDocument();
+    });
+
+    it('deve suportar navegação por teclado', async () => {
+      const user = userEvent.setup();
+      
+      render(<[ComponentName] {...defaultProps} />);
+      
+      // Tab navigation
+      await user.tab();
+      expect(screen.getByRole('button')).toHaveFocus();
+      
+      // Enter/Space para ativar
+      await user.keyboard('{Enter}');
+      // Verificar resultado da ação
+    });
+  });
+
+  describe('Conditional Rendering', () => {
+    it('deve mostrar conteúdo condicionalmente', () => {
+      render(<[ComponentName] {...defaultProps} showContent={true} />);
+      
+      expect(screen.getByText(/conteúdo específico/i)).toBeInTheDocument();
+    });
+
+    it('não deve mostrar conteúdo quando condição é falsa', () => {
+      render(<[ComponentName] {...defaultProps} showContent={false} />);
+      
+      expect(screen.queryByText(/conteúdo específico/i)).not.toBeInTheDocument();
+    });
+  });
+});
+```
+
+## Configuração do vitest.config.ts
+
+```typescript
+/// <reference types="vitest" />
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.ts'],
+    css: true,
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@/components': path.resolve(__dirname, './src/components'),
+      '@/pages': path.resolve(__dirname, './src/pages'),
+    },
+  },
+});
+```
+
+## Arquivo de Setup: src/test/setup.ts
+
+```typescript
+import { expect, afterEach } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import * as matchers from '@testing-library/jest-dom/matchers';
+
+// Extend Vitest's expect with jest-dom matchers
+expect.extend(matchers);
+
+// Cleanup after each test
+afterEach(() => {
+  cleanup();
+});
+
+// Mock window.matchMedia
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
+
+// Mock IntersectionObserver
+global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+```
+
+## Dependências necessárias:
+
+```json
+{
+  "devDependencies": {
+    "vitest": "^1.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "jsdom": "^23.0.0"
+  }
+}
+
+
+
+

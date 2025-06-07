@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Execução Direta
+
+## 🏁 Trigger
+- Receber código do usuário
+
+## Fluxo
+1. **ANTES de ajustar:**
+   - Ler `context/stack-tech.mdc`
+   - Executar `commands/detect-style.mdc`
+   - Escolher Tailwind ou Styled-components baseado na detecção
+
+2. **Aplicar padrões** React/Next/TypeScript
+
+3. **SEMPRE criar teste** com vitest + userEvent
+
+4. **Não explique, só execute**
+
+5. **Se não tem código, peça:** "Envie o código"
+
+## Comportamento
+- Execução direta aplicando boas práticas
+- Sem explicações desnecessárias
+- Foco na implementação
+

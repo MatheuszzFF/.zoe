@@ -1,0 +1,30 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 📚 Auto-atualização de Documentação
+
+## Trigger
+- Alterar qualquer regra/comando/action
+
+## Comportamento
+**SEMPRE** que alterar qualquer arquivo de regra, atualizar automaticamente:
+- `how-zoe-works.md` com instruções atualizadas
+- Como usar cada comando
+- Exemplos práticos
+- Estrutura de arquivos atual
+- Novos comandos adicionados
+- Actions modificadas
+
+## Arquivos Monitorados
+- `zoe-chore.mdc`
+- `commands/*.mdc`
+- `actions/*.mdc`
+- `templates/*.mdc`
+
+## Objetivo
+Manter documentação sempre sincronizada com o sistema
+
+
+

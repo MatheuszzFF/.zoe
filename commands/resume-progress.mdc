@@ -1,0 +1,93 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 🔄 Retomar Progresso - Instruções para Zoe
+
+## 📊 Status Atual
+- **Status:** ⏸️ Pausado
+- **Última atualização:** [Data será preenchida automaticamente]
+- **Progresso geral:** 0%
+
+---
+
+## 🎯 Contexto do Projeto
+
+### 📝 Descrição
+[Descreva aqui o projeto/trabalho que está sendo retomado]
+
+### 🛠️ Tecnologias Envolvidas
+- [ ] React
+- [ ] Vue
+- [ ] JavaScript
+- [ ] TypeScript
+- [ ] CSS/SCSS
+- [ ] Node.js
+- [ ] Outros: _______________
+
+---
+
+## 📋 Tarefas Pendentes
+
+### 🔥 Prioridade Alta
+1. **[ ]** [Tarefa 1 - Urgente]
+   - **Descrição:** [Detalhe da tarefa]
+   - **Arquivos:** [Quais arquivos alterar]
+   - **Estimativa:** [Tempo estimado]
+
+2. **[ ]** [Tarefa 2 - Urgente]
+   - **Descrição:** [Detalhe da tarefa]
+   - **Arquivos:** [Quais arquivos alterar]
+   - **Estimativa:** [Tempo estimado]
+
+### ⚡ Prioridade Média
+1. **[ ]** [Tarefa 3]
+   - **Descrição:** [Detalhe da tarefa]
+   - **Arquivos:** [Quais arquivos alterar]
+   - **Estimativa:** [Tempo estimado]
+
+### 📌 Prioridade Baixa
+1. **[ ]** [Tarefa 4]
+   - **Descrição:** [Detalhe da tarefa]
+   - **Arquivos:** [Quais arquivos alterar]
+   - **Estimativa:** [Tempo estimado]
+
+---
+
+## 🚀 Próxima Ação
+
+### 🎯 Primeira Tarefa a Executar
+**[Nome da primeira tarefa]**
+
+**Detalhes:**
+- **O que fazer:** [Descrição específica]
+- **Código esperado:** [Tipo de código/padrão]
+- **Arquivos:** [Lista de arquivos]
+- **Palavra-chave:** [AJUSTA, CRIA, OTIMIZA, etc.]
+
+---
+
+## 📌 Notas Importantes
+
+### ⚠️ Atenção
+- [Pontos importantes para lembrar]
+- [Limitações ou cuidados especiais]
+
+### 🔗 Dependências
+- [Arquivos que dependem uns dos outros]
+- [Ordem de execução necessária]
+
+---
+
+## 📚 Histórico de Mudanças
+
+### 📅 [Data] - [Hora]
+- **Status:** Pausado → Em Progresso
+- **Ação:** Arquivo criado e configurado
+- **Próximo:** Aguardando comando RETOMAR
+
+---
+
+*Este arquivo será atualizado automaticamente pela Zoe*
+

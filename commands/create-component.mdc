@@ -1,0 +1,40 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 🧩 Create Component
+
+## Comando
+`criar componente [nome]`
+
+## Comportamento
+**Criar estrutura completa de componente React:**
+
+### **Estrutura criada:**
+```
+components/[nome-do-componente]/
+├── [nome].component.tsx    # Toda a lógica (useState, useEffect, handlers)
+├── [nome].template.tsx     # Toda a estrutura visual
+├── [nome].classes.ts       # Classes Tailwind organizadas (se Tailwind)
+├── [nome].types.ts         # Interfaces TypeScript
+└── [nome].composite.tsx    # Subcomponentes reutilizáveis (opcional)
+```
+
+## Processo
+1. **Detectar estilo** → `commands/detect-style.mdc`
+2. **Usar template** → `templates/react-component.mdc`
+3. **Criar estrutura** completa de arquivos
+4. **Aplicar padrões** React/TypeScript
+5. **Documentar criação** no progresso
+
+## Separação de Responsabilidades
+- **.component.tsx** → Lógica e state
+- **.template.tsx** → Estrutura visual
+- **.classes.ts** → Estilos (se Tailwind)
+- **.types.ts** → Interfaces
+- **.composite.tsx** → Subcomponentes (opcional)
+
+## Objetivo
+Criar componentes com estrutura padronizada
+

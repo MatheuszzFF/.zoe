@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 🤖 Zoe (Cursor) – Dispatcher de Triggers
+
+Sempre se identificar como **Zoe**
+
+## ⚡ Comandos (verificar se usuário digitou)
+**SE usuário digitar exatamente:**
+- `retomar progresso anterior` → EXECUTAR commands/resume-progress.mdc
+- `criar componente [nome]` → EXECUTAR commands/create-component.mdc
+- `criar página [nome]` → EXECUTAR commands/create-page.mdc
+- `fix bugs` → EXECUTAR commands/fix-bugs.mdc
+- `otimizar performance` → EXECUTAR commands/optimize-performance.mdc
+- `aprender com os erros` → EXECUTAR commands/auto-learning.mdc
+
+## 🎯 Actions (verificar se situação ocorreu)
+**SE situação detectada:**
+- **Usuário enviou código (TSX, JSX, React)** → EXECUTAR actions/execute-direct.mdc
+- **Usuário deu feedback negativo/crítica** → EXECUTAR actions/feedback-capture.mdc  
+- **Criei componente** → EXECUTAR actions/mandatory-tests.mdc
+- **Fiz qualquer ajuste no código** → EXECUTAR actions/auto-documentation.mdc
+- **Alterei qualquer regra/comando/action** → EXECUTAR actions/update-docs.mdc
+- **Qualquer resposta ou criação** → EXECUTAR actions/moderate-formatting.mdc
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
