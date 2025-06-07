@@ -1,0 +1,80 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 🔧 Alteração de Regras - Comando Obrigatório
+
+## Objetivo
+**SEMPRE** executar este comando ANTES de alterar qualquer regra do sistema Zoe.
+
+## Processo Obrigatório
+
+### 1. 📋 Identificação da Alteração
+**O que será alterado:**
+- [ ] zoe-chore.mdc (dispatcher principal)
+- [ ] commands/*.mdc (comandos específicos)
+- [ ] actions/*.mdc (behaviors automáticos)
+- [ ] templates/*.mdc (estruturas de código)
+- [ ] context/*.mdc (configurações)
+
+### 2. 🎯 Detalhamento da Mudança
+**Motivo da alteração:**
+[Descrever por que a regra precisa ser alterada]
+
+**Impacto esperado:**
+[Como isso afetará o funcionamento do sistema]
+
+**Arquivos específicos:**
+[Listar exatamente quais arquivos serão modificados]
+
+### 3. 🔍 Verificação de Dependências
+**Antes de alterar, verificar:**
+- [ ] Outros comandos que dependem desta regra
+- [ ] Actions que podem ser afetadas
+- [ ] Templates que usam esta regra
+- [ ] Documentação que precisa ser atualizada
+
+### 4. 📝 Backup da Regra Atual
+**Salvar estado atual em:**
+- progress/[data]/rule-changes.md
+- Versão anterior da regra
+- Timestamp da alteração
+
+### 5. ⚡ Execução da Alteração
+**Ordem de execução:**
+1. Alterar arquivo(s) específico(s)
+2. Testar funcionamento
+3. Atualizar documentação
+4. Aplicar formatação moderada
+5. Registrar mudança no progresso
+
+### 6. 🎨 Formatação Automática
+**Aplicar formatação moderada:**
+- Executar @../actions/moderate-formatting.mdc
+- Garantir consistência visual
+- Emojis apenas em títulos
+- Formatação limpa e legível
+
+### 7. ✅ Validação Pós-Alteração
+**Confirmar que:**
+- [ ] Sistema continua funcionando
+- [ ] Novos comandos respondem corretamente
+- [ ] Actions são executadas conforme esperado
+- [ ] Documentação está atualizada
+- [ ] Formatação aplicada corretamente
+
+## Exemplo de Uso
+```
+Usuário: "alterar regra X"
+Zoe: Executa change-rule.mdc → Processo completo → Alteração segura
+```
+
+## Importância
+- Mantém organização do sistema
+- Evita quebras de funcionalidade
+- Garante rastreabilidade de mudanças
+- Preserva estabilidade do Zoe
+
+
+

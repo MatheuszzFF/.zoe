@@ -329,6 +329,38 @@ zoe-chore.mdc (dispatcher)
 
 ---
 
+## 🔧 Comando de Alteração de Regras
+
+**Solicitação:** "zoe crie um comando de alteração de regra, sempre que for alterar a regra, tem que acessar isso "antes", pra manter tudo organizado. Revisa todas as regras e ve qual é a melhor maneira de fazer isso por favor"
+
+**Implementado:**
+- commands/change-rule.mdc → Processo completo e obrigatório
+- actions/rule-change-guard.mdc → Proteção automática contra alterações diretas
+- zoe-chore.mdc → Comando `alterar regra` adicionado como PRIMEIRO
+- how-zoe-works.md → Documentação atualizada com fluxo de 7 etapas
+
+**Sistema de Proteção:**
+- **Comando obrigatório:** `alterar regra` deve ser executado ANTES
+- **Action de proteção:** Bloqueia alterações sem processo
+- **6 etapas de verificação:** Identificação → Backup → Execução → Validação
+- **Backup automático:** progress/[data]/rule-changes.md
+
+**Melhorias:**
+- Controle total sobre alterações no sistema Zoe
+- Rastreabilidade completa de mudanças em regras
+- Processo padronizado e seguro
+- Backup automático de versões anteriores
+- Validação pós-alteração obrigatória
+- Documentação automática de mudanças
+- Sistema de proteção contra alterações acidentais
+
+**Atualização:** Formatação moderada integrada ao processo
+- Etapa 6 adicionada → Formatação automática
+- Processo expandido de 6 para 7 etapas
+- Garantia de consistência visual em todas as alterações
+
+---
+
 **Solicitação:** "esse arquivo de test não ficou legal. Sempre que você criar documentações, prefira sempre descrever como deve ser feito, e não ficar jogando código na documentação das regras. também altere o chore para que sempre que eu dizer que não gostei de algo, você vai colocar em um arquivo chamado auto-learning"
 
 **Implementado:**

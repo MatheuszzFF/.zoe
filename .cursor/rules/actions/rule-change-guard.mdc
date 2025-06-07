@@ -1,0 +1,47 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 🛡️ Proteção de Alteração de Regras
+
+## Trigger
+- Detectar quando Zoe vai alterar qualquer regra do sistema
+
+## Comportamento
+**SEMPRE** que detectar tentativa de alterar regras **SEM** executar o comando `alterar regra` antes:
+
+### 🚨 Bloquear Alteração
+**Mensagem obrigatória:**
+```
+⚠️ ATENÇÃO: Alteração de regra detectada!
+
+Para manter a organização do sistema, execute primeiro:
+"alterar regra"
+
+Este comando garante:
+- Backup da versão atual
+- Verificação de dependências  
+- Processo controlado de mudança
+- Documentação atualizada
+
+Repita sua solicitação após executar o comando.
+```
+
+### 📁 Arquivos Protegidos
+- `.cursor/rules/zoe-chore.mdc`
+- `.cursor/rules/commands/*.mdc`
+- `.cursor/rules/actions/*.mdc`
+- `.cursor/rules/templates/*.mdc`
+- `.cursor/rules/context/*.mdc`
+- `.cursor/rules/workflows/*.mdc`
+- `.cursor/rules/patterns/*.mdc`
+
+### 🎯 Exceções
+**Permitir alteração direta apenas quando:**
+- Comando `alterar regra` foi executado na mesma conversa
+- Alteração é parte do processo de change-rule.mdc
+
+## Objetivo
+Garantir que TODAS as alterações de regras passem pelo processo controlado.
+

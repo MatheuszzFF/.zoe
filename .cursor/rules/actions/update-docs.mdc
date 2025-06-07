@@ -19,9 +19,9 @@ alwaysApply: false
 
 ## Arquivos Monitorados
 - `zoe-chore.mdc`
-- `commands/*.mdc`
-- `actions/*.mdc`
-- `templates/*.mdc`
+- @./commands/*.mdc
+- @./actions/*.mdc
+- @./templates/*.mdc
 
 ## Objetivo
 Manter documentação sempre sincronizada com o sistema

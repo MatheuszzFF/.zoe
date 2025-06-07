@@ -22,8 +22,8 @@ components/[nome-do-componente]/
 ```
 
 ## Processo
-1. **Detectar estilo** → `commands/detect-style.mdc`
-2. **Usar template** → `templates/react-component.mdc`
+1. **Detectar estilo** → @./commands/detect-style.mdc
+2. **Usar template** → @./templates/react-component.mdc
 3. **Criar estrutura** completa de arquivos
 4. **Aplicar padrões** React/TypeScript
 5. **Documentar criação** no progresso

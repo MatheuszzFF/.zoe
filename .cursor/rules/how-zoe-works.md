@@ -30,7 +30,24 @@ A **Zoe** é um sistema automatizado para desenvolvimento React/Next.js que:
 
 ## ⚡ Comandos de Criação
 
-### **1. Aprender com os Erros**
+### **1. Alterar Regra**
+```bash
+alterar regra
+```
+
+**Fluxo obrigatório ANTES de qualquer alteração:**
+1. Executa commands/change-rule.mdc completamente
+2. Identifica arquivos que serão alterados
+3. Verifica dependências e impactos
+4. Cria backup da versão atual
+5. Executa alteração de forma controlada
+6. Aplica formatação moderada automaticamente
+7. Valida funcionamento pós-alteração
+8. Atualiza documentação automaticamente
+
+**Proteção:** Action rule-change-guard.mdc bloqueia alterações diretas
+
+### **2. Aprender com os Erros**
 ```bash
 aprender com os erros
 ```
@@ -42,7 +59,7 @@ aprender com os erros
 4. Marca correções como concluídas (✅)
 5. Documenta aplicação em progress/[data]/README.md
 
-### **2. Criar Componente**
+### **3. Criar Componente**
 ```bash
 criar componente [nome-do-componente]
 ```
@@ -58,7 +75,7 @@ components/[nome-do-componente]/
 └── [nome].test.tsx         # 🧪 Testes com vitest + userEvent (OBRIGATÓRIO)
 ```
 
-### **3. Criar Página**
+### **4. Criar Página**
 ```bash
 criar página [nome-da-pagina]
 ```
@@ -74,7 +91,7 @@ pages/[nome-da-pagina]/
 └── [nome].test.tsx         # 🧪 Testes com vitest + userEvent (OBRIGATÓRIO)
 ```
 
-### **4. Fix Bugs**
+### **5. Fix Bugs**
 ```bash
 fix bugs
 ```
@@ -86,7 +103,7 @@ fix bugs
 - Hydration mismatch fixes
 - Dependency arrays corretas
 
-### **5. Otimizar Performance**
+### **6. Otimizar Performance**
 ```bash
 otimizar performance
 ```
