@@ -1,0 +1,108 @@
+---
+description: Regras principais de desenvolvimento
+globs: ["**/*"]
+alwaysApply: true
+---
+# Regras de Desenvolvimento
+
+## 🚀 FRONTEND COMPLETO (ARQUIVO CONSOLIDADO)
+{mdc:frontend-complete.mdc}
+
+## Documentação Primeiro (CRÍTICO - OBRIGATÓRIO)
+{mdc:documentation-first.mdc}
+
+## Labels (OBRIGATÓRIO)
+{mdc:labels.mdc}
+
+## Funcionalidades
+{mdc:funcionalidades.mdc}
+
+## Frontend (Detalhado)
+{mdc:frontend/index.mdc}
+
+### UI Moderna (NOVA DIRETRIZ - OBRIGATÓRIA)
+{mdc:frontend/modern-ui.mdc}
+
+### Performance
+{mdc:frontend/performance.mdc}
+
+### Componentes
+{mdc:frontend/components.mdc}
+
+### Estado
+{mdc:frontend/state-management.mdc}
+
+### Estilização
+{mdc:frontend/styling.mdc}
+
+### Formulários
+{mdc:frontend/forms.mdc}
+
+### Máscaras de Input
+{mdc:frontend/input-masks.mdc}
+
+### Hooks
+{mdc:frontend/hooks.mdc}
+
+### Roteamento
+{mdc:frontend/routing.mdc}
+
+### Testes
+{mdc:frontend/testing.mdc}
+
+### Acessibilidade
+{mdc:frontend/accessibility.mdc}
+
+### Arquitetura
+{mdc:frontend/architecture.mdc}
+
+### Internacionalização
+{mdc:frontend/i18n.mdc}
+
+### Segurança
+{mdc:frontend/security.mdc}
+
+## Backend
+{mdc:backend/index.mdc}
+
+### API
+{mdc:backend/api.mdc}
+
+### Banco de Dados
+{mdc:backend/database.mdc}
+
+### Arquitetura
+{mdc:backend/architecture.mdc}
+
+### Segurança
+{mdc:backend/security.mdc}
+
+## DevOps
+{mdc:devops/index.mdc}
+
+### Git
+{mdc:devops/git.mdc}
+
+### CI/CD
+{mdc:devops/ci-cd.mdc}
+
+### Docker
+{mdc:devops/docker.mdc}
+
+## Qualidade
+{mdc:quality/index.mdc}
+
+### Testes
+{mdc:quality/testing.mdc}
+
+### Documentação
+{mdc:documentation.mdc}
+
+### Code Review
+{mdc:quality/code-review.mdc}
+
+
+
+
+
+

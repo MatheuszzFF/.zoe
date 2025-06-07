@@ -1,0 +1,80 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Regras de DevOps
+
+## Git
+{mdc:devops/git.mdc}
+
+### Padrões de Commits
+```bash
+# Formato: tipo(escopo): descrição
+# Exemplos:
+feat(auth): adiciona autenticação com Google
+fix(api): corrige validação de token
+docs(readme): atualiza instruções de instalação
+```
+
+### Estrutura de Branches
+```bash
+main        # Branch principal
+develop     # Branch de desenvolvimento
+feature/*   # Novas funcionalidades
+hotfix/*    # Correções urgentes
+release/*   # Preparação para release
+```
+
+## CI/CD
+{mdc:devops/ci-cd.mdc}
+
+### Pipeline Básico
+```yaml
+# Exemplo de estrutura
+stages:
+  - lint
+  - test
+  - build
+  - deploy
+
+# Regras de execução
+rules:
+  - if: $CI_PIPELINE_SOURCE == "merge_request"
+  - if: $CI_COMMIT_BRANCH == "main"
+```
+
+### Variáveis de Ambiente
+```yaml
+# Variáveis sensíveis devem ser:
+# - Armazenadas no vault do CI/CD
+# - Nunca expostas nos logs
+# - Rotacionadas regularmente
+```
+
+## Docker
+{mdc:devops/docker.mdc}
+
+### Boas Práticas
+```dockerfile
+# Usar imagens oficiais
+FROM node:18-alpine
+
+# Definir usuário não-root
+USER node
+
+# Multi-stage builds
+FROM builder AS production
+
+# Otimizar layers
+COPY --from=builder /app/dist /app
+```
+
+### Segurança
+```dockerfile
+# Escanear vulnerabilidades
+# Manter imagens atualizadas
+# Usar .dockerignore
+# Não expor portas desnecessárias
+```
+

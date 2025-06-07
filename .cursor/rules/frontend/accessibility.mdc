@@ -1,0 +1,286 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Acessibilidade Frontend
+
+## Princípios Fundamentais
+
+### 1. Semântica HTML
+```typescript
+// Exemplo de semântica HTML
+function Article() {
+  return (
+    <article>
+      <header>
+        <h1>Título do Artigo</h1>
+        <p>Autor: John Doe</p>
+      </header>
+      
+      <main>
+        <section>
+          <h2>Introdução</h2>
+          <p>Conteúdo da introdução...</p>
+        </section>
+        
+        <section>
+          <h2>Desenvolvimento</h2>
+          <p>Conteúdo do desenvolvimento...</p>
+        </section>
+      </main>
+      
+      <footer>
+        <p>Publicado em: 2024</p>
+      </footer>
+    </article>
+  )
+}
+```
+
+### 2. ARIA Labels
+```typescript
+// Exemplo de ARIA labels
+function Navigation() {
+  return (
+    <nav aria-label="Menu principal">
+      <ul>
+        <li>
+          <a href="/" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="/sobre">Sobre</a>
+        </li>
+        <li>
+          <a href="/contato">Contato</a>
+        </li>
+      </ul>
+    </nav>
+  )
+}
+
+function SearchForm() {
+  return (
+    <form role="search">
+      <label htmlFor="search">Buscar</label>
+      <input
+        id="search"
+        type="search"
+        aria-label="Buscar no site"
+        placeholder="Digite sua busca..."
+      />
+      <button type="submit" aria-label="Enviar busca">
+        <SearchIcon />
+      </button>
+    </form>
+  )
+}
+```
+
+### 3. Navegação por Teclado
+```typescript
+// Exemplo de navegação por teclado
+function Dropdown() {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  return (
+    <div>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls="dropdown-menu"
+      >
+        Menu
+      </button>
+      
+      {isOpen && (
+        <ul
+          id="dropdown-menu"
+          role="menu"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setIsOpen(false)
+            }
+          }}
+        >
+          <li role="none">
+            <a href="/item1" role="menuitem" tabIndex={0}>
+              Item 1
+            </a>
+          </li>
+          <li role="none">
+            <a href="/item2" role="menuitem" tabIndex={0}>
+              Item 2
+            </a>
+          </li>
+        </ul>
+      )}
+    </div>
+  )
+}
+```
+
+### 4. Contraste de Cores
+```typescript
+// Exemplo de contraste de cores
+const theme = {
+  colors: {
+    text: {
+      primary: '#000000', // Contraste 21:1 com fundo branco
+      secondary: '#4A4A4A', // Contraste 12:1 com fundo branco
+      disabled: '#757575' // Contraste 4.5:1 com fundo branco
+    },
+    background: {
+      primary: '#FFFFFF',
+      secondary: '#F5F5F5'
+    }
+  }
+}
+```
+
+### 5. Formulários Acessíveis
+```typescript
+// Exemplo de formulário acessível
+function ContactForm() {
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Nome</label>
+        <input
+          id="name"
+          type="text"
+          required
+          aria-required="true"
+          aria-invalid={errors.name ? 'true' : 'false'}
+          aria-describedby={errors.name ? 'name-error' : undefined}
+        />
+        {errors.name && (
+          <span id="name-error" role="alert">
+            {errors.name}
+          </span>
+        )}
+      </div>
+      
+      <div>
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          required
+          aria-required="true"
+          aria-invalid={errors.email ? 'true' : 'false'}
+          aria-describedby={errors.email ? 'email-error' : undefined}
+        />
+        {errors.email && (
+          <span id="email-error" role="alert">
+            {errors.email}
+          </span>
+        )}
+      </div>
+      
+      <button type="submit">Enviar</button>
+    </form>
+  )
+}
+```
+
+### 6. Imagens Acessíveis
+```typescript
+// Exemplo de imagens acessíveis
+function ImageGallery() {
+  return (
+    <div>
+      <img
+        src="/image1.jpg"
+        alt="Descrição detalhada da imagem 1"
+        width={800}
+        height={600}
+      />
+      
+      <img
+        src="/decorative.jpg"
+        alt=""
+        role="presentation"
+        width={100}
+        height={100}
+      />
+      
+      <figure>
+        <img
+          src="/chart.jpg"
+          alt="Gráfico de vendas"
+          width={600}
+          height={400}
+        />
+        <figcaption>
+          Gráfico mostrando o crescimento das vendas no último trimestre
+        </figcaption>
+      </figure>
+    </div>
+  )
+}
+```
+
+### 7. Animações e Transições
+```typescript
+// Exemplo de animações acessíveis
+function AnimatedComponent() {
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
+  
+  return (
+    <div
+      style={{
+        transition: prefersReducedMotion ? 'none' : 'all 0.3s ease',
+        transform: isHovered && !prefersReducedMotion
+          ? 'scale(1.05)'
+          : 'scale(1)'
+      }}
+    >
+      Conteúdo
+    </div>
+  )
+}
+```
+
+### 8. Testes de Acessibilidade
+```typescript
+// Exemplo de teste de acessibilidade
+import { render } from '@testing-library/react'
+import { axe, toHaveNoViolations } from 'jest-axe'
+import { Button } from './Button'
+
+expect.extend(toHaveNoViolations)
+
+describe('Button', () => {
+  it('should not have accessibility violations', async () => {
+    const { container } = render(<Button>Click me</Button>)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
+})
+```
+
+### 9. Boas Práticas
+- Use HTML semântico
+- Forneça textos alternativos
+- Mantenha contraste adequado
+- Suporte navegação por teclado
+- Teste com leitores de tela
+- Respeite preferências de redução de movimento
+- Forneça feedback claro
+- Mantenha foco visível
+- Use landmarks ARIA
+- Documente padrões de acessibilidade
+
+### 10. Ferramentas
+- axe-core
+- Lighthouse
+- WAVE
+- VoiceOver
+- NVDA
+- ChromeVox
+- Color Contrast Analyzer
+- React Testing Library
+- Jest-axe
+- ESLint-plugin-jsx-a11y

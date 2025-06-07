@@ -1,0 +1,601 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Metodologia de UI Moderna - Processo Criativo
+
+## 🎯 Filosofia de Design
+
+### Objetivo Principal
+Criar interfaces que sejam **visualmente atrativas, funcionalmente intuitivas e emocionalmente envolventes**. O usuário deve se sentir confortável e confiante ao usar o sistema.
+
+### Princípios Fundamentais
+1. **Hierarquia Visual Clara** - O olho deve saber para onde ir
+2. **Espaço Respiratório** - Evitar sensação de claustrofobia  
+3. **Consistência Emocional** - Cada seção deve ter sua personalidade visual
+4. **Profundidade e Camadas** - Criar sensação de modernidade
+5. **Feedback Visual Imediato** - O usuário sempre sabe o que está acontecendo
+6. **Proporções Harmoniosas** - Tamanhos equilibrados, sem exageros
+7. **Minimalismo Elegante** - Menos é mais, foque no essencial
+
+## 📋 Cards Compactos e Funcionais (NOVA DIRETRIZ)
+
+### Objetivo
+Criar cards que maximizem a densidade de informação útil sem comprometer a legibilidade ou usabilidade. Cards devem ser coesos, funcionais e visualmente organizados.
+
+### Diretrizes de Layout (ULTRA-COMPACTO)
+- **Espaçamentos ULTRA-Mínimos**: 
+  - Padding interno: p-2 (8px) MÁXIMO ABSOLUTO
+  - Entre seções: ZERO margin adicional (usar apenas separadores visuais)
+  - Entre linhas dentro de seção: space-y-0.5 (2px) MÁXIMO ABSOLUTO
+  - Entre elementos na mesma linha: gap-1 (4px) ou gap-1.5 (6px) MÁXIMO
+- **Agrupamento Lógico**: Informações relacionadas devem ficar próximas umas das outras
+- **Alinhamento Visual**: Todos os elementos devem estar visualmente alinhados em linhas e colunas imaginárias, garantindo que ícones, textos e botões criem blocos retangulares facilmente escaneáveis
+- **Altura MÍNIMA**: Prefira altura mínima para conter apenas o necessário, mantendo a legibilidade
+
+### Hierarquia de Informações
+- **Informações Essenciais**: Destaque título, valor e status principal usando:
+  - Tamanho de fonte maior (text-base ou text-lg)
+  - Cor de destaque ou negrito (font-semibold ou font-bold)
+  - Posicionamento prioritário (topo do card)
+- **Detalhes Secundários**: Mantenha em estilo secundário:
+  - Texto menor (text-xs ou text-sm)
+  - Cores neutras (text-slate-500/600)
+  - Posicionamento secundário (meio ou base do card)
+
+### Estrutura Recomendada (ULTRA-COMPACTA)
+```tsx
+<Card>
+  {/* Barra de Status/Accent - 0.5px height */}
+  
+  {/* Seção Principal - Informações críticas */}
+  <div className="p-2 space-y-0.5">
+    {/* Título + Status Principal */}
+    {/* Informações secundárias agrupadas */}
+  </div>
+  
+  {/* Divisor sutil - SEM padding adicional */}
+  <div className="border-t border-slate-100" />
+  
+  {/* Seção de Detalhes ULTRA-Compacta */}
+  <div className="p-2 space-y-0.5">
+    {/* Métricas ou valores */}
+    {/* Informações contextuais */}
+  </div>
+  
+  {/* Divisor sutil - SEM padding adicional */}
+  <div className="border-t border-slate-100" />
+  
+  {/* Seção de Ações */}
+  <div className="p-2 flex justify-between items-center">
+    {/* Botões de ação agrupados com gap-0.5 */}
+    {/* Info rápida (ID, etc.) */}
+  </div>
+</Card>
+```
+
+### Tamanhos e Proporções (ULTRA-RIGOROSO)
+- **Ícones**: Proporcionais ao conteúdo, evitando poluição visual
+  - Pequenos: h-3 w-3 (12px) - PADRÃO
+  - Médios: h-4 w-4 (16px) - APENAS se necessário
+  - Grandes: h-5 w-5 (20px) - APENAS para elementos principais críticos
+- **Botões**: Compactos mas acessíveis
+  - Mini: h-6 w-6 (24px) - PADRÃO para cards compactos
+  - Pequenos: h-7 w-7 (28px) - APENAS se necessário
+  - Normais: h-8 w-8 (32px) - EVITAR em cards compactos
+- **Espaçamentos (ULTRA-MÁXIMOS)**:
+  - Interno: p-2 (8px) - NUNCA mais que isso em cards compactos
+  - Entre seções: apenas separadores visuais, ZERO gaps
+  - Entre linhas: space-y-0.5 (2px) - NUNCA space-y-1 ou maior
+  - Entre elementos: gap-1 (4px) máximo, gap-0.5 (2px) preferível
+  - Entre ícone e texto: gap-1 (4px) máximo
+
+### Responsividade Compacta
+- **Desktop**: Aproveite o espaço horizontal com grid denso (gap-3 máximo)
+- **Tablet**: Reorganize elementos mantendo compactação
+- **Mobile**: Empilhe informações mas mantenha densidade
+
+### Elementos de Separação (ULTRA-MINIMALISTA)
+- **Divisórias suaves**: border-t border-slate-100/200 - SEM padding extra
+- **Espaçamentos entre seções**: ZERO - usar apenas separadores visuais
+- **Agrupamento visual**: Elementos relacionados em containers SEM margins extras
+
+### Regras ULTRA-Rígidas de Espaçamento
+❌ **NUNCA usar em cards compactos**:
+- space-y-1 ou maior (usar space-y-0.5 máximo)
+- padding maior que p-2 em seções internas
+- margin entre seções (usar apenas separadores)
+- gap maior que 3 no grid principal
+- mt-0.5 ou qualquer margin top adicional
+- p-1.5 (usar p-1 ou p-0.5)
+- gap-1.5 (usar gap-1 máximo)
+
+✅ **SEMPRE usar em cards compactos**:
+- space-y-0.5 (2px) entre linhas
+- p-2 (8px) interno nas seções
+- gap-1 (4px) entre elementos da mesma linha
+- gap-0.5 (2px) entre botões de ação
+- gap-3 (12px) máximo entre cards no grid
+- separadores visuais ao invés de espaços vazios
+- p-1 ou p-0.5 para ícones pequenos
+- rounded-sm ou rounded-md (evitar rounded-lg)
+
+### Informações Compactas
+- **Valores monetários**: Formato "k" (R$ 25k ao invés de R$ 25.000,00)
+- **Datas/tempo**: Formato curto (15d, 2h, 3m)
+- **Status**: Badges pequenos com texto conciso
+- **IDs**: Últimos caracteres (#abc123)
+
+### Contraste e Acessibilidade
+- **Contraste mínimo**: 4.5:1 para textos
+- **Área de clique**: Mínimo 44x44px para touch
+- **Foco visível**: ring-2 ring-offset-2
+- **Estados claros**: hover, active, disabled bem definidos
+
+### Visual Padronizado
+- **Cantos arredondados**: rounded-lg ou rounded-xl
+- **Sombras suaves**: shadow-sm para elevação sutil
+- **Cores neutras**: Predominância de grays/slates
+- **Cores vibrantes**: Apenas para ações críticas ou status importantes
+
+### O que Evitar
+❌ Padding excessivo (p-6, p-8)
+❌ Margins desnecessários
+❌ Elementos redundantes
+❌ Informações espalhadas
+❌ Ícones desproporcionais
+❌ Cards muito altos
+❌ Textos muito longos
+❌ Múltiplas cores vibrantes
+❌ Sombras pesadas
+❌ Bordas grossas
+
+### Exemplos de Aplicação
+- **Card de item de lista**: Compacto, informações essenciais, ações rápidas
+- **Card de métrica**: Valor principal, variação, contexto mínimo
+- **Card de usuário**: Avatar, nome, status, ações principais
+- **Card de notificação**: Tipo, mensagem concisa, timestamp, ações
+
+## 🎨 Design Minimalista e Moderno
+
+### Referências Visuais (Padrão Startup Moderna)
+Inspire-se nos padrões de design de startups modernas reconhecidas pela excelência em UX/UI:
+
+**🔗 Notion** - Simplicidade funcional
+- Layout limpo com muito white space
+- Tipografia clara e hierarquia bem definida
+- Cores neutras com acentos sutis
+- Componentes modulares e organizados
+
+**📈 Linear** - Elegância minimalista
+- Interface dark/light bem balanceada
+- Animações micro-interações suaves
+- Gradientes sutis e sombras leves
+- Foco na funcionalidade sem ornamentos
+
+**⚡ Superhuman** - Performance visual
+- Design system consistente
+- Feedback visual imediato
+- Shortcuts visuais claros
+- Interface responsiva e rápida
+
+**💎 Lovable** - Modernidade profissional
+- Bordas arredondadas em todos os elementos
+- Paleta de cores harmoniosa
+- Cards com elevação sutil
+- Interações previsíveis e fluidas
+
+### Estética Visual
+- **Visual minimalista e moderno**: Use muitos espaços em branco ("white space") para dar respiro aos elementos. Evite poluição visual. Prefira layouts limpos, organizados, e fáceis de navegar.
+
+- **Hierarquia visual clara**: Dê destaque ao que realmente importa com fontes maiores, títulos marcantes e cores de destaque nos principais botões e CTAs.
+
+- **Componentes arredondados**: Todos os cards, botões, inputs e avatares devem ter bordas arredondadas (border-radius alto).
+
+### Paleta de Cores (Inspiração Startup)
+- **Cores suaves**: Priorize tons de branco, cinza claro, azul claro, lavanda, rosa claro
+- **Cores de destaque**: Use apenas 1 ou 2 cores vibrantes para CTAs ou informações importantes
+- **Contraste adequado**: Garanta legibilidade em todos os textos
+- **Mode dual**: Considere sempre dark/light mode compatibility
+- **Contraste inteligente**: Quando usar backgrounds coloridos suaves (ex: bg-red-50), os elementos sobre eles devem ter cores mais fortes da mesma família (ex: text-red-700, bg-red-500) para garantir contraste e legibilidade adequados
+
+### Tipografia (Padrão Moderno)
+- **Fontes sem serifa**: Inter, Montserrat, Roboto ou similares modernas
+- **Legibilidade otimizada**: Tamanhos apropriados e espaçamento adequado
+- **Hierarquia clara**: Diferentes pesos e tamanhos para guiar o olhar
+- **Consistência**: Máximo 2-3 fontes diferentes em toda a aplicação
+
+### Elementos Visuais (Inspiração Linear/Notion)
+- **Ícones outline minimalistas**: SEMPRE prefira ícones de linhas (outline) minimalistas, como os já utilizados no projeto (Lucide Icons). Nunca use ícones preenchidos pesados, 3D ou com muitos detalhes
+- **Consistência de ícones**: Mantenha o mesmo peso de linha e estilo em todos os ícones da interface
+- **Tamanho apropriado**: Ícones devem ter tamanhos proporcionais (h-4 w-4 para pequenos, h-5 w-5 para médios, h-6 w-6 para grandes)
+- **Cards e sombras**: Cards devem ter leve sombra (box-shadow) para dar sensação de flutuação. Nunca abuse das sombras, mantenha leve
+- **Animações suaves**: Caso use animações, elas devem ser rápidas e discretas (ex: hover em botões, loading)
+- **Micro-interações**: Feedback sutil em todas as ações do usuário
+
+### Princípios das Startups Modernas
+✅ **Função sobre forma** - Beleza que serve à usabilidade
+✅ **Consistência visual** - Padrões reconhecíveis em toda aplicação
+✅ **Performance visual** - Carregamento rápido e responsivo
+✅ **Acessibilidade nativa** - Inclusivo por design
+✅ **Escalabilidade** - Design system que cresce com o produto
+
+### O que Evitar (Anti-padrões)
+❌ Gradientes pesados
+❌ Excesso de informações
+❌ Bordas pretas
+❌ Sombras fortes
+❌ Fontes fantasiosas
+❌ Efeitos 3D exagerados
+❌ Paletas muito vibrantes
+❌ Animações desnecessárias
+❌ Inconsistência entre telas
+
+## 🖱️ Comportamento do Cursor (UX Essencial)
+
+### Botões e Links
+- **cursor: pointer** - Sempre que o usuário passar o mouse sobre qualquer botão ou link clicável
+- **Feedback instantâneo** - Mudança imediata do cursor em todos os estados interativos
+- **Acompanhar com hover visual** - Cor, sombra ou escala devem mudar junto
+
+### Elementos de Texto Não Interativos
+- **cursor: default** - Para títulos, textos, parágrafos e rótulos não clicáveis
+- **Sem confusão** - Usuário deve saber que não é interativo
+
+### Campos de Input e Áreas Editáveis
+- **cursor: text** - Em campos de formulário (inputs, textareas, selects, search bars)
+- **Indicação clara** - Mostrar que é área editável ao hover
+
+### Arrastáveis e Drag & Drop
+- **cursor: grab** - Elementos que permitem drag & drop ao hover
+- **cursor: grabbing** - Enquanto estiverem sendo arrastados
+- **Feedback visual** - Combinar com animações de movimento
+
+### Componentes Desabilitados
+- **cursor: not-allowed** - Botões, links ou elementos desabilitados
+- **Opacity reduzida** - Indicação visual adicional de estado desabilitado
+
+### Tooltips e Ajudas
+- **cursor: help** - Ícones de ajuda ou tooltips (quando suportado)
+- **Fallback para pointer** - Se help não for suportado
+
+### Áreas de Redimensionamento
+- **cursor: ew-resize** - Para divisores horizontais
+- **cursor: ns-resize** - Para divisores verticais
+- **Cursores apropriados** - nw-resize, ne-resize, etc. conforme necessário
+
+### Regras de Consistência
+- **Aplicação universal** - Todas as regras aplicadas consistentemente
+- **Sem cursores excêntricos** - Foco em clareza e familiaridade
+- **Transições suaves** - Hover visual com transition, cursor muda imediatamente
+- **Acessibilidade** - Feedback do cursor + feedback visual para diferentes percepções
+
+## 🧠 Processo de Raciocínio
+
+### 1. Análise da Funcionalidade
+**Antes de pensar visualmente, entenda profundamente:**
+
+- **Qual é o objetivo principal desta tela?**
+  - Criar algo novo? → Use cores energizantes (azuis, verdes)
+  - Visualizar dados? → Use cores neutras com destaques pontuais
+  - Editar informações? → Use cores de atenção (âmbares, laranjas)
+  - Relatórios/análise? → Use cores analíticas (teals, cyans)
+
+- **Qual é o estado mental do usuário?**
+  - Ansioso (criando algo importante)? → Tranquilize com muito espaço e cores suaves
+  - Focado (preenchendo formulário)? → Organize em seções claras
+  - Explorando (navegando dados)? → Use elementos visuais que guiem o olhar
+
+- **Qual é a urgência da tarefa?**
+  - Alta urgência → Menos elementos decorativos, mais foco na ação
+  - Rotineira → Pode ter mais elementos visuais agradáveis
+  - Exploratória → Priorize navegação intuitiva
+
+### 2. Arquitetura Visual
+
+**Pense em camadas de importância:**
+
+**Camada 1 - Navegação e Context:**
+- Como o usuário chegou aqui?
+- Como ele vai sair?
+- Onde ele está no fluxo?
+→ *Decisão: Criar header que responda essas perguntas*
+
+**Camada 2 - Identificação da Tarefa:**
+- O que exatamente ele vai fazer?
+- Por que isso é importante?
+→ *Decisão: Título moderado + descrição que crie confiança*
+
+**Camada 3 - Organização do Conteúdo:**
+- Quais são os grupos lógicos de informação?
+- Qual a ordem natural de preenchimento/leitura?
+→ *Decisão: Seções temáticas com identidade visual própria*
+
+**Camada 4 - Ações e Finalização:**
+- Qual é a próxima ação mais provável?
+- Como dar confiança para o usuário prosseguir?
+→ *Decisão: Botões que transmitam segurança e clareza*
+
+### 3. Psicologia das Cores por Contexto
+
+**Em vez de decorar cores, entenda o impacto emocional:**
+
+- **Verde/Emerald** → Crescimento, início, dados, identificação
+- **Roxo/Purple** → Pessoas, relacionamentos, perfis
+- **Âmbar/Amber** → Proteção, cuidado, cobertura, segurança
+- **Rosa/Rose** → Tempo, cronologia, prazos, calendário
+- **Azul/Blue** → Ações, confiança, próximos passos
+- **Teal** → Análise, relatórios, visão geral
+- **Índigo** → Configurações, sistema, ajustes
+
+**Processo de Escolha:**
+1. Pergunte: "Que emoção esta seção deve transmitir?"
+2. Escolha a cor que melhor representa essa emoção
+3. Use gradientes para adicionar profundidade
+4. Mantenha consistência dentro do contexto
+
+### 4. Hierarquia de Espaçamento e Tamanhos
+
+**Regra do Espaço Respiratório:**
+
+**Pense em "zonas de conforto":**
+- **Zona Macro** (página inteira) → Muito espaço, background suave
+- **Zona Meso** (seções) → Espaço moderado, separações claras  
+- **Zona Micro** (campos) → Espaço suficiente, sem apertar
+
+**Hierarquia de Tamanhos (Proporções Harmoniosas):**
+- **Título Principal**: text-3xl (30px) - máximo text-4xl (36px) em casos especiais
+- **Subtítulos de Seção**: text-xl (20px) a text-2xl (24px)
+- **Labels e Títulos Menores**: text-base (16px) a text-lg (18px)
+- **Texto Corpo**: text-sm (14px) a text-base (16px)
+- **Texto Auxiliar**: text-xs (12px) a text-sm (14px)
+
+**Metodologia:**
+1. **Comece comedido** - Hierarquia clara sem exagerar
+2. **Agrupe logicamente** - Itens relacionados ficam próximos
+3. **Separe conceitos** - Conceitos diferentes precisam de espaço entre eles
+4. **Teste o cansaço visual** - Se parece "gritante", diminua os tamanhos
+
+## 🎨 Processo de Criação Visual
+
+### 1. Definindo a Personalidade da Tela
+
+**Faça essas perguntas:**
+- Esta tela é mais "corporativa" ou "amigável"?
+- É mais "rápida" ou "cuidadosa"?
+- É mais "técnica" ou "humana"?
+
+**Traduza em elementos visuais:**
+- Corporativa → Cinzas, linhas retas, espaços uniformes
+- Amigável → Cores quentes, bordas arredondadas, variação de tamanhos
+- Rápida → Gradientes suaves, transições rápidas
+- Cuidadosa → Sombras profundas, bordas bem definidas
+- Técnica → Fontes menores, mais informação por área
+- Humana → Fontes equilibradas, densidade de informação confortável
+
+### 2. Construindo Profundidade Visual
+
+**Camadas de profundidade (do fundo para frente):**
+
+1. **Background** - Gradiente sutil que não compete com o conteúdo
+2. **Container Principal** - Levemente elevado, com transparência
+3. **Seções** - Pequenas elevações, bordas sutis
+4. **Elementos Interativos** - Sombras mais pronunciadas
+5. **Estados de Hover/Focus** - Máxima elevação
+
+**Técnicas para criar profundidade:**
+- Transparências (80-90% opacity)
+- Blur no background (backdrop-filter)
+- Sombras graduais (não apenas border)
+- Gradientes sutis em elementos
+- Variação no peso das fontes
+
+### 3. Guiando o Olhar do Usuário
+
+**Fluxo Visual Natural:**
+1. **Primeiro olhar** → Header com ícone (âncora visual)
+2. **Segundo olhar** → Título (confirma onde está)
+3. **Terceiro olhar** → Primeira seção (onde começar)
+4. **Fluxo natural** → Seções em ordem lógica
+5. **Finalização** → Botões de ação (clara conclusão)
+
+**Técnicas de direcionamento:**
+- Tamanhos de fonte decrescentes conforme importância (sem exagerar)
+- Cores mais vibrantes nos pontos importantes
+- Espaçamento que cria "pausas" visuais
+- Ícones que funcionam como "sinalizadores"
+
+## 🔧 Metodologia de Implementação
+
+### 1. Processo de Desenvolvimento
+
+**Fase 1 - Estrutura Básica:**
+- Layout responsivo básico
+- Hierarquia de informações
+- Navegação funcional
+
+**Fase 2 - Identidade Visual:**
+- Escolha de cores baseada no contexto emocional
+- Definição de espaçamentos
+- Tipografia consistente e proporcionada
+
+**Fase 3 - Profundidade e Polimento:**
+- Gradientes e transparências
+- Sombras e elevações
+- Animações sutis
+
+**Fase 4 - Estados e Feedback:**
+- Estados de loading
+- Feedback visual de ações
+- Estados de erro/sucesso
+- **Comportamentos de cursor apropriados**
+
+### 2. Checklist de Qualidade Visual
+
+**Perguntas para auto-avaliação:**
+- [ ] Um usuário novo entenderia o que fazer em 3 segundos?
+- [ ] A tela transmite confiança e profissionalismo?
+- [ ] Existe hierarquia clara de importância?
+- [ ] Os elementos interativos são óbvios?
+- [ ] A tela é agradável de olhar por período prolongado?
+- [ ] Funciona bem em dispositivos diferentes?
+- [ ] As cores fazem sentido com o contexto?
+- [ ] Os tamanhos de texto estão proporcionais e legíveis?
+- [ ] Nada parece "gritante" ou exagerado?
+- [ ] **Cursores estão apropriados para cada elemento?**
+- [ ] **Feedback visual acompanha mudanças de cursor?**
+- [ ] **Interface é acessível para diferentes usuários?**
+
+### 3. Adaptação e Evolução
+
+**Não copie, adapte:**
+- Use os princípios, não os elementos exatos
+- Cada tela tem sua personalidade própria
+- Considere o contexto específico do usuário
+- Teste com usuários reais quando possível
+
+**Evolução contínua:**
+- Observe como usuários interagem
+- Ajuste baseado no feedback
+- Mantenha consistência, mas permita variação
+- Documente as decisões e os motivos
+
+## 🎭 Personalização por Tipo de Tela
+
+### Telas de Criação
+**Mindset:** "Empoderamento e confiança"
+- Cores energizantes mas não agressivas
+- Muito espaço para "respirar"
+- Seções bem organizadas para reduzir ansiedade
+- Feedback constante de progresso
+- **Tamanhos**: Títulos moderados (text-3xl máximo), foco na usabilidade
+- **Cursores**: Pointer em todos os CTAs, text em inputs
+
+### Telas de Visualização  
+**Mindset:** "Clareza e compreensão"
+- Cores neutras com destaques estratégicos
+- Densidade de informação balanceada
+- Hierarquia visual muito clara
+- Navegação intuitiva
+- **Tamanhos**: Proporções equilibradas, legibilidade otimizada
+- **Cursores**: Pointer em elementos clicáveis, default em textos
+
+### Telas de Edição
+**Mindset:** "Cuidado e precisão"
+- Cores que indicam atenção (âmbares, laranjas suaves)
+- Campos claramente identificáveis
+- Estados "antes/depois" visíveis
+- Confirmações visuais
+- **Tamanhos**: Funcionalidade sobre impacto visual
+- **Cursores**: Text em campos editáveis, not-allowed em desabilitados
+
+### Telas de Relatório
+**Mindset:** "Análise e insights"
+- Cores analíticas (teals, blues, greens)
+- Espaço para gráficos e visualizações
+- Hierarquia de dados clara
+- Exportação e compartilhamento óbvios
+- **Tamanhos**: Densidade informacional otimizada
+- **Cursores**: Pointer em filtros/ações, resize em divisores
+
+## 🌟 Princípios Finais
+
+### Lembre-se sempre:
+1. **O usuário é o protagonista** - Sua interface é o coadjuvante
+2. **Cada pixel deve ter um propósito** - Se não serve para nada, remova
+3. **Consistência não é repetição** - Mantenha padrões, varie execução
+4. **Beleza serve à função** - Estética que não ajuda a tarefa é distração
+5. **Teste com empatia** - Como VOCÊ se sentiria usando isso?
+6. **Proporção é elegância** - Tamanhos equilibrados transmitem profissionalismo
+7. **Acessibilidade é fundamental** - Interface deve funcionar para todos
+8. **Responsividade é obrigatória** - Desktop e mobile com qualidade igual
+
+### Guia de Tamanhos Recomendados:
+```
+// Hierarquia de Títulos (comedida)
+h1: text-3xl (30px) - máximo text-4xl em casos especiais
+h2: text-2xl (24px) 
+h3: text-xl (20px)
+h4: text-lg (18px)
+
+// Textos de Interface
+labels: text-sm (14px) a text-base (16px)
+body: text-sm (14px) a text-base (16px)
+captions: text-xs (12px) a text-sm (14px)
+
+// Elementos de Interface
+buttons: text-sm (14px) a text-base (16px)
+inputs: text-sm (14px) a text-base (16px)
+```
+
+### Guia de Cursores Essenciais:
+```css
+/* Elementos Interativos */
+button, a, [role="button"] { cursor: pointer; }
+input, textarea, select { cursor: text; }
+[disabled] { cursor: not-allowed; }
+
+/* Elementos Especiais */
+[draggable="true"] { cursor: grab; }
+[draggable="true"]:active { cursor: grabbing; }
+.resize-handle { cursor: ew-resize; /* ou ns-resize */ }
+.help-icon { cursor: help; }
+
+/* Estados Padrão */
+p, h1, h2, h3, span { cursor: default; }
+```
+
+Esta metodologia deve ser aplicada como processo de raciocínio, não como template rígido. Cada tela é uma oportunidade de criar algo que realmente serve e encanta o usuário, **com elegância, proporção adequadas e interações previsíveis**.
+
+### Regras de Contraste de Cores
+- **Background claro + Elemento forte**: bg-blue-50 com text-blue-700 ou bg-blue-500
+- **Hierarquia visual**: Cores mais fortes para elementos importantes, suaves para backgrounds
+- **Acessibilidade**: Sempre teste contraste com ferramentas (mínimo 4.5:1 para texto normal)
+- **Consistência**: Use a mesma lógica de contraste em toda a aplicação
+- **Estados interativos**: Hover e focus devem intensificar as cores mantendo contraste
+
+### Abstração e Reutilização (OBRIGATÓRIO)
+
+**Quando abstrair código:**
+- [ ] **Repetição**: Se você está copiando lógica/estilos 2+ vezes
+- [ ] **Complexidade**: Lógica de cores, temas, cálculos que podem ser úteis em outros lugares
+- [ ] **Configuração**: Constantes, mapeamentos, transformações de dados
+- [ ] **Utilitários**: Helpers para formatação, validação, manipulação
+
+**Onde criar abstrações:**
+- [ ] **`/lib/theme-utils.ts`**: Temas, cores, estilos reutilizáveis
+- [ ] **`/lib/format-utils.ts`**: Formatação de datas, números, textos
+- [ ] **`/lib/validation-utils.ts`**: Validações comuns de formulários
+- [ ] **`/utils/`**: Outras utilidades específicas do domínio
+
+**Como identificar oportunidades:**
+- [ ] **Cores e temas**: Lógica de contraste, mapeamentos de cores por status
+- [ ] **Classes CSS**: Combinações frequentes (cards, inputs, buttons)
+- [ ] **Transformações**: Formatação de dados, cálculos, conversões
+- [ ] **Validações**: Regras de negócio reutilizáveis
+
+**Padrão de abstração:**
+```typescript
+// ✅ Bom: Utilitário bem documentado e tipado
+export const getEnhancedTheme = (stageName: string): EnhancedTheme => {
+  // Lógica centralizada com tipos claros
+}
+
+// ✅ Bom: Constantes reutilizáveis  
+export const commonStyles = {
+  card: { base: '...', interactive: '...' }
+}
+
+// ❌ Evitar: Lógica repetida em cada componente
+const getStageTheme = (stage) => { /* lógica duplicada */ }
+```
+
+**Benefícios esperados:**
+- [ ] **Consistência**: Mesmo comportamento em toda aplicação
+- [ ] **Manutenibilidade**: Mudanças centralizadas
+- [ ] **Velocidade**: Reutilização acelera desenvolvimento
+- [ ] **Testes**: Lógica centralizada é mais fácil de testar
+
+
+

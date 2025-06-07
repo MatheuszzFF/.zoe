@@ -1,0 +1,138 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Regras de Atualização de Funcionalidades
+
+## Obrigatoriedade
+- TODA atualização de funcionalidade DEVE ser documentada
+- TODA mudança de terminologia DEVE ser aplicada consistentemente
+- TODO campo ou label alterado DEVE ser atualizado em TODOS os locais
+
+## Processo de Atualização
+
+### 1. Identificação Completa
+- [ ] Usar busca global (`grep_search`) para encontrar TODAS as ocorrências
+- [ ] Verificar código-fonte, documentações e configurações
+- [ ] Mapear impacto em diferentes módulos
+- [ ] Listar TODOS os arquivos que precisam de alteração
+
+### 2. Implementação Consistente
+- [ ] Atualizar TODOS os arquivos identificados em paralelo
+- [ ] Manter consistência de terminologia
+- [ ] Seguir padrões de nomenclatura estabelecidos
+- [ ] Validar tipos TypeScript se aplicável
+
+### 3. Documentação Obrigatória
+- [ ] Atualizar documentação principal da funcionalidade
+- [ ] Criar/atualizar glossário de termos
+- [ ] Registrar mudança no histórico de todas as docs relacionadas
+- [ ] Manter exemplos atualizados
+
+### 4. Verificação de Consistência
+- [ ] Buscar novamente para confirmar que não sobrou nenhuma ocorrência
+- [ ] Verificar se imports/exports estão corretos
+- [ ] Validar se tipos TypeScript estão consistentes
+- [ ] Testar funcionalidade após mudanças
+
+## Padrões de Busca
+
+### Para Campos/Labels
+```bash
+# Buscar o nome antigo
+grep -r "Nome Antigo" src/
+# Buscar a chave do campo
+grep -r "nomeAntigo" src/
+# Buscar variações
+grep -r "nome_antigo\|nomeAntigo\|Nome Antigo" src/
+```
+
+### Para Funcionalidades
+```bash
+# Buscar função/componente
+grep -r "NomeFuncao" src/
+# Buscar imports
+grep -r "import.*NomeFuncao" src/
+# Buscar uso
+grep -r "NomeFuncao\|nomeFuncao" src/
+```
+
+## Checklist de Atualização
+
+### Código
+- [ ] Constantes e configurações
+- [ ] Labels em formulários
+- [ ] Textos de interface
+- [ ] Mensagens de erro
+- [ ] Comentários no código
+- [ ] Tipos TypeScript
+- [ ] Props e interfaces
+
+### Documentação
+- [ ] Arquivos .md dos componentes
+- [ ] Documentação de APIs
+- [ ] Exemplos de uso
+- [ ] Glossários
+- [ ] Histórico de mudanças
+- [ ] Checklists
+
+### Validação Final
+- [ ] Busca global confirma 0 ocorrências antigas
+- [ ] Build passa sem erros
+- [ ] Tipos TypeScript válidos
+- [ ] Interface funciona corretamente
+- [ ] Documentação atualizada e clara
+
+## Exemplos de Aplicação
+
+### Mudança de Label: "Valor Estimado" → "Estimativa"
+1. **Busca**: `grep -r "Valor Estimado\|estimatedLoss" src/`
+2. **Arquivos identificados**:
+   - `src/constants/claims.ts`
+   - `src/app/(internal)/claims/new/page.tsx`
+   - `src/app/(internal)/claims/[id]/edit/page.tsx`
+   - `src/constants/claims.md`
+   - `src/app/(internal)/claims/completed/completed-claims.md`
+3. **Atualização**: Todos os arquivos em paralelo
+4. **Documentação**: Atualizar glossário e histórico
+5. **Verificação**: Nova busca confirma consistência
+
+### Mudança de Funcionalidade
+1. **Mapear**: Todos os usos da funcionalidade
+2. **Planejar**: Quebras de compatibilidade
+3. **Implementar**: Mudanças graduais se necessário
+4. **Documentar**: Processo e decisões tomadas
+5. **Testar**: Funcionalidade completa
+
+## Responsabilidades
+
+### Desenvolvedor
+- Seguir processo completo de atualização
+- Não deixar inconsistências
+- Documentar adequadamente
+- Testar após mudanças
+
+### Revisor
+- Verificar consistência global
+- Validar documentação
+- Confirmar que processo foi seguido
+- Testar funcionalidade
+
+## Ferramentas Recomendadas
+
+### Busca
+- `grep_search` para busca em arquivos
+- `codebase_search` para busca semântica
+- `file_search` para localizar arquivos
+
+### Edição
+- `edit_file` para múltiplas mudanças
+- Edições em paralelo quando possível
+- Verificação com `read_file` se necessário
+
+### Documentação
+- Sempre criar/atualizar .md correspondente
+- Manter estrutura padrão de documentação
+- Usar checklists para tracking
+

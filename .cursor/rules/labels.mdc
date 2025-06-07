@@ -1,0 +1,88 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Sistema de Labels (OBRIGATÓRIO)
+
+## Regra Principal
+- **SEMPRE** usar o sistema de labels existente em `src/constants/labels.ts`
+- **NUNCA** criar novos arquivos de constantes para labels quando já existe um sistema
+- **SEMPRE** verificar se existe uma label antes de criar uma nova
+
+## Sistema Atual
+O sistema de labels está centralizado em `src/constants/labels.ts` e contém:
+
+### Estrutura
+```typescript
+export const LABELS = {
+  claims: { /* labels de sinistros */ },
+  users: { /* labels de usuários */ },
+  inspectionTypes: { /* tipos de vistoria */ },
+  productTypes: { /* tipos de produto */ },
+  // ... outras categorias
+}
+```
+
+### Como Usar
+```typescript
+// Para labels simples
+import { LABELS, getLabel } from '@/constants/labels'
+
+// Para usar tipos de vistoria
+Object.entries(LABELS.inspectionTypes).map(([value, label]) => (
+  <SelectItem key={value} value={value}>
+    {label}
+  </SelectItem>
+))
+
+// Para labels dinâmicas
+getLabel('inspectionTypes.sem_vistoria') // "Sem Vistoria"
+```
+
+## Tipos de Vistoria Existentes
+- `sem_vistoria`: "Sem Vistoria"
+- `presencial`: "Presencial" 
+- `remota`: "Remota"
+
+## Regras de Uso
+1. **Verificar Primeiro**: Sempre verificar se a label já existe no sistema
+2. **Não Duplicar**: Não criar arquivos separados para labels que já existem
+3. **Usar Constantes**: Usar `LABELS.inspectionTypes` em vez de valores hardcoded
+4. **Manter Consistência**: Todas as labels devem vir do mesmo sistema
+
+## Exemplos de USO CORRETO
+```typescript
+// ✅ CORRETO - Usar sistema existente
+import { LABELS } from '@/constants/labels'
+
+Object.entries(LABELS.inspectionTypes).map(([value, label]) => (
+  <SelectItem key={value} value={value}>
+    {label}
+  </SelectItem>
+))
+```
+
+## Exemplos de USO INCORRETO
+```typescript
+// ❌ INCORRETO - Criar constantes duplicadas
+const INSPECTION_TYPES = [
+  { value: 'sem_vistoria', label: 'Sem Vistoria' }
+]
+
+// ❌ INCORRETO - Hardcoded
+<SelectItem value="sem_vistoria">Sem Vistoria</SelectItem>
+```
+
+## Quando Criar Novas Labels
+- Somente quando não existe no sistema atual
+- Adicionar ao arquivo `src/constants/labels.ts` existente
+- Seguir a estrutura hierárquica existente
+- Atualizar a documentação
+
+## Verificação Obrigatória
+Antes de qualquer mudança em labels:
+1. [ ] Verificar se existe em `src/constants/labels.ts`
+2. [ ] Confirmar se não há duplicação
+3. [ ] Usar o sistema existente
+4. [ ] Testar em todas as telas afetadas

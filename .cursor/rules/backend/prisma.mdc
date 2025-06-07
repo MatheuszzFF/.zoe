@@ -1,0 +1,307 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Regras do Prisma
+
+## Configuração Inicial
+
+### 1. Instalação
+```bash
+# Instalar dependências
+npm install @prisma/client
+npm install prisma --save-dev
+
+# Inicializar Prisma
+npx prisma init
+```
+
+### 2. Configuração do Schema
+```prisma
+// schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // ou "mysql" ou "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Modelos devem seguir o padrão:
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users") // Nome da tabela no banco
+}
+```
+
+## Boas Práticas
+
+### 1. Cliente Prisma como Singleton
+```typescript
+// lib/prisma.ts
+import { PrismaClient } from '@prisma/client'
+
+const globalForPrisma = global as unknown as { prisma: PrismaClient }
+
+export const prisma = globalForPrisma.prisma || new PrismaClient()
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+```
+
+### 2. Uso em API Routes
+```typescript
+// app/api/users/route.ts
+import { prisma } from '@/lib/prisma'
+import { NextResponse } from 'next/server'
+
+export async function GET() {
+  try {
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true
+      }
+    })
+    return NextResponse.json(users)
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    )
+  }
+}
+```
+
+### 3. Validação com Zod
+```typescript
+// lib/validations/user.ts
+import { z } from 'zod'
+
+export const userSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(2),
+  password: z.string().min(8)
+})
+
+// app/api/users/route.ts
+import { userSchema } from '@/lib/validations/user'
+
+export async function POST(request: Request) {
+  try {
+    const data = await request.json()
+    const validatedData = userSchema.parse(data)
+    
+    const user = await prisma.user.create({
+      data: validatedData
+    })
+    
+    return NextResponse.json(user, { status: 201 })
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: error.errors },
+        { status: 400 }
+      )
+    }
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    )
+  }
+}
+```
+
+### 4. Relacionamentos
+```prisma
+// schema.prisma
+model User {
+  id        String   @id @default(cuid())
+  posts     Post[]   // Relacionamento 1:N
+  profile   Profile? // Relacionamento 1:1
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+}
+
+model Profile {
+  id     String  @id @default(cuid())
+  user   User    @relation(fields: [userId], references: [id])
+  userId String  @unique
+}
+```
+
+### 5. Queries Otimizadas
+```typescript
+// Incluir relacionamentos
+const user = await prisma.user.findUnique({
+  where: { id },
+  include: {
+    posts: true,
+    profile: true
+  }
+})
+
+// Selecionar campos específicos
+const users = await prisma.user.findMany({
+  select: {
+    id: true,
+    name: true,
+    _count: {
+      select: { posts: true }
+    }
+  }
+})
+
+// Paginação
+const posts = await prisma.post.findMany({
+  skip: 10,
+  take: 5,
+  orderBy: {
+    createdAt: 'desc'
+  }
+})
+```
+
+### 6. Transações
+```typescript
+// Operações múltiplas
+const result = await prisma.$transaction([
+  prisma.user.create({ data: userData }),
+  prisma.profile.create({ data: profileData })
+])
+
+// Transação com rollback
+try {
+  const result = await prisma.$transaction(async (tx) => {
+    const user = await tx.user.create({ data: userData })
+    const profile = await tx.profile.create({
+      data: { ...profileData, userId: user.id }
+    })
+    return { user, profile }
+  })
+} catch (error) {
+  // Rollback automático em caso de erro
+}
+```
+
+### 7. Migrações
+```bash
+# Criar migração
+npx prisma migrate dev --name add_user_fields
+
+# Verificar status
+npx prisma migrate status
+
+# Aplicar em produção
+npx prisma migrate deploy
+
+# Resetar banco (desenvolvimento)
+npx prisma migrate reset
+```
+
+### 8. Seeds
+```typescript
+// prisma/seed.ts
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
+async function main() {
+  await prisma.user.create({
+    data: {
+      email: 'admin@example.com',
+      name: 'Admin',
+      posts: {
+        create: [
+          { title: 'Post 1' },
+          { title: 'Post 2' }
+        ]
+      }
+    }
+  })
+}
+
+main()
+  .catch((e) => {
+    console.error(e)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })
+```
+
+## Segurança
+
+### 1. Variáveis de Ambiente
+```env
+# .env
+DATABASE_URL="postgresql://user:password@localhost:5432/mydb?schema=public"
+```
+
+### 2. Índices
+```prisma
+model User {
+  id    String @id @default(cuid())
+  email String @unique // Índice automático
+  name  String
+
+  @@index([name]) // Índice explícito
+}
+```
+
+### 3. Soft Delete
+```prisma
+model User {
+  id        String   @id @default(cuid())
+  deletedAt DateTime?
+}
+```
+
+## Performance
+
+### 1. Caching
+```typescript
+// lib/cache.ts
+import { Redis } from '@upstash/redis'
+
+const redis = Redis.fromEnv()
+
+export async function getCachedUser(id: string) {
+  const cached = await redis.get(`user:${id}`)
+  if (cached) return JSON.parse(cached)
+  
+  const user = await prisma.user.findUnique({
+    where: { id }
+  })
+  
+  await redis.set(`user:${id}`, JSON.stringify(user), { ex: 3600 })
+  return user
+}
+```
+
+### 2. Batch Operations
+```typescript
+// Inserção em lote
+const users = await prisma.user.createMany({
+  data: userDataArray,
+  skipDuplicates: true
+})
+
+// Atualização em lote
+const updated = await prisma.user.updateMany({
+  where: { role: 'USER' },
+  data: { role: 'ADMIN' }
+})
+```
+

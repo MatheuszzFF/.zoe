@@ -1,0 +1,105 @@
+# Arquitetura Backend
+
+## Princípios Fundamentais
+
+### 1. Separação de Responsabilidades
+- Cada módulo deve ter uma única responsabilidade
+- Evitar acoplamento entre módulos
+- Usar injeção de dependência
+- Manter a lógica de negócios isolada
+
+### 2. Camadas da Aplicação
+```typescript
+src/
+  ├── domain/          # Regras de negócio
+  │   ├── entities/    # Entidades
+  │   ├── use-cases/   # Casos de uso
+  │   └── repositories/# Interfaces de repositórios
+  ├── infrastructure/  # Implementações técnicas
+  │   ├── database/    # Acesso a dados
+  │   ├── api/         # Controllers/Rotas
+  │   └── services/    # Serviços externos
+  └── application/     # Orquestração
+      ├── dtos/        # Objetos de transferência
+      └── mappers/     # Conversores de dados
+```
+
+### 3. Padrões de Projeto
+- Repository Pattern para acesso a dados
+- Factory Pattern para criação de objetos
+- Strategy Pattern para algoritmos variáveis
+- Observer Pattern para eventos
+- Decorator Pattern para cross-cutting concerns
+
+### 4. Princípios SOLID
+- Single Responsibility Principle
+- Open/Closed Principle
+- Liskov Substitution Principle
+- Interface Segregation Principle
+- Dependency Inversion Principle
+
+### 5. Tratamento de Erros
+```typescript
+// Exemplo de estrutura de erro
+class DomainError extends Error {
+  constructor(
+    public code: string,
+    message: string,
+    public details?: unknown
+  ) {
+    super(message)
+  }
+}
+
+// Uso
+throw new DomainError(
+  'INVALID_OPERATION',
+  'Operação não permitida',
+  { reason: 'Limite excedido' }
+)
+```
+
+### 6. Logging e Monitoramento
+- Logs estruturados
+- Níveis de log apropriados
+- Rastreamento de requisições
+- Métricas de performance
+- Alertas configuráveis
+
+### 7. Configuração
+- Variáveis de ambiente
+- Configuração por ambiente
+- Secrets gerenciados
+- Feature flags
+- Configuração dinâmica
+
+### 8. Documentação
+- Documentação de API (OpenAPI/Swagger)
+- Documentação de código
+- Diagramas de arquitetura
+- Guias de contribuição
+- Changelog
+
+## Visão Geral
+O backend é construído usando Next.js App Router, com foco em performance, segurança e manutenibilidade.
+
+## Estrutura de Diretórios
+```bash
+src/
+  ├── app/
+  │   └── api/           # Rotas da API
+  │       ├── auth/      # Autenticação
+  │       ├── claims/    # Sinistros
+  │       └── users/     # Usuários
+  ├── lib/
+  │   ├── prisma.ts      # Cliente Prisma
+  │   └── supabase.ts    # Cliente Supabase
+  └── types/             # Tipos TypeScript
+```
+
+## Padrões de Código
+- Funções puras quando possível
+- Tratamento de erros consistente
+- Logs estruturados
+- Validação de dados
+- Tipagem forte 

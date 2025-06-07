@@ -1,0 +1,98 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Regras de Qualidade
+
+## Testes
+{mdc:quality/testing.mdc}
+
+### Testes Unitários
+```typescript
+// Estrutura básica
+describe('Component', () => {
+  it('should render correctly', () => {
+    // Arrange
+    const props = { ... }
+    
+    // Act
+    render(<Component {...props} />)
+    
+    // Assert
+    expect(screen.getByText('text')).toBeInTheDocument()
+  })
+})
+```
+
+### Testes de Integração
+```typescript
+// Testar fluxos completos
+describe('User Flow', () => {
+  it('should complete registration', async () => {
+    // Setup
+    // Execução
+    // Verificação
+  })
+})
+```
+
+## Documentação
+{mdc:quality/documentation.mdc}
+
+### Documentação de Código
+```typescript
+/**
+ * @description Função que processa dados do usuário
+ * @param {UserData} data - Dados do usuário
+ * @returns {ProcessedData} Dados processados
+ * @throws {ValidationError} Se os dados forem inválidos
+ */
+```
+
+### Documentação de API
+```typescript
+/**
+ * @api {post} /users Criar usuário
+ * @apiName CreateUser
+ * @apiGroup User
+ * @apiVersion 1.0.0
+ * 
+ * @apiParam {String} name Nome do usuário
+ * @apiParam {String} email Email do usuário
+ * 
+ * @apiSuccess {Object} user Dados do usuário criado
+ */
+```
+
+## Code Review
+{mdc:quality/code-review.mdc}
+
+### Checklist de Revisão
+```markdown
+- [ ] Código segue os padrões do projeto
+- [ ] Testes foram adicionados/atualizados
+- [ ] Documentação foi atualizada
+- [ ] Não há código morto
+- [ ] Performance foi considerada
+- [ ] Segurança foi verificada
+```
+
+### Processo de Revisão
+```markdown
+1. Revisão inicial
+   - Verificar estrutura
+   - Verificar padrões
+   - Verificar testes
+
+2. Revisão técnica
+   - Verificar arquitetura
+   - Verificar performance
+   - Verificar segurança
+
+3. Aprovação
+   - Mínimo de 2 aprovações
+   - Resolver todos os comentários
+   - Atualizar branch
+```
+

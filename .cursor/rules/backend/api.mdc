@@ -1,0 +1,450 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# API Design
+
+## Princípios Fundamentais
+
+### 1. RESTful APIs
+- Usar verbos HTTP apropriadamente
+- URLs descritivas e em inglês
+- Versionamento da API
+- Respostas consistentes
+- Paginação padrão
+
+### 2. Estrutura de Endpoints
+```typescript
+// Exemplo de estrutura
+GET    /api/v1/resources          // Listar recursos
+POST   /api/v1/resources          // Criar recurso
+GET    /api/v1/resources/:id      // Buscar recurso
+PUT    /api/v1/resources/:id      // Atualizar recurso
+DELETE /api/v1/resources/:id      // Remover recurso
+```
+
+### 3. Respostas Padronizadas
+```typescript
+// Sucesso
+{
+  "data": T,
+  "meta": {
+    "page": number,
+    "limit": number,
+    "total": number
+  }
+}
+
+// Erro
+{
+  "error": {
+    "code": string,
+    "message": string,
+    "details": unknown
+  }
+}
+```
+
+### 4. Autenticação e Autorização
+- JWT para autenticação
+- Refresh tokens
+- RBAC (Role-Based Access Control)
+- Rate limiting
+- CORS configurado
+
+### 5. Validação
+```typescript
+// Exemplo de validação
+const schema = z.object({
+  name: z.string().min(3),
+  email: z.string().email(),
+  age: z.number().min(18)
+})
+
+// Uso
+const validated = schema.parse(data)
+```
+
+### 6. Cache
+- Cache-Control headers
+- ETags
+- Cache em camadas
+- Invalidação de cache
+- Cache distribuído
+
+### 7. Documentação
+- OpenAPI/Swagger
+- Exemplos de uso
+- Descrição de parâmetros
+- Respostas possíveis
+- Autenticação
+
+### 8. Performance
+- Compressão
+- Paginação
+- Filtros eficientes
+- Queries otimizadas
+- Timeouts configurados
+
+### 9. Segurança
+- HTTPS obrigatório
+- Sanitização de inputs
+- Proteção contra ataques comuns
+- Headers de segurança
+- Rate limiting
+
+### 10. Monitoramento
+- Logs de requisições
+- Métricas de performance
+- Alertas de erro
+- Rastreamento de requisições
+- Análise de uso
+
+# Regras de API Routes
+
+## Estrutura
+
+### 1. Organização de Rotas
+```typescript
+// app/api/users/route.ts
+import { NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma'
+import { userSchema } from '@/lib/validations/user'
+
+// GET /api/users
+export async function GET() {
+  try {
+    const users = await prisma.user.findMany()
+    return NextResponse.json(users)
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    )
+  }
+}
+
+// POST /api/users
+export async function POST(request: Request) {
+  try {
+    const data = await request.json()
+    const validatedData = userSchema.parse(data)
+    
+    const user = await prisma.user.create({
+      data: validatedData
+    })
+    
+    return NextResponse.json(user, { status: 201 })
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: error.errors },
+        { status: 400 }
+      )
+    }
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    )
+  }
+}
+```
+
+### 2. Rotas Dinâmicas
+```typescript
+// app/api/users/[id]/route.ts
+import { NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma'
+
+// GET /api/users/123
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: params.id }
+    })
+    
+    if (!user) {
+      return NextResponse.json(
+        { error: 'User not found' },
+        { status: 404 }
+      )
+    }
+    
+    return NextResponse.json(user)
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    )
+  }
+}
+```
+
+## Middleware
+
+### 1. Autenticação
+```typescript
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { getToken } from 'next-auth/jwt'
+
+export async function middleware(request: NextRequest) {
+  const token = await getToken({ req: request })
+  
+  if (!token) {
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401 }
+    )
+  }
+  
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: '/api/protected/:path*'
+}
+```
+
+### 2. Rate Limiting
+```typescript
+// lib/rate-limit.ts
+import { Ratelimit } from '@upstash/ratelimit'
+import { Redis } from '@upstash/redis'
+
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(10, '10 s')
+})
+
+// middleware.ts
+export async function middleware(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for')
+  const { success } = await ratelimit.limit(ip)
+  
+  if (!success) {
+    return NextResponse.json(
+      { error: 'Too Many Requests' },
+      { status: 429 }
+    )
+  }
+  
+  return NextResponse.next()
+}
+```
+
+## Validação
+
+### 1. Schemas com Zod
+```typescript
+// lib/validations/user.ts
+import { z } from 'zod'
+
+export const userSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(2),
+  password: z.string().min(8)
+})
+
+// lib/validations/query.ts
+export const paginationSchema = z.object({
+  page: z.string().optional(),
+  limit: z.string().optional()
+})
+```
+
+### 2. Validação de Query Params
+```typescript
+// app/api/users/route.ts
+import { paginationSchema } from '@/lib/validations/query'
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const validatedParams = paginationSchema.parse({
+      page: searchParams.get('page'),
+      limit: searchParams.get('limit')
+    })
+    
+    const users = await prisma.user.findMany({
+      skip: (Number(validatedParams.page) - 1) * Number(validatedParams.limit),
+      take: Number(validatedParams.limit)
+    })
+    
+    return NextResponse.json(users)
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: error.errors },
+        { status: 400 }
+      )
+    }
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    )
+  }
+}
+```
+
+## Respostas
+
+### 1. Padronização
+```typescript
+// lib/api-response.ts
+import { NextResponse } from 'next/server'
+
+export const apiResponse = {
+  success: (data: any, status = 200) => {
+    return NextResponse.json({ data }, { status })
+  },
+  
+  error: (message: string, status = 500) => {
+    return NextResponse.json(
+      { error: message },
+      { status }
+    )
+  },
+  
+  validation: (errors: any) => {
+    return NextResponse.json(
+      { error: 'Validation Error', details: errors },
+      { status: 400 }
+    )
+  }
+}
+
+// app/api/users/route.ts
+import { apiResponse } from '@/lib/api-response'
+
+export async function GET() {
+  try {
+    const users = await prisma.user.findMany()
+    return apiResponse.success(users)
+  } catch (error) {
+    return apiResponse.error('Internal Server Error')
+  }
+}
+```
+
+### 2. Headers
+```typescript
+// app/api/users/route.ts
+export async function GET() {
+  return NextResponse.json(
+    { data: users },
+    {
+      status: 200,
+      headers: {
+        'Cache-Control': 'public, s-maxage=10, stale-while-revalidate=59',
+        'Content-Type': 'application/json'
+      }
+    }
+  )
+}
+```
+
+## Segurança
+
+### 1. CORS
+```typescript
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next()
+  
+  response.headers.set('Access-Control-Allow-Origin', '*')
+  response.headers.set(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, OPTIONS'
+  )
+  response.headers.set(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization'
+  )
+  
+  return response
+}
+
+export const config = {
+  matcher: '/api/:path*'
+}
+```
+
+### 2. Sanitização
+```typescript
+// lib/sanitize.ts
+import { z } from 'zod'
+
+export function sanitizeInput<T extends z.ZodType>(
+  schema: T,
+  data: unknown
+): z.infer<T> {
+  return schema.parse(data)
+}
+
+// app/api/users/route.ts
+import { sanitizeInput } from '@/lib/sanitize'
+
+export async function POST(request: Request) {
+  try {
+    const data = await request.json()
+    const sanitizedData = sanitizeInput(userSchema, data)
+    // ... resto do código
+  } catch (error) {
+    // ... tratamento de erro
+  }
+}
+```
+
+## Performance
+
+### 1. Caching
+```typescript
+// app/api/users/route.ts
+export async function GET() {
+  const cached = await redis.get('users')
+  if (cached) {
+    return NextResponse.json(JSON.parse(cached))
+  }
+  
+  const users = await prisma.user.findMany()
+  await redis.set('users', JSON.stringify(users), { ex: 3600 })
+  
+  return NextResponse.json(users)
+}
+```
+
+### 2. Paginação
+```typescript
+// app/api/users/route.ts
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const page = Number(searchParams.get('page')) || 1
+  const limit = Number(searchParams.get('limit')) || 10
+  
+  const [users, total] = await Promise.all([
+    prisma.user.findMany({
+      skip: (page - 1) * limit,
+      take: limit
+    }),
+    prisma.user.count()
+  ])
+  
+  return NextResponse.json({
+    data: users,
+    pagination: {
+      total,
+      pages: Math.ceil(total / limit),
+      current: page
+    }
+  })
+}
+```

@@ -1,0 +1,262 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Roteamento Frontend
+
+## Princípios Fundamentais
+
+### 1. Configuração de Rotas
+```typescript
+// Exemplo de configuração de rotas
+import { createBrowserRouter } from 'react-router-dom'
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+        loader: dashboardLoader
+      },
+      {
+        path: 'users',
+        element: <Users />,
+        children: [
+          {
+            path: ':id',
+            element: <UserDetails />,
+            loader: userLoader
+          }
+        ]
+      },
+      {
+        path: 'settings',
+        element: <Settings />,
+        loader: settingsLoader
+      }
+    ]
+  }
+])
+```
+
+### 2. Rotas Protegidas
+```typescript
+// Exemplo de rotas protegidas
+import { Navigate, useLocation } from 'react-router-dom'
+
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useAuth()
+  const location = useLocation()
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />
+  }
+  
+  return <>{children}</>
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        path: 'dashboard',
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        )
+      }
+    ]
+  }
+])
+```
+
+### 3. Lazy Loading
+```typescript
+// Exemplo de lazy loading
+import { lazy, Suspense } from 'react'
+import { Routes, Route } from 'react-router-dom'
+
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const Users = lazy(() => import('./pages/Users'))
+const Settings = lazy(() => import('./pages/Settings'))
+
+function App() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </Suspense>
+  )
+}
+```
+
+### 4. Navegação
+```typescript
+// Exemplo de navegação
+import { useNavigate, Link } from 'react-router-dom'
+
+function Navigation() {
+  const navigate = useNavigate()
+  
+  return (
+    <nav>
+      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/users">Users</Link>
+      <button onClick={() => navigate('/settings')}>
+        Settings
+      </button>
+      <button onClick={() => navigate(-1)}>
+        Back
+      </button>
+    </nav>
+  )
+}
+```
+
+### 5. Parâmetros de Rota
+```typescript
+// Exemplo de parâmetros de rota
+import { useParams, useSearchParams } from 'react-router-dom'
+
+function UserDetails() {
+  const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const tab = searchParams.get('tab')
+  
+  return (
+    <div>
+      <h1>User {id}</h1>
+      <p>Current tab: {tab}</p>
+    </div>
+  )
+}
+```
+
+### 6. Breadcrumbs
+```typescript
+// Exemplo de breadcrumbs
+import { useLocation, Link } from 'react-router-dom'
+
+function Breadcrumbs() {
+  const location = useLocation()
+  const pathnames = location.pathname.split('/').filter(x => x)
+  
+  return (
+    <nav>
+      <Link to="/">Home</Link>
+      {pathnames.map((name, index) => {
+        const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
+        const isLast = index === pathnames.length - 1
+        
+        return (
+          <span key={name}>
+            <span> / </span>
+            {isLast ? (
+              <span>{name}</span>
+            ) : (
+              <Link to={routeTo}>{name}</Link>
+            )}
+          </span>
+        )
+      })}
+    </nav>
+  )
+}
+```
+
+### 7. Error Boundaries
+```typescript
+// Exemplo de error boundary
+import { useRouteError, isRouteErrorResponse } from 'react-router-dom'
+
+function ErrorBoundary() {
+  const error = useRouteError()
+  
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div>
+        <h1>Oops! {error.status}</h1>
+        <p>{error.statusText}</p>
+      </div>
+    )
+  }
+  
+  return (
+    <div>
+      <h1>Oops! Something went wrong</h1>
+      <p>{error.message}</p>
+    </div>
+  )
+}
+```
+
+### 8. Middleware
+```typescript
+// Exemplo de middleware
+import { useLoaderData, useNavigate } from 'react-router-dom'
+
+async function authMiddleware(loader: LoaderFunction) {
+  return async (...args: Parameters<LoaderFunction>) => {
+    const { isAuthenticated } = useAuth()
+    
+    if (!isAuthenticated) {
+      throw redirect('/login')
+    }
+    
+    return loader(...args)
+  }
+}
+
+const protectedLoader = authMiddleware(async () => {
+  // Loader logic
+})
+```
+
+### 9. Animações de Transição
+```typescript
+// Exemplo de animações de transição
+import { motion, AnimatePresence } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
+
+function AnimatedRoutes() {
+  const location = useLocation()
+  
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Routes location={location}>
+          {/* Routes */}
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  )
+}
+```
+
+### 10. Boas Práticas
+- Use rotas declarativas
+- Implemente lazy loading
+- Proteja rotas sensíveis
+- Mantenha URLs limpas
+- Use parâmetros de query
+- Implemente breadcrumbs
+- Trate erros adequadamente
+- Use middleware quando necessário
+- Anime transições
+- Documente rotas
