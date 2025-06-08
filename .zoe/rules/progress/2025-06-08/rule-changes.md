@@ -3,7 +3,7 @@
 ## 📋 Backup: Estrutura de Props em Componentes
 
 **Timestamp:** 2025-06-08  
-**Arquivo alterado:** `.cursor/rules/commands/create-component.mdc`
+**Arquivo alterado:** `.zoe/rules/commands/create-component.mdc`
 
 ### 📄 Regra ANTERIOR:
 - Componentes recebiam props desestruturadas diretamente nos parâmetros
@@ -20,7 +20,7 @@
 - Padrão mais limpo para props
 
 ### 📁 Arquivos Impactados:
-- `.cursor/rules/commands/create-component.mdc`
+- `.zoe/rules/commands/create-component.mdc`
 
 ---
 
@@ -28,8 +28,8 @@
 
 **Timestamp:** 2025-06-08  
 **Arquivos alterados:** 
-- `.cursor/rules/commands/create-component.mdc`
-- `.cursor/rules/zoe-chore.mdc`
+- `.zoe/rules/commands/create-component.mdc`
+- `.zoe/rules/zoe-chore.mdc`
 
 ### 📄 Regra ANTERIOR:
 - Testes eram criados por action separada (mandatory-tests.mdc)
@@ -51,17 +51,17 @@
 ## 📋 Backup: Localização da Pasta Progress
 
 **Timestamp:** 2025-06-08  
-**Arquivo alterado:** `.cursor/rules/actions/auto-documentation.mdc`
+**Arquivo alterado:** `.zoe/rules/actions/auto-documentation.mdc`
 
 ### 📄 Regra ANTERIOR:
 - Progress salvo em: `@./progress/[YYYY-MM-DD]/README.md` (raiz do projeto)
 
 ### 📄 Regra NOVA:
-- Progress salvo em: `@./.cursor/rules/progress/[YYYY-MM-DD]/README.md` (dentro das rules)
+- Progress salvo em: `@./.zoe/rules/progress/[YYYY-MM-DD]/README.md` (dentro das rules)
 
 ### 🎯 Motivo da Alteração:
 - Manter organização do sistema Zoe
-- Todas as pastas do sistema ficam em .cursor/rules/
+- Todas as pastas do sistema ficam em .zoe/rules/
 - Evitar poluir a raiz do projeto
 
 --- 

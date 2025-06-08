@@ -171,7 +171,7 @@ components/[nome]/
 
 ## Correção da Localização da Pasta Progress
 
-**Solicitação:** Ajustar regras para que pasta progress sempre fique dentro de .cursor/rules/
+**Solicitação:** Ajustar regras para que pasta progress sempre fique dentro de .zoe/rules/
 
 **Antes:**
 ```
@@ -181,7 +181,7 @@ components/[nome]/
 
 **Depois:**
 ```
-- Progress salvo em: .cursor/rules/progress/[YYYY-MM-DD]/ (dentro das rules)
+- Progress salvo em: .zoe/rules/progress/[YYYY-MM-DD]/ (dentro das rules)
 - Todas as referências corrigidas
 - Arquivos movidos para o local correto
 ```
@@ -194,7 +194,7 @@ components/[nome]/
 **Melhorias:**
 - Organização consistente do sistema Zoe
 - Pasta progress não polui mais a raiz do projeto
-- Todas as pastas do sistema ficam centralizadas em .cursor/rules/
+- Todas as pastas do sistema ficam centralizadas em .zoe/rules/
 - Facilita manutenção e navegação
 
 --- 
