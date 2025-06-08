@@ -9,7 +9,7 @@ alwaysApply: false
 - Qualquer ajuste feito no código
 
 ## Comportamento
-**Arquivo único por dia:** `progress/[YYYY-MM-DD]/README.md`
+**Arquivo único por dia:** @./.cursor/rules/progress/[YYYY-MM-DD]/README.md
 
 **Estrutura do arquivo diário:**
 ```markdown

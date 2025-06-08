@@ -63,7 +63,7 @@ alwaysApply: false
 **Arquivos com Erro:**
 - `auto-learning.mdc` → Entrada #2 indica correção automática (incorreto)
 - `zoe-chore.mdc` → Regra #5 mistura captura com correção
-- `progress/2025-06-07/README.md` → Documentação indica correção imediata
+- `.cursor/rules/progress/2025-06-07/README.md` → Documentação indica correção imediata
 
 **Problema Identificado:**
 - Sistema auto-learning estava aplicando correções automaticamente
@@ -117,7 +117,7 @@ alwaysApply: false
 **Arquivos com Erro:**
 - `zoe-chore.mdc` → Excesso de emojis em textos normais, listas e conteúdo
 - `how-zoe-works.md` → Emojis demais em conteúdo regular, não só títulos
-- `progress/2025-06-07/README.md` → Formatação excessiva com emojis em textos comuns
+- `.cursor/rules/progress/2025-06-07/README.md` → Formatação excessiva com emojis em textos comuns
 - `commands/auto-learning.mdc` → Título com emoji desnecessário
 
 **Problema Identificado:**
@@ -129,7 +129,7 @@ alwaysApply: false
 **Ação Corretiva:**
 - ✅ zoe-chore.mdc → Emojis removidos de textos normais, mantidos só em títulos principais
 - ✅ how-zoe-works.md → Conteúdo limpo, emojis só em títulos de seções
-- ✅ progress/2025-06-07/README.md → Formatação excessiva simplificada
+- ✅ .cursor/rules/progress/2025-06-07/README.md → Formatação excessiva simplificada
 - ✅ Regra #6 → Reformulada para uso moderado apenas em títulos
 - ✅ commands/auto-learning.mdc → Emoji removido do título da entrada
 

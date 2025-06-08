@@ -6,35 +6,179 @@ alwaysApply: false
 # 🧩 Create Component
 
 ## Comando
-`criar componente [nome]`
+`criar componente [nome]` ou `criar componente [nome] design system`
 
 ## Comportamento
 **Criar estrutura completa de componente React:**
 
-### **Estrutura criada:**
+### **Estrutura criada (componente comum):**
 ```
 components/[nome-do-componente]/
 ├── [nome].component.tsx    # Toda a lógica (useState, useEffect, handlers)
 ├── [nome].template.tsx     # Toda a estrutura visual
 ├── [nome].classes.ts       # Classes Tailwind organizadas (se Tailwind)
-├── [nome].types.ts         # Interfaces TypeScript
+├── [nome].types.ts         # Types TypeScript (T[NomeComponente] = {...})
+├── [nome].test.tsx         # Testes com userEvent e testing-library
 └── [nome].composite.tsx    # Subcomponentes reutilizáveis (opcional)
 ```
 
+### **Estrutura criada (design system):**
+```
+components/[nome-do-componente]/
+├── [nome].component.tsx    # Toda a lógica (useState, useEffect, handlers)
+├── [nome].template.tsx     # Toda a estrutura visual
+├── [nome].classes.ts       # Classes Tailwind organizadas (se Tailwind)
+├── [nome].types.ts         # Types TypeScript (T[NomeComponente] = {...})
+├── [nome].test.tsx         # Testes com userEvent e testing-library
+├── [nome].composite.tsx    # Subcomponentes reutilizáveis (opcional)
+└── [nome].stories.tsx      # Stories do Storybook 📚
+```
+
 ## Processo
-1. **Detectar estilo** → @./commands/detect-style.mdc
-2. **Usar template** → @./templates/react-component.mdc
-3. **Criar estrutura** completa de arquivos
-4. **Aplicar padrões** React/TypeScript
-5. **Documentar criação** no progresso
+1. **Detectar flag "design system"** no comando
+2. **Detectar estilo** → @./commands/detect-style.mdc
+3. **Usar template** → @./templates/react-component.mdc
+4. **Criar arquivo .test.tsx** com template de testes OBRIGATÓRIO
+5. **SE design system:** Criar arquivo .stories.tsx com template completo
+6. **Criar estrutura** completa de arquivos
+7. **Aplicar padrões** React/TypeScript
+8. **Documentar criação** no progresso
+
+## Convenção de Tipagem
+**SEMPRE usar `type` com padrão `T[NomeComponente]`:**
+```typescript
+// ✅ Correto
+export type TButton = {
+  variant?: 'primary' | 'secondary'
+  size?: 'sm' | 'md' | 'lg'
+  onClick?: () => void
+}
+
+export type TButtonState = {
+  isLoading: boolean
+  isPressed: boolean
+}
+
+// ❌ Evitar interfaces
+export interface ButtonProps { ... }
+```
+
+## Estrutura de Props
+**SEMPRE receber props como objeto único e desestruturar internamente:**
+```typescript
+// ✅ Correto - Componente principal
+export const Button: React.FC<TButton> = (props) => {
+  const { variant, size, onClick, children } = props
+  // lógica do componente
+}
+
+// ✅ Correto - Template 
+export const ButtonTemplate: React.FC<TButtonTemplate> = (props) => {
+  const { variant, size, className, children } = props
+  // estrutura visual
+}
+
+// ❌ Evitar desestruturação direta nos parâmetros
+export const Button: React.FC<TButton> = ({ variant, size, onClick }) => {}
+```
+
+## Testes Obrigatórios
+**SEMPRE criar arquivo .test.tsx com:**
+```typescript
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { [Nome] } from './[nome].component'
+
+describe('[Nome] Component', () => {
+  // ✅ Setup obrigatório
+  const user = userEvent.setup()
+
+  it('should render correctly', () => {
+    render(<[Nome] onChange={vi.fn()} />)
+    expect(screen.getByRole('button')).toBeInTheDocument()
+  })
+
+  it('should handle user interactions', async () => {
+    const mockOnChange = vi.fn()
+    render(<[Nome] onChange={mockOnChange} />)
+    
+    const button = screen.getByRole('button')
+    await user.click(button)
+    
+    expect(mockOnChange).toHaveBeenCalled()
+  })
+
+  it('should handle keyboard navigation', async () => {
+    render(<[Nome] onChange={vi.fn()} />)
+    
+    await user.tab()
+    expect(screen.getByRole('button')).toHaveFocus()
+    
+    await user.keyboard('{Enter}')
+    // verificar comportamento esperado
+  })
+
+  it('should handle different states', () => {
+    // Testar estados: loading, error, disabled, etc.
+    render(<[Nome] disabled onChange={vi.fn()} />)
+    expect(screen.getByRole('button')).toBeDisabled()
+  })
+})
+```
+
+### Padrões de Teste:
+- **userEvent OBRIGATÓRIO** → `const user = userEvent.setup()`
+- **Nunca fireEvent** → Sempre userEvent para interações realistas
+- **Testes essenciais:** Renderização, Interações, Estados, Acessibilidade
+- **Ferramentas:** Vitest + @testing-library/react + @testing-library/user-event
+
+## Template Stories (Design System)
+**Quando detectar "design system", criar arquivo .stories.tsx com:**
+```typescript
+import type { Meta, StoryObj } from '@storybook/react'
+import { [Nome] } from './[nome].component'
+
+const meta: Meta<typeof [Nome]> = {
+  title: 'Design System/[Nome]',
+  component: [Nome],
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    // Definir controles baseados nas props do componente
+  },
+}
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+// Story padrão
+export const Default: Story = {
+  args: {
+    // Props padrão do componente
+  },
+}
+
+// Variações baseadas no tipo do componente
+export const Variants: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      {/* Diferentes variações do componente */}
+    </div>
+  ),
+}
+```
 
 ## Separação de Responsabilidades
 - **.component.tsx** → Lógica e state
 - **.template.tsx** → Estrutura visual
 - **.classes.ts** → Estilos (se Tailwind)
-- **.types.ts** → Interfaces
+- **.types.ts** → Types (padrão T[NomeComponente])
+- **.test.tsx** → Testes com userEvent (OBRIGATÓRIO)
 - **.composite.tsx** → Subcomponentes (opcional)
+- **.stories.tsx** → Documentação interativa (design system)
 
 ## Objetivo
-Criar componentes com estrutura padronizada
+Criar componentes com estrutura padronizada, tipagem consistente e stories automáticos para design system
 
