@@ -1,0 +1,215 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "description": "Mapa de prioridades para o sistema Zoe - menor level = maior prioridade",
+    "last_updated": "2025-06-08",
+    "priority_logic": "Em caso de múltiplos triggers, sempre executar o menor level primeiro. Se levels iguais, executar na ordem do array."
+  },
+  
+  "priority": [
+    {
+      "type": "action",
+      "name": "rule-change-guard",
+      "file": "actions/rule-change-guard.mdc",
+      "trigger": "Vou alterar qualquer regra do sistema",
+      "description": "Proteção obrigatória antes de alterações em regras",
+      "level": 1,
+      "category": "security",
+      "mandatory": true
+    },
+    {
+      "type": "command",
+      "name": "change-rule",
+      "file": "commands/change-rule.mdc",
+      "trigger": "alterar regra",
+      "description": "Processo controlado para alteração de regras",
+      "level": 2,
+      "category": "system",
+      "mandatory": true
+    },
+    {
+      "type": "command",
+      "name": "zoe-start",
+      "file": "commands/zoe-start.mdc",
+      "trigger": ["zoe, iniciar", "zoe iniciar"],
+      "description": "Inicialização e resumo de progresso",
+      "level": 3,
+      "category": "initialization"
+    },
+    {
+      "type": "action",
+      "name": "feedback-capture",
+      "file": "actions/feedback-capture.mdc",
+      "trigger": "Usuário deu feedback negativo/crítica",
+      "description": "Captura e processa feedback negativo",
+      "level": 4,
+      "category": "learning"
+    },
+    {
+      "type": "command",
+      "name": "fix-bugs",
+      "file": "commands/fix-bugs.mdc",
+      "trigger": "fix bugs",
+      "description": "Correção de bugs identificados",
+      "level": 5,
+      "category": "maintenance"
+    },
+    {
+      "type": "command",
+      "name": "optimize-performance",
+      "file": "commands/optimize-performance.mdc",
+      "trigger": "otimizar performance",
+      "description": "Otimizações de performance",
+      "level": 6,
+      "category": "maintenance"
+    },
+    {
+      "type": "action",
+      "name": "execute-direct",
+      "file": "actions/execute-direct.mdc",
+      "trigger": "Usuário enviou código (TSX, JSX, React)",
+      "description": "Execução direta de código React enviado",
+      "level": 7,
+      "category": "development"
+    },
+    {
+      "type": "command",
+      "name": "create-component",
+      "file": "commands/create-component.mdc",
+      "trigger": "criar componente [nome]",
+      "description": "Criação de componentes React com estrutura completa",
+      "level": 8,
+      "category": "development"
+    },
+    {
+      "type": "command",
+      "name": "create-page",
+      "file": "commands/create-page.mdc",
+      "trigger": "criar página [nome]",
+      "description": "Criação de páginas/rotas completas",
+      "level": 9,
+      "category": "development"
+    },
+    {
+      "type": "command",
+      "name": "auto-learning",
+      "file": "commands/auto-learning.mdc",
+      "trigger": "aprender com os erros",
+      "description": "Sistema de aprendizado automático",
+      "level": 10,
+      "category": "learning"
+    },
+    {
+      "type": "command",
+      "name": "resume-progress",
+      "file": "commands/resume-progress.mdc",
+      "trigger": ["retomar progresso", "retomar progresso anterior"],
+      "description": "Retomada de progresso anterior",
+      "level": 11,
+      "category": "organization"
+    },
+    {
+      "type": "action",
+      "name": "auto-documentation",
+      "file": "actions/auto-documentation.mdc",
+      "trigger": "Fiz qualquer ajuste no código",
+      "description": "Documentação automática de mudanças",
+      "level": 50,
+      "category": "documentation",
+      "post_execution": true
+    },
+    {
+      "type": "action",
+      "name": "update-docs",
+      "file": "actions/update-docs.mdc",
+      "trigger": "Alterei qualquer regra/comando/action",
+      "description": "Atualização da documentação do sistema",
+      "level": 51,
+      "category": "documentation",
+      "post_execution": true
+    },
+    {
+      "type": "action",
+      "name": "priority-logger",
+      "file": "actions/priority-logger.mdc",
+      "trigger": "Sistema de prioridades toma decisão",
+      "description": "Logging de decisões de prioridade",
+      "level": 0,
+      "category": "system",
+      "mandatory": true,
+      "blocking": false
+    },
+    {
+      "type": "action",
+      "name": "moderate-formatting",
+      "file": "actions/moderate-formatting.mdc",
+      "trigger": "Qualquer resposta ou criação",
+      "description": "Formatação moderada e consistente",
+      "level": 99,
+      "category": "formatting",
+      "post_execution": true,
+      "always_execute": true
+    }
+  ],
+
+  "categories": {
+    "security": {
+      "description": "Ações de segurança e proteção do sistema",
+      "priority_range": [1, 10],
+      "blocking": true
+    },
+    "system": {
+      "description": "Comandos de sistema e configuração",
+      "priority_range": [1, 20],
+      "blocking": true
+    },
+    "initialization": {
+      "description": "Comandos de inicialização",
+      "priority_range": [1, 20]
+    },
+    "learning": {
+      "description": "Sistema de aprendizado e feedback",
+      "priority_range": [1, 30]
+    },
+    "maintenance": {
+      "description": "Manutenção e correções",
+      "priority_range": [1, 30]
+    },
+    "development": {
+      "description": "Comandos de desenvolvimento",
+      "priority_range": [1, 40]
+    },
+    "organization": {
+      "description": "Organização e progresso",
+      "priority_range": [1, 40]
+    },
+    "documentation": {
+      "description": "Documentação automática",
+      "priority_range": [50, 60],
+      "post_execution": true
+    },
+    "formatting": {
+      "description": "Formatação e apresentação",
+      "priority_range": [90, 100],
+      "post_execution": true
+    }
+  },
+
+  "execution_rules": {
+    "conflict_resolution": {
+      "same_level": "Execute na ordem do array (primeiro encontrado)",
+      "blocking_categories": ["security", "system"],
+      "post_execution_only": ["documentation", "formatting"]
+    },
+    "mandatory_rules": {
+      "rule_change_protection": "rule-change-guard deve SEMPRE ser executado antes de mudanças em regras",
+      "formatting": "moderate-formatting deve SEMPRE ser executado ao final"
+    },
+    "logging": {
+      "enabled": true,
+      "log_conflicts": true,
+      "log_decisions": true,
+      "log_skipped": true
+    }
+  }
+} 
