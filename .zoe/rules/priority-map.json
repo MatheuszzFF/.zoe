@@ -109,6 +109,61 @@
       "category": "organization"
     },
     {
+      "type": "command",
+      "name": "context-summary",
+      "file": "commands/context-summary.mdc",
+      "trigger": ["resumir contexto", "resumo do contexto"],
+      "description": "Resumo inteligente do contexto atual",
+      "level": 12,
+      "category": "organization"
+    },
+    {
+      "type": "command",
+      "name": "update-stack",
+      "file": "commands/update-stack.mdc",
+      "trigger": ["atualizar stack", "atualizar stack tecnológica"],
+      "description": "Atualização automática de informações da stack",
+      "level": 13,
+      "category": "organization"
+    },
+    {
+      "type": "command",
+      "name": "show-history",
+      "file": "commands/show-history.mdc",
+      "trigger": ["mostrar histórico", "histórico do projeto"],
+      "description": "Cronologia completa de decisões e evolução",
+      "level": 14,
+      "category": "organization"
+    },
+    {
+      "type": "command",
+      "name": "export-context",
+      "file": "commands/export-context.mdc",
+      "trigger": ["exportar contexto", "export context"],
+      "description": "Exportar contexto para reutilização em outros projetos",
+      "level": 15,
+      "category": "organization"
+    },
+    {
+      "type": "command",
+      "name": "import-context",
+      "file": "commands/import-context.mdc",
+      "trigger": ["importar contexto", "import context"],
+      "description": "Importar contexto de outros projetos",
+      "level": 16,
+      "category": "organization"
+    },
+    {
+      "type": "action",
+      "name": "context-updater",
+      "file": "actions/context-updater.mdc",
+      "trigger": "Qualquer mudança importante no projeto",
+      "description": "Atualização automática do contexto",
+      "level": 25,
+      "category": "system",
+      "post_execution": true
+    },
+    {
       "type": "action",
       "name": "auto-documentation",
       "file": "actions/auto-documentation.mdc",

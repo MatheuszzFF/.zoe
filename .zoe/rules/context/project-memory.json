@@ -1,0 +1,168 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "created": "2025-06-08",
+    "last_updated": "2025-06-08T16:30:00Z",
+    "project_name": "cursor-boilerplate",
+    "description": "Memória inteligente de contexto do projeto Zoe"
+  },
+
+  "project_overview": {
+    "name": "cursor-boilerplate",
+    "type": "Design System + Boilerplate",
+    "objectives": [
+      "Criar componentes reutilizáveis de alta qualidade",
+      "Estabelecer padrões de desenvolvimento consistentes",
+      "Implementar sistema de testes robusto",
+      "Documentar componentes via Storybook"
+    ],
+    "current_phase": "Component Creation",
+    "priority_focus": "Design System Components"
+  },
+
+  "tech_stack": {
+    "frontend": {
+      "framework": "React 18+",
+      "meta_framework": "Next.js 14+",
+      "language": "TypeScript",
+      "styling": "Tailwind CSS",
+      "styling_fallback": "Styled-components"
+    },
+    "state_management": ["Context API", "Zustand"],
+    "forms": "React Hook Form",
+    "http_client": ["Axios", "SWR"],
+    "testing": {
+      "runner": "Vitest",
+      "library": "@testing-library/react",
+      "interactions": "@testing-library/user-event",
+      "matchers": "@testing-library/jest-dom",
+      "approach": "userEvent mandatory"
+    },
+    "documentation": "Storybook",
+    "dependencies_verified": {
+      "tailwind_detected": true,
+      "tailwind_config": true,
+      "package_json_has_tailwind": true
+    }
+  },
+
+  "architectural_decisions": [
+    {
+      "date": "2025-06-07",
+      "decision": "Component structure separation",
+      "rationale": "Separar lógica (.component.tsx) de estrutura visual (.template.tsx)",
+      "impact": "Maior manutenibilidade e testabilidade"
+    },
+    {
+      "date": "2025-06-08",
+      "decision": "Props pattern change",
+      "rationale": "Receber props como objeto único e desestruturar internamente",
+      "impact": "Consistência e melhor debugging"
+    },
+    {
+      "date": "2025-06-08",
+      "decision": "Integrated testing",
+      "rationale": "Criar testes automaticamente com componentes",
+      "impact": "Garantia de qualidade e cobertura completa"
+    },
+    {
+      "date": "2025-06-08",
+      "decision": "Priority system implementation",
+      "rationale": "Controlar execução de comandos/actions para evitar conflitos",
+      "impact": "Sistema mais previsível e escalável"
+    }
+  ],
+
+  "code_patterns": {
+    "component_structure": {
+      "naming": "kebab-case",
+      "files": [
+        "component.tsx - Lógica e state",
+        "template.tsx - Estrutura visual",
+        "classes.ts - Classes Tailwind organizadas", 
+        "types.ts - Interfaces TypeScript",
+        "test.tsx - Testes obrigatórios",
+        "stories.tsx - Storybook (se design system)"
+      ],
+      "props_pattern": "Object destructuring interno",
+      "export_pattern": "Default export no final"
+    },
+    "testing_mandatory": {
+      "setup": "userEvent.setup()",
+      "interactions": "await user.click/type/keyboard",
+      "coverage": ["Renderização", "Interações", "Estados", "Acessibilidade"],
+      "forbidden": "fireEvent usage"
+    }
+  },
+
+  "components_created": [
+    {
+      "name": "DatePicker",
+      "date": "2025-06-08",
+      "type": "Design System",
+      "features": ["Calendar dropdown", "Multiple formats", "Validation", "Accessibility"],
+      "status": "Completed"
+    },
+    {
+      "name": "Button", 
+      "date": "2025-06-08",
+      "type": "Design System",
+      "features": ["7 variants", "5 sizes", "Loading state", "Icons support"],
+      "status": "Completed"
+    }
+  ],
+
+  "preferences": {
+    "math_preferences": {
+      "communication_style": "Direct and practical",
+      "nickname": "Math",
+      "language": "Portuguese",
+      "feedback_style": "Honest and specific",
+      "celebration_phrase": "ficou chave!"
+    },
+    "coding_style": {
+      "file_naming": "English",
+      "comments": "Portuguese",
+      "variables": "English preferred",
+      "documentation": "Portuguese"
+    },
+    "project_style": {
+      "component_priority": "Quality over quantity",
+      "test_coverage": "Mandatory for all components",
+      "documentation": "Storybook for design system",
+      "architecture": "Separation of concerns"
+    }
+  },
+
+  "current_context": {
+    "last_session_summary": "Implemented priority system with logging",
+    "active_work": "Context Memory system implementation",
+    "next_suggested": ["Input component", "Modal component", "Card component"],
+    "pending_tasks": [],
+    "blockers": []
+  },
+
+  "learning_insights": [
+    {
+      "date": "2025-06-08",
+      "insight": "User prefers structured systems over ad-hoc solutions",
+      "application": "Always propose systematic approaches",
+      "confidence": "high"
+    },
+    {
+      "date": "2025-06-08", 
+      "insight": "Documentation and logging are highly valued",
+      "application": "Always include comprehensive documentation",
+      "confidence": "high"
+    }
+  ],
+
+  "project_metrics": {
+    "components_completed": 2,
+    "tests_created": 2,
+    "commands_implemented": 8,
+    "actions_implemented": 7,
+    "system_improvements": 4,
+    "last_major_update": "Priority system"
+  }
+} 

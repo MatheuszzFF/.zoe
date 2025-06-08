@@ -1,0 +1,171 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 📤 Exportar Contexto - Comando
+
+## Trigger
+- Usuário digita: `exportar contexto` ou `export context`
+
+## Comportamento
+**Gerar package de contexto** para reutilização em outros projetos:
+
+### 1. Dados a Exportar
+```
+Incluir no export:
+✅ project-memory.json (contexto principal)
+✅ stack-tech.mdc (configuração de stack)  
+✅ Padrões estabelecidos
+✅ Decisões arquiteturais
+✅ Learning insights
+✅ Preferências de desenvolvimento
+
+Excluir do export:
+❌ Logs específicos do projeto
+❌ Componentes criados
+❌ Progress histórico
+❌ Dados sensíveis/específicos
+```
+
+### 2. Estrutura do Export
+```json
+{
+  "export_metadata": {
+    "version": "1.0",
+    "exported_from": "[nome do projeto]",
+    "export_date": "[YYYY-MM-DD]",
+    "zoe_version": "1.0",
+    "compatibility": ["design-system", "react-project", "next-project"]
+  },
+  
+  "tech_stack_template": {
+    "frontend": { "framework": "React", "language": "TypeScript" },
+    "styling": "Tailwind CSS",
+    "testing": { "approach": "userEvent mandatory" },
+    "patterns": { "component_structure": "separation of concerns" }
+  },
+  
+  "architectural_patterns": [
+    {
+      "pattern": "Component separation",
+      "description": ".component + .template + .classes + .types",
+      "rationale": "Maintainability and testability",
+      "applicability": "All component creation"
+    }
+  ],
+  
+  "development_preferences": {
+    "code_quality": "Quality over speed",
+    "testing": "Mandatory for all components",
+    "documentation": "Comprehensive and automated",
+    "naming": "kebab-case files, English variables"
+  },
+  
+  "learning_insights": [
+    {
+      "insight": "User prefers structured systems",
+      "application": "Always propose systematic approaches",
+      "confidence": "high"
+    }
+  ],
+  
+  "recommended_commands": [
+    "create-component",
+    "context-summary", 
+    "update-stack",
+    "priority-system"
+  ]
+}
+```
+
+### 3. Tipos de Export
+
+#### **A. Export Completo**
+```
+Comando: "exportar contexto completo"
+Inclui: Tudo (stack + padrões + insights + preferências)
+Arquivo: zoe-context-export-full-[date].json
+```
+
+#### **B. Export de Stack**
+```
+Comando: "exportar contexto stack"
+Inclui: Apenas configurações técnicas
+Arquivo: zoe-stack-export-[date].json
+```
+
+#### **C. Export de Padrões**
+```
+Comando: "exportar contexto padrões"
+Inclui: Apenas decisões arquiteturais e patterns
+Arquivo: zoe-patterns-export-[date].json
+```
+
+### 4. Localização do Export
+```
+Criar em: .zoe/exports/
+Formato: zoe-context-export-[type]-[YYYY-MM-DD].json
+Backup: Manter últimos 5 exports
+```
+
+### 5. Sanitização de Dados
+**Remover/Anonimizar:**
+```
+- Nomes específicos de projeto
+- Dados pessoais
+- Caminhos absolutos
+- Informações sensíveis
+- Logs com timestamps específicos
+```
+
+### 6. Validação do Export
+**Verificar antes de gerar:**
+```
+✅ JSON válido
+✅ Estrutura completa
+✅ Dados sanitizados
+✅ Compatibilidade com versão atual
+✅ Tamanho razoável (< 1MB)
+```
+
+### 7. Estrutura de Resposta
+```
+📤 **Contexto Exportado:**
+
+📊 **Resumo do Export:**
+- **Tipo:** [Completo/Stack/Padrões]
+- **Tamanho:** [X] KB
+- **Itens incluídos:** [X] configurações, [X] padrões, [X] insights
+
+📁 **Arquivo gerado:**
+`.zoe/exports/zoe-context-export-[type]-[date].json`
+
+🔄 **Como usar em outro projeto:**
+1. Copie o arquivo para o novo projeto
+2. Execute: "importar contexto [nome-do-arquivo]"
+3. Zoe aplicará configurações automaticamente
+
+💡 **Incluído no export:**
+- ✅ Stack tecnológica e padrões
+- ✅ Decisões arquiteturais
+- ✅ Preferências de desenvolvimento  
+- ✅ Learning insights
+- ✅ Configurações do sistema Zoe
+
+🚫 **Excluído do export:**
+- ❌ Componentes específicos
+- ❌ Histórico de progresso
+- ❌ Logs de sessão
+- ❌ Dados sensíveis/específicos
+```
+
+## Objetivo
+Permitir reutilização de configurações, padrões e aprendizados entre projetos diferentes.
+
+## Exemplo de Uso
+```
+Usuário: "exportar contexto"
+Zoe: [Gera export completo → Salva em .zoe/exports/ → Informa localização e instruções]
+```
+
