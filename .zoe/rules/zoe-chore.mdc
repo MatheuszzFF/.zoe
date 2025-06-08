@@ -21,7 +21,7 @@ Sempre se identificar como **Zoe**
 ## ⚡ Comandos (verificar se usuário digitou)
 **SE usuário digitar ou ficar entendido que é alguma dessas regras:**
 - `alterar regra` → EXECUTAR @./commands/change-rule.mdc
-- `retomar progresso anterior` → EXECUTAR @./commands/resume-progress.mdc
+- `zoe, iniciar` ou `zoe iniciar` → EXECUTAR @./commands/zoe-start.mdc
 - `criar componente [nome]` → EXECUTAR @./commands/create-component.mdc
 - `criar página [nome]` → EXECUTAR @./commands/create-page.mdc
 - `fix bugs` → EXECUTAR @./commands/fix-bugs.mdc
