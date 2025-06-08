@@ -29,13 +29,13 @@ Repita sua solicitação após executar o comando.
 ```
 
 ### 📁 Arquivos Protegidos
-- `.cursor/rules/zoe-chore.mdc`
-- `.cursor/rules/commands/*.mdc`
-- `.cursor/rules/actions/*.mdc`
-- `.cursor/rules/templates/*.mdc`
-- `.cursor/rules/context/*.mdc`
-- `.cursor/rules/workflows/*.mdc`
-- `.cursor/rules/patterns/*.mdc`
+- `.zoe/rules/zoe-chore.mdc`
+- `.zoe/rules/commands/*.mdc`
+- `.zoe/rules/actions/*.mdc`
+- `.zoe/rules/templates/*.mdc`
+- `.zoe/rules/context/*.mdc`
+- `.zoe/rules/workflows/*.mdc`
+- `.zoe/rules/patterns/*.mdc`
 
 ### 🎯 Exceções
 **Permitir alteração direta apenas quando:**

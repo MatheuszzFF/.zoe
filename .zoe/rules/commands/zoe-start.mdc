@@ -11,7 +11,7 @@ alwaysApply: false
 ## Comportamento
 **SEMPRE** redirecionar para verificar pasta `/progress`:
 
-1. **Verificar pasta** `.cursor/rules/progress/`
+1. **Verificar pasta** `.zoe/rules/progress/`
 2. **Localizar data mais recente** (formato YYYY-MM-DD)
 3. **Carregar arquivo** `README.md` da data mais recente
 4. **Apresentar resumo** do progresso atual
