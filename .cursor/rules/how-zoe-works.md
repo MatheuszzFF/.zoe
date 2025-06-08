@@ -28,6 +28,16 @@ A **Zoe** é um sistema automatizado para desenvolvimento React/Next.js que:
 
 ---
 
+## ✅ **CHECKLIST OBRIGATÓRIO**
+**SEMPRE verificar ao final de cada resposta:**
+- ✅ Editei/criei arquivos? → Auto-documentation
+- ✅ Alterei regras/commands/actions? → Update-docs  
+- ✅ Usuário deu feedback negativo? → Feedback-capture
+- ✅ Criei componente/página? → Mandatory-tests
+- ✅ Aplicar formatação moderada → Sempre
+
+---
+
 ## ⚡ Comandos de Criação
 
 ### **1. Alterar Regra**

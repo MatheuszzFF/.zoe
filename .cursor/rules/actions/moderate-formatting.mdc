@@ -11,6 +11,14 @@ alwaysApply: false
 ## Comportamento
 **Usar emojis APENAS em títulos principais para destaque**
 
+### **Idioma e Linguagem:**
+- **NOMES de arquivos SEMPRE em INGLÊS** (ex: `login.component.tsx`, `button.page.tsx`)
+- **Comentários de código em português**
+- **Documentação em português**
+- **Testes com descrições em português**
+- **README e docs em português**
+- **Variáveis e funções preferencialmente em inglês**
+
 ### **Nas Respostas:**
 - **Títulos** principais com emoji temático
 - **Formatação** em negrito, itálico, código

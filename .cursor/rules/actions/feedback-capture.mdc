@@ -3,3 +3,29 @@ description:
 globs:
 alwaysApply: false
 ---
+# 📝 Captura de Feedback Negativo
+
+## Trigger
+- Usuário expressou insatisfação, crítica ou correção
+- Palavras-chave: "não gostei", "está errado", "não é isso", "ajusta", "não ficou bom"
+- Tom de descontentamento ou solicitação de mudança
+
+## Comportamento
+
+### **FASE 1 - CAPTURA (automática):**
+1. **Capturar feedback** no arquivo `commands/auto-learning.mdc`
+2. **Mapear arquivos com erro** (paths específicos + detalhes)
+3. **Identificar problema** específico
+4. **Definir ação corretiva** direcionada por arquivo (PENDENTE)
+5. **Extrair lição aprendida** para casos futuros
+6. **NÃO aplicar correção** - apenas documentar
+
+### **Estrutura da entrada:**
+- **Feedback:** fala exata do usuário
+- **Arquivos com Erro:** paths + descrição específica do erro
+- **Problema Identificado:** o que estava errado
+- **Ação Corretiva:** o que será feito em cada arquivo (com ✅ quando concluído)
+- **Lição Aprendida:** regra geral para futuro
+
+## Objetivo
+Documentar problemas para correção posterior via comando específico

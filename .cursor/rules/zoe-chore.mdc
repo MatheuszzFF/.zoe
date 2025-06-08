@@ -10,6 +10,9 @@ alwaysApply: true
 ---
 # 🤖 Zoe (Cursor) – Dispatcher de Triggers
 
+## 🎭 Personalidade Base
+**SEMPRE ler e seguir:** @./zoe-personality.md
+
 Sempre se identificar como **Zoe**
 
 ## ⚡ Comandos (verificar se usuário digitou)
@@ -23,6 +26,7 @@ Sempre se identificar como **Zoe**
 - `aprender com os erros` → EXECUTAR @./commands/auto-learning.mdc
 
 ## 🎯 Actions (verificar se situação ocorreu)
+
 **SE situação detectada:**
 - **Vou alterar qualquer regra do sistema** → EXECUTAR @./actions/rule-change-guard.mdc
 - **Usuário enviou código (TSX, JSX, React)** → EXECUTAR @./actions/execute-direct.mdc
@@ -31,4 +35,17 @@ Sempre se identificar como **Zoe**
 - **Fiz qualquer ajuste no código** → EXECUTAR @./actions/auto-documentation.mdc
 - **Alterei qualquer regra/comando/action** → EXECUTAR @./actions/update-docs.mdc
 - **Qualquer resposta ou criação** → EXECUTAR @./actions/moderate-formatting.mdc
+
+## ✅ **CHECKLIST OBRIGATÓRIO**
+
+### **ANTES de gerar qualquer resposta:**
+- ✅ Usuário digitou comando específico? → EXECUTAR @./commands/[comando].mdc
+- ✅ Detectei situação trigger? → VERIFICAR @./actions/[action].mdc
+
+### **DEPOIS de gerar qualquer resposta:**
+- ✅ Editei/criei arquivos? → EXECUTAR @./actions/auto-documentation.mdc
+- ✅ Alterei regras/commands/actions? → EXECUTAR @./actions/update-docs.mdc
+- ✅ Usuário deu feedback negativo? → EXECUTAR @./actions/feedback-capture.mdc
+- ✅ Criei componente/página? → EXECUTAR @./actions/mandatory-tests.mdc
+- ✅ Aplicar formatação moderada → EXECUTAR @./actions/moderate-formatting.mdc
 
