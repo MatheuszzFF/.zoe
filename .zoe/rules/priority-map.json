@@ -99,6 +99,15 @@
       "level": 10,
       "category": "learning"
     },
+    {
+      "type": "command",
+      "name": "set-project",
+      "file": "commands/set-project.mdc",
+      "trigger": ["setar projeto [nome]", "set project [nome]", "projeto [nome]"],
+      "description": "Definir/alternar projeto ativo com contexto isolado",
+      "level": 11,
+      "category": "project-management"
+    },
 
     {
       "type": "command",
@@ -164,6 +173,71 @@
       "category": "organization"
     },
     {
+      "type": "command",
+      "name": "list-projects",
+      "file": "commands/list-projects.mdc",
+      "trigger": ["listar projetos", "list projects", "mostrar projetos"],
+      "description": "Listagem de todos os projetos com estatísticas",
+      "level": 19,
+      "category": "project-management"
+    },
+    {
+      "type": "command",
+      "name": "list-progress",
+      "file": "commands/list-progress.mdc",
+      "trigger": ["listar progresso [nome]", "list progress [nome]", "progresso [nome]"],
+      "description": "Progresso cronológico detalhado de um projeto",
+      "level": 20,
+      "category": "project-management"
+    },
+    {
+      "type": "command",
+      "name": "export-project",
+      "file": "commands/export-project.mdc",
+      "trigger": ["exportar projeto [nome]", "export project [nome]"],
+      "description": "Exportação completa de projeto com contexto e progresso",
+      "level": 21,
+      "category": "project-management"
+    },
+    {
+      "type": "command",
+      "name": "import-project",
+      "file": "commands/import-project.mdc",
+      "trigger": ["importar projeto [caminho]", "import project [caminho]"],
+      "description": "Importação de projeto com verificação de conflitos",
+      "level": 22,
+      "category": "project-management"
+    },
+    {
+      "type": "command",
+      "name": "detect-stack",
+      "file": "actions/stack-autodetection.mdc",
+      "trigger": ["detect stack", "autodetect", "detectar stack"],
+      "description": "Autodetecção inteligente de stack tecnológica",
+      "level": 23,
+      "category": "project-setup"
+    },
+    {
+      "type": "action",
+      "name": "project-context-manager",
+      "file": "actions/project-context-manager.mdc",
+      "trigger": "SEMPRE antes de qualquer comando que afete progresso/contexto",
+      "description": "Gerenciamento de contexto ativo do projeto com isolamento total",
+      "level": 0,
+      "category": "project-isolation",
+      "mandatory": true,
+      "blocking": true
+    },
+    {
+      "type": "action",
+      "name": "stack-autodetection",
+      "file": "actions/stack-autodetection.mdc",
+      "trigger": "Criação de novo projeto sem contexto ou comando detect stack",
+      "description": "Detecção automática de stack baseada em arquivos de configuração",
+      "level": 24,
+      "category": "project-setup"
+    },
+    {
       "type": "action",
       "name": "context-updater",
       "file": "actions/context-updater.mdc",
@@ -190,6 +264,16 @@
       "trigger": "Alterei qualquer regra/comando/action",
       "description": "Atualização da documentação do sistema",
       "level": 51,
+      "category": "documentation",
+      "post_execution": true
+    },
+    {
+      "type": "action",
+      "name": "zoe-docs-updater",
+      "file": "actions/zoe-docs-updater.mdc",
+      "trigger": "Mudanças no projeto 'zoe' ou comando 'update zoe docs'",
+      "description": "Atualização automática do how-zoe-works.md para humanos",
+      "level": 52,
       "category": "documentation",
       "post_execution": true
     },
@@ -247,6 +331,20 @@
     "organization": {
       "description": "Organização e progresso",
       "priority_range": [1, 40]
+    },
+    "project-isolation": {
+      "description": "Isolamento e gerenciamento de contexto por projeto",
+      "priority_range": [0, 5],
+      "blocking": true,
+      "mandatory": true
+    },
+    "project-management": {
+      "description": "Comandos de gerenciamento de projetos",
+      "priority_range": [10, 25]
+    },
+    "project-setup": {
+      "description": "Configuração e detecção de projetos",
+      "priority_range": [20, 30]
     },
     "documentation": {
       "description": "Documentação automática",

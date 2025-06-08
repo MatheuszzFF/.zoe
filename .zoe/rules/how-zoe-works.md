@@ -1,434 +1,361 @@
-# 🤖 Como a Zoe Funciona - Guia Completo
-
-## 🎯 Visão Geral
-
-A **Zoe** é um sistema automatizado para desenvolvimento React/Next.js que:
-- **Executa diretamente** sem explicações
-- **Detecta automaticamente** Tailwind vs Styled-components
-- **Documenta tudo** automaticamente
-- **Cria estruturas completas** de componentes e páginas
-- **Gera testes obrigatórios** com vitest + userEvent
-- **Usa formatação limpa** com emojis apenas em títulos
+# 🤖 Como Usar a Zoe - Guia Completo para Humanos
 
 ---
-
-## 🚀 Sistema de Retomada de Trabalho
-
-**Arquivo:** `commands/resume-progress.mdc`
-
-**Comando:** `retomar progresso anterior`
-
-**Fluxo:**
-1. Lê commands/resume-progress.mdc completamente
-2. Interpreta todas as instruções e contexto  
-3. Atualiza zoe-chore.mdc se especificado
-4. Marca progresso como "Em Progresso"
-5. Cria plano detalhado em progress/[data]/README.md
-6. Executa primeira tarefa automaticamente
-
+⚠️ **DOCUMENTAÇÃO ATUALIZADA AUTOMATICAMENTE EM 2025-06-09T17:00:00Z**  
+**Mudanças detectadas:** Sistema de Contexto por Projeto v2.0 implementado
 ---
 
-## ✅ **CHECKLIST OBRIGATÓRIO**
-**SEMPRE verificar ao final de cada resposta:**
-- ✅ Editei/criei arquivos? → Auto-documentation
-- ✅ Alterei regras/commands/actions? → Update-docs  
-- ✅ Usuário deu feedback negativo? → Feedback-capture
-- ✅ Criei componente/página? → Mandatory-tests
-- ✅ Aplicar formatação moderada → Sempre
+## 🎯 O que é a Zoe?
 
----
+A **Zoe** é sua assistente inteligente para desenvolvimento React/Next.js que:
 
-## ⚡ Comandos de Criação
+- ✅ **Entende automaticamente** seu projeto (nunca pergunta a mesma coisa)
+- ✅ **Trabalha com múltiplos projetos** sem misturar informações  
+- ✅ **Cria código completo** com testes automáticos
+- ✅ **Documenta tudo** que você faz
+- ✅ **Detecta sua stack** automaticamente (React, Next.js, TypeScript, Tailwind, etc.)
+- ✅ **Lembra do seu progresso** e sugere próximos passos
 
-### **1. Alterar Regra**
+## 🚀 Primeiros Passos
+
+### **1. Iniciando um Projeto**
+
 ```bash
-alterar regra
+zoe iniciar meu-projeto
 ```
 
-**Fluxo obrigatório ANTES de qualquer alteração:**
-1. Executa commands/change-rule.mdc completamente
-2. Identifica arquivos que serão alterados
-3. Verifica dependências e impactos
-4. Cria backup da versão atual
-5. Executa alteração de forma controlada
-6. Aplica formatação moderada automaticamente
-7. Valida funcionamento pós-alteração
-8. Atualiza documentação automaticamente
+**O que acontece:**
+- 🔍 Zoe verifica se já conhece este projeto
+- 📂 Se não conhece, analisa seus arquivos (package.json, etc.)
+- 🎯 Pergunta apenas o essencial (objetivo do projeto)
+- ✅ Cria contexto e está pronta para trabalhar!
 
-**Proteção:** Action rule-change-guard.mdc bloqueia alterações diretas
+**Exemplo prático:**
+```
+Você: "zoe iniciar loja-virtual"
 
-### **2. Aprender com os Erros**
+Zoe detecta automaticamente:
+✅ React + Next.js (pelo package.json)
+✅ TypeScript (pelo tsconfig.json)  
+✅ Tailwind CSS (pelo tailwind.config.js)
+
+Zoe pergunta apenas:
+"Qual o objetivo desta loja virtual?"
+
+Você responde e pronto! 🎉
+```
+
+### **2. Trabalhando com Múltiplos Projetos**
+
 ```bash
+# Alternar para outro projeto
+set project blog-pessoal
+
+# Ver todos os seus projetos  
+list projects
+
+# Ver progresso de um projeto específico
+list progress loja-virtual
+```
+
+**Cada projeto é completamente isolado:**
+- 🗂️ Configurações próprias
+- 📊 Progresso separado  
+- 🔧 Stack específica
+- 📝 Histórico independente
+
+## ⚡ Comandos Essenciais
+
+### **🏗️ Criar Componentes**
+
+```bash
+criar componente botao-principal
+```
+
+**O que você ganha:**
+```
+components/botao-principal/
+├── botao-principal.component.tsx    # 🧠 Lógica (useState, handlers)
+├── botao-principal.template.tsx     # 🎨 Visual (JSX)
+├── botao-principal.classes.ts       # 🎯 Estilos Tailwind organizados
+├── botao-principal.types.ts         # 📝 TypeScript interfaces
+└── botao-principal.test.tsx         # 🧪 Testes automáticos
+```
+
+**Zoe já cria tudo:**
+- ✅ Estrutura completa separada (lógica + visual)
+- ✅ TypeScript configurado
+- ✅ Estilos organizados (Tailwind ou Styled Components)
+- ✅ Testes funcionais obrigatórios
+
+### **📄 Criar Páginas**
+
+```bash
+criar página dashboard
+```
+
+**Estrutura criada:**
+```
+pages/dashboard/
+├── dashboard.page.tsx               # 📄 Página + Head component
+├── dashboard.template.tsx           # 🎨 Layout visual
+├── dashboard.classes.ts             # 🎯 Estilos
+├── dashboard.types.ts               # 📝 Props e interfaces
+└── dashboard.test.tsx               # 🧪 Testes de página
+```
+
+### **🔧 Comandos de Manutenção**
+
+```bash
+# Corrigir bugs automaticamente
+fix bugs
+
+# Otimizar performance
+otimizar performance
+
+# Aprender com erros anteriores
 aprender com os erros
 ```
 
-**Fluxo:**
-1. Lê commands/auto-learning.mdc completamente
-2. Identifica correções pendentes (⏳)
-3. Aplica todas as correções em sequência
-4. Marca correções como concluídas (✅)
-5. Documenta aplicação em progress/[data]/README.md
+## 📊 Gerenciamento de Projetos
 
-### **3. Criar Componente**
+### **Ver Todos os Seus Projetos**
+
 ```bash
-criar componente [nome-do-componente]
+list projects
 ```
 
-**Estrutura criada:**
+**Resultado:**
 ```
-components/[nome-do-componente]/
-├── [nome].component.tsx    # 🧠 Toda a lógica (useState, useEffect, handlers)
-├── [nome].template.tsx     # 🎨 Toda a estrutura visual
-├── [nome].classes.ts       # 🎯 Classes Tailwind organizadas (se Tailwind)
-├── [nome].types.ts         # 📝 Interfaces TypeScript
-├── [nome].composite.tsx    # 🔧 Subcomponentes reutilizáveis (opcional)
-└── [nome].test.tsx         # 🧪 Testes com vitest + userEvent (OBRIGATÓRIO)
+📋 PROJETOS EXISTENTES:
+
+🎯 loja-virtual ← ATIVO
+   Stack: Next.js, TypeScript, Tailwind, Prisma
+   Objetivo: E-commerce completo
+   Progresso: 5 dias registrados
+   Última atividade: Hoje
+
+📁 blog-pessoal
+   Stack: Gatsby, MDX, Styled Components
+   Objetivo: Blog técnico
+   Progresso: 3 dias registrados
+   Última atividade: Ontem
+
+📊 RESUMO:
+- Total de projetos: 2
+- Projeto ativo: loja-virtual
+- Comandos disponíveis: set project, export project
 ```
 
-### **4. Criar Página**
+### **Ver Progresso Detalhado**
+
 ```bash
-criar página [nome-da-pagina]
+list progress loja-virtual
 ```
 
-**Estrutura criada:**
+**Resultado:**
 ```
-pages/[nome-da-pagina]/
-├── [nome].page.tsx         # 📄 Página principal + Head component
-├── [nome].template.tsx     # 🎨 Estrutura visual
-├── [nome].classes.ts       # 🎯 Classes Tailwind (se aplicável)
-├── [nome].types.ts         # 📝 Props interfaces
-├── [nome].composite.tsx    # 🔧 Componentes da página (opcional)
-└── [nome].test.tsx         # 🧪 Testes com vitest + userEvent (OBRIGATÓRIO)
+📈 PROGRESSO: loja-virtual
+
+📅 2025-06-09 ← HOJE
+   ✅ Tarefas: 3/5 concluídas
+   🔧 Criado: ProductCard, AddToCart
+   📝 Decisão: Usar Context API para carrinho
+   
+📅 2025-06-08
+   ✅ Tarefas: 5/5 concluídas  
+   🔧 Criado: Header, Navigation
+   📝 Decisão: Layout responsivo mobile-first
+
+📊 RESUMO GERAL:
+- Dias trabalhados: 5
+- Componentes criados: 8
+- Taxa de conclusão: 78%
 ```
 
-### **5. Fix Bugs**
+### **Exportar/Importar Projetos**
+
 ```bash
-fix bugs
+# Exportar projeto (backup ou compartilhar)
+export project loja-virtual
+
+# Importar projeto
+import project loja-virtual-export-2025-06-09.zip
 ```
 
-**Correções aplicadas automaticamente:**
-- Missing keys em listas
-- Memory leaks (cleanup em useEffect)
-- State stale closure fixes  
-- Hydration mismatch fixes
-- Dependency arrays corretas
+**Útil para:**
+- 💾 Fazer backup completo
+- 👥 Compartilhar com equipe
+- 🖥️ Migrar entre computadores
+- 📦 Arquivar projetos antigos
 
-### **6. Otimizar Performance**
+## 🔍 Como a Zoe "Lembra" dos Seus Projetos
+
+### **Primeira Vez (Projeto Novo):**
+1. Zoe analisa seus arquivos automaticamente
+2. Pergunta apenas o que não conseguiu detectar
+3. Salva tudo em contexto específico do projeto
+4. Nunca mais pergunta as mesmas coisas!
+
+### **Próximas Vezes (Projeto Conhecido):**
+1. Carrega contexto salvo instantaneamente
+2. Sabe sua stack, preferências, histórico
+3. Sugere próximos passos baseado no progresso
+4. Continua de onde parou
+
+## 🎯 Fluxos Comuns de Uso
+
+### **Cenário 1: Desenvolvedor Iniciante**
 ```bash
-otimizar performance
+# Primeiro projeto
+zoe iniciar meu-primeiro-app
+
+# Zoe detecta React automaticamente
+# Pergunta apenas: "Qual objetivo do app?"
+
+# Criar primeiro componente
+criar componente hello-world
+
+# Zoe cria tudo pronto com testes!
 ```
 
-**Otimizações aplicadas:**
-- React.memo onde necessário
-- Lazy loading de componentes
-- Otimização de classes Tailwind
-- Verificação de re-renders
-
----
-
-## 🧪 Regra #4: Testes Obrigatórios
-
-### **SEMPRE que criar componente/página:**
-1. **Gerar arquivo `.test.tsx`** usando `templates/react-component-test.mdc`
-2. **userEvent OBRIGATÓRIO** → `const user = userEvent.setup()`
-3. **Nunca fireEvent** → Sempre userEvent para interações realistas
-4. **Estrutura de teste obrigatória:**
-   - **Renderização** → Verificar se componente renderiza
-   - **Interações com userEvent** → Cliques, digitação, formulários
-   - **Estados** → Loading, erro, sucesso
-   - **Acessibilidade** → ARIA labels, navegação por teclado
-
-### **Ferramentas de Teste:**
-- **Vitest** → Test runner (mais rápido que Jest)
-- **@testing-library/react** → Renderização de componentes
-- **@testing-library/user-event** → Interações realistas (SEMPRE usar)
-- **@testing-library/jest-dom** → Matchers específicos para DOM
-
-### **Padrões userEvent (OBRIGATÓRIOS):**
-- Setup obrigatório: `const user = userEvent.setup()`
-- Cliques: `await user.click(element)`
-- Digitação: `await user.type(input, 'texto')`
-- Navegação: `await user.tab()` e `await user.keyboard('{Enter}')`
-- Formulários: preencher + submeter
-- **NUNCA usar fireEvent**
-
-### **Estrutura de Teste Obrigatória:**
-- **Renderização** → Verificar se componente renderiza corretamente
-- **Interações com userEvent** → Cliques, digitação, formulários (SEMPRE com userEvent.setup())
-- **Estados** → Loading, erro, sucesso
-- **Acessibilidade** → ARIA labels, navegação por teclado
-
----
-
-## 🏁 Regra #1: Execução Direta
-
-### **Comportamento:**
-- **Recebeu código** = ajuste direto aplicando boas práticas
-- **Não explica** = só executa
-- **Sem código** = pede: "Envie o código"
-- **SEMPRE cria teste** com vitest + userEvent
-
-### **ANTES de qualquer ajuste:**
-1. **Ler contexto:** `context/stack-tech.mdc`
-2. **Detectar estilo:** `commands/detect-style.mdc`
-3. **Escolher abordagem:** Tailwind ou Styled-components
-4. **Aplicar padrões:** React/Next/TypeScript
-5. **Gerar teste:** templates/react-component-test.mdc
-
----
-
-## 📚 Regra #2: Documentação Automática
-
-### **Arquivo único por dia:** `progress/[YYYY-MM-DD]/README.md`
-
-### **Auto-Documentação:**
-- Cada ajuste adiciona entrada em: `progress/[YYYY-MM-DD]/README.md`
-- Um arquivo README por dia
-- Resumo diário simples no topo
-- Cada ajuste como seção separada (sem horários)
-
-### **Estrutura do arquivo diário:**
-```markdown
-# Progresso - [DD/MM/YYYY]
-
-## 📊 Resumo
-- **Total de ajustes:** X
-- **Principais melhorias:** [lista]
-- **Stack:** React/Next + TypeScript + [Tailwind/Styled-components] + Vitest
-
----
-
-## [Tipo de Ajuste]
-
-**Solicitação:** [O que foi pedido]
-
-**Antes:**
-```[linguagem]
-[código original]
-```
-
-**Depois:**
-```[linguagem]
-[código ajustado]
-```
-
-**Testes:**
-```tsx
-[código do teste gerado]
-```
-
-**Melhorias:**
-- [lista das melhorias aplicadas]
-- ✅ Teste criado com userEvent
-
----
-
-## [Próximo Ajuste]
-[Repetir estrutura para cada ajuste do dia]
-
----
-```
-
-### **Benefícios:**
-- **Simplicidade:** README limpo sem horários
-- **Organização:** Um arquivo por dia
-- **Fácil navegação:** Estrutura clara e direta
-- **Menos complexidade:** Formato mais clean
-- **Testes documentados:** Cada ajuste inclui teste
-
----
-
-## 📚 Regra #3: Auto-documentação de Regras
-
-### **SEMPRE que alterar `zoe-chore.mdc`:**
-- Atualiza automaticamente este arquivo (`how-zoe-works.md`)
-- Documenta como usar cada comando
-- Inclui exemplos práticos
-- Atualiza estrutura de arquivos
-
----
-
-## 🛠️ Detecção Automática de Estilo
-
-### **Processo de detecção:**
-1. **Verifica se existe:**
-   - `tailwind.config.js` ou `tailwind.config.ts`
-   - `tailwindcss` em package.json
-   - `@tailwind` imports em CSS
-
-2. **Resultado:**
-   - **SE ENCONTRADO** → Usa Tailwind + arquivo `.classes.ts`
-   - **SE NÃO ENCONTRADO** → Usa Styled-components no `.template.tsx`
-
-### **Estratégia Tailwind:**
-```tsx
-// .classes.ts
-export const classes = {
-  container: "flex flex-col space-y-4",
-  header: "text-lg font-semibold"
-};
-
-// .template.tsx
-<div className={classes.container}>
-```
-
-### **Estratégia Styled-components:**
-```tsx
-// .template.tsx
-import styled from 'styled-components';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-```
-
----
-
-## 🎯 Configuração de Teste
-
-### **Dependências necessárias:**
-- vitest, @testing-library/react, @testing-library/user-event
-- @testing-library/jest-dom, @vitejs/plugin-react, jsdom
-
-### **Configuração:**
-- vitest.config.ts com jsdom environment
-- src/test/setup.ts com jest-dom matchers e cleanup automático
-- Aliases para paths (@/components, etc.)
-
----
-
-## 🚫 Proibições
-
-### **Nunca fazer:**
-- Usar `fireEvent` em vez de `userEvent`
-- Criar componentes sem testes
-- Testes sem `userEvent.setup()`
-- Class components
-- Inline styles
-- Console.log em produção
-
-### **Sempre fazer:**
-- `const user = userEvent.setup()` em cada teste
-- Arquivo `.test.tsx` para cada componente
-- Interações realistas com userEvent
-- Testes de acessibilidade
-- Cleanup após cada teste
-
----
-
-## 🎯 Convenções de Nomenclatura
-
-### **Pastas e arquivos:**
-- **Pastas:** kebab-case (user-profile, update-modal)
-- **Componentes:** PascalCase (UserProfile, UpdateModal)
-- **Arquivos:** kebab-case + extensão específica
-- **Classes:** camelCase no .classes.ts
-
-### **Estrutura de arquivo:**
-```
-[nome-kebab-case]/
-├── [nome-kebab-case].component.tsx
-├── [nome-kebab-case].template.tsx
-├── [nome-kebab-case].classes.ts (se Tailwind)
-├── [nome-kebab-case].types.ts
-└── [nome-kebab-case].composite.tsx (opcional)
-```
-
----
-
-## 🚀 Stack Tecnológica Suportada
-
-### **Principais:**
-- **Frontend:** React 18+ / Next.js 14+
-- **Linguagem:** TypeScript
-- **Estilo:** Tailwind CSS (preferência) ou Styled-components
-- **Estado:** Context API / Zustand
-- **Forms:** React Hook Form
-- **Requests:** Axios / SWR
-
-### **Padrões sempre aplicados:**
-- Componentes funcionais com hooks
-- Separação clara: lógica (.component) vs visual (.template)
-- TypeScript interfaces em arquivo separado
-- Responsive design (mobile-first)
-- Accessibility (ARIA labels)
-- Performance otimizada
-
----
-
-## 📁 Estrutura do Sistema
-
-```
-cursor-boilerplate/
-├── zoe-chore.mdc           # ⚙️ Regras principais
-├── resume-progress.mdc     # 🔄 Arquivo de retomada
-├── how-zoe-works.md        # 📚 Este guia
-├── templates/              # 📋 Templates de código
-│   ├── react-component.mdc
-│   └── next-page.mdc
-├── context/                # 🎯 Contexto da stack
-│   └── stack-tech.mdc
-├── commands/               # ⚡ Comandos rápidos
-│   ├── fix-bugs.mdc
-│   └── detect-style.mdc
-├── workflows/              # 🔄 Fluxos de trabalho
-│   └── frontend.mdc
-├── patterns/               # 🎨 Padrões de código
-└── progress/               # 📊 Documentação automática
-    └── [YYYY-MM-DD]/
-```
-
----
-
-## 🎯 Exemplos Práticos
-
-### **Exemplo 1: Criar componente**
+### **Cenário 2: Múltiplos Projetos**
 ```bash
-criar componente user-profile
-```
-**Resultado:** Pasta `components/user-profile/` com 4-5 arquivos
+# Manhã - trabalhar no e-commerce
+zoe iniciar loja-virtual
+criar componente product-grid
 
-### **Exemplo 2: Ajustar código existente**
-```tsx
-// Envio este código:
-function MyComponent() {
-  return <div>Hello</div>;
-}
-```
-**Resultado:** Código ajustado com TypeScript, boas práticas, estrutura correta
+# Tarde - mudar para projeto pessoal  
+set project blog-pessoal
+criar página sobre-mim
 
-### **Exemplo 3: Retomar trabalho**
+# Cada projeto mantém contexto isolado!
+```
+
+### **Cenário 3: Trabalho em Equipe**
 ```bash
-retomar progresso anterior
+# Colega compartilha projeto
+import project dashboard-admin-export.zip
+
+# Zoe importa contexto completo
+# Você já pode trabalhar sabendo toda história!
+
+set project dashboard-admin
+list progress dashboard-admin
+# Ver o que foi feito, continuar trabalho
 ```
-**Resultado:** Lê `commands/resume-progress.mdc` e executa automaticamente
+
+## 🛠️ Resolução de Problemas
+
+### **❓ "Zoe não detectou minha stack corretamente"**
+```bash
+# Detectar novamente
+detect stack
+
+# Ou corrigir manualmente
+update stack
+```
+
+### **❓ "Quero ver todos os comandos disponíveis"**
+```bash
+list projects
+# Mostra comandos relacionados a projetos
+
+# Para comandos de criação:
+# criar componente [nome]
+# criar página [nome]  
+# fix bugs
+# otimizar performance
+```
+
+### **❓ "Como mudar configurações do projeto atual?"**
+```bash
+update stack
+# Permite atualizar tecnologias e preferências
+```
+
+### **❓ "Preciso recuperar projeto deletado"**
+```bash
+# Se você fez export antes:
+import project [arquivo-de-backup].zip
+
+# Zoe restaura tudo: contexto + progresso + histórico
+```
+
+## 📚 Stack Tecnológica Suportada
+
+### **Frontend (Detectados Automaticamente):**
+- ⚛️ **React** 18+ (com hooks)
+- ⚡ **Next.js** 14+ (App Router ou Pages)
+- 🔷 **TypeScript** (preferência)
+- 🎨 **Tailwind CSS** (primeira opção)
+- 💅 **Styled Components** (alternativa)
+
+### **Backend:**
+- 🟢 **Node.js** 
+- 🗄️ **Prisma** (ORM preferido)
+- 🐘 **PostgreSQL** / **MySQL**
+
+### **Ferramentas:**
+- 🧪 **Vitest** (testes rápidos)
+- 📱 **Testing Library** (testes realistas)
+- 🎯 **ESLint** (qualidade de código)
+
+## ✅ O que a Zoe Faz Automaticamente
+
+### **📝 Documentação:**
+- Registra todo progresso diário
+- Documenta decisões importantes
+- Mantém histórico por projeto
+- Atualiza esta documentação quando evolui
+
+### **🧪 Testes:**
+- Cria teste para cada componente
+- Usa interações realistas (userEvent)
+- Testa acessibilidade e states
+- NUNCA pula a criação de testes
+
+### **🎯 Organização:**
+- Separa lógica de apresentação
+- Organiza estilos em arquivos específicos
+- Mantém TypeScript configurado
+- Isola contexto entre projetos
+
+### **🔍 Inteligência:**
+- Detecta stack automaticamente
+- Lembra preferências por projeto
+- Sugere próximos passos
+- Aprende com padrões de uso
 
 ---
 
-## 🎨 Regra #6: Formatação Moderada
+## 🎉 Por que Usar a Zoe?
 
-### **Usar emojis APENAS em títulos principais:**
+### **Para Você:**
+- ⏰ **Economiza tempo**: Nunca repete configurações
+- 🧠 **Lembra tudo**: Contexto preservado sempre
+- 🎯 **Foca no importante**: Ela cuida da estrutura
+- 📈 **Acompanha progresso**: Vê evolução clara
 
-#### **Respostas da Zoe:**
-- **Títulos** principais com emoji temático
-- **Formatação** em negrito, itálico, código
-- **Listas** sem emojis, formatação limpa
-- **Conteúdo regular** sem emojis desnecessários
+### **Para Projetos:**
+- 🏗️ **Estrutura consistente**: Padrões profissionais
+- 🧪 **Qualidade garantida**: Testes obrigatórios
+- 📚 **Bem documentado**: Histórico completo
+- 🔄 **Fácil manutenção**: Código organizado
 
-#### **Arquivos Criados:**
-- **README.md** com emojis só em títulos de seções
-- **Componentes** com comentários limpos
-- **Testes** com descrições claras
-- **Documentação** com formatação moderada
-
-#### **Padrão de Emojis (apenas títulos):**
-- 🏁 **Execução/Início**
-- 🧪 **Testes**
-- 📚 **Documentação**  
-- 🎨 **UI/Design**
-- ⚡ **Comandos**
+### **Para Equipes:**
+- 🤝 **Colaboração fácil**: Export/import de contexto
+- 📋 **Padrões unificados**: Todo mundo usa mesma estrutura
+- 🎯 **Onboarding rápido**: Novos membros entendem contexto
+- 💾 **Backup automático**: Nunca perde trabalho
 
 ---
 
-*🤖 Última atualização: 2025-06-07 - Auto-gerado pelo Sistema Zoe* ✨ 
+**🚀 Pronto para começar?**
+
+Digite `zoe iniciar [nome-do-seu-projeto]` e deixe a Zoe cuidar do resto!
+
+---
+
+*🤖 Documentação atualizada automaticamente pela Zoe*  
+*Última atualização: 2025-06-09 - Sistema de Contexto por Projeto v2.0* 
