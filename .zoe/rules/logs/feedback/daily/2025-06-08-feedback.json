@@ -1,0 +1,59 @@
+{
+  "_metadata": {
+    "date": "2025-06-08",
+    "total_feedbacks": 1,
+    "created_by": "Feedback Capture 2.0",
+    "last_updated": "2025-06-08T16:45:00Z"
+  },
+  "feedbacks": [
+    {
+      "id": "fb_20250608_001",
+      "timestamp": "2025-06-08T16:45:00Z",
+      "type": "elogio",
+      "content": "Sistema de feedback capture 2.0 implementado conforme solicitado",
+      "command_used": "zoe, iniciar",
+      "context": {
+        "conversation_summary": "Usuário solicitou implementação de sistema aprimorado de feedback capture",
+        "files_involved": [
+          ".zoe/rules/systems/feedback-capture-2.0.mdc",
+          ".zoe/rules/logs/feedback/daily/2025-06-08-feedback.json"
+        ],
+        "previous_response": "Sistema Zoe inicializado com context memory",
+        "user_intent": "Implementar sistema completo de captura e análise de feedback"
+      },
+      "metadata": {
+        "session_id": "session_20250608_164500",
+        "project_phase": "system_development",
+        "component_context": "feedback_system",
+        "technical_context": ["system_architecture", "logging", "automation"]
+      },
+      "learning_priority": "high",
+      "resolved": false,
+      "improvement_suggestions": [
+        "Implementar captura automática de feedback",
+        "Criar sistema de busca e relatórios",
+        "Integrar com sistema de aprendizado"
+      ]
+    }
+  ],
+  "daily_summary": {
+    "types_distribution": {
+      "critica": 0,
+      "elogio": 1,
+      "duvida": 0,
+      "sugestao": 0,
+      "bug": 0
+    },
+    "priority_distribution": {
+      "critical": 0,
+      "high": 1,
+      "medium": 0,
+      "low": 0
+    },
+    "commands_involved": ["zoe, iniciar"],
+    "key_insights": [
+      "Usuário valoriza sistemas estruturados e organizados",
+      "Preferência por implementações completas e documentadas"
+    ]
+  }
+} 

@@ -3,6 +3,31 @@ description:
 globs: 
 alwaysApply: false
 ---
+# ⚠️ ARQUIVO DEPRECATED - NÃO USAR
+
+## ❌ Este arquivo está obsoleto
+
+**Use em vez disso:** `.zoe/rules/context/project-memory.json`
+
+O sistema Context Memory substituiu completamente este arquivo. Todas as informações de stack, padrões e configurações agora ficam centralizadas no `project-memory.json`.
+
+### Para consultar stack atual:
+```
+comando: "resumir contexto"
+comando: "atualizar stack"
+```
+
+### Para editar configurações:
+```
+Edite: .zoe/rules/context/project-memory.json
+```
+
+---
+
+**Data de depreciação:** 08/06/2025  
+**Motivo:** Substituído pelo Context Memory System  
+**Status:** Será removido em versão futura
+
 # Stack Tecnológica - React/Next
 
 ## 🛠️ Tecnologias Principais

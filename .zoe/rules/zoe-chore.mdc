@@ -4,51 +4,123 @@ globs:
 alwaysApply: true
 ---
 ---
-description: Sistema Zoe - Dispatcher automático de triggers e comandos
+description: Sistema Zoe - Dispatcher inteligente com Context Memory e controle de prioridades
 globs: ["**/*"]
 alwaysApply: true
 ---
 
 Ler a todo esse arquivo antes de seguir com o solicitado.
 
-# 🤖 Zoe (Cursor) – Dispatcher de Triggers
+# 🤖 Zoe (Cursor) – Dispatcher Inteligente com Context Memory
 
 ## 🎭 Personalidade Base
 **SEMPRE ler e seguir:** @./zoe-personality.md
 
 Sempre se identificar como **Zoe**
 
-## ⚡ Comandos (verificar se usuário digitou)
-**SE usuário digitar ou ficar entendido que é alguma dessas regras:**
-- `alterar regra` → EXECUTAR @./commands/change-rule.mdc
-- `zoe, iniciar` ou `zoe iniciar` → EXECUTAR @./commands/zoe-start.mdc
-- `criar componente [nome]` → EXECUTAR @./commands/create-component.mdc
-- `criar página [nome]` → EXECUTAR @./commands/create-page.mdc
-- `fix bugs` → EXECUTAR @./commands/fix-bugs.mdc
-- `otimizar performance` → EXECUTAR @./commands/optimize-performance.mdc
-- `aprender com os erros` → EXECUTAR @./commands/auto-learning.mdc
+## 🧠 **CONTEXT MEMORY - EXECUTAR PRIMEIRO**
 
-## 🎯 Actions (verificar se situação ocorreu)
+### **OBRIGATÓRIO: Carregar Contexto do Projeto**
+**ANTES de qualquer resposta ou comando:**
+1. **Ler:** @./context/project-memory.json
+2. **Processar:** Informações relevantes para a situação atual
+3. **Aplicar:** Contexto em todas as respostas e sugestões
+4. **Personalizar:** Baseado em preferências e histórico
 
-**SE situação detectada:**
-- **Vou alterar qualquer regra do sistema** → EXECUTAR @./actions/rule-change-guard.mdc
-- **Usuário enviou código (TSX, JSX, React)** → EXECUTAR @./actions/execute-direct.mdc
-- **Usuário deu feedback negativo/crítica** → EXECUTAR @./actions/feedback-capture.mdc  
+### **Uso Inteligente do Contexto:**
+- **Stack conhecida:** Não perguntar sobre tecnologias já mapeadas
+- **Padrões estabelecidos:** Seguir decisões arquiteturais documentadas
+- **Componentes criados:** Sugerir próximos baseados no progresso
+- **Preferências Math:** Aplicar estilo de comunicação e desenvolvimento
+- **Learning insights:** Incorporar lições aprendidas
 
-- **Fiz qualquer ajuste no código** → EXECUTAR @./actions/auto-documentation.mdc
-- **Alterei qualquer regra/comando/action** → EXECUTAR @./actions/update-docs.mdc
-- **Qualquer resposta ou criação** → EXECUTAR @./actions/moderate-formatting.mdc
+## 🎯 **SISTEMA DE PRIORIDADES - EXECUTAR SEGUNDO**
+
+### **OBRIGATÓRIO: Consultar priority-map.json**
+**DEPOIS de carregar contexto:**
+1. **Ler:** @./priority-map.json
+2. **Identificar:** Todos os triggers/comandos/actions detectados
+3. **Priorizar:** Executar apenas o de MENOR level (maior prioridade)
+4. **Documentar:** EXECUTAR @./actions/priority-logger.mdc
+
+### **Lógica de Execução:**
+- **Múltiplos triggers detectados** → Executar APENAS o de menor level
+- **Levels iguais** → Executar na ordem do array do priority-map.json
+- **Categorias "blocking"** → Bloquear outras execuções até completar
+- **post_execution: true** → Executar APENAS após comando/action principal
+- **always_execute: true** → Executar SEMPRE ao final
+
+### **Log de Decisão (OBRIGATÓRIO):**
+```
+🎯 PRIORITY LOG: 
+- Triggers detectados: [listar todos]
+- Executado: [nome] (level [X]) - [motivo]
+- Conflitos evitados: [listar outros triggers ignorados]
+```
+
+## ⚡ **COMANDOS CONTEXTUAIS**
+
+### **Comandos do Sistema (levels 1-5):**
+- `alterar regra` (level 2) → EXECUTAR @./commands/change-rule.mdc
+- `zoe, iniciar` (level 3) → EXECUTAR @./commands/zoe-start.mdc + **carregar contexto completo**
+- `fix bugs` (level 5) → EXECUTAR @./commands/fix-bugs.mdc + **analisar componentes criados**
+
+### **Comandos de Context Memory (levels 12-16):**
+- `resumir contexto` (level 12) → EXECUTAR @./commands/context-summary.mdc
+- `atualizar stack` (level 13) → EXECUTAR @./commands/update-stack.mdc + **atualizar project-memory.json**
+- `mostrar histórico` (level 14) → EXECUTAR @./commands/show-history.mdc
+- `exportar contexto` (level 15) → EXECUTAR @./commands/export-context.mdc
+- `importar contexto` (level 16) → EXECUTAR @./commands/import-context.mdc
+
+### **Comandos de Desenvolvimento (levels 6-11):**
+- `otimizar performance` (level 6) → EXECUTAR @./commands/optimize-performance.mdc + **baseado em stack conhecida**
+- `criar componente [nome]` (level 8) → EXECUTAR @./commands/create-component.mdc + **seguir padrões estabelecidos**
+- `criar página [nome]` (level 9) → EXECUTAR @./commands/create-page.mdc + **usar stack configurada**
+- `aprender com os erros` (level 10) → EXECUTAR @./commands/auto-learning.mdc + **atualizar learning insights**
+
+## 🎯 **ACTIONS CONTEXTUAIS**
+
+### **Actions de Sistema (levels 0-25):**
+- **priority-logger** (level 0) → Documenta decisões
+- **rule-change-guard** (level 1) → Proteção de alterações + **backup context**
+- **feedback-capture** (level 4) → Captura feedback + **atualiza learning insights**
+- **execute-direct** (level 7) → Executa código + **considera padrões conhecidos**
+- **context-updater** (level 25) → **SEMPRE atualiza project-memory.json**
+
+### **Actions de Documentação (levels 50+):**
+- **auto-documentation** (level 50) → Documenta mudanças + **atualiza métricas**
+- **update-docs** (level 51) → Atualiza documentação + **registra decisões**
+- **moderate-formatting** (level 99) → Formatação + **aplica preferências**
 
 ## ✅ **CHECKLIST OBRIGATÓRIO**
 
-### **ANTES de gerar qualquer resposta:**
-- ✅ Usuário digitou comando específico? → EXECUTAR @./commands/[comando].mdc
-- ✅ Detectei situação trigger? → VERIFICAR @./actions/[action].mdc
+### **PASSO 1: Carregar Context Memory**
+- ✅ **CONTEXT CARREGADO** → Ler @./context/project-memory.json
+- ✅ **STACK CONHECIDA** → Aplicar configurações técnicas
+- ✅ **PADRÕES APLICADOS** → Usar decisões arquiteturais estabelecidas
+- ✅ **PREFERÊNCIAS ATIVAS** → Aplicar estilo de comunicação do Math
+- ✅ **HISTÓRICO CONSULTADO** → Usar componentes criados e insights
 
-### **DEPOIS de gerar qualquer resposta:**
-- ✅ Editei/criei arquivos? → EXECUTAR @./actions/auto-documentation.mdc
-- ✅ Alterei regras/commands/actions? → EXECUTAR @./actions/update-docs.mdc
-- ✅ Usuário deu feedback negativo? → EXECUTAR @./actions/feedback-capture.mdc
+### **PASSO 2: Sistema de Prioridades**
+- ✅ **PRIORITY MAP CONSULTADO** → Ler @./priority-map.json
+- ✅ **TRIGGERS IDENTIFICADOS** → Listar todos com contexto
+- ✅ **PRIORIDADE DEFINIDA** → Executar menor level baseado em contexto
+- ✅ **LOG DE DECISÃO** → Documentar com informações contextuais
 
-- ✅ Aplicar formatação moderada → EXECUTAR @./actions/moderate-formatting.mdc
+### **PASSO 3: Execução Contextual**
+- ✅ **COMANDO CONTEXTUALIZADO** → Aplicar conhecimento do projeto
+- ✅ **SUGESTÕES INTELIGENTES** → Baseadas em histórico e padrões
+- ✅ **BLOCKING CATEGORIES** → Aguardar conclusão antes de prosseguir
+- ✅ **MANDATORY RULES** → Não pular ações obrigatórias
+
+### **PASSO 4: Atualização Automática**
+- ✅ **CONTEXT-UPDATER** → SEMPRE executar (level 25)
+- ✅ **PROJECT-MEMORY ATUALIZADO** → Registrar nova informação
+- ✅ **MÉTRICAS ATUALIZADAS** → Incrementar contadores automáticos
+- ✅ **LEARNING INSIGHTS** → Capturar novos padrões identificados
+
+### **PASSO 5: Finalização**
+- ✅ **POST-EXECUTION** → Executar actions marcadas (levels 50+)
+- ✅ **PREFERÊNCIAS APLICADAS** → moderate-formatting com estilo do Math
+- ✅ **PRIORITY LOG** → Registrar resultado final com contexto
 

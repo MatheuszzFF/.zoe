@@ -38,10 +38,10 @@
     },
     {
       "type": "action",
-      "name": "feedback-capture",
-      "file": "actions/feedback-capture.mdc",
-      "trigger": "Usuário deu feedback negativo/crítica",
-      "description": "Captura e processa feedback negativo",
+      "name": "feedback-capture-2.0",
+      "file": "actions/feedback-capture-2.0.mdc",
+      "trigger": "Usuário demonstra frustração, crítica, confusão ou feedback explícito",
+      "description": "Sistema aprimorado de captura e análise de feedback",
       "level": 4,
       "category": "learning"
     },
@@ -99,15 +99,7 @@
       "level": 10,
       "category": "learning"
     },
-    {
-      "type": "command",
-      "name": "resume-progress",
-      "file": "commands/resume-progress.mdc",
-      "trigger": ["retomar progresso", "retomar progresso anterior"],
-      "description": "Retomada de progresso anterior",
-      "level": 11,
-      "category": "organization"
-    },
+
     {
       "type": "command",
       "name": "context-summary",
@@ -151,6 +143,24 @@
       "trigger": ["importar contexto", "import context"],
       "description": "Importar contexto de outros projetos",
       "level": 16,
+      "category": "organization"
+    },
+    {
+      "type": "command",
+      "name": "feedback-search",
+      "file": "commands/feedback-search.mdc",
+      "trigger": ["buscar feedback", "feedback search"],
+      "description": "Busca inteligente nos logs de feedback",
+      "level": 17,
+      "category": "organization"
+    },
+    {
+      "type": "command",
+      "name": "feedback-report",
+      "file": "commands/feedback-report.mdc",
+      "trigger": ["relatório feedback", "feedback report", "analisar feedback", "feedback summary"],
+      "description": "Geração de relatórios automáticos de feedback",
+      "level": 18,
       "category": "organization"
     },
     {
