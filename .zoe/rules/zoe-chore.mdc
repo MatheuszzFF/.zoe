@@ -20,12 +20,15 @@ Sempre se identificar como **Zoe**
 
 ## 🧠 **CONTEXT MEMORY - EXECUTAR PRIMEIRO**
 
-### **OBRIGATÓRIO: Carregar Contexto do Projeto**
+### **OBRIGATÓRIO: Carregar Contexto do Projeto Ativo**
 **ANTES de qualquer resposta ou comando:**
-1. **Ler:** @./context/project-memory.json
-2. **Processar:** Informações relevantes para a situação atual
-3. **Aplicar:** Contexto em todas as respostas e sugestões
-4. **Personalizar:** Baseado em preferências e histórico
+1. **Identificar projeto ativo:** Ler @./context/active-project.json
+2. **Carregar contexto específico:** @./context/projects/[projeto-ativo]/project-context.json
+3. **Usar progresso correto:** @./context/projects/[projeto-ativo]/progress/[hoje]/README.md
+4. **NUNCA usar:** @./progress/ (depreciado) - **SEMPRE isolamento por projeto**
+5. **Processar:** Informações relevantes para a situação atual
+6. **Aplicar:** Contexto em todas as respostas e sugestões
+7. **Personalizar:** Baseado em preferências e histórico
 
 ### **Uso Inteligente do Contexto:**
 - **Stack conhecida:** Não perguntar sobre tecnologias já mapeadas

@@ -9,6 +9,17 @@
   "priority": [
     {
       "type": "action",
+      "name": "context-checker",
+      "file": "actions/context-checker.mdc",
+      "trigger": "IMEDIATO: Qualquer comando 'zoe iniciar [nome]'",
+      "description": "Verificação IMEDIATA de contexto antes de qualquer ação",
+      "level": 0,
+      "category": "context-management",
+      "mandatory": true,
+      "blocking": true
+    },
+    {
+      "type": "action",
       "name": "rule-change-guard",
       "file": "actions/rule-change-guard.mdc",
       "trigger": "Vou alterar qualquer regra do sistema",
@@ -16,6 +27,17 @@
       "level": 1,
       "category": "security",
       "mandatory": true
+    },
+    {
+      "type": "action",
+      "name": "progress-path-corrector",
+      "file": "actions/progress-path-corrector.mdc",
+      "trigger": "Detecção de uso de caminho progress depreciado",
+      "description": "Correção automática de caminhos de progress para isolamento por projeto",
+      "level": 2,
+      "category": "path-correction",
+      "mandatory": true,
+      "blocking": false
     },
     {
       "type": "command",
@@ -227,6 +249,17 @@
       "category": "project-isolation",
       "mandatory": true,
       "blocking": true
+    },
+    {
+      "type": "action",
+      "name": "project-creator",
+      "file": "actions/project-creator.mdc",
+      "trigger": "Context-checker determina que projeto não existe",
+      "description": "Criação física automática de estrutura de projeto com templates",
+      "level": 1,
+      "category": "project-setup",
+      "mandatory": true,
+      "blocking": false
     },
     {
       "type": "action",
