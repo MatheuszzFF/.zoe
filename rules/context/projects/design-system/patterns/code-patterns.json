@@ -1,0 +1,44 @@
+{
+  "typing_conventions": {
+    "prefix": "T",
+    "rules": [
+      "Props types: T{ComponentName}Props",
+      "Component types: T{ComponentName}",
+      "Template types: T{ComponentName}Template",
+      "Export types: T{ComponentName}Exports"
+    ],
+    "examples": {
+      "props": "TButtonProps",
+      "component": "TButton",
+      "template": "TButtonTemplate"
+    }
+  },
+  "props_structure": {
+    "pattern": "Destructured props with default values",
+    "destructuring_style": "Object destructuring in function parameters",
+    "rules": [
+      "Use transient props ($prop) for styled-components",
+      "Separate logic props from styling props",
+      "Forward HTML attributes when appropriate"
+    ]
+  },
+  "styling_patterns": {
+    "transient_props": "Use $ prefix for styled-components props ($bgColor, $color)",
+    "prop_forwarding": "Forward HTML attributes using ...rest pattern",
+    "theme_usage": "Access theme through styled-components ThemeProvider",
+    "responsive_patterns": "Use theme breakpoints for responsive design"
+  },
+  "naming_conventions": {
+    "files": "kebab-case (button.component.tsx)",
+    "components": "PascalCase (Button, TableComposite)",
+    "exports": "Named exports with consistent naming",
+    "variables": "camelCase",
+    "constants": "UPPER_SNAKE_CASE"
+  },
+  "import_patterns": {
+    "react": "import React from 'react'",
+    "styled": "import styled from 'styled-components'",
+    "types": "import type { TComponentProps } from './component.types'",
+    "relative": "Use relative imports for local files"
+  }
+} 

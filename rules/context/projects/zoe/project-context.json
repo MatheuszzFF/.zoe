@@ -1,0 +1,136 @@
+{
+  "_metadata": {
+    "version": "2.0",
+    "created": "2025-01-09",
+    "last_updated": "2025-01-09",
+    "project_name": "Zoe",
+    "project_type": "AI Assistant Development",
+    "description": "Contexto específico do desenvolvimento da assistente Zoe"
+  },
+  "project_overview": {
+    "name": "Zoe",
+    "type": "AI Assistant Development",
+    "objectives": [
+      "Desenvolver sistema de regras e contexto para assistente IA",
+      "Implementar padrões de desenvolvimento consistentes",
+      "Criar templates reutilizáveis para projetos",
+      "Estabelecer workflows de desenvolvimento eficientes"
+    ],
+    "current_phase": "Desenvolvimento Ativo",
+    "priority_focus": "Sistema de Padrões e Templates",
+    "location": ".zoe/",
+    "mono_repo": false
+  },
+  "tech_stack": {
+    "detected_automatically": false,
+    "detection_confidence": "manual",
+    "detection_method": "manual configuration",
+    "primary": {
+      "language": "JSON",
+      "configuration": "Markdown",
+      "templates": "JSON/Markdown",
+      "rules": "Markdown"
+    },
+    "development": {
+      "version_control": "Git",
+      "documentation": "Markdown",
+      "structure": "Hierarchical JSON"
+    }
+  },
+  "architectural_patterns": {
+    "rule_system": {
+      "separation_pattern": "Contexto por projeto",
+      "file_structure": {
+        "rules_file": "zoe-chore.mdc",
+        "context_files": "project-context.json",
+        "progress_files": "daily progress in markdown",
+        "pattern_files": "JSON pattern definitions"
+      },
+      "responsibility_separation": {
+        "rules_layer": "Regras gerais de comportamento",
+        "context_layer": "Contexto específico do projeto",
+        "progress_layer": "Acompanhamento de progresso diário"
+      }
+    },
+    "template_patterns": {
+      "project_templates": "Templates JSON para novos projetos",
+      "progress_templates": "Templates Markdown para progresso",
+      "pattern_templates": "Templates para definição de padrões"
+    }
+  },
+  "development_workflow": {
+    "rule_creation_process": [
+      "Identificar necessidade de nova regra",
+      "Documentar no arquivo apropriado",
+      "Testar implementação",
+      "Atualizar templates se necessário"
+    ],
+    "context_management": [
+      "Manter contexto por projeto",
+      "Atualizar progresso diariamente",
+      "Documentar padrões descobertos"
+    ],
+    "template_workflow": [
+      "Criar template base",
+      "Testar com projeto real",
+      "Refinar baseado no uso",
+      "Documentar uso correto"
+    ]
+  },
+  "preferences": {
+    "math_preferences": {
+      "communication_style": "Direto e prático",
+      "nickname": "Math",
+      "language": "Português",
+      "feedback_style": "Honesto e específico"
+    },
+    "development_style": {
+      "file_naming": "Inglês para código, Português para documentação",
+      "comments": "Português",
+      "structure": "Hierárquica e organizada",
+      "documentation": "Português"
+    },
+    "project_style": {
+      "priority": "Funcionalidade sobre complexidade",
+      "maintenance": "Templates atualizados regularmente",
+      "documentation": "Clara e prática"
+    }
+  },
+  "current_context": {
+    "last_session_summary": "Implementação de padrões JSON para design system",
+    "active_work": "Criação de projeto específico para Zoe",
+    "next_suggested": [
+      "Criar estrutura de progresso para Zoe",
+      "Documentar melhorias implementadas",
+      "Testar novos templates"
+    ],
+    "pending_tasks": [
+      "Atualizar progresso da Zoe corretamente",
+      "Testar regras do zoe-chore atualizadas"
+    ],
+    "blockers": [],
+    "recent_changes": [
+      "Criação de padrões JSON para design system",
+      "Atualização do template de contexto",
+      "Criação de projeto específico para Zoe"
+    ],
+    "next_priorities": [
+      "Estruturar progresso da Zoe",
+      "Documentar padrões implementados"
+    ]
+  },
+  "learning_insights": [
+    "Separação de contexto por projeto melhora organização",
+    "Templates JSON são mais estruturados que Markdown",
+    "Progresso deve ser específico por projeto/ferramenta"
+  ],
+  "project_metrics": {
+    "rules_created": 1,
+    "templates_updated": 1,
+    "projects_supported": 3,
+    "sessions_count": 1,
+    "days_worked": 1,
+    "creation_date": "2025-01-09",
+    "last_activity": "2025-01-09"
+  }
+} 

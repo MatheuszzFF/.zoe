@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "project": "Zoe",
+  "patterns": {
+    "test_structure": {
+      "description": "Estrutura de testes para sistema Zoe",
+      "pattern": {
+        "validation_tests": "Testar validação de estruturas JSON",
+        "integration_tests": "Testar integração entre componentes",
+        "rule_tests": "Testar aplicação de regras",
+        "context_tests": "Testar carregamento e isolamento de contexto"
+      }
+    },
+    "test_naming": {
+      "description": "Nomenclatura de testes para Zoe", 
+      "pattern": {
+        "test_files": "test-nome-componente.js",
+        "test_functions": "describe('Componente') + it('should...')",
+        "test_data": "mock-data-nome.json para dados de teste"
+      }
+    },
+    "coverage_requirements": {
+      "description": "Requisitos de cobertura para Zoe",
+      "minimum": {
+        "rules_validation": "100% - Regras críticas devem ser testadas",
+        "context_loading": "95% - Carregamento de contexto",
+        "pattern_detection": "80% - Detecção de padrões",
+        "template_generation": "90% - Geração de templates"
+      }
+    },
+    "test_scenarios": {
+      "description": "Cenários de teste específicos",
+      "scenarios": {
+        "project_creation": "Testar criação completa de projeto com patterns",
+        "context_switching": "Testar mudança entre projetos",
+        "progress_tracking": "Testar atualização de progresso",
+        "pattern_application": "Testar aplicação de padrões detectados",
+        "rule_enforcement": "Testar aplicação de regras obrigatórias"
+      }
+    },
+    "validation_patterns": {
+      "description": "Padrões de validação para Zoe",
+      "validations": {
+        "json_schema": "Validar estrutura de arquivos JSON",
+        "file_existence": "Validar existência de arquivos obrigatórios",
+        "reference_integrity": "Validar integridade de referências",
+        "pattern_consistency": "Validar consistência de padrões"
+      }
+    }
+  }
+} 

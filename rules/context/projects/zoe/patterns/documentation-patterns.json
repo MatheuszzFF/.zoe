@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "project": "Zoe",
+  "patterns": {
+    "documentation_style": {
+      "description": "Estilo de documentação para sistema Zoe",
+      "pattern": {
+        "language": "Português brasileiro",
+        "tone": "Direto, prático e técnico",
+        "structure": "Hierárquica com seções bem definidas",
+        "visual_aids": "Emojis para identificação rápida de seções"
+      }
+    },
+    "comment_patterns": {
+      "description": "Padrões de comentários no código",
+      "pattern": {
+        "json_comments": "Usar description fields para documentar",
+        "markdown_comments": "Usar <!-- --> para comentários HTML",
+        "inline_docs": "Documentar decisões importantes inline",
+        "section_headers": "Usar emojis para identificar seções"
+      }
+    },
+    "readme_structure": {
+      "description": "Estrutura padrão de README para projetos",
+      "pattern": {
+        "header": "# Nome do Projeto + Data + Sessão",
+        "summary": "## Resumo do Dia - Visão geral das atividades",
+        "activities": "## Atividades Realizadas - Timeline detalhado",
+        "problems": "## Problemas Identificados e Soluções",
+        "improvements": "## Melhorias Implementadas",
+        "metrics": "## Métricas do Dia - Números e estatísticas",
+        "next_steps": "## Próximos Passos - Planejamento",
+        "learnings": "## Aprendizados - Insights capturados",
+        "status": "## Status Final - Estado atual do projeto"
+      }
+    },
+    "progress_documentation": {
+      "description": "Padrões para documentação de progresso",
+      "format": {
+        "timestamp": "[HH:MM] - Sempre incluir horário",
+        "type": "TIPO - CRIAÇÃO, EDIÇÃO, BUGFIX, etc.",
+        "description": "Descrição clara e técnica",
+        "files": "Lista de arquivos afetados",
+        "status": "Status: COMPLETO, EM_ANDAMENTO, TESTANDO",
+        "impact": "Impacto: Como afeta o projeto"
+      }
+    },
+    "technical_documentation": {
+      "description": "Padrões para documentação técnica",
+      "patterns": {
+        "api_docs": "Documentar APIs e interfaces claramente",
+        "config_docs": "Explicar configurações e parâmetros",
+        "architecture_docs": "Documentar decisões arquiteturais",
+        "pattern_docs": "Documentar padrões detectados e aplicados",
+        "rule_docs": "Documentar regras e suas justificativas"
+      }
+    },
+    "maintenance_documentation": {
+      "description": "Documentação para manutenção",
+      "requirements": {
+        "update_frequency": "Atualizar a cada mudança significativa",
+        "version_tracking": "Manter histórico de versões",
+        "change_log": "Documentar todas as mudanças",
+        "deprecation_notices": "Avisar sobre funcionalidades obsoletas"
+      }
+    }
+  }
+} 

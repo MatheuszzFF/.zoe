@@ -1,0 +1,50 @@
+{
+  "version": "1.0", 
+  "project": "Zoe",
+  "patterns": {
+    "naming_conventions": {
+      "description": "Convenções de nomenclatura para sistema Zoe",
+      "files": {
+        "rules": "kebab-case com extensão .mdc (ex: zoe-chore.mdc)",
+        "context": "kebab-case com extensão .json (ex: project-context.json)",
+        "progress": "README.md dentro de pasta com data (ex: 2025-01-09/README.md)",
+        "patterns": "kebab-case com sufixo -patterns.json"
+      },
+      "variables": {
+        "json_keys": "snake_case para chaves JSON",
+        "project_names": "kebab-case para nomes de projetos",
+        "dates": "formato ISO YYYY-MM-DD"
+      },
+      "functions": "camelCase para funções JavaScript se houver"
+    },
+    "typing_patterns": {
+      "description": "Padrões de tipagem e estrutura",
+      "json_structure": {
+        "metadata": "Sempre incluir _metadata com version, created, updated",
+        "versioning": "Usar semantic versioning para patterns",
+        "references": "Usar caminhos relativos para referências"
+      },
+      "markdown_structure": {
+        "headers": "Usar ## para seções principais, ### para subseções",
+        "lists": "Usar - para listas não ordenadas",
+        "code_blocks": "Usar ``` com linguagem especificada"
+      }
+    },
+    "import_export": {
+      "description": "Padrões de referência entre arquivos",
+      "pattern": {
+        "context_references": "Usar @ para referenciar arquivos (ex: @./context/)",
+        "relative_paths": "Sempre usar caminhos relativos",
+        "pattern_links": "Linkar patterns no project-context.json",
+        "template_usage": "Usar {{PLACEHOLDER}} para templates"
+      }
+    },
+    "documentation_style": {
+      "description": "Estilo de documentação em português",
+      "language": "Português brasileiro",
+      "tone": "Direto e prático",
+      "structure": "Hierárquica com emojis para identificação visual",
+      "examples": "Sempre incluir exemplos práticos"
+    }
+  }
+} 

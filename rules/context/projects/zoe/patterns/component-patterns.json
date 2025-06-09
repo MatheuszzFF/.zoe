@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "project": "Zoe", 
+  "patterns": {
+    "component_structure": {
+      "description": "Estrutura padrão de componentes do sistema Zoe",
+      "template": {
+        "rules_component": {
+          "file": "nome-regra.mdc",
+          "structure": "Markdown com seções hierárquicas",
+          "sections": ["Descrição", "Regras", "Exemplos", "Checklist"]
+        },
+        "context_component": {
+          "file": "project-context.json", 
+          "structure": "JSON estruturado com metadata",
+          "sections": ["_metadata", "project_overview", "tech_stack", "patterns", "current_context"]
+        },
+        "progress_component": {
+          "file": "progress/YYYY-MM-DD/README.md",
+          "structure": "Markdown com timeline",
+          "sections": ["Resumo", "Atividades", "Problemas", "Melhorias", "Próximos Passos"]
+        }
+      }
+    },
+    "props_patterns": {
+      "description": "Padrões de propriedades e configuração",
+      "pattern": {
+        "json_properties": "snake_case para propriedades JSON",
+        "required_fields": "Sempre incluir campos obrigatórios",
+        "optional_fields": "Marcar campos opcionais claramente",
+        "validation": "Validar estrutura antes de usar"
+      }
+    },
+    "styling_patterns": {
+      "description": "Padrões de formatação e apresentação",
+      "pattern": {
+        "markdown_styling": "Usar emojis para identificação visual",
+        "json_formatting": "Indentação de 2 espaços",
+        "hierarchy": "Estrutura hierárquica clara",
+        "consistency": "Manter consistência entre arquivos similares"
+      }
+    },
+    "template_patterns": {
+      "description": "Padrões para criação de templates",
+      "pattern": {
+        "placeholders": "Usar {{PLACEHOLDER}} para substituição",
+        "defaults": "Fornecer valores padrão quando possível",
+        "documentation": "Documentar cada placeholder",
+        "validation": "Validar templates antes de usar"
+      }
+    },
+    "integration_patterns": {
+      "description": "Padrões de integração entre componentes",
+      "pattern": {
+        "references": "Usar caminhos relativos para referências",
+        "linking": "Linkar componentes relacionados",
+        "isolation": "Manter isolamento entre projetos",
+        "consistency": "Garantir consistência de dados"
+      }
+    }
+  }
+} 

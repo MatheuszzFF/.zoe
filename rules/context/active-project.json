@@ -2,14 +2,21 @@
   "_metadata": {
     "version": "1.0",
     "description": "Controle do projeto ativo para isolamento de contexto",
-    "last_updated": "2025-01-20T10:30:00Z"
+    "last_updated": "2025-01-20T14:30:00Z"
   },
-  "active_project": "mz-shareholders-mf",
-  "activated_at": "2025-01-20T10:30:00Z",
-  "session_id": "sess_mz_shareholders_mf_init",
-  "last_command": "zoe, iniciar mz-shareholders-mf",
-  "last_command_at": "2025-01-20T10:30:00Z",
+  "active_project": "zoe",
+  "project_path": ".zoe/rules/context/projects/zoe/",
+  "last_updated": "2025-01-09T12:30:00Z",
+  "session_info": {
+    "current_session": 1,
+    "session_start": "2025-01-09T09:00:00Z",
+    "last_activity": "2025-01-09T12:30:00Z"
+  },
+  "activated_at": "2025-01-20T14:30:00Z",
+  "session_id": "sess_design_system_init",
+  "last_command": "zoe, iniciar design-system",
+  "last_command_at": "2025-01-20T14:30:00Z",
   "commands_count": 1,
   "session_duration": "started",
-  "notes": "Projeto MZ-SHAREHOLDERS-MF ativado. Microfrontend para gestão de acionistas."
+  "notes": "Projeto DESIGN-SYSTEM ativado. Sistema de design com componentes React documentados no Storybook."
 } 

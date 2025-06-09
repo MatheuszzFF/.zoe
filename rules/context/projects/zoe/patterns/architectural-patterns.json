@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "project": "Zoe",
+  "patterns": {
+    "file_structure": {
+      "description": "Estrutura hierárquica de arquivos para sistema de regras",
+      "pattern": {
+        "rules": ".zoe/rules/ - Regras principais do sistema",
+        "context": ".zoe/rules/context/ - Contexto e memória",
+        "projects": ".zoe/rules/context/projects/ - Projetos isolados",
+        "patterns": "./patterns/ - Padrões específicos por projeto",
+        "progress": "./progress/ - Progresso diário por projeto"
+      }
+    },
+    "component_organization": {
+      "description": "Organização de componentes do sistema Zoe",
+      "pattern": {
+        "rules_layer": "Regras gerais de comportamento (.mdc)",
+        "context_layer": "Contexto específico por projeto (.json)",
+        "progress_layer": "Acompanhamento diário (.md)",
+        "patterns_layer": "Padrões detectados e templates (.json)"
+      }
+    },
+    "separation_of_concerns": {
+      "description": "Separação clara de responsabilidades",
+      "pattern": {
+        "rules": "Comportamento geral da Zoe",
+        "context": "Estado específico do projeto",
+        "progress": "Histórico temporal de atividades",
+        "patterns": "Padrões reutilizáveis detectados",
+        "templates": "Templates para novos projetos"
+      }
+    },
+    "isolation_pattern": {
+      "description": "Isolamento total entre projetos",
+      "pattern": {
+        "project_context": "Cada projeto tem seu próprio contexto",
+        "progress_tracking": "Progresso isolado por projeto",
+        "pattern_detection": "Padrões específicos por projeto",
+        "no_cross_contamination": "Nenhum projeto interfere em outro"
+      }
+    }
+  }
+} 

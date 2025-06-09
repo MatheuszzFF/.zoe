@@ -1,0 +1,31 @@
+{
+  "framework": "Jest + React Testing Library",
+  "required_tests": [
+    "component rendering",
+    "user interactions", 
+    "prop variations"
+  ],
+  "coverage_targets": "Focus on component logic and user flows",
+  "testing_utilities": [
+    "@testing-library/react",
+    "@testing-library/jest-dom"
+  ],
+  "test_structure": {
+    "describe_blocks": "Describe blocks for component behavior",
+    "user_interaction_testing": "fireEvent for user interactions",
+    "accessibility_testing": "screen.getByRole for accessibility testing",
+    "coverage_requirements": "Test component logic and user interactions"
+  },
+  "patterns": {
+    "render_testing": "Test component renders without crashing",
+    "props_testing": "Test different prop combinations",
+    "interaction_testing": "Test user interactions and callbacks",
+    "accessibility_testing": "Test keyboard navigation and screen readers"
+  },
+  "file_naming": "*.spec.tsx for component tests",
+  "test_organization": {
+    "unit_tests": "Individual component testing",
+    "integration_tests": "Component interaction testing",
+    "accessibility_tests": "A11y compliance testing"
+  }
+} 

@@ -1,0 +1,76 @@
+{
+  "component_template_types_separation": {
+    "file_structure": {
+      "component_file": "*.component.tsx - Lógica e estado",
+      "template_file": "*.template.tsx - Apresentação visual", 
+      "types_file": "*.types.ts - Definições de tipos",
+      "stories_file": "*.stories.tsx - Documentação Storybook",
+      "test_files": "*.spec.tsx - Testes unitários",
+      "index_file": "index.ts - Exports"
+    },
+    "responsibilities": {
+      "component": [
+        "Estado local: useState, useReducer",
+        "Efeitos: useEffect, useCallback, useMemo",
+        "Lógica de negócio: Validações, transformações",
+        "Handlers: Funções de evento e callbacks",
+        "Props processing: Processamento de props antes de passar para template"
+      ],
+      "template": [
+        "Renderização visual: JSX e estrutura HTML",
+        "Styled-components: Estilos e componentes estilizados",
+        "Composição: Organização visual dos elementos",
+        "forwardRef: Para componentes que precisam de ref",
+        "Props destruct: Recebe props processadas do component"
+      ],
+      "types": [
+        "Props interfaces: Definições de propriedades",
+        "Component types: Tipos específicos do componente",
+        "Export types: Tipos para exportação",
+        "Utility types: Tipos auxiliares e transformações"
+      ]
+    }
+  },
+  "composite_pattern": {
+    "usage": [
+      "Componentes com múltiplas partes: Table, Form, Modal",
+      "Família de componentes relacionados: Button variants",
+      "Componentes com sub-componentes: Card com Header, Body, Footer"
+    ],
+    "structure": {
+      "composite_object": "TableComposite = { Table, Wrapper, Container }",
+      "import_pattern": "import { TableComposite } from './table.composite'",
+      "destructuring": "const { Table, Wrapper } = TableComposite"
+    }
+  },
+  "directory_organization": {
+    "structure": {
+      "by_category": "src/buttons/, src/table/, src/forms/",
+      "component_folders": "Each component in its own folder",
+      "sub_components": "Related components grouped in category folders"
+    },
+    "rules": [
+      "Categorização: Agrupar por funcionalidade similar",
+      "Isolamento: Cada componente em sua própria pasta", 
+      "Hierarquia: Sub-componentes dentro da categoria principal",
+      "Exports centralizados: index.ts em cada nível"
+    ]
+  },
+  "export_patterns": {
+    "individual": "export { Button } from './button.component'",
+    "grouped": "export const Buttons = { Button, CancelButton, ConfirmButton }",
+    "namespace": "export const TableComposite = { Table, Wrapper, Container }"
+  },
+  "dependency_injection": {
+    "theme_provider": [
+      "Styled-components ThemeProvider: Acesso global ao tema",
+      "Theme typing: Tipos TypeScript para tema",
+      "Responsive breakpoints: Breakpoints definidos no tema"
+    ],
+    "context_usage": [
+      "Minimal context: Apenas quando necessário",
+      "Performance: React.memo para componentes pesados",
+      "Prop drilling: Preferir props sobre context quando possível"
+    ]
+  }
+} 

@@ -1,0 +1,39 @@
+{
+  "creation_workflow": [
+    "Create component folder structure",
+    "Define types in *.types.ts",
+    "Implement logic in *.component.tsx",
+    "Create template in *.template.tsx",
+    "Write tests in *.spec.tsx",
+    "Document in *.stories.tsx",
+    "Export in index.ts"
+  ],
+  "file_structure": {
+    "component_file": "*.component.tsx - Lógica e estado",
+    "template_file": "*.template.tsx - Apresentação visual",
+    "types_file": "*.types.ts - Definições de tipos",
+    "stories_file": "*.stories.tsx - Documentação Storybook",
+    "test_files": "*.spec.tsx - Testes unitários"
+  },
+  "responsibility_separation": {
+    "logic_layer": "Component files handle state, effects, and business logic",
+    "presentation_layer": "Template files handle visual rendering and styling",
+    "type_layer": "Types files define interfaces, props, and type definitions"
+  },
+  "export_patterns": {
+    "individual_exports": "Each component exports its main component and types",
+    "grouped_exports": "Category-based exports (e.g., Buttons object with all button variants)",
+    "namespace_exports": "Composite objects for related components (e.g., TableComposite)"
+  },
+  "composition_patterns": {
+    "composite_components": "Complex components organized as composite objects (TableComposite)",
+    "sub_components": "Related components grouped in category folders",
+    "compound_components": "Components that work together as a system"
+  },
+  "state_management": {
+    "local_state": "useState for local state, useEffect for side effects",
+    "effect_usage": "useEffect for mounting state and cleanup",
+    "ref_patterns": "forwardRef for template components",
+    "async_handling": "Loading states with isLoading prop pattern"
+  }
+} 

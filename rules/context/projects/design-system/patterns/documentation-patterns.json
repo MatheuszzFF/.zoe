@@ -1,0 +1,35 @@
+{
+  "storybook_structure": {
+    "naming_pattern": "Components/{ComponentName}",
+    "title_format": "Components/{ComponentName}",
+    "rules": [
+      "NUNCA alterar títulos existentes sem solicitação explícita",
+      "Manter consistência com padrão Components/",
+      "Usar PascalCase para nomes de componentes",
+      "Incluir controles interativos quando apropriado"
+    ]
+  },
+  "story_requirements": {
+    "required_stories": ["Default"],
+    "optional_stories": ["Variants", "Playground", "Examples"],
+    "story_naming": "Descriptive story names (Default, WithLoading, etc.)",
+    "controls_usage": "argTypes for interactive controls"
+  },
+  "documentation_requirements": {
+    "storybook_required": true,
+    "story_descriptions": "Required for all public components",
+    "playground_stories": "Interactive stories with controls",
+    "documentation_completeness": "Default story + variations minimum"
+  },
+  "story_patterns": {
+    "default_export": "Component metadata with title and component",
+    "named_exports": "Individual stories as named exports",
+    "args_usage": "Use args for story props",
+    "controls": "Interactive controls for testing"
+  },
+  "file_structure": {
+    "stories_file": "*.stories.tsx",
+    "story_format": "CSF (Component Story Format)",
+    "typescript_support": "Full TypeScript support required"
+  }
+} 
