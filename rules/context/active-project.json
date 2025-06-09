@@ -1,0 +1,15 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "description": "Controle do projeto ativo para isolamento de contexto",
+    "last_updated": "2025-01-20T10:30:00Z"
+  },
+  "active_project": "sinistro-flow-prisma",
+  "activated_at": "2025-01-20T10:30:00Z",
+  "session_id": "sess_sinistro_flow_init",
+  "last_command": "zoe, iniciar sinistro-flow-prisma",
+  "last_command_at": "2025-01-20T10:30:00Z",
+  "commands_count": 1,
+  "session_duration": "0min",
+  "notes": "Projeto Sinistro Flow Prisma ativado. Sistema de gestão de sinistros com Next.js 15, TypeScript, Prisma, Supabase."
+} 

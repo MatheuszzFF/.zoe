@@ -1,0 +1,141 @@
+{
+  "_metadata": {
+    "command_name": "import-context",
+    "version": "1.0",
+    "format": "json",
+    "description": "Importar contexto de outros projetos para o projeto atual",
+    "created": "2025-06-08",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "importar contexto",
+      "import context"
+    ],
+    "priority_level": 16,
+    "category": "organization"
+  },
+
+  "behavior": {
+    "description": "Importar contexto, stack e configurações de outro projeto",
+    "phases": [
+      {
+        "phase": 1,
+        "name": "select_source",
+        "description": "Selecionar projeto fonte para importação",
+        "options": [
+          "list_available_projects",
+          "import_from_file",
+          "import_specific_sections"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "validate_compatibility",
+        "description": "Validar compatibilidade entre projetos",
+        "checks": [
+          "stack_compatibility",
+          "version_conflicts",
+          "architectural_differences"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "merge_contexts",
+        "description": "Mesclar contextos de forma inteligente",
+        "merge_strategy": [
+          "preserve_current_stack",
+          "merge_architectural_decisions",
+          "import_learning_insights",
+          "update_preferences"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "update_current_project",
+        "description": "Atualizar projeto atual com contexto importado",
+        "preserve_identity": true
+      }
+    ]
+  },
+
+  "import_options": {
+    "full_context": {
+      "description": "Importar contexto completo",
+      "includes": [
+        "tech_stack",
+        "architectural_decisions",
+        "code_patterns",
+        "learning_insights",
+        "preferences"
+      ]
+    },
+    "stack_only": {
+      "description": "Importar apenas stack tecnológica",
+      "includes": ["tech_stack", "code_patterns"]
+    },
+    "insights_only": {
+      "description": "Importar apenas insights de aprendizado",
+      "includes": ["learning_insights", "architectural_decisions"]
+    },
+    "preferences_only": {
+      "description": "Importar apenas preferências",
+      "includes": ["preferences", "coding_style"]
+    }
+  },
+
+  "output_format": {
+    "success": {
+      "template": "📥 **Contexto Importado:** [source_project] → [target_project]\n\n✅ **Seções importadas:**\n[imported_sections]\n\n⚠️ **Conflitos resolvidos:**\n[conflicts_resolved]\n\n📊 **Contexto atualizado:** [context_summary]",
+      "variables": {
+        "source_project": "source project name",
+        "target_project": "current project name",
+        "imported_sections": "list of imported sections",
+        "conflicts_resolved": "conflicts handled during import",
+        "context_summary": "summary of updated context"
+      }
+    },
+    "partial_import": {
+      "template": "📥 **Importação Parcial:** [import_type] de [source_project]\n\n✅ **Importado:**\n[imported_content]\n\n📊 **Resultado:** [import_summary]",
+      "variables": {
+        "import_type": "type of partial import",
+        "source_project": "source project name",
+        "imported_content": "content that was imported",
+        "import_summary": "summary of import results"
+      }
+    }
+  },
+
+  "safety_measures": {
+    "backup_current": {
+      "description": "Backup do contexto atual antes da importação",
+      "mandatory": true
+    },
+    "conflict_resolution": {
+      "description": "Estratégias para resolver conflitos",
+      "strategies": [
+        "preserve_current_on_conflict",
+        "manual_review_required",
+        "merge_intelligently"
+      ]
+    },
+    "rollback_option": {
+      "description": "Opção de reverter importação",
+      "available": true
+    }
+  },
+
+  "integration": {
+    "post_execution": [
+      {
+        "action": "update_progress",
+        "description": "Register context import in daily progress"
+      },
+      {
+        "action": "context_updater",
+        "description": "Update project context with imported information"
+      }
+    ]
+  }
+} 

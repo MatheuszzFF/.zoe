@@ -1,0 +1,185 @@
+{
+  "_metadata": {
+    "action_name": "progress-path-corrector",
+    "version": "1.0",
+    "format": "json",
+    "description": "Correção automática de caminhos de progress para isolamento por projeto",
+    "created": "2025-01-20",
+    "converted_from": "progress-path-corrector.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Detecção de uso de caminho progress depreciado",
+      "Referência a .zoe/rules/progress/",
+      "Uso de caminho não isolado por projeto"
+    ],
+    "automatic": true,
+    "priority_level": 2,
+    "category": "path-correction",
+    "mandatory": true,
+    "blocking": false
+  },
+
+  "behavior": {
+    "description": "Corrige automaticamente caminhos de progress deprecados para novo formato isolado",
+    "deprecated_patterns": [
+      ".zoe/rules/progress/",
+      ".zoe/progress/",
+      "progress/ (sem isolamento)"
+    ],
+    "correct_patterns": [
+      ".zoe/rules/context/projects/[projeto]/progress/",
+      ".zoe/rules/context/projects/[projeto]/progress/[YYYY-MM-DD]/"
+    ],
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "detect_deprecated_path",
+        "description": "Detectar uso de caminho progress depreciado",
+        "detection_rules": [
+          "Qualquer referência a .zoe/rules/progress/",
+          "Comandos tentando acessar progress sem isolamento",
+          "Leitura/escrita em caminhos antigos"
+        ]
+      },
+      {
+        "step": 2,
+        "action": "identify_active_project",
+        "description": "Identificar projeto ativo para correção",
+        "source": ".zoe/rules/context/active-project.json",
+        "fallback": "Perguntar ao usuário qual projeto"
+      },
+      {
+        "step": 3,
+        "action": "migrate_data",
+        "description": "Migrar dados existentes se necessário",
+        "migration_steps": [
+          "Verificar se dados existem no caminho depreciado",
+          "Criar estrutura correta se não existir",
+          "Copiar dados para caminho correto",
+          "Validar migração"
+        ]
+      },
+      {
+        "step": 4,
+        "action": "update_references",
+        "description": "Atualizar todas as referências para novo caminho",
+        "correction_mapping": {
+          ".zoe/rules/progress/": ".zoe/rules/context/projects/[projeto]/progress/",
+          ".zoe/progress/": ".zoe/rules/context/projects/[projeto]/progress/",
+          "progress/": ".zoe/rules/context/projects/[projeto]/progress/"
+        }
+      },
+      {
+        "step": 5,
+        "action": "cleanup_deprecated",
+        "description": "Limpar caminhos deprecados após migração bem-sucedida",
+        "safety_checks": [
+          "Verificar que migração foi bem-sucedida",
+          "Confirmar que dados estão no novo local",
+          "Fazer backup antes de deletar"
+        ]
+      }
+    ]
+  },
+
+  "project_isolation": {
+    "description": "Garantir isolamento total por projeto",
+    "mandatory_structure": {
+      "correct_path": ".zoe/rules/context/projects/[projeto]/progress/[YYYY-MM-DD]/",
+      "required_files": [
+        "README.md",
+        "sessions.log"
+      ]
+    },
+    "forbidden_paths": [
+      ".zoe/rules/progress/",
+      ".zoe/progress/",
+      "Qualquer caminho sem isolamento por projeto"
+    ]
+  },
+
+  "migration": {
+    "description": "Processo de migração de dados antigos",
+    "migration_strategy": "Copy and validate, then cleanup",
+    "backup_strategy": "Sempre fazer backup antes de deletar",
+    "validation": [
+      "Verificar integridade dos dados migrados",
+      "Confirmar que novo caminho está funcional",
+      "Testar acesso de leitura/escrita"
+    ]
+  },
+
+  "integration": {
+    "files_read": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/progress/ (deprecated)",
+      ".zoe/rules/context/projects/[projeto]/progress/"
+    ],
+    "files_write": [
+      ".zoe/rules/context/projects/[projeto]/progress/[data]/",
+      "Migration logs"
+    ],
+    "related_actions": [
+      "context-checker",
+      "project-creator",
+      "context-updater"
+    ]
+  },
+
+  "validation": {
+    "required_conditions": [
+      "Projeto ativo identificado",
+      "Permissões para criar/mover arquivos",
+      "Estrutura de contexto existente"
+    ],
+    "success_criteria": [
+      "Todos os caminhos usando formato correto",
+      "Dados migrados com sucesso",
+      "Caminhos deprecados limpos",
+      "Isolamento por projeto garantido"
+    ]
+  },
+
+  "error_handling": {
+    "common_errors": [
+      {
+        "error": "migration_failed",
+        "description": "Falha na migração de dados",
+        "solution": "Restaurar backup e tentar novamente"
+      },
+      {
+        "error": "active_project_not_found",
+        "description": "Não foi possível identificar projeto ativo",
+        "solution": "Executar context-checker primeiro"
+      },
+      {
+        "error": "permission_denied",
+        "description": "Sem permissão para mover/criar arquivos",
+        "solution": "Verificar permissões do sistema de arquivos"
+      },
+      {
+        "error": "data_corruption",
+        "description": "Dados corrompidos durante migração",
+        "solution": "Restaurar backup e investigar causa"
+      }
+    ]
+  },
+
+  "objective": {
+    "primary": "Garantir isolamento perfeito por projeto",
+    "benefits": [
+      "Evitar conflitos entre projetos",
+      "Melhor organização de dados",
+      "Facilitar backup/restore por projeto",
+      "Suporte a múltiplos projetos simultâneos"
+    ]
+  },
+
+  "logging": {
+    "log_format": "🔄 PATH CORRECTOR:\n- Caminho depreciado: [old_path]\n- Caminho correto: [new_path]\n- Projeto: [projeto]\n- Ação: [migrated | corrected | cleaned]\n- Status: [success | failed]",
+    "log_location": ".zoe/rules/logs/path-corrections.log"
+  }
+} 

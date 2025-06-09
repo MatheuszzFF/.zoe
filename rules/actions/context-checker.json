@@ -1,0 +1,207 @@
+{
+  "_metadata": {
+    "action_name": "context-checker",
+    "version": "1.0",
+    "format": "json",
+    "description": "Verificação AUTOMÁTICA de contexto antes de qualquer comando - SEMPRE executada",
+    "created": "2025-01-20",
+    "converted_from": "context-checker.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "IMEDIATO: Qualquer comando que mencione projeto ou 'zoe iniciar'",
+      "SEMPRE antes de qualquer comando ou resposta",
+      "zoe iniciar [projeto]",
+      "zoe, iniciar [projeto]"
+    ],
+    "automatic": true,
+    "priority_level": 0,
+    "category": "context-management",
+    "mandatory": true,
+    "blocking": true
+  },
+
+  "behavior": {
+    "description": "Verificação automática e criação obrigatória de estrutura de contexto",
+    "critical_rule": "SEMPRE CRIAR ESTRUTURA COMPLETA, MESMO SE JÁ EXISTIR PROJETO",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "analyze_command",
+        "description": "Detectar padrões de comando e projeto solicitado",
+        "patterns": [
+          "zoe, iniciar [nome-projeto]",
+          "zoe iniciar [nome-projeto]",
+          "Qualquer comando que mencione nome de projeto",
+          "Comandos em projeto diferente do ativo"
+        ]
+      },
+      {
+        "step": 2,
+        "action": "verify_context",
+        "description": "Verificar estado atual do contexto",
+        "validations": [
+          "Projeto solicitado == active-project.json",
+          "Estrutura context/projects/[projeto]/ existe",
+          "project-context.json existe e está atualizado",
+          "Pasta progress/[hoje]/ existe",
+          "Contexto carregado está correto"
+        ]
+      },
+      {
+        "step": 3,
+        "action": "automatic_correction",
+        "description": "Correção automática se necessário",
+        "conditions": [
+          "Se projeto solicitado ≠ projeto ativo",
+          "OU estrutura não existe"
+        ],
+        "corrections": [
+          "Atualizar active-project.json com novo projeto",
+          "CRIAR ESTRUTURA OBRIGATORIAMENTE context/projects/[novo-projeto]/",
+          "CRIAR project-context.json básico SEMPRE",
+          "CRIAR pasta progress para hoje SEMPRE",
+          "Analisar package.json do projeto para detectar stack",
+          "Log da mudança no progresso"
+        ]
+      },
+      {
+        "step": 4,
+        "action": "create_mandatory_structure",
+        "description": "Criação automática obrigatória",
+        "always_verify_and_create": [
+          ".zoe/rules/context/projects/[projeto]/",
+          ".zoe/rules/context/projects/[projeto]/progress/",
+          ".zoe/rules/context/projects/[projeto]/progress/[hoje]/",
+          ".zoe/rules/context/projects/[projeto]/project-context.json",
+          ".zoe/rules/context/projects/[projeto]/progress/[hoje]/README.md"
+        ],
+        "commands": [
+          "mkdir -p \".zoe/rules/context/projects/[projeto]/progress/$(date +%Y-%m-%d)\"",
+          "Copy template se project-context.json não existir",
+          "Copy template se README.md progress não existir"
+        ]
+      },
+      {
+        "step": 5,
+        "action": "final_validation",
+        "description": "Validação final obrigatória",
+        "mandatory_checks": [
+          "active-project.json aponta para projeto correto",
+          "project-context.json existe e é válido",
+          "Estrutura de pastas está criada",
+          "Pasta de progresso diário existe",
+          "README.md de progresso existe",
+          "Sistema pronto para operar no contexto correto"
+        ],
+        "fail_action": "PARAR execução, CRIAR estrutura faltante, REPETIR validação"
+      }
+    ]
+  },
+
+  "templates": {
+    "project_context_template": {
+      "metadata": {
+        "version": "1.0",
+        "created": "[timestamp]",
+        "project_name": "[nome-projeto]",
+        "description": "Auto-gerado pelo context-checker"
+      },
+      "project_overview": {
+        "name": "[nome-projeto]",
+        "type": "A ser definido",
+        "objectives": ["Detectar automaticamente"],
+        "current_phase": "Inicialização",
+        "priority_focus": "Setup inicial"
+      },
+      "tech_stack": {
+        "auto_detected": true,
+        "detection_source": "package.json analysis"
+      }
+    },
+    "folder_structure": {
+      "created_structure": [
+        ".zoe/rules/context/projects/[projeto]/",
+        "├── project-context.json",
+        "└── progress/",
+        "    └── [YYYY-MM-DD]/",
+        "        └── README.md"
+      ]
+    }
+  },
+
+  "integration": {
+    "files_read": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/context/projects/[projeto]/project-context.json",
+      "package.json"
+    ],
+    "files_write": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/context/projects/[projeto]/project-context.json",
+      ".zoe/rules/context/projects/[projeto]/progress/[hoje]/README.md"
+    ],
+    "related_actions": [
+      "project-creator",
+      "stack-autodetection",
+      "context-updater"
+    ]
+  },
+
+  "validation": {
+    "required_conditions": [
+      "Sistema deve ter permissão para criar diretórios",
+      "Projeto deve ter package.json válido",
+      "Nome do projeto deve ser válido"
+    ],
+    "success_criteria": [
+      "Estrutura completa criada",
+      "Todos os arquivos obrigatórios existem",
+      "Contexto correto carregado",
+      "Sistema pronto para operação"
+    ],
+    "blocking_behavior": "Este action bloqueia TODA execução até completar com sucesso"
+  },
+
+  "error_handling": {
+    "common_errors": [
+      {
+        "error": "permission_denied",
+        "description": "Sem permissão para criar estrutura",
+        "solution": "Verificar permissões da pasta .zoe/ e projeto"
+      },
+      {
+        "error": "invalid_project_name",
+        "description": "Nome de projeto inválido",
+        "solution": "Usar apenas letras, números e hífens"
+      },
+      {
+        "error": "missing_package_json",
+        "description": "package.json não encontrado",
+        "solution": "Criar package.json básico ou especificar stack manualmente"
+      },
+      {
+        "error": "corrupted_context",
+        "description": "Arquivo de contexto corrompido",
+        "solution": "Recriar arquivo usando template padrão"
+      }
+    ]
+  },
+
+  "objective": {
+    "primary": "Tornar IMPOSSÍVEL esquecer de atualizar contexto",
+    "features": [
+      "Verificação automática sempre",
+      "Correção automática quando necessário", 
+      "Context memory sempre correto",
+      "Zero intervenção manual necessária"
+    ]
+  },
+
+  "logging": {
+    "log_format": "🔍 CONTEXT CHECKER EXECUTADO:\n- Projeto solicitado: [nome]\n- Projeto ativo: [nome-atual]\n- Ação: [nenhuma | atualizado | criado]\n- Status: ✅ Contexto correto",
+    "log_location": ".zoe/rules/context/projects/[projeto]/progress/[hoje]/README.md"
+  }
+} 

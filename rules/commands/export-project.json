@@ -1,0 +1,94 @@
+{
+  "_metadata": {
+    "command_name": "export-project",
+    "version": "1.0",
+    "format": "json",
+    "description": "Exportar projeto completo para backup ou transferência",
+    "created": "2025-06-08",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "exportar projeto",
+      "export project"
+    ],
+    "priority_level": 21,
+    "category": "project-management"
+  },
+
+  "behavior": {
+    "description": "Exportar projeto completo com toda estrutura de contexto",
+    "phases": [
+      {
+        "phase": 1,
+        "name": "collect_project_data",
+        "description": "Coletar todos os dados do projeto ativo",
+        "sources": [
+          ".zoe/rules/context/projects/[active_project]/project-context.json",
+          ".zoe/rules/context/projects/[active_project]/progress/",
+          ".zoe/rules/context/projects/[active_project]/logs/"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "package_data",
+        "description": "Empacotar dados em formato estruturado",
+        "format": "JSON with metadata"
+      },
+      {
+        "phase": 3,
+        "name": "create_export_file",
+        "description": "Criar arquivo de exportação",
+        "filename": "[project_name]_export_[timestamp].json"
+      },
+      {
+        "phase": 4,
+        "name": "generate_readme",
+        "description": "Gerar README com instruções de importação",
+        "include": "import_instructions"
+      }
+    ]
+  },
+
+  "export_options": {
+    "full_export": {
+      "description": "Exportar projeto completo",
+      "includes": [
+        "project_context",
+        "all_progress",
+        "all_logs",
+        "configurations"
+      ]
+    },
+    "context_only": {
+      "description": "Exportar apenas contexto",
+      "includes": ["project_context", "latest_configurations"]
+    },
+    "progress_only": {
+      "description": "Exportar apenas progresso",
+      "includes": ["all_progress", "summary_metrics"]
+    }
+  },
+
+  "output_format": {
+    "success": {
+      "template": "📤 **Projeto Exportado:** [project_name]\n\n📁 **Arquivo gerado:** [export_file]\n\n📊 **Conteúdo exportado:**\n[exported_content]\n\n📖 **README criado:** [readme_file]",
+      "variables": {
+        "project_name": "exported project name",
+        "export_file": "generated export file path",
+        "exported_content": "summary of exported content",
+        "readme_file": "README file path"
+      }
+    }
+  },
+
+  "integration": {
+    "post_execution": [
+      {
+        "action": "update_progress",
+        "description": "Register project export in daily progress"
+      }
+    ]
+  }
+} 

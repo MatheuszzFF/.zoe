@@ -1,0 +1,71 @@
+{
+  "_metadata": {
+    "action_name": "stack-autodetection",
+    "version": "1.0",
+    "format": "json",
+    "description": "Detecção automática de stack tecnológica via análise de arquivos",
+    "created": "2025-01-20",
+    "converted_from": "stack-autodetection.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Análise de stack necessária",
+      "Novo projeto criado",
+      "Stack não identificada"
+    ],
+    "automatic": true,
+    "priority_level": 24,
+    "category": "detection"
+  },
+
+  "behavior": {
+    "description": "Análise automática de arquivos para detectar stack tecnológica",
+    "detection_files": {
+      "package.json": ["Node.js", "React", "Next.js", "TypeScript"],
+      "composer.json": ["PHP", "Laravel"],
+      "requirements.txt": ["Python", "Django"],
+      "Gemfile": ["Ruby", "Rails"],
+      "cargo.toml": ["Rust"],
+      "go.mod": ["Go"]
+    },
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "scan_project_files",
+        "description": "Escanear arquivos de configuração",
+        "priority_order": ["package.json", "composer.json", "requirements.txt"]
+      },
+      {
+        "step": 2,
+        "action": "analyze_dependencies",
+        "description": "Analisar dependências e frameworks",
+        "extract_info": ["framework", "language", "version", "tools"]
+      },
+      {
+        "step": 3,
+        "action": "update_context",
+        "description": "Atualizar project-context.json com stack detectada",
+        "merge_strategy": "preserve_existing_then_add_detected"
+      }
+    ]
+  },
+
+  "integration": {
+    "files_read": [
+      "package.json",
+      "composer.json", 
+      "requirements.txt",
+      "Gemfile",
+      "cargo.toml"
+    ],
+    "files_write": [
+      ".zoe/rules/context/projects/[projeto]/project-context.json"
+    ],
+    "related_actions": [
+      "project-creator",
+      "context-updater"
+    ]
+  }
+} 

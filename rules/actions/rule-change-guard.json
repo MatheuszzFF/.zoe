@@ -1,0 +1,170 @@
+{
+  "_metadata": {
+    "action_name": "rule-change-guard",
+    "version": "1.0",
+    "format": "json",
+    "description": "Proteção obrigatória antes de alterações em regras",
+    "created": "2025-01-20",
+    "converted_from": "rule-change-guard.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Vou alterar qualquer regra do sistema",
+      "Detectar quando Zoe vai alterar qualquer regra",
+      "Tentativa de modificar arquivos protegidos"
+    ],
+    "automatic": true,
+    "priority_level": 1,
+    "category": "security",
+    "mandatory": true,
+    "blocking": true
+  },
+
+  "behavior": {
+    "description": "Proteção automática contra alterações não controladas de regras",
+    "protection_mechanism": "Bloquear TODA alteração SEM executar comando 'alterar regra' antes",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "detect_rule_change_attempt",
+        "description": "Detectar tentativa de alteração em arquivos protegidos",
+        "detection_scope": "Qualquer modificação nos arquivos do sistema Zoe"
+      },
+      {
+        "step": 2,
+        "action": "verify_authorization",
+        "description": "Verificar se comando 'alterar regra' foi executado",
+        "authorization_check": [
+          "Comando 'alterar regra' executado na mesma conversa",
+          "Alteração é parte do processo change-rule.mdc"
+        ]
+      },
+      {
+        "step": 3,
+        "action": "block_or_allow",
+        "description": "Bloquear alteração não autorizada ou permitir se autorizada",
+        "block_conditions": [
+          "Comando 'alterar regra' NÃO foi executado",
+          "Alteração NÃO é parte de processo controlado"
+        ],
+        "allow_conditions": [
+          "Comando 'alterar regra' foi executado",
+          "Alteração é parte do processo change-rule.mdc"
+        ]
+      }
+    ],
+    "mandatory_message": {
+      "title": "⚠️ ATENÇÃO: Alteração de regra detectada!",
+      "content": "Para manter a organização do sistema, execute primeiro:\n\"alterar regra\"\n\nEste comando garante:\n- Backup da versão atual\n- Verificação de dependências\n- Processo controlado de mudança\n- Documentação atualizada\n\nRepita sua solicitação após executar o comando."
+    }
+  },
+
+  "protected_files": {
+    "description": "Arquivos que requerem processo controlado para alteração",
+    "file_patterns": [
+      ".zoe/rules/zoe-chore.mdc",
+      ".zoe/rules/commands/*.mdc",
+      ".zoe/rules/commands/*.json",
+      ".zoe/rules/actions/*.mdc", 
+      ".zoe/rules/actions/*.json",
+      ".zoe/rules/templates/*.mdc",
+      ".zoe/rules/templates/*.json",
+      ".zoe/rules/context/*.mdc",
+      ".zoe/rules/context/*.json",
+      ".zoe/rules/workflows/*.mdc",
+      ".zoe/rules/workflows/*.json",
+      ".zoe/rules/patterns/*.mdc",
+      ".zoe/rules/patterns/*.json",
+      ".zoe/rules/priority-map.json"
+    ],
+    "protection_level": "HIGH - Require authorization",
+    "exceptions": "Apenas durante processo change-rule autorizado"
+  },
+
+  "authorization": {
+    "description": "Condições para permitir alterações",
+    "valid_scenarios": [
+      {
+        "scenario": "command_executed",
+        "description": "Comando 'alterar regra' foi executado na mesma conversa",
+        "verification": "Verificar histórico da conversa atual"
+      },
+      {
+        "scenario": "controlled_process",
+        "description": "Alteração é parte do processo change-rule.mdc",
+        "verification": "Verificar se processo controlado está ativo"
+      }
+    ],
+    "invalid_scenarios": [
+      {
+        "scenario": "direct_modification",
+        "description": "Tentativa de modificação direta sem autorização",
+        "action": "BLOCK e mostrar mensagem obrigatória"
+      }
+    ]
+  },
+
+  "integration": {
+    "files_read": [
+      ".zoe/rules/commands/change-rule.json",
+      "Histórico da conversa atual"
+    ],
+    "files_write": [
+      "Log de tentativas de alteração"
+    ],
+    "related_actions": [
+      "change-rule",
+      "auto-documentation",
+      "update-docs"
+    ]
+  },
+
+  "validation": {
+    "required_conditions": [
+      "Sistema deve monitorar tentativas de alteração",
+      "Histórico da conversa deve estar acessível",
+      "Comando change-rule deve estar disponível"
+    ],
+    "success_criteria": [
+      "Alterações não autorizadas bloqueadas",
+      "Processo controlado respeitado",
+      "Mensagem educativa exibida",
+      "Sistema mantém integridade"
+    ],
+    "blocking_behavior": "Bloqueia alterações até autorização adequada"
+  },
+
+  "error_handling": {
+    "common_errors": [
+      {
+        "error": "unauthorized_modification",
+        "description": "Tentativa de alterar regra sem autorização",
+        "solution": "Executar comando 'alterar regra' primeiro"
+      },
+      {
+        "error": "missing_change_rule_command",
+        "description": "Comando change-rule não disponível",
+        "solution": "Verificar se arquivo change-rule.json existe"
+      },
+      {
+        "error": "history_not_available",
+        "description": "Não é possível verificar histórico da conversa",
+        "solution": "Assumir não autorizado e bloquear"
+      }
+    ]
+  },
+
+  "security": {
+    "objective": "Garantir que TODAS as alterações de regras passem pelo processo controlado",
+    "protection_level": "CRITICAL",
+    "enforcement": "STRICT - Zero tolerância para alterações não autorizadas",
+    "logging": "Registrar todas as tentativas de alteração"
+  },
+
+  "logging": {
+    "log_format": "🛡️ RULE CHANGE GUARD:\n- Arquivo: [arquivo]\n- Ação: [permitida | bloqueada]\n- Motivo: [autorização | sem autorização]\n- Timestamp: [ISO 8601]",
+    "log_location": ".zoe/rules/logs/security/rule-changes.log"
+  }
+} 

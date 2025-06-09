@@ -1,0 +1,48 @@
+{
+  "_metadata": {
+    "action_name": "priority-logger",
+    "version": "1.0",
+    "format": "json",
+    "description": "Documentar priority logs automáticos",
+    "created": "2025-01-20",
+    "converted_from": "priority-logger.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Execução de qualquer comando com prioridades",
+      "Decisão de priority system necessária"
+    ],
+    "automatic": true,
+    "priority_level": 26,
+    "category": "logging"
+  },
+
+  "behavior": {
+    "description": "Logging automático das decisões do sistema de prioridades",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "log_priority_decision",
+        "description": "Registrar decisão de prioridade tomada",
+        "format": "🎯 PRIORITY LOG:\n- Triggers detectados: [listar todos]\n- Executado: [nome] (level [X]) - [motivo]\n- Conflitos evitados: [listar outros triggers ignorados]"
+      },
+      {
+        "step": 2,
+        "action": "document_execution",
+        "description": "Documentar execução do comando/action"
+      }
+    ]
+  },
+
+  "integration": {
+    "files_write": [
+      ".zoe/rules/logs/priority-decisions.log"
+    ],
+    "related_actions": [
+      "context-updater",
+      "auto-documentation"
+    ]
+  }
+} 

@@ -1,0 +1,102 @@
+{
+  "_metadata": {
+    "action_name": "feedback-capture-2.0",
+    "version": "2.0",
+    "format": "json",
+    "description": "Sistema aprimorado de captura e análise de feedback",
+    "created": "2025-01-20",
+    "converted_from": "feedback-capture-2.0.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Usuário demonstra frustração, crítica, confusão ou feedback explícito",
+      "não funciona",
+      "não está certo", 
+      "bugado",
+      "problema",
+      "deveria ser",
+      "poderia ter",
+      "falta",
+      "melhorar",
+      "não entendi",
+      "como assim",
+      "o que",
+      "explicar",
+      "feedback",
+      "sugestão",
+      "opinião",
+      "achei que"
+    ],
+    "automatic": true,
+    "priority_level": 4,
+    "category": "learning",
+    "sentiment_detection": true
+  },
+
+  "behavior": {
+    "description": "Captura inteligente de feedback com análise automática e aprendizado",
+    "detection_engine": {
+      "sentiment_analysis": {
+        "positive": ["legal", "bacana", "bom", "gostei", "perfeito", "show"],
+        "negative": ["ruim", "péssimo", "não funciona", "problema", "erro"],
+        "confusion": ["não entendi", "como", "o que", "?", "hein"],
+        "suggestion": ["poderia", "deveria", "sugiro", "seria bom", "melhor"]
+      },
+      "context_clues": {
+        "repetition": "Usuário repete o mesmo problema",
+        "escalation": "Tom aumenta negativamente",
+        "detailed_explanation": "Usuário dá explicações longas sobre problemas"
+      }
+    },
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "detect_feedback",
+        "description": "Analisar mensagem em busca de triggers de feedback"
+      },
+      {
+        "step": 2,
+        "action": "categorize_feedback", 
+        "description": "Classificar tipo e severidade do feedback"
+      },
+      {
+        "step": 3,
+        "action": "provide_empathetic_response",
+        "description": "Dar resposta empática e construtiva"
+      },
+      {
+        "step": 4,
+        "action": "log_feedback",
+        "description": "Salvar no sistema de logs estruturado"
+      },
+      {
+        "step": 5,
+        "action": "update_learning",
+        "description": "Atualizar contexto e insights"
+      }
+    ]
+  },
+
+  "integration": {
+    "files_read": [
+      ".zoe/rules/context/projects/[projeto]/project-context.json"
+    ],
+    "files_write": [
+      ".zoe/rules/logs/feedback/[ano]/[mes]/feedback-[data].json"
+    ],
+    "related_actions": [
+      "context-updater"
+    ]
+  },
+
+  "validation": {
+    "required_conditions": [
+      "Sistema de logs deve estar disponível"
+    ],
+    "success_criteria": [
+      "Feedback detectado e categorizado corretamente"
+    ]
+  }
+} 
