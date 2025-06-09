@@ -1,0 +1,118 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "description": "Contexto do projeto MZ-SHAREHOLDERS-MF - Microfrontend para gestão de acionistas",
+    "created_at": "2025-01-20T10:30:00Z",
+    "last_updated": "2025-01-20T10:30:00Z",
+    "project_type": "microfrontend"
+  },
+  
+  "project_info": {
+    "name": "mz-shareholders-mf",
+    "display_name": "MZ Shareholders Microfrontend",
+    "description": "Microfrontend React para gestão de acionistas, construído com Vite e Module Federation",
+    "version": "2.0.0",
+    "status": "active",
+    "domain": "shareholders",
+    "port": 3005
+  },
+
+  "tech_stack": {
+    "framework": "React 18.3.1",
+    "language": "TypeScript 5.6.3",
+    "bundler": "Vite 6.3.2",
+    "architecture": "Module Federation",
+    "testing": "Vitest 3.1.2",
+    "styling": "Styled Components 6.1.13",
+    "routing": "React Router DOM 6.28.0",
+    "state_management": "Valtio 2.1.2",
+    "auth": "Logto React 4.0.7",
+    "charts": "Highcharts 11.4.8",
+    "i18n": "i18next 23.10.1"
+  },
+
+  "key_dependencies": {
+    "ui_library": "@mz-codes/design-system@2.1.2",
+    "auth_kit": "@mz-codes/mz-auth-kit@2.0.18",
+    "page_package": "@mz-codes/mz-page-package@1.0.1-preview-ss-1495.0",
+    "platform_toolkit": "@mziq-platform/toolkit@1.0.13",
+    "module_federation": "@module-federation/vite@1.1.5",
+    "monitoring": "@datadog/browser-rum@6.8.0",
+    "analytics": "@microsoft/clarity@1.0.0"
+  },
+
+  "project_structure": {
+    "src/components/": "Componentes React reutilizáveis",
+    "src/pages/": "Páginas da aplicação",
+    "src/routes/": "Configuração de rotas",
+    "src/types/": "Definições de tipos TypeScript",
+    "src/utils/": "Utilitários e helpers",
+    "src/services/": "Serviços e APIs",
+    "src/hooks/": "Custom hooks",
+    "src/contexts/": "Contextos React",
+    "src/valtio/": "Estados globais com Valtio",
+    "src/translate/": "Arquivos de tradução",
+    "src/__tests__/": "Testes unitários",
+    "src/assets/": "Recursos estáticos"
+  },
+
+  "development_patterns": {
+    "component_structure": "Functional components com TypeScript",
+    "state_management": "Valtio para estado global, useState para local",
+    "styling": "Styled Components com tema do design system",
+    "testing": "Vitest com Testing Library",
+    "routing": "React Router v6 com lazy loading",
+    "error_handling": "Error Boundaries",
+    "code_quality": "ESLint + Prettier + Husky"
+  },
+
+  "environments": {
+    "development": {
+      "url": "http://localhost:3005",
+      "env_file": ".env.local"
+    },
+    "staging": {
+      "env_file": ".env.staging"
+    },
+    "production": {
+      "env_file": ".env.production"
+    }
+  },
+
+  "scripts": {
+    "dev": "Servidor de desenvolvimento",
+    "build": "Build de produção",
+    "test": "Executar testes com coverage",
+    "codestyle:check": "Verificar ESLint + Prettier",
+    "codestyle:fix": "Corrigir ESLint + Prettier",
+    "translation:check": "Verificar traduções não utilizadas"
+  },
+
+  "integration": {
+    "module_federation": {
+      "type": "microfrontend",
+      "shared_dependencies": ["react", "react-dom", "react-router-dom"],
+      "requires_navbar": "mz-navbar-sub-mf"
+    },
+    "authentication": {
+      "provider": "Logto",
+      "flow": "Redirect para login, retorno para localhost"
+    }
+  },
+
+  "current_focus": "Inicialização do projeto - pronto para desenvolvimento",
+  
+  "next_steps": [
+    "Verificar se todas as dependências estão atualizadas",
+    "Executar testes para validar funcionamento",
+    "Configurar ambiente de desenvolvimento",
+    "Revisar estrutura de componentes existentes"
+  ],
+
+  "learning_insights": [
+    "Projeto bem estruturado com Module Federation",
+    "Utiliza design system próprio da MZ",
+    "Integração com múltiplos microfrontends",
+    "Foco em qualidade de código com linting e testes"
+  ]
+} 
