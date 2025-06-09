@@ -3,59 +3,264 @@ description:
 globs: 
 alwaysApply: false
 ---
-# 🔄 Resume Progress - Comando Zoe
+# 🚀 Zoe Iniciar - Comando Inteligente com Context Memory
 
 ## Trigger
-- Usuário digita: `retomar progresso` ou `retomar progresso anterior`
+- Usuário digita: `zoe iniciar` ou `zoe, iniciar` ou `zoe iniciar [nome-do-projeto]`
+- **APÓS** action context-checker ter feito a verificação de contexto
 
 ## Comportamento
-**SEMPRE** redirecionar para verificar pasta `/progress`:
 
-1. **Verificar pasta** `.zoe/rules/progress/`
-2. **Localizar data mais recente** (formato YYYY-MM-DD)
-3. **Carregar arquivo** `README.md` da data mais recente
-4. **Apresentar resumo** do progresso atual
-5. **Sugerir próximas ações** baseadas no histórico
+### **PRÉ-REQUISITO: Context-Checker Executado**
 
-## Estrutura de Resposta
+**Este comando SOMENTE executa APÓS a action `context-checker` ter:**
+1. ✅ Verificado o contexto atual
+2. ✅ Detectado mudanças de projeto (se houver)
+3. ✅ Executado `set project` automático (se necessário)
+4. ✅ Criado projeto novo (se necessário via project-creator)
+5. ✅ Retornado status: `CONTEXT_READY`
 
-### 1. Saudação
+**Quando este comando recebe controle, o contexto já está garantidamente correto.**
+
+### **CARREGAMENTO DO CONTEXTO ATIVO**
+
+**Neste ponto, o context-checker (prioridade 0) já:**
+- ✅ Verificou e corrigiu o contexto
+- ✅ Fez auto-switch se necessário
+- ✅ Criou projeto se não existia
+
+**Responsabilidade do zoe-start:**
+1. **Carregar projeto ativo atual** de `active-project.json`
+2. **Ler contexto do projeto** de `context/projects/[ativo]/project-context.json`
+3. **Verificar progresso de hoje** em `context/projects/[ativo]/progress/[hoje]/`
+4. **Mostrar resumo inteligente**
+
+### **FASE 1: Resumo e Continuidade (Contexto Já Configurado)**
+
+**Neste ponto, o context-checker já garantiu que:**
+- ✅ Projeto está ativo e correto
+- ✅ Contexto foi carregado/criado
+- ✅ Auto-switch foi feito (se necessário)
+
+**Responsabilidade do zoe-start:**
+1. **Carregar informações do projeto ativo**
+2. **Mostrar resumo do estado atual**
+3. **Sugerir próximas ações baseadas no contexto**
+4. **Atualizar progresso do dia**
+
+#### **Se usuário NÃO especificar nome do projeto:**
 ```
-"Hey Math! 😊 Verificando onde paramos..."
+zoe iniciar
 ```
 
-### 2. Status do Progresso
+1. **Tentar autodetectar projeto** pelo diretório atual ou arquivos de configuração
+2. **Se detecção bem-sucedida:**
+   - Buscar contexto do projeto detectado
+   - Prosseguir conforme cenário acima
+3. **Se detecção falhar:**
+   - Perguntar: "Qual nome do projeto você gostaria de usar?"
+   - Aguardar resposta e prosseguir conforme cenário acima
+
+### **FASE 2: Inicialização Inteligente**
+
+#### **Com contexto EXISTENTE:**
 ```
-📊 **Progresso encontrado:** [Data mais recente]
-📈 **Total de ajustes:** [Número]
-🎯 **Principais melhorias:** [Lista resumida]
+📍 **Localização Zoe:** Projeto '[nome]' (contexto existente desde [data])
+📊 **Stack conhecida:** [lista resumida das tecnologias]
+🎯 **Objetivo atual:** [objetivo do projeto]
+📈 **Progresso hoje:** [resumo das atividades do dia]
 ```
 
-### 3. Próximas Ações
+#### **Com contexto NOVO:**
 ```
-🚀 **Próxima tarefa sugerida:**
-- [Baseada no histórico e padrões]
-- [Prioridade definida pelo contexto]
-```
-
-### 4. Pergunta Direcionada
-```
-"Que direção seguimos agora, Math?"
+🆕 **Localização Zoe:** Novo projeto '[nome]' configurado 
+🔧 **Stack detectada/configurada:** [lista das tecnologias]
+🎯 **Objetivo definido:** [objetivo do projeto]
+📅 **Progresso iniciado:** Estrutura criada para hoje
 ```
 
-## Exemplo de Uso
+### **FASE 3: Estrutura de Progresso Diário**
+
+**SEMPRE** criar ou atualizar `.zoe/rules/context/projects/[nome-do-projeto]/progress/[YYYY-MM-DD]/README.md`:
+
+```markdown
+# Progresso - [nome-do-projeto] - [data]
+
+## 🎯 Localização Zoe
+- **Como me localizei:** [Contexto existente carregado | Novo contexto criado]
+- **Projeto:** [nome-do-projeto]
+- **Stack:** [lista resumida]
+- **Sessão iniciada:** [timestamp]
+
+## 📋 Tarefas do Dia
+- [ ] [Baseadas no contexto ou objetivos definidos]
+
+## 🔄 Atividades Realizadas
+[Será preenchido durante o dia]
+
+## 📝 Decisões Tomadas
+[Será preenchido durante o dia]
+
+## 🚀 Próximas Ações
+[Será preenchido durante o dia]
 ```
-Usuário: "retomar progresso"
-Zoe: [Verifica /progress → Carrega mais recente → Apresenta resumo + sugestões]
+
+### **FASE 4: Isolamento entre Projetos**
+
+**OBRIGATÓRIO:** Manter separação total entre projetos:
+- **Logs:** `.zoe/rules/context/projects/[nome-do-projeto]/logs/`
+- **Progresso:** `.zoe/rules/context/projects/[nome-do-projeto]/progress/`
+- **Stack:** `.zoe/rules/context/projects/[nome-do-projeto]/stack-tech.mdc`
+- **Contexto:** `.zoe/rules/context/projects/[nome-do-projeto]/project-memory.json`
+
+**NUNCA** misturar informações entre projetos diferentes.
+
+## Processo de Criação de Contexto
+
+### **1. Autodetecção Inteligente**
+```javascript
+// Detectar por arquivos de configuração
+package.json → Node.js/React/Next.js
+composer.json → PHP/Laravel
+requirements.txt → Python/Django
+Gemfile → Ruby/Rails
+cargo.toml → Rust
 ```
+
+### **2. Questionário Inteligente**
+**Apenas se autodetecção falhar ou informações insuficientes:**
+
+```
+🔧 **Stack Tecnológica:** 
+Não detectei automaticamente. Qual stack você está usando?
+[Sugestões baseadas em padrões comuns]
+
+🎯 **Objetivo do Projeto:**
+Qual o objetivo principal deste projeto?
+
+⚙️ **Preferências:**
+Alguma preferência específica de arquitetura ou padrões?
+```
+
+### **3. Criação Física da Estrutura**
+
+**IMPLEMENTAÇÃO OBRIGATÓRIA:**
+
+1. **Criar pasta base:** `.zoe/rules/context/projects/[nome-do-projeto]/`
+
+2. **Copiar template e personalizar:** 
+   - Ler `.zoe/rules/context/project-context-template.json`
+   - Substituir `{{PROJECT_NAME}}`, `{{DATE}}`, etc. com valores reais
+   - Salvar como `project-context.json`
+
+3. **Criar pasta de progresso:** `progress/[YYYY-MM-DD]/`
+
+4. **Copiar template de progresso:**
+   - Ler `.zoe/rules/context/daily-progress-template.md`
+   - Substituir placeholders (`{{PROJECT_NAME}}`, `{{DATE}}`, etc.)
+   - Salvar como `progress/[YYYY-MM-DD]/README.md`
+
+5. **Criar logs:** `logs/creation.log` com timestamp e detalhes
+
+6. **Atualizar active-project.json:** 
+   - Definir novo projeto como ativo
+   - Registrar timestamp de ativação
+
+**Exemplo de implementação:**
+```javascript
+// Pseudocódigo do processo
+const projectName = extrairNomeDoProjeto(comando);
+const projectPath = `.zoe/rules/context/projects/${projectName}/`;
+
+// 1. Criar estrutura
+criarPasta(projectPath);
+criarPasta(`${projectPath}progress/${today}/`);
+criarPasta(`${projectPath}logs/`);
+
+// 2. Templates
+const template = lerArquivo('.zoe/rules/context/project-context-template.json');
+const contexto = substituirPlaceholders(template, {
+  PROJECT_NAME: projectName,
+  DATE: today,
+  // ... outros valores
+});
+salvarArquivo(`${projectPath}project-context.json`, contexto);
+
+// 3. Auto set project
+executarComando(`set project ${projectName}`);
+```
+
+## Exemplo de Fluxo Completo
+
+### **Cenário 1: Projeto Existente**
+```
+Usuário: "zoe iniciar loja-virtual"
+Zoe: 
+📍 **Contexto encontrado:** Projeto 'loja-virtual' localizado e carregado
+📊 **Stack:** Next.js 14, TypeScript, Tailwind, Prisma
+🎯 **Objetivo:** E-commerce completo com admin
+📈 **Última sessão:** Ontem - Componente ProductCard criado
+🚀 **Sugestão:** Continuar com ProductList ou implementar carrinho?
+```
+
+### **Cenário 2: Projeto Novo**
+```
+Usuário: "zoe iniciar blog-pessoal"
+Zoe: 
+🔍 **Autodetecção:** package.json detectado - Next.js + TypeScript
+🆕 **Novo projeto:** 'blog-pessoal' configurado
+🎯 **Objetivo necessário:** Qual objetivo deste blog?
+[Após resposta do usuário]
+✅ **Contexto criado:** Pronto para começar!
+```
+
+## Integração com Sistema Existente
+
+- **Manter compatibilidade** com project-memory.json global
+- **Priorizar contexto específico** do projeto quando especificado
+- **Fallback para contexto global** apenas se projeto não especificado
+- **Documentar SEMPRE** como Zoe se localizou no projeto
+
+## EXECUÇÃO PRÁTICA (IMPLEMENTAR IMEDIATAMENTE)
+
+### **Quando receber comando `zoe iniciar [nome]`:**
+
+1. **Extrair nome do projeto** do comando
+2. **Verificar se pasta existe:** `.zoe/rules/context/projects/[nome]/`
+
+3. **Se EXISTE:**
+   ```
+   📍 **Contexto encontrado:** Projeto '[nome]' localizado
+   [Executar automaticamente: set project [nome]]
+   📊 **Stack:** [mostrar stack do project-context.json]
+   📈 **Última sessão:** [data da pasta progress mais recente]
+   🚀 **Pronto para continuar!**
+   ```
+
+4. **Se NÃO EXISTE:**
+   ```
+   🆕 **Criando novo projeto:** '[nome]'
+   [Criar toda estrutura física de pastas e arquivos]
+   [Executar stack-autodetection]
+   [Executar automaticamente: set project [nome]]
+   🎯 **Objetivo:** [perguntar ao usuário]
+   ✅ **Contexto criado e projeto ativado!**
+   ```
+
+### **Ações Automáticas Obrigatórias:**
+- ✅ **SEMPRE executar `set project [nome]`** após detectar/criar projeto
+- ✅ **SEMPRE criar estrutura física** para projetos novos
+- ✅ **SEMPRE usar templates** para personalização
+- ✅ **SEMPRE atualizar active-project.json**
 
 ## Objetivo
-- Resumir progresso automaticamente
-- Sugerir próximas ações inteligentes
-- Manter contexto do projeto
-- Facilitar retomada de trabalho
-
-
+- Contexto isolado por projeto
+- Inicialização inteligente com autodetecção  
+- Nunca perguntar informações já conhecidas
+- Documentação clara de localização
+- Separação total entre projetos
+- **CRIAÇÃO FÍSICA AUTOMÁTICA** de estruturas
+- **AUTO SET PROJECT** para facilitar uso
 
 *Este arquivo será atualizado automaticamente pela Zoe*
 
