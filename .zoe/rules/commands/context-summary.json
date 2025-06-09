@@ -1,0 +1,269 @@
+{
+  "_metadata": {
+    "command_name": "context-summary",
+    "version": "2.0",
+    "format": "json",
+    "description": "Resumo inteligente e dinâmico do contexto atual do projeto",
+    "created": "2025-06-09",
+    "ai_optimized": true
+  },
+
+  "trigger": {
+    "patterns": [
+      "resumir contexto",
+      "resumo do contexto",
+      "status do projeto",
+      "contexto atual"
+    ],
+    "priority_level": 14,
+    "category": "context",
+    "auto_trigger": false
+  },
+
+  "behavior": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "load_project_context",
+        "description": "Carregar contexto completo do projeto ativo",
+        "steps": [
+          {
+            "step": 1,
+            "action": "read_active_project",
+            "file": ".zoe/rules/context/active-project.json"
+          },
+          {
+            "step": 2,
+            "action": "read_project_context",
+            "file": ".zoe/rules/context/projects/[active_project]/project-context.json"
+          },
+          {
+            "step": 3,
+            "action": "read_latest_progress",
+            "file": ".zoe/rules/context/projects/[active_project]/progress/[YYYY-MM-DD]/README.md"
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "analyze_project_status",
+        "description": "Analisar status atual e métricas",
+        "analysis": [
+          "count created components",
+          "identify current phase",
+          "determine priority focus",
+          "calculate completion metrics"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "generate_insights",
+        "description": "Gerar insights baseados no contexto",
+        "insights": [
+          "identify patterns",
+          "suggest improvements",
+          "detect optimization opportunities",
+          "recommend next actions"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "format_summary_response",
+        "description": "Formatar resposta estruturada",
+        "format": "markdown with emojis for headers only"
+      }
+    ]
+  },
+
+  "response_structure": {
+    "project_status": {
+      "section": "📊 Status do Projeto",
+      "fields": [
+        "🎯 **Projeto:** [project_name] - [project_type]",
+        "📈 **Fase atual:** [current_phase]",
+        "🔥 **Foco:** [priority_focus]",
+        "⚡ **Última atualização:** [last_major_update]"
+      ]
+    },
+    "tech_stack": {
+      "section": "🛠️ Stack Tecnológica",
+      "dynamic_content": "extract from project context",
+      "format": [
+        "- **Frontend:** [framework] + [language]",
+        "- **Estilo:** [css_framework] ✅ (detectado)",
+        "- **Testes:** [testing_framework] + [testing_library]",
+        "- **Docs:** [documentation_tool]"
+      ]
+    },
+    "created_components": {
+      "section": "🏗️ Componentes Criados",
+      "dynamic_content": "list from project context",
+      "format": "✅ [component_name] - [main_features] - [status]"
+    },
+    "established_patterns": {
+      "section": "🎨 Padrões Estabelecidos",
+      "extract_from": "project context patterns",
+      "format": [
+        "- **Estrutura:** [component_structure]",
+        "- **Props:** [props_pattern]",
+        "- **Testes:** [testing_pattern]",
+        "- **Naming:** [naming_convention]"
+      ]
+    },
+    "metrics": {
+      "section": "📈 Métricas",
+      "calculations": [
+        "- **Componentes:** [count] completos",
+        "- **Testes:** [count] criados",
+        "- **Comandos:** [count] implementados",
+        "- **Decisões arquiteturais:** [count] documentadas"
+      ]
+    },
+    "next_suggestions": {
+      "section": "🚀 Próximas Sugestões",
+      "dynamic_content": "based on current context",
+      "format": [
+        "1. [most_relevant_suggestion]",
+        "2. [next_component_suggestion]",
+        "3. [system_improvement]"
+      ]
+    },
+    "automated_insights": {
+      "section": "💡 Insights Detectados",
+      "dynamic_content": "patterns and opportunities",
+      "format": [
+        "- [identified_pattern]",
+        "- [improvement_area]",
+        "- [optimization_opportunity]"
+      ]
+    }
+  },
+
+  "dynamic_adaptation": {
+    "context_factors": [
+      "created components list",
+      "last activity timestamp",
+      "project objectives",
+      "identified preferences",
+      "current development phase"
+    ],
+    "response_customization": {
+      "new_project": "emphasize setup and initial patterns",
+      "active_development": "focus on progress and next steps",
+      "established_project": "highlight metrics and optimizations"
+    }
+  },
+
+  "metrics_calculation": {
+    "components_count": {
+      "source": "project context components array",
+      "calculation": "length of components array"
+    },
+    "tests_count": {
+      "source": "project context test files",
+      "calculation": "count of .test files"
+    },
+    "commands_count": {
+      "source": "project context used commands",
+      "calculation": "unique commands used"
+    },
+    "decisions_count": {
+      "source": "project context architectural decisions",
+      "calculation": "length of decisions array"
+    }
+  },
+
+  "insight_generation": {
+    "pattern_detection": [
+      "most used component patterns",
+      "preferred testing approaches",
+      "common architectural decisions"
+    ],
+    "improvement_suggestions": [
+      "missing components based on patterns",
+      "testing gaps",
+      "documentation opportunities"
+    ],
+    "optimization_opportunities": [
+      "code reuse possibilities",
+      "performance improvements",
+      "developer experience enhancements"
+    ]
+  },
+
+  "context_integration": {
+    "description": "Integração completa com contexto do projeto ativo",
+    "requires_active_project": true,
+    "reads_project_context": true,
+    "reads_progress": true,
+    "isolation_level": "full"
+  },
+
+  "dynamic_content": {
+    "project_phase_detection": {
+      "setup": "initial setup and configuration",
+      "development": "active component development",
+      "testing": "testing and validation phase",
+      "optimization": "performance and code optimization",
+      "maintenance": "ongoing maintenance and updates"
+    },
+    "suggestion_logic": {
+      "based_on_components": "suggest related components",
+      "based_on_patterns": "suggest pattern improvements",
+      "based_on_gaps": "identify missing elements"
+    }
+  },
+
+  "integration": {
+    "related_commands": [
+      "zoe-start (level 3)",
+      "export-context (level 15)",
+      "set-project (level 12)"
+    ],
+    "reads_files": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/context/projects/[active_project]/project-context.json",
+      ".zoe/rules/context/projects/[active_project]/progress/[YYYY-MM-DD]/README.md"
+    ],
+    "updates_files": []
+  },
+
+  "error_handling": {
+    "no_active_project": {
+      "action": "show_error",
+      "message": "❌ **Nenhum projeto ativo**\n💡 **Execute:** `zoe iniciar [nome-projeto]` primeiro"
+    },
+    "context_not_found": {
+      "action": "show_partial_summary",
+      "message": "⚠️ **Contexto parcial carregado**\n💡 **Algumas informações podem estar ausentes**"
+    },
+    "read_error": {
+      "action": "show_error_with_details",
+      "message": "❌ **Erro ao carregar contexto**\n🔍 **Detalhes:** [error_details]"
+    }
+  },
+
+  "performance": {
+    "data_loading": "parallel file reads",
+    "analysis": "lightweight context analysis",
+    "formatting": "template-based response generation"
+  },
+
+  "examples": {
+    "new_project": {
+      "command": "resumir contexto",
+      "context": "projeto recém-criado",
+      "emphasizes": ["setup status", "initial patterns", "next steps"]
+    },
+    "active_project": {
+      "command": "resumir contexto", 
+      "context": "projeto em desenvolvimento",
+      "emphasizes": ["progress metrics", "created components", "optimization opportunities"]
+    },
+    "established_project": {
+      "command": "resumir contexto",
+      "context": "projeto maduro",
+      "emphasizes": ["comprehensive metrics", "patterns analysis", "maintenance suggestions"]
+    }
+  }
+} 

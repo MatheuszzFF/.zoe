@@ -1,0 +1,95 @@
+{
+  "_metadata": {
+    "command_name": "[COMMAND_NAME]",
+    "version": "2.0",
+    "format": "json",
+    "description": "[COMMAND_DESCRIPTION]",
+    "created": "[DATE]",
+    "ai_optimized": true
+  },
+
+  "trigger": {
+    "patterns": [
+      "[TRIGGER_PATTERN_1]",
+      "[TRIGGER_PATTERN_2]"
+    ],
+    "parameters": {
+      "[PARAM_NAME]": {
+        "type": "[string|number|boolean|array]",
+        "required": "[true|false]",
+        "validation": "[VALIDATION_RULE]",
+        "description": "[PARAM_DESCRIPTION]"
+      }
+    },
+    "priority_level": "[LEVEL_NUMBER]",
+    "category": "[CATEGORY_NAME]"
+  },
+
+  "behavior": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "[PHASE_NAME]",
+        "description": "[PHASE_DESCRIPTION]",
+        "steps": [
+          {
+            "step": 1,
+            "action": "[ACTION_NAME]",
+            "description": "[STEP_DESCRIPTION]",
+            "file": "[FILE_PATH_IF_APPLICABLE]",
+            "extract": "[FIELDS_TO_EXTRACT]"
+          }
+        ]
+      }
+    ]
+  },
+
+  "context_integration": {
+    "description": "How this command integrates with project context",
+    "requires_active_project": "[true|false]",
+    "reads_project_context": "[true|false]",
+    "updates_progress": "[true|false]",
+    "isolation_level": "[none|partial|full]"
+  },
+
+  "validation": {
+    "[FIELD_NAME]": {
+      "pattern": "[REGEX_PATTERN]",
+      "max_length": "[NUMBER]",
+      "description": "[VALIDATION_DESCRIPTION]"
+    }
+  },
+
+  "examples": {
+    "[EXAMPLE_NAME]": {
+      "command": "[EXAMPLE_COMMAND]",
+      "precondition": "[PRECONDITION]",
+      "expected_output": "[EXPECTED_OUTPUT]"
+    }
+  },
+
+  "integration": {
+    "related_commands": [
+      "[COMMAND_NAME] (level [LEVEL])"
+    ],
+    "related_actions": [
+      "[ACTION_NAME] (level [LEVEL])"
+    ],
+    "updates_files": [
+      "[FILE_PATH]"
+    ],
+    "reads_files": [
+      "[FILE_PATH]"
+    ],
+    "creates_files": [
+      "[FILE_PATH]"
+    ]
+  },
+
+  "error_handling": {
+    "[ERROR_TYPE]": {
+      "action": "[ERROR_ACTION]",
+      "message": "[ERROR_MESSAGE]"
+    }
+  }
+} 

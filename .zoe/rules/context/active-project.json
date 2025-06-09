@@ -2,14 +2,14 @@
   "_metadata": {
     "version": "1.0",
     "description": "Controle do projeto ativo para isolamento de contexto",
-    "last_updated": "2025-06-09T16:00:00Z"
+    "last_updated": "2025-01-20T10:30:00Z"
   },
-  "active_project": "zoe",
-  "activated_at": "2025-06-09T17:00:00Z",
-  "session_id": "sess_zoe_context_creation",
-  "last_command": "create zoe context",
-  "last_command_at": "2025-06-09T17:00:00Z",
+  "active_project": "sinistro-flow-prisma",
+  "activated_at": "2025-01-20T10:30:00Z",
+  "session_id": "sess_sinistro_flow_init",
+  "last_command": "zoe, iniciar sinistro-flow-prisma",
+  "last_command_at": "2025-01-20T10:30:00Z",
   "commands_count": 1,
-  "session_duration": "30min",
-  "notes": "Use 'set project [nome]' para ativar um projeto. Use 'list projects' para ver projetos disponíveis."
+  "session_duration": "0min",
+  "notes": "Projeto Sinistro Flow Prisma ativado. Sistema de gestão de sinistros com Next.js 15, TypeScript, Prisma, Supabase."
 } 

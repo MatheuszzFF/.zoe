@@ -1,0 +1,252 @@
+{
+  "_metadata": {
+    "command_name": "zoe-start",
+    "version": "2.0",
+    "format": "json",
+    "description": "Comando inteligente de inicialização com context memory e isolamento por projeto",
+    "created": "2025-06-09",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "zoe iniciar",
+      "zoe, iniciar", 
+      "zoe iniciar [nome-do-projeto]"
+    ],
+    "requirements": [
+      "Deve executar APÓS action context-checker (level 0)",
+      "Context-checker deve retornar status CONTEXT_READY"
+    ],
+    "priority_level": 3,
+    "category": "initialization"
+  },
+
+  "prerequisites": {
+    "description": "Este comando só executa após verificações de contexto",
+    "dependencies": [
+      {
+        "action": "context-checker",
+        "level": 0,
+        "status_required": "CONTEXT_READY",
+        "validations": [
+          "Contexto atual verificado",
+          "Mudanças de projeto detectadas/aplicadas",
+          "Set project automático executado (se necessário)",
+          "Projeto novo criado (se necessário via project-creator)"
+        ]
+      }
+    ]
+  },
+
+  "behavior": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "load_active_context",
+        "description": "Carregamento do contexto ativo",
+        "steps": [
+          {
+            "step": 1,
+            "action": "read_active_project",
+            "file": ".zoe/rules/context/active-project.json",
+            "extract": "active_project"
+          },
+          {
+            "step": 2,
+            "action": "read_project_context", 
+            "file": ".zoe/rules/context/projects/[active_project]/project-context.json",
+            "extract": ["tech_stack", "project_overview", "current_context"]
+          },
+          {
+            "step": 3,
+            "action": "check_today_progress",
+            "file": ".zoe/rules/context/projects/[active_project]/progress/[YYYY-MM-DD]/README.md",
+            "create_if_missing": true,
+            "template": ".zoe/rules/context/daily-progress-template.md"
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "intelligent_summary",
+        "description": "Mostrar resumo inteligente do estado atual",
+        "output_templates": {
+          "existing_context": {
+            "format": "📍 **Localização Zoe:** Projeto '[project_name]' (contexto existente desde [creation_date])\n📊 **Stack conhecida:** [tech_stack_summary]\n🎯 **Objetivo atual:** [project_objectives]\n📈 **Progresso hoje:** [today_activities_summary]",
+            "variables": {
+              "project_name": "project_overview.name",
+              "creation_date": "_metadata.created", 
+              "tech_stack_summary": "tech_stack.frontend.framework + tech_stack.frontend.language",
+              "project_objectives": "project_overview.objectives[0]",
+              "today_activities_summary": "current_context.active_work"
+            }
+          },
+          "new_context": {
+            "format": "🆕 **Localização Zoe:** Novo projeto '[project_name]' configurado\n🔧 **Stack detectada/configurada:** [tech_stack_summary]\n🎯 **Objetivo definido:** [project_objectives]\n📅 **Progresso iniciado:** Estrutura criada para hoje",
+            "variables": {
+              "project_name": "project_overview.name",
+              "tech_stack_summary": "tech_stack.frontend.framework + tech_stack.frontend.language",
+              "project_objectives": "project_overview.objectives[0]"
+            }
+          }
+        }
+      },
+      {
+        "phase": 3,
+        "name": "update_daily_progress",
+        "description": "Atualizar progresso diário do projeto",
+        "file_path": ".zoe/rules/context/projects/[active_project]/progress/[YYYY-MM-DD]/README.md",
+        "template_structure": {
+          "header": "# Progresso - [project_name] - [date]",
+          "sections": [
+            {
+              "name": "localization",
+              "title": "🎯 Localização Zoe",
+              "content": [
+                "Como me localizei: [localization_method]",
+                "Projeto: [project_name]", 
+                "Stack: [stack_summary]",
+                "Sessão iniciada: [timestamp]"
+              ]
+            },
+            {
+              "name": "daily_tasks",
+              "title": "📋 Tarefas do Dia",
+              "content": "- [ ] [baseadas no contexto ou objetivos definidos]"
+            },
+            {
+              "name": "activities",
+              "title": "🔄 Atividades Realizadas", 
+              "content": "[Será preenchido durante o dia]"
+            },
+            {
+              "name": "decisions",
+              "title": "📝 Decisões Tomadas",
+              "content": "[Será preenchido durante o dia]"
+            },
+            {
+              "name": "next_actions",
+              "title": "🚀 Próximas Ações",
+              "content": "[Será preenchido durante o dia]"
+            }
+          ]
+        }
+      },
+      {
+        "phase": 4,
+        "name": "suggest_next_actions",
+        "description": "Sugerir próximas ações baseadas no contexto",
+        "logic": [
+          {
+            "condition": "components_created.length === 0",
+            "suggestion": "Criar primeiro componente baseado no objetivo do projeto"
+          },
+          {
+            "condition": "current_context.pending_tasks.length > 0",
+            "suggestion": "Continuar tarefas pendentes: [list_pending_tasks]"
+          },
+          {
+            "condition": "current_context.blockers.length > 0", 
+            "suggestion": "Resolver bloqueadores: [list_blockers]"
+          },
+          {
+            "condition": "default",
+            "suggestion": "next_suggested actions from context"
+          }
+        ]
+      }
+    ]
+  },
+
+  "project_isolation": {
+    "description": "Manter separação total entre projetos",
+    "mandatory_paths": {
+      "logs": ".zoe/rules/context/projects/[project_name]/logs/",
+      "progress": ".zoe/rules/context/projects/[project_name]/progress/",
+      "context": ".zoe/rules/context/projects/[project_name]/project-context.json"
+    },
+    "forbidden_paths": [
+      ".zoe/rules/progress/",
+      ".zoe/rules/context/project-memory.json"
+    ],
+    "rules": [
+      "NUNCA misturar informações entre projetos diferentes",
+      "SEMPRE usar caminho específico do projeto ativo",
+      "CRIAR estrutura automaticamente se não existir"
+    ]
+  },
+
+  "autodetection": {
+    "description": "Detecção automática de stack tecnológica",
+    "detection_files": {
+      "package.json": ["Node.js", "React", "Next.js", "TypeScript"],
+      "composer.json": ["PHP", "Laravel"], 
+      "requirements.txt": ["Python", "Django"],
+      "Gemfile": ["Ruby", "Rails"],
+      "cargo.toml": ["Rust"]
+    },
+    "fallback_questions": [
+      {
+        "question": "🔧 **Stack Tecnológica:** Não detectei automaticamente. Qual stack você está usando?",
+        "type": "tech_stack"
+      },
+      {
+        "question": "🎯 **Objetivo do Projeto:** Qual o objetivo principal deste projeto?", 
+        "type": "project_objective"
+      },
+      {
+        "question": "⚙️ **Preferências:** Alguma preferência específica de arquitetura ou padrões?",
+        "type": "preferences"
+      }
+    ]
+  },
+
+  "examples": {
+    "existing_project": {
+      "input": "zoe iniciar loja-virtual",
+      "context_state": "project exists",
+      "expected_output": "📍 **Contexto encontrado:** Projeto 'loja-virtual' localizado e carregado\n📊 **Stack:** Next.js 14, TypeScript, Tailwind, Prisma\n🎯 **Objetivo:** E-commerce completo com admin\n📈 **Última sessão:** Ontem - Componente ProductCard criado\n🚀 **Sugestão:** Continuar com ProductList ou implementar carrinho?"
+    },
+    "new_project": {
+      "input": "zoe iniciar blog-pessoal",
+      "context_state": "project does not exist",
+      "expected_output": "🔍 **Autodetecção:** package.json detectado - Next.js + TypeScript\n🆕 **Novo projeto:** 'blog-pessoal' configurado\n🎯 **Objetivo necessário:** Qual objetivo deste blog?\n[Após resposta do usuário]\n✅ **Contexto criado:** Pronto para começar!"
+    },
+    "no_project_specified": {
+      "input": "zoe iniciar",
+      "context_state": "no project name",
+      "expected_output": "❓ **Nome do projeto não especificado**\n📍 **Projeto atual:** [projeto-ativo-atual]\n📋 **Projetos disponíveis:** [lista]\n💡 **Para mudar projeto:** zoe iniciar [nome-do-projeto]\n💡 **Para criar novo:** zoe iniciar [nome-novo-projeto]"
+    }
+  },
+
+  "integration": {
+    "related_actions": [
+      "context-checker (level 0)",
+      "project-creator (level 1)",
+      "stack-autodetection (level 24)"
+    ],
+    "updates_files": [
+      ".zoe/rules/context/projects/[active_project]/progress/[YYYY-MM-DD]/README.md"
+    ],
+    "reads_files": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/context/projects/[active_project]/project-context.json"
+    ]
+  },
+
+  "error_handling": {
+    "missing_project_context": {
+      "action": "trigger project-creator",
+      "message": "❌ **Contexto de projeto não encontrado**\n🔧 **Criando automaticamente...**"
+    },
+    "invalid_project_name": {
+      "action": "show validation error",
+      "message": "❌ **Nome de projeto inválido**\n✅ **Use:** letras, números, hífens apenas"
+    },
+    "permission_error": {
+      "action": "show permission error",
+      "message": "❌ **Erro de permissão ao acessar projeto**\n🔍 **Verificar:** permissões da pasta .zoe/"
+    }
+  }
+} 

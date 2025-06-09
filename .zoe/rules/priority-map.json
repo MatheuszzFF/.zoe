@@ -11,8 +11,8 @@
       "type": "action",
       "name": "context-checker",
       "file": "actions/context-checker.mdc",
-      "trigger": "IMEDIATO: Qualquer comando 'zoe iniciar [nome]'",
-      "description": "Verificação IMEDIATA de contexto antes de qualquer ação",
+      "trigger": "IMEDIATO: Qualquer comando que mencione projeto ou 'zoe iniciar'",
+      "description": "Verificação AUTOMÁTICA de contexto antes de qualquer comando - SEMPRE executada",
       "level": 0,
       "category": "context-management",
       "mandatory": true,
@@ -42,21 +42,23 @@
     {
       "type": "command",
       "name": "change-rule",
-      "file": "commands/change-rule.mdc",
+      "file": "commands/change-rule.json",
       "trigger": "alterar regra",
       "description": "Processo controlado para alteração de regras",
       "level": 2,
       "category": "system",
-      "mandatory": true
+      "mandatory": true,
+      "format": "json"
     },
     {
       "type": "command",
       "name": "zoe-start",
-      "file": "commands/zoe-start.mdc",
+      "file": "commands/zoe-start.json",
       "trigger": ["zoe, iniciar", "zoe iniciar"],
-      "description": "Inicialização e resumo de progresso",
+      "description": "Inicialização inteligente com context memory e isolamento por projeto",
       "level": 3,
-      "category": "initialization"
+      "category": "initialization",
+      "format": "json"
     },
     {
       "type": "action",
@@ -70,20 +72,22 @@
     {
       "type": "command",
       "name": "fix-bugs",
-      "file": "commands/fix-bugs.mdc",
+      "file": "commands/fix-bugs.json",
       "trigger": "fix bugs",
       "description": "Correção de bugs identificados",
       "level": 5,
-      "category": "maintenance"
+      "category": "maintenance",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "optimize-performance",
-      "file": "commands/optimize-performance.mdc",
+      "file": "commands/optimize-performance.json",
       "trigger": "otimizar performance",
       "description": "Otimizações de performance",
       "level": 6,
-      "category": "maintenance"
+      "category": "maintenance",
+      "format": "json"
     },
     {
       "type": "action",
@@ -97,138 +101,153 @@
     {
       "type": "command",
       "name": "create-component",
-      "file": "commands/create-component.mdc",
+      "file": "commands/create-component.json",
       "trigger": "criar componente [nome]",
-      "description": "Criação de componentes React com estrutura completa",
+      "description": "Criação estruturada de componentes React com padrões específicos e testes",
       "level": 8,
-      "category": "development"
+      "category": "development",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "create-page",
-      "file": "commands/create-page.mdc",
+      "file": "commands/create-page.json",
       "trigger": "criar página [nome]",
       "description": "Criação de páginas/rotas completas",
       "level": 9,
-      "category": "development"
+      "category": "development",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "auto-learning",
-      "file": "commands/auto-learning.mdc",
+      "file": "commands/auto-learning.json",
       "trigger": "aprender com os erros",
       "description": "Sistema de aprendizado automático",
       "level": 10,
-      "category": "learning"
+      "category": "learning",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "set-project",
-      "file": "commands/set-project.mdc",
+      "file": "commands/set-project.json",
       "trigger": ["setar projeto [nome]", "set project [nome]", "projeto [nome]"],
-      "description": "Definir/alternar projeto ativo com contexto isolado",
+      "description": "Alternância entre projetos com isolamento total de contexto",
       "level": 11,
-      "category": "project-management"
+      "category": "project-management",
+      "format": "json"
     },
 
     {
       "type": "command",
       "name": "context-summary",
-      "file": "commands/context-summary.mdc",
+      "file": "commands/context-summary.json",
       "trigger": ["resumir contexto", "resumo do contexto"],
       "description": "Resumo inteligente do contexto atual",
       "level": 12,
-      "category": "organization"
+      "category": "organization",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "update-stack",
-      "file": "commands/update-stack.mdc",
+      "file": "commands/update-stack.json",
       "trigger": ["atualizar stack", "atualizar stack tecnológica"],
       "description": "Atualização automática de informações da stack",
       "level": 13,
-      "category": "organization"
+      "category": "organization",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "show-history",
-      "file": "commands/show-history.mdc",
+      "file": "commands/show-history.json",
       "trigger": ["mostrar histórico", "histórico do projeto"],
       "description": "Cronologia completa de decisões e evolução",
       "level": 14,
-      "category": "organization"
+      "category": "organization",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "export-context",
-      "file": "commands/export-context.mdc",
+      "file": "commands/export-context.json",
       "trigger": ["exportar contexto", "export context"],
       "description": "Exportar contexto para reutilização em outros projetos",
       "level": 15,
-      "category": "organization"
+      "category": "organization",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "import-context",
-      "file": "commands/import-context.mdc",
+      "file": "commands/import-context.json",
       "trigger": ["importar contexto", "import context"],
       "description": "Importar contexto de outros projetos",
       "level": 16,
-      "category": "organization"
+      "category": "organization",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "feedback-search",
-      "file": "commands/feedback-search.mdc",
+      "file": "commands/feedback-search.json",
       "trigger": ["buscar feedback", "feedback search"],
       "description": "Busca inteligente nos logs de feedback",
       "level": 17,
-      "category": "organization"
+      "category": "organization",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "feedback-report",
-      "file": "commands/feedback-report.mdc",
+      "file": "commands/feedback-report.json",
       "trigger": ["relatório feedback", "feedback report", "analisar feedback", "feedback summary"],
       "description": "Geração de relatórios automáticos de feedback",
       "level": 18,
-      "category": "organization"
+      "category": "organization",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "list-projects",
-      "file": "commands/list-projects.mdc",
+      "file": "commands/list-projects.json",
       "trigger": ["listar projetos", "list projects", "mostrar projetos"],
-      "description": "Listagem de todos os projetos com estatísticas",
+      "description": "Listagem inteligente de todos os projetos com estatísticas e navegação",
       "level": 19,
-      "category": "project-management"
+      "category": "project-management",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "list-progress",
-      "file": "commands/list-progress.mdc",
+      "file": "commands/list-progress.json",
       "trigger": ["listar progresso [nome]", "list progress [nome]", "progresso [nome]"],
       "description": "Progresso cronológico detalhado de um projeto",
       "level": 20,
-      "category": "project-management"
+      "category": "project-management",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "export-project",
-      "file": "commands/export-project.mdc",
+      "file": "commands/export-project.json",
       "trigger": ["exportar projeto [nome]", "export project [nome]"],
       "description": "Exportação completa de projeto com contexto e progresso",
       "level": 21,
-      "category": "project-management"
+      "category": "project-management",
+      "format": "json"
     },
     {
       "type": "command",
       "name": "import-project",
-      "file": "commands/import-project.mdc",
+      "file": "commands/import-project.json",
       "trigger": ["importar projeto [caminho]", "import project [caminho]"],
       "description": "Importação de projeto com verificação de conflitos",
       "level": 22,
-      "category": "project-management"
+      "category": "project-management",
+      "format": "json"
     },
     {
       "type": "command",

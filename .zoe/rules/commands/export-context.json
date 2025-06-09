@@ -1,0 +1,323 @@
+{
+  "_metadata": {
+    "command_name": "export-context",
+    "version": "2.0",
+    "format": "json",
+    "description": "Exportação de contexto de projeto para reutilização",
+    "created": "2025-06-09",
+    "ai_optimized": true
+  },
+
+  "trigger": {
+    "patterns": [
+      "exportar contexto",
+      "export context",
+      "exportar contexto completo",
+      "exportar contexto stack",
+      "exportar contexto padrões"
+    ],
+    "parameters": {
+      "tipo": {
+        "type": "string",
+        "options": ["completo", "stack", "padrões"],
+        "default": "completo",
+        "description": "Tipo de export desejado"
+      }
+    },
+    "priority_level": 15,
+    "category": "system"
+  },
+
+  "behavior": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "detect_export_type",
+        "description": "Determinar tipo de export baseado no comando",
+        "steps": [
+          {
+            "step": 1,
+            "action": "parse_command",
+            "logic": "extract export type from command text"
+          },
+          {
+            "step": 2,
+            "action": "set_export_scope",
+            "options": {
+              "completo": "all project context",
+              "stack": "tech stack only",
+              "padrões": "architectural patterns only"
+            }
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "gather_export_data",
+        "description": "Coletar dados do projeto ativo para export",
+        "steps": [
+          {
+            "step": 1,
+            "action": "read_active_project",
+            "file": ".zoe/rules/context/active-project.json"
+          },
+          {
+            "step": 2,
+            "action": "read_project_context",
+            "file": ".zoe/rules/context/projects/[active_project]/project-context.json"
+          },
+          {
+            "step": 3,
+            "action": "extract_exportable_data",
+            "based_on": "export_scope"
+          }
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "sanitize_data",
+        "description": "Sanitizar dados para reutilização em outros projetos",
+        "sanitization_rules": [
+          "remove project-specific names",
+          "anonymize personal data",
+          "convert absolute paths to relative",
+          "remove sensitive information",
+          "generalize specific configurations"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "generate_export_file",
+        "description": "Criar arquivo de export estruturado",
+        "export_path": ".zoe/exports/",
+        "filename_pattern": "zoe-context-export-[type]-[YYYY-MM-DD].json"
+      },
+      {
+        "phase": 5,
+        "name": "validate_export",
+        "description": "Validar integridade do arquivo gerado",
+        "validations": [
+          "JSON validity",
+          "complete structure",
+          "data sanitization",
+          "file size < 1MB",
+          "version compatibility"
+        ]
+      }
+    ]
+  },
+
+  "export_types": {
+    "completo": {
+      "description": "Export completo do contexto do projeto",
+      "includes": [
+        "tech_stack_template",
+        "architectural_patterns", 
+        "development_preferences",
+        "learning_insights",
+        "recommended_commands",
+        "coding_standards"
+      ],
+      "filename": "zoe-context-export-full-[date].json"
+    },
+    "stack": {
+      "description": "Export apenas das configurações técnicas",
+      "includes": [
+        "tech_stack_template",
+        "coding_standards",
+        "development_preferences.technical"
+      ],
+      "filename": "zoe-stack-export-[date].json"
+    },
+    "padrões": {
+      "description": "Export apenas dos padrões arquiteturais",
+      "includes": [
+        "architectural_patterns",
+        "coding_standards.patterns",
+        "development_preferences.patterns"
+      ],
+      "filename": "zoe-patterns-export-[date].json"
+    }
+  },
+
+  "export_structure": {
+    "export_metadata": {
+      "version": "2.0",
+      "exported_from": "[project_name_anonymized]",
+      "export_date": "[YYYY-MM-DD]",
+      "zoe_version": "2.0",
+      "export_type": "[completo|stack|padrões]",
+      "compatibility": ["react-project", "next-project", "design-system"]
+    },
+    "tech_stack_template": {
+      "frontend": {
+        "framework": "extracted from project context",
+        "language": "extracted from project context"
+      },
+      "styling": "extracted from project context",
+      "testing": {
+        "approach": "extracted from project context"
+      },
+      "patterns": {
+        "component_structure": "extracted from project context"
+      }
+    },
+    "architectural_patterns": [
+      {
+        "pattern": "pattern name",
+        "description": "pattern description", 
+        "rationale": "why this pattern was chosen",
+        "applicability": "where to apply this pattern"
+      }
+    ],
+    "development_preferences": {
+      "code_quality": "extracted preferences",
+      "testing": "testing preferences",
+      "documentation": "documentation preferences",
+      "naming": "naming conventions"
+    },
+    "learning_insights": [
+      {
+        "insight": "learned insight",
+        "application": "how to apply this insight",
+        "confidence": "high|medium|low"
+      }
+    ],
+    "recommended_commands": [
+      "list of recommended zoe commands for this context"
+    ]
+  },
+
+  "data_sanitization": {
+    "project_specific": {
+      "action": "anonymize",
+      "examples": ["project names", "company names", "personal names"]
+    },
+    "paths": {
+      "action": "generalize",
+      "convert": "absolute paths → relative paths"
+    },
+    "sensitive_data": {
+      "action": "exclude",
+      "examples": ["API keys", "passwords", "internal URLs"]
+    },
+    "timestamps": {
+      "action": "generalize", 
+      "convert": "specific dates → relative dates"
+    },
+    "logs": {
+      "action": "exclude",
+      "reason": "project-specific debugging information"
+    }
+  },
+
+  "validation_rules": {
+    "json_validity": {
+      "requirement": "valid JSON syntax",
+      "action_on_fail": "fix syntax errors"
+    },
+    "structure_completeness": {
+      "requirement": "all required sections present",
+      "action_on_fail": "add missing sections"
+    },
+    "data_sanitization": {
+      "requirement": "no sensitive data present",
+      "action_on_fail": "remove sensitive data"
+    },
+    "file_size": {
+      "requirement": "< 1MB",
+      "action_on_fail": "compress or reduce data"
+    },
+    "compatibility": {
+      "requirement": "compatible with current zoe version",
+      "action_on_fail": "update format"
+    }
+  },
+
+  "backup_management": {
+    "location": ".zoe/exports/",
+    "retention": "keep last 5 exports",
+    "cleanup": "delete older exports automatically"
+  },
+
+  "context_integration": {
+    "description": "Requer projeto ativo para exportação",
+    "requires_active_project": true,
+    "reads_project_context": true,
+    "isolation_level": "full"
+  },
+
+  "usage_examples": {
+    "export_completo": {
+      "command": "exportar contexto",
+      "creates": "zoe-context-export-full-2025-06-09.json",
+      "includes": "tudo do projeto"
+    },
+    "export_stack": {
+      "command": "exportar contexto stack",
+      "creates": "zoe-stack-export-2025-06-09.json", 
+      "includes": "apenas configurações técnicas"
+    },
+    "export_padroes": {
+      "command": "exportar contexto padrões",
+      "creates": "zoe-patterns-export-2025-06-09.json",
+      "includes": "apenas padrões arquiteturais"
+    }
+  },
+
+  "response_format": {
+    "success": {
+      "structure": [
+        "📤 **Contexto Exportado:**",
+        "",
+        "📊 **Resumo do Export:**",
+        "- **Tipo:** [tipo]",
+        "- **Tamanho:** [X] KB", 
+        "- **Itens incluídos:** [detalhes]",
+        "",
+        "📁 **Arquivo gerado:**",
+        "`.zoe/exports/[filename]`",
+        "",
+        "🔄 **Como usar em outro projeto:**",
+        "1. Copie o arquivo para o novo projeto",
+        "2. Execute: \"importar contexto [nome-do-arquivo]\"",
+        "3. Zoe aplicará configurações automaticamente"
+      ]
+    }
+  },
+
+  "integration": {
+    "related_commands": [
+      "import-context (level 13)",
+      "context-summary (level 14)"
+    ],
+    "creates_files": [
+      ".zoe/exports/zoe-context-export-[type]-[date].json"
+    ],
+    "reads_files": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/context/projects/[active_project]/project-context.json"
+    ]
+  },
+
+  "error_handling": {
+    "no_active_project": {
+      "action": "show_error",
+      "message": "❌ **Nenhum projeto ativo**\n💡 **Execute:** `zoe iniciar [nome-projeto]` primeiro"
+    },
+    "export_failed": {
+      "action": "show_error_details",
+      "message": "❌ **Falha ao exportar contexto**\n🔍 **Erro:** [error_details]"
+    },
+    "validation_failed": {
+      "action": "show_validation_errors",
+      "message": "⚠️ **Export gerado com problemas:**\n[validation_errors]"
+    }
+  },
+
+  "performance": {
+    "data_processing": "efficient JSON serialization",
+    "file_operations": "atomic write operations",
+    "validation": "lightweight checks"
+  }
+} 

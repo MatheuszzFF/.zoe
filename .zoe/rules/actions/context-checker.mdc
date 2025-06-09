@@ -1,5 +1,156 @@
 ---
-description:
-globs:
+description: 
+globs: 
 alwaysApply: false
 ---
+# 🔍 Context Checker - Action Obrigatória Level 0
+
+## Trigger
+- **SEMPRE** antes de qualquer comando ou resposta
+- Detecta automaticamente qualquer comando "zoe iniciar [projeto]" ou similar
+- Executada com prioridade máxima (level 0)
+
+## Comportamento
+**VERIFICAÇÃO AUTOMÁTICA E CRIAÇÃO OBRIGATÓRIA DE ESTRUTURA:**
+
+### ⚠️ REGRA CRÍTICA
+**SEMPRE CRIAR ESTRUTURA COMPLETA, MESMO SE JÁ EXISTIR PROJETO**
+- Verificar se pasta do projeto existe
+- Verificar se project-context.json existe  
+- Verificar se pasta de progresso existe
+- Verificar se README.md do dia existe
+- **SE QUALQUER COISA ESTIVER FALTANDO, CRIAR IMEDIATAMENTE**
+
+### 1. Análise de Comando
+```
+Detectar padrões:
+- "zoe, iniciar [nome-projeto]"
+- "zoe iniciar [nome-projeto]" 
+- Qualquer comando que mencione nome de projeto
+- Comandos em projeto diferente do ativo
+```
+
+### 2. Verificação de Contexto
+```
+Verificar se:
+✅ Projeto solicitado == active-project.json
+✅ Estrutura context/projects/[projeto]/ existe
+✅ project-context.json existe e está atualizado
+✅ Pasta progress/[hoje]/ existe
+✅ Contexto carregado está correto
+```
+
+### 3. Correção Automática
+**Se projeto solicitado ≠ projeto ativo OU estrutura não existe:**
+1. **Atualizar active-project.json** com novo projeto
+2. **CRIAR ESTRUTURA OBRIGATORIAMENTE** context/projects/[novo-projeto]/
+3. **CRIAR project-context.json** básico SEMPRE (mesmo se não existir)
+4. **CRIAR pasta progress** para hoje SEMPRE
+5. **Analisar package.json** do projeto para detectar stack
+6. **Log da mudança** no progresso
+
+**COMANDOS ESPECÍFICOS PARA CRIAÇÃO:**
+```bash
+# Criar estrutura completa
+mkdir -p ".zoe/rules/context/projects/[projeto]/progress/$(date +%Y-%m-%d)"
+
+# Verificar se project-context.json existe, se não criar com template
+if [ ! -f ".zoe/rules/context/projects/[projeto]/project-context.json" ]; then
+    cp ".zoe/rules/context/project-context-template.json" ".zoe/rules/context/projects/[projeto]/project-context.json"
+    # Substituir placeholders com dados reais
+fi
+
+# Criar README.md do progresso diário
+if [ ! -f ".zoe/rules/context/projects/[projeto]/progress/$(date +%Y-%m-%d)/README.md" ]; then
+    cp ".zoe/rules/context/daily-progress-template.md" ".zoe/rules/context/projects/[projeto]/progress/$(date +%Y-%m-%d)/README.md"
+    # Substituir placeholders com dados reais
+fi
+```
+
+### 4. Validação Final
+```
+VALIDAÇÃO OBRIGATÓRIA (SEMPRE EXECUTAR):
+- ✅ active-project.json aponta para projeto correto
+- ✅ project-context.json existe e é válido  
+- ✅ Estrutura de pastas está criada
+- ✅ Pasta de progresso diário existe
+- ✅ README.md de progresso existe
+- ✅ Sistema pronto para operar no contexto correto
+
+SE QUALQUER VALIDAÇÃO FALHAR:
+- PARAR execução
+- CRIAR estrutura faltante
+- REPETIR validação
+- SÓ CONTINUAR se tudo estiver OK
+```
+
+### 5. Criação Automática Obrigatória
+```
+SEMPRE verificar e criar se não existir:
+1. Pasta: .zoe/rules/context/projects/[projeto]/
+2. Pasta: .zoe/rules/context/projects/[projeto]/progress/
+3. Pasta: .zoe/rules/context/projects/[projeto]/progress/[hoje]/
+4. Arquivo: .zoe/rules/context/projects/[projeto]/project-context.json
+5. Arquivo: .zoe/rules/context/projects/[projeto]/progress/[hoje]/README.md
+
+NUNCA assumir que estrutura existe - SEMPRE verificar e criar
+```
+
+### 5. Estrutura Automática Criada
+
+**Estrutura de Pastas:**
+```
+.zoe/rules/context/projects/[projeto]/
+├── project-context.json     # Contexto específico
+└── progress/               # Progresso isolado
+    └── [YYYY-MM-DD]/       # Por data
+        └── README.md       # Log diário
+```
+
+**project-context.json Template:**
+```json
+{
+  "_metadata": {
+    "version": "1.0",
+    "created": "[timestamp]",
+    "project_name": "[nome-projeto]",
+    "description": "Auto-gerado pelo context-checker"
+  },
+  "project_overview": {
+    "name": "[nome-projeto]",
+    "type": "A ser definido",
+    "objectives": ["Detectar automaticamente"],
+    "current_phase": "Inicialização",
+    "priority_focus": "Setup inicial"
+  },
+  "tech_stack": {
+    "auto_detected": true,
+    "detection_source": "package.json analysis"
+  }
+}
+```
+
+## Execução Obrigatória
+- **Level 0** no priority-map.json
+- **Blocking:** true
+- **Mandatory:** true
+- **Sempre executada** antes de qualquer outro comando/action
+
+## Objetivo
+**Tornar IMPOSSÍVEL** esquecer de atualizar contexto:
+- Verificação automática sempre
+- Correção automática quando necessário
+- Context memory sempre correto
+- Zero intervenção manual necessária
+
+## Log de Ação
+```
+🔍 CONTEXT CHECKER EXECUTADO:
+- Projeto solicitado: [nome]
+- Projeto ativo: [nome-atual]
+- Ação: [nenhuma | atualizado | criado]
+- Status: ✅ Contexto correto
+```
+
+
+

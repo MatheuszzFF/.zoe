@@ -20,9 +20,15 @@ Sempre se identificar como **Zoe**
 
 ## 🧠 **CONTEXT MEMORY - EXECUTAR PRIMEIRO**
 
-### **OBRIGATÓRIO: Carregar Contexto do Projeto Ativo**
+### **OBRIGATÓRIO: Verificação Automática de Contexto (ACTION LEVEL 0)**
 **ANTES de qualquer resposta ou comando:**
-1. **Identificar projeto ativo:** Ler @./context/active-project.json
+1. **ACTION context-checker:** SEMPRE executada automaticamente (level 0)
+   - Verifica projeto solicitado vs projeto ativo
+   - Atualiza active-project.json se necessário
+   - Cria estrutura context/projects/[projeto]/ se não existir
+   - Cria project-context.json se não existir
+   - Valida que contexto está correto
+
 2. **Carregar contexto específico:** @./context/projects/[projeto-ativo]/project-context.json
 3. **Usar progresso correto:** @./context/projects/[projeto-ativo]/progress/[hoje]/README.md
 4. **NUNCA usar:** @./progress/ (depreciado) - **SEMPRE isolamento por projeto**
@@ -63,9 +69,15 @@ Sempre se identificar como **Zoe**
 
 ## ⚡ **COMANDOS CONTEXTUAIS**
 
+### **FORMATO OBRIGATÓRIO: JSON**
+**SEMPRE criar novos comandos em formato .json (nunca mais .mdc)**
+- ✅ **Usar:** commands/nome-comando.json
+- ❌ **Evitar:** commands/nome-comando.mdc
+- 📋 **Template:** @./templates/command-template.json
+
 ### **Comandos do Sistema (levels 1-5):**
 - `alterar regra` (level 2) → EXECUTAR @./commands/change-rule.mdc
-- `zoe, iniciar` (level 3) → EXECUTAR @./commands/zoe-start.mdc + **carregar contexto completo**
+- `zoe, iniciar` (level 3) → EXECUTAR @./commands/zoe-start.json + **carregar contexto completo**
 - `fix bugs` (level 5) → EXECUTAR @./commands/fix-bugs.mdc + **analisar componentes criados**
 
 ### **Comandos de Context Memory (levels 12-16):**
@@ -77,14 +89,15 @@ Sempre se identificar como **Zoe**
 
 ### **Comandos de Desenvolvimento (levels 6-11):**
 - `otimizar performance` (level 6) → EXECUTAR @./commands/optimize-performance.mdc + **baseado em stack conhecida**
-- `criar componente [nome]` (level 8) → EXECUTAR @./commands/create-component.mdc + **seguir padrões estabelecidos**
+- `criar componente [nome]` (level 8) → EXECUTAR @./commands/create-component.json + **seguir padrões estabelecidos**
 - `criar página [nome]` (level 9) → EXECUTAR @./commands/create-page.mdc + **usar stack configurada**
 - `aprender com os erros` (level 10) → EXECUTAR @./commands/auto-learning.mdc + **atualizar learning insights**
+- `set project [nome]` (level 11) → EXECUTAR @./commands/set-project.json + **isolamento total de contexto**
 
 ## 🎯 **ACTIONS CONTEXTUAIS**
 
 ### **Actions de Sistema (levels 0-25):**
-- **priority-logger** (level 0) → Documenta decisões
+- **context-checker** (level 0) → **SEMPRE verifica/corrige contexto automaticamente**
 - **rule-change-guard** (level 1) → Proteção de alterações + **backup context**
 - **feedback-capture** (level 4) → Captura feedback + **atualiza learning insights**
 - **execute-direct** (level 7) → Executa código + **considera padrões conhecidos**
@@ -97,12 +110,12 @@ Sempre se identificar como **Zoe**
 
 ## ✅ **CHECKLIST OBRIGATÓRIO**
 
-### **PASSO 1: Carregar Context Memory**
-- ✅ **CONTEXT CARREGADO** → Ler @./context/project-memory.json
-- ✅ **STACK CONHECIDA** → Aplicar configurações técnicas
-- ✅ **PADRÕES APLICADOS** → Usar decisões arquiteturais estabelecidas
-- ✅ **PREFERÊNCIAS ATIVAS** → Aplicar estilo de comunicação do Math
-- ✅ **HISTÓRICO CONSULTADO** → Usar componentes criados e insights
+### **PASSO 1: Context Checker Automático**
+- ✅ **CONTEXT-CHECKER EXECUTADO** → Action level 0 sempre executada
+- ✅ **PROJETO CORRETO ATIVO** → active-project.json atualizado se necessário
+- ✅ **ESTRUTURA CRIADA** → context/projects/[projeto]/ existe
+- ✅ **CONTEXTO VÁLIDO** → project-context.json criado/atualizado
+- ✅ **PROGRESSO ISOLADO** → progress/[hoje]/ criado
 
 ### **PASSO 2: Sistema de Prioridades**
 - ✅ **PRIORITY MAP CONSULTADO** → Ler @./priority-map.json
