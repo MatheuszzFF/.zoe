@@ -2,21 +2,21 @@
   "_metadata": {
     "version": "1.0",
     "description": "Controle do projeto ativo para isolamento de contexto",
-    "last_updated": "2025-01-20T14:30:00Z"
+    "last_updated": "2025-06-09T16:50:00Z"
   },
-  "active_project": "zoe",
-  "project_path": ".zoe/rules/context/projects/zoe/",
-  "last_updated": "2025-01-09T12:30:00Z",
+  "active_project": "design-system",
+  "project_path": ".zoe/rules/context/projects/design-system/",
+  "last_updated": "2025-06-09T16:50:00Z",
   "session_info": {
-    "current_session": 1,
-    "session_start": "2025-01-09T09:00:00Z",
-    "last_activity": "2025-01-09T12:30:00Z"
+    "current_session": 2,
+    "session_start": "2025-06-09T16:50:00Z",
+    "last_activity": "2025-06-09T16:50:00Z"
   },
-  "activated_at": "2025-01-20T14:30:00Z",
-  "session_id": "sess_design_system_init",
+  "activated_at": "2025-06-09T16:50:00Z",
+  "session_id": "sess_design_system_restart",
   "last_command": "zoe, iniciar design-system",
-  "last_command_at": "2025-01-20T14:30:00Z",
+  "last_command_at": "2025-06-09T16:50:00Z",
   "commands_count": 1,
   "session_duration": "started",
-  "notes": "Projeto DESIGN-SYSTEM ativado. Sistema de design com componentes React documentados no Storybook."
+  "notes": "Projeto DESIGN-SYSTEM reativado. Sistema de design com componentes React documentados no Storybook. Sessão anterior: desenvolvimento de funcionalidade de scroll no Table."
 } 

@@ -199,6 +199,52 @@ Ações realizadas:
 Status: COMPLETO
 Impacto: Contexto recarregado, progresso do dia revisado, pronto para continuar desenvolvimento
 
+[16:50] - REINICIALIZAÇÃO - Comando "zoe, iniciar design-system" executado
+Status: COMPLETO
+Impacto: Projeto design-system reativado, contexto carregado, sessão 2 iniciada
+Contexto: Projeto com 9 componentes completados, padrões arquiteturais estabelecidos, última atividade foi desenvolvimento de scroll no Table
+
+[16:55] - MELHORIA - Scroll do TableWrapper alterado para ser ativo por padrão
+Status: COMPLETO
+Impacto: Melhor UX - scroll automático por padrão, desativa apenas quando necessário
+Feedback implementado: "deixa esse scroll como padrão, ai a pessoa desativa se passar o $scroll como false"
+Arquivos modificados:
+- table-wrapper/table-wrapper.template.tsx (lógica $scroll = true por padrão)
+- table-wrapper/table-wrapper.types.ts (documentação atualizada)
+- table.stories.tsx (stories atualizadas: Default com scroll, WithoutScroll para desabilitado)
+- table-wrapper.template.spec.tsx (testes atualizados para novo comportamento)
+
+Mudanças implementadas:
+- ✅ `$scroll = true` por padrão na lógica do styled-component
+- ✅ Documentação atualizada: "@default true - Scroll ativo por padrão"
+- ✅ Stories reorganizadas: Default (com scroll), WithoutScroll (sem scroll)
+- ✅ Testes atualizados: comportamento padrão e explícito testados
+- ✅ Descrições das stories atualizadas para refletir novo comportamento
+
+[17:00] - EXPORT - Contexto completo do design-system exportado
+Status: COMPLETO
+Impacto: Contexto reutilizável criado para aplicação em outros projetos similares
+Comando executado: "Zoe, exportar contexto do design-system"
+Arquivo gerado: .zoe/exports/zoe-context-export-full-2025-06-09.json
+
+Conteúdo exportado:
+- ✅ **Tech Stack Template**: React + TypeScript + styled-components + Storybook
+- ✅ **Padrões Arquiteturais**: 4 patterns (Component-Template-Types, Composite, T Prefix, Transient Props)
+- ✅ **Padrões de Código**: Typing conventions, props structure, styling patterns
+- ✅ **Organização de Componentes**: Directory structure, naming conventions, categorization
+- ✅ **Padrões de Qualidade**: Testing, documentation, code quality, accessibility
+- ✅ **Workflow de Desenvolvimento**: 7 passos para criação de componentes
+- ✅ **Configuração Storybook**: Naming patterns e regras de documentação
+- ✅ **Learning Insights**: 5 insights com alta confiança
+- ✅ **Comandos Recomendados**: Lista de comandos úteis para design systems
+
+Dados sanitizados:
+- ✅ Nomes específicos do projeto anonimizados
+- ✅ Caminhos absolutos convertidos para relativos
+- ✅ Informações sensíveis removidas
+- ✅ Timestamps generalizados
+- ✅ Compatibilidade com projetos React/design-system
+
 ## 📝 Decisões Tomadas
 
 - Ativação do projeto design-system como projeto ativo
@@ -281,22 +327,3 @@ const generateTableData = (columns: number, rows: number) => {
   return { headers, data }
 }
 ```
-
-[AGORA] - OTIMIZAÇÃO - Regras da Zoe atualizadas com sistema de verificação de arquivos e patterns
-Status: COMPLETO
-Impacto: Zoe agora verifica arquivos existentes antes de editar e usa patterns específicos do projeto
-Arquivos modificados:
-- .zoe/rules/zoe-chore.mdc (ATUALIZADO)
-- .zoe/rules/context/projects/design-system/patterns/architectural-patterns.json (CRIADO)
-- .zoe/rules/context/projects/design-system/patterns/code-patterns.json (CRIADO)
-- .zoe/rules/context/projects/design-system/patterns/component-patterns.json (CRIADO)
-- .zoe/rules/context/projects/design-system/patterns/testing-patterns.json (CRIADO)
-- .zoe/rules/context/projects/design-system/patterns/documentation-patterns.json (CRIADO)
-- .zoe/rules/context/projects/design-system/project-context.json (ATUALIZADO)
-
-Melhorias implementadas:
-- ✅ Sistema de verificação obrigatória de arquivos existentes
-- ✅ NUNCA mais substituir arquivos de progresso sem ler primeiro
-- ✅ Sistema de patterns específicos por projeto em formato JSON
-- ✅ Integração de patterns no project-context.json
-- ✅ Checklist atualizado com novas verificações obrigatórias

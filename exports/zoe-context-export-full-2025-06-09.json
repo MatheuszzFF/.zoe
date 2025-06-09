@@ -1,0 +1,259 @@
+{
+  "export_metadata": {
+    "version": "2.0",
+    "exported_from": "design-system-project",
+    "export_date": "2025-06-09",
+    "zoe_version": "2.0",
+    "export_type": "completo",
+    "compatibility": ["react-project", "design-system", "component-library"],
+    "description": "Contexto completo de um sistema de design React com componentes reutilizáveis"
+  },
+  
+  "tech_stack_template": {
+    "frontend": {
+      "language": "TypeScript",
+      "framework": "React",
+      "meta_framework": "None",
+      "css_framework": "styled-components",
+      "styling": "styled-components with transient props",
+      "documentation": "Storybook",
+      "testing": "Jest + React Testing Library",
+      "build": "Rollup/Webpack"
+    },
+    "backend": {
+      "runtime": "N/A",
+      "database": "N/A",
+      "orm": "N/A"
+    },
+    "development": {
+      "testing": "Jest + React Testing Library",
+      "bundler": "Rollup/Webpack",
+      "linting": "ESLint",
+      "package_manager": "npm/yarn",
+      "type_checking": "TypeScript"
+    }
+  },
+
+  "architectural_patterns": [
+    {
+      "pattern": "Component-Template-Types Separation",
+      "description": "Separação clara entre lógica de componente, apresentação visual e definições de tipos",
+      "rationale": "Melhora a manutenibilidade e testabilidade através da separação de responsabilidades",
+      "applicability": "Todos os componentes do design system",
+      "implementation": {
+        "component_file": "*.component.tsx - Lógica e estado",
+        "template_file": "*.template.tsx - Apresentação visual",
+        "types_file": "*.types.ts - Definições de tipos",
+        "stories_file": "*.stories.tsx - Documentação Storybook",
+        "test_files": "*.spec.tsx - Testes unitários"
+      }
+    },
+    {
+      "pattern": "Composite Pattern for Complex Components",
+      "description": "Organização de componentes complexos como objetos compostos",
+      "rationale": "Facilita descoberta e uso de componentes relacionados",
+      "applicability": "Componentes com múltiplos sub-componentes (Table, Form, etc.)",
+      "implementation": {
+        "structure": "ComponentComposite com sub-componentes organizados",
+        "exports": "Namespace exports para componentes relacionados"
+      }
+    },
+    {
+      "pattern": "T Prefix Type Naming",
+      "description": "Convenção de nomenclatura com prefixo T para todos os tipos customizados",
+      "rationale": "Identificação consistente de tipos e melhor experiência do desenvolvedor",
+      "applicability": "Todas as definições de tipos do projeto",
+      "implementation": {
+        "props_types": "T{ComponentName}Props",
+        "component_types": "T{ComponentName}",
+        "template_types": "T{ComponentName}Template"
+      }
+    },
+    {
+      "pattern": "Transient Props Pattern",
+      "description": "Uso de $ prefix para props que não devem ser passadas para o DOM",
+      "rationale": "Evita warnings do React e mantém props de styling separadas",
+      "applicability": "Todos os styled-components",
+      "implementation": {
+        "syntax": "$propName para props de styling",
+        "forwarding": "Automático com $ prefix, sem shouldForwardProp"
+      }
+    }
+  ],
+
+  "code_patterns": {
+    "typing_conventions": {
+      "pattern": "T prefix for types (TButton, TTable)",
+      "rules": [
+        "Props types: T{ComponentName}Props",
+        "Component types: T{ComponentName}",
+        "Template types: T{ComponentName}Template",
+        "Export types: T{ComponentName}Exports"
+      ],
+      "prefix_usage": "T prefix for all custom types",
+      "interface_vs_type": "Prefer type aliases over interfaces"
+    },
+    "props_structure": {
+      "pattern": "Destructured props with default values",
+      "destructuring_style": "Object destructuring in function parameters",
+      "rules": [
+        "Use transient props ($prop) for styled-components",
+        "Separate logic props from styling props",
+        "Forward HTML attributes when appropriate"
+      ]
+    },
+    "styling_patterns": {
+      "transient_props": "Use $ prefix for styled-components props ($bgColor, $color)",
+      "prop_forwarding": "Forward HTML attributes using ...rest pattern",
+      "theme_usage": "Access theme through styled-components ThemeProvider",
+      "responsive_patterns": "Use theme breakpoints for responsive design"
+    },
+    "component_patterns": {
+      "state_management": "useState for local state, useEffect for side effects",
+      "effect_usage": "useEffect for mounting state and cleanup",
+      "ref_patterns": "forwardRef for template components",
+      "async_handling": "Loading states with isLoading prop pattern"
+    }
+  },
+
+  "component_organization": {
+    "directory_structure": {
+      "component_folders": "Category-based folders (buttons/, table/, etc.)",
+      "sub_component_organization": "Individual component folders within categories",
+      "shared_components": "Common components in shared directories"
+    },
+    "naming_conventions": {
+      "file_naming": "kebab-case for files (button.component.tsx)",
+      "component_naming": "PascalCase for components (Button, TableComposite)",
+      "export_naming": "Named exports with consistent naming"
+    },
+    "categorization": {
+      "component_categories": ["buttons", "table", "forms", "layout", "feedback"],
+      "complexity_levels": ["atomic", "molecular", "organism"],
+      "usage_patterns": ["standalone", "composite", "compound"]
+    }
+  },
+
+  "quality_standards": {
+    "testing": {
+      "framework": "Jest + React Testing Library",
+      "required_tests": ["component rendering", "user interactions", "prop variations"],
+      "coverage_targets": "Focus on component logic and user flows",
+      "testing_utilities": ["@testing-library/react", "@testing-library/jest-dom"]
+    },
+    "documentation": {
+      "storybook_required": true,
+      "story_descriptions": "Required for all public components",
+      "playground_stories": "Interactive stories with controls",
+      "documentation_completeness": "Default story + variations minimum"
+    },
+    "code_quality": {
+      "linting": "ESLint with React and TypeScript rules",
+      "type_checking": "Strict TypeScript configuration",
+      "formatting": "Prettier for consistent formatting",
+      "performance_considerations": ["React.memo for expensive components", "Proper prop drilling"]
+    },
+    "accessibility": {
+      "a11y_requirements": ["ARIA labels", "keyboard navigation", "screen reader support"],
+      "keyboard_navigation": "Tab order and keyboard interactions",
+      "screen_reader_support": "Semantic HTML and ARIA attributes"
+    }
+  },
+
+  "development_preferences": {
+    "communication_style": "Direct and practical",
+    "language": "Portuguese for comments and documentation",
+    "coding_style": {
+      "file_naming": "English",
+      "comments": "Portuguese",
+      "variables": "English preferred",
+      "documentation": "Portuguese"
+    },
+    "project_style": {
+      "component_priority": "Quality over quantity",
+      "test_coverage": "Focus on component logic and user interactions",
+      "documentation": "Complete Storybook documentation required"
+    }
+  },
+
+  "development_workflow": {
+    "component_creation_process": [
+      "Create component folder structure",
+      "Define types in *.types.ts",
+      "Implement logic in *.component.tsx",
+      "Create template in *.template.tsx",
+      "Write tests in *.spec.tsx",
+      "Document in *.stories.tsx",
+      "Export in index.ts"
+    ],
+    "testing_workflow": [
+      "Write unit tests for component logic",
+      "Test user interactions",
+      "Verify accessibility",
+      "Run test suite"
+    ],
+    "documentation_workflow": [
+      "Create Default story",
+      "Add interactive controls",
+      "Document component variations",
+      "Review Storybook output"
+    ]
+  },
+
+  "storybook_configuration": {
+    "naming_pattern": "Components/{ComponentName}",
+    "title_format": "Components/{ComponentName}",
+    "rules": [
+      "NUNCA alterar títulos existentes sem solicitação explícita",
+      "Manter consistência com padrão Components/",
+      "Usar PascalCase para nomes de componentes",
+      "Incluir controles interativos quando apropriado"
+    ],
+    "required_stories": ["Default"],
+    "optional_stories": ["Variants", "Playground", "Examples"]
+  },
+
+  "learning_insights": [
+    {
+      "insight": "Component-Template-Types separation provides clear responsibility boundaries",
+      "application": "Apply to all new components for better maintainability",
+      "confidence": "high"
+    },
+    {
+      "insight": "Composite pattern works well for complex components with multiple sub-components",
+      "application": "Use for complex components like Table, Form, etc.",
+      "confidence": "high"
+    },
+    {
+      "insight": "Consistent type naming with T prefix improves developer experience",
+      "application": "Apply T prefix to all custom types for better IntelliSense",
+      "confidence": "high"
+    },
+    {
+      "insight": "Transient props ($prop) pattern keeps styled-components clean",
+      "application": "Use $ prefix for all styling props to prevent prop forwarding issues",
+      "confidence": "high"
+    },
+    {
+      "insight": "Default scroll behavior improves UX for table components",
+      "application": "Enable scroll by default, allow explicit disabling when needed",
+      "confidence": "medium"
+    }
+  ],
+
+  "recommended_commands": [
+    "criar componente [nome]",
+    "fix bugs",
+    "otimizar performance",
+    "atualizar progresso",
+    "mostrar histórico"
+  ],
+
+  "export_summary": {
+    "total_patterns": 4,
+    "total_insights": 5,
+    "component_categories": 2,
+    "quality_standards": 4,
+    "workflow_steps": 7
+  }
+} 
