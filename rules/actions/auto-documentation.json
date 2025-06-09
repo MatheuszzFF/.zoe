@@ -1,0 +1,73 @@
+{
+  "_metadata": {
+    "action_name": "auto-documentation",
+    "version": "1.0",
+    "format": "json",
+    "description": "Documenta mudanças + atualiza métricas",
+    "created": "2025-01-20",
+    "converted_from": "auto-documentation.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Qualquer ajuste feito no código",
+      "Mudança documentável realizada"
+    ],
+    "automatic": true,
+    "priority_level": 50,
+    "category": "documentation"
+  },
+
+  "behavior": {
+    "description": "Documentação automática diária de mudanças",
+    "file_strategy": "Arquivo único por dia",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "create_daily_file",
+        "description": "Criar/atualizar arquivo diário",
+        "file_path": ".zoe/rules/context/projects/[projeto]/progress/[YYYY-MM-DD]/README.md"
+      },
+      {
+        "step": 2,
+        "action": "document_change",
+        "description": "Documentar mudança específica",
+        "structure": {
+          "request": "O que foi pedido",
+          "before": "Código original",
+          "after": "Código ajustado", 
+          "improvements": "Lista das melhorias"
+        }
+      },
+      {
+        "step": 3,
+        "action": "update_summary",
+        "description": "Atualizar resumo diário",
+        "metrics": ["total_adjustments", "main_improvements", "stack_used"]
+      }
+    ],
+    "template_structure": {
+      "header": "# 📈 Progresso - [DD/MM/YYYY]",
+      "summary": "## 📊 Resumo\n- **Total de ajustes:** X\n- **Principais melhorias:** [lista]\n- **Stack:** React/Next + TypeScript + [Tailwind/Styled-components]",
+      "separator": "---",
+      "adjustment_section": "## [Tipo de Ajuste]\n**Solicitação:** [pedido]\n**Antes/Depois:** [código]\n**Melhorias:** [lista]"
+    },
+    "rules": [
+      "Um arquivo README por dia",
+      "Resumo diário simples no topo",
+      "Cada ajuste como seção separada",
+      "Sem horários, estrutura limpa"
+    ]
+  },
+
+  "integration": {
+    "files_write": [
+      ".zoe/rules/context/projects/[projeto]/progress/[YYYY-MM-DD]/README.md"
+    ],
+    "related_actions": [
+      "context-updater",
+      "update-docs"
+    ]
+  }
+} 

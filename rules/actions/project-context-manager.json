@@ -1,0 +1,57 @@
+{
+  "_metadata": {
+    "action_name": "project-context-manager",
+    "version": "1.0",
+    "format": "json",
+    "description": "Gerenciamento inteligente de contexto de projetos",
+    "created": "2025-01-20",
+    "converted_from": "project-context-manager.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Mudança de contexto necessária",
+      "Sincronização de projeto",
+      "Validação de contexto"
+    ],
+    "automatic": true,
+    "priority_level": 23,
+    "category": "context-management"
+  },
+
+  "behavior": {
+    "description": "Gerencia contexto de projetos com validação e sincronização",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "validate_context",
+        "description": "Validar integridade do contexto atual"
+      },
+      {
+        "step": 2,
+        "action": "sync_active_project",
+        "description": "Sincronizar projeto ativo com contexto"
+      },
+      {
+        "step": 3,
+        "action": "manage_sessions",
+        "description": "Gerenciar sessões e estados"
+      }
+    ]
+  },
+
+  "integration": {
+    "files_read": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/context/projects/[projeto]/project-context.json"
+    ],
+    "files_write": [
+      ".zoe/rules/context/active-project.json"
+    ],
+    "related_actions": [
+      "context-checker",
+      "context-updater"
+    ]
+  }
+} 

@@ -1,0 +1,76 @@
+{
+  "_metadata": {
+    "action_name": "update-docs",
+    "version": "1.0",
+    "format": "json",
+    "description": "Atualiza documentação + registra decisões",
+    "created": "2025-01-20",
+    "converted_from": "update-docs.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Alterar qualquer regra/comando/action",
+      "Modificação em arquivos de sistema"
+    ],
+    "automatic": true,
+    "priority_level": 51,
+    "category": "documentation"
+  },
+
+  "behavior": {
+    "description": "Atualização automática da documentação do sistema",
+    "always_update": [
+      "how-zoe-works.md com instruções atualizadas",
+      "Como usar cada comando",
+      "Exemplos práticos",
+      "Estrutura de arquivos atual",
+      "Novos comandos adicionados",
+      "Actions modificadas"
+    ],
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "detect_changes",
+        "description": "Detectar mudanças em arquivos monitorados"
+      },
+      {
+        "step": 2,
+        "action": "update_documentation",
+        "description": "Atualizar how-zoe-works.md"
+      },
+      {
+        "step": 3,
+        "action": "sync_examples",
+        "description": "Sincronizar exemplos práticos"
+      }
+    ],
+    "monitored_files": [
+      "zoe-chore.mdc",
+      "commands/*.mdc",
+      "commands/*.json",
+      "actions/*.mdc", 
+      "actions/*.json",
+      "templates/*.mdc",
+      "templates/*.json"
+    ]
+  },
+
+  "integration": {
+    "files_read": [
+      "zoe-chore.mdc",
+      "commands/*",
+      "actions/*",
+      "templates/*"
+    ],
+    "files_write": [
+      "how-zoe-works.md"
+    ],
+    "related_actions": [
+      "auto-documentation"
+    ]
+  },
+
+  "objective": "Manter documentação sempre sincronizada com o sistema"
+} 

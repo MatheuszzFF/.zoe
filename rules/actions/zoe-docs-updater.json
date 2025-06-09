@@ -1,0 +1,159 @@
+{
+  "_metadata": {
+    "action_name": "zoe-docs-updater",
+    "version": "1.0",
+    "format": "json",
+    "description": "Atualização automática da documentação principal do sistema Zoe",
+    "created": "2025-01-20",
+    "converted_from": "zoe-docs-updater.mdc",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "Qualquer alteração no projeto zoe",
+      "Mudanças em arquivos .mdc dentro de .zoe/rules/",
+      "Atualizações no context do projeto zoe",
+      "update zoe docs"
+    ],
+    "automatic": true,
+    "priority_level": 52,
+    "category": "documentation",
+    "post_execution": true,
+    "specific_trigger": "Mudanças no projeto zoe"
+  },
+
+  "behavior": {
+    "description": "Atualização inteligente e automática da documentação principal",
+    "execution_phases": [
+      {
+        "phase": 1,
+        "name": "detect_zoe_changes",
+        "description": "Detecção de alterações no projeto Zoe",
+        "monitored_files": [
+          ".zoe/rules/commands/*.mdc",
+          ".zoe/rules/commands/*.json",
+          ".zoe/rules/actions/*.mdc",
+          ".zoe/rules/actions/*.json",
+          ".zoe/rules/priority-map.json",
+          ".zoe/rules/context/projects/zoe/*",
+          ".zoe/rules/zoe-chore.mdc"
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "analyze_changes",
+        "description": "Análise das mudanças detectadas",
+        "change_types": [
+          "Novo comando adicionado",
+          "Action modificada",
+          "Prioridade alterada",
+          "Contexto atualizado"
+        ],
+        "extract_info": [
+          "Triggers dos comandos",
+          "Descrições das funcionalidades",
+          "Exemplos de uso",
+          "Integrações com sistema"
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "update_documentation",
+        "description": "Atualização inteligente do how-zoe-works.md",
+        "sections_to_update": [
+          "Comandos Principais",
+          "Sistema de Prioridades",
+          "Funcionalidades do Sistema"
+        ]
+      },
+      {
+        "phase": 4,
+        "name": "humanize_content",
+        "description": "Geração de conteúdo acessível para humanos",
+        "transformations": {
+          "Action level 0": "Executa automaticamente antes de tudo",
+          "Priority map": "Sistema que decide qual comando executar primeiro",
+          "Context isolation": "Cada projeto tem suas próprias configurações",
+          "Stack autodetection": "Descobre automaticamente as tecnologias do projeto"
+        }
+      },
+      {
+        "phase": 5,
+        "name": "validate_and_backup",
+        "description": "Validação e backup automático",
+        "actions": [
+          "Backup automático do how-zoe-works.md atual",
+          "Validação da estrutura markdown",
+          "Verificação de links internos",
+          "Teste de legibilidade"
+        ]
+      },
+      {
+        "phase": 6,
+        "name": "notify_changes",
+        "description": "Notificação das mudanças realizadas",
+        "notification_format": "📚 DOCUMENTAÇÃO ATUALIZADA AUTOMATICAMENTE\n🔄 Mudanças detectadas\n📝 Seções atualizadas\n✅ Backup criado\n📖 Documentação pronta para humanos"
+      }
+    ]
+  },
+
+  "change_mapping": {
+    "file_to_section": {
+      "commands/*.mdc": "Comandos Principais",
+      "commands/*.json": "Comandos Principais",
+      "actions/*.mdc": "Sistema de Actions",
+      "actions/*.json": "Sistema de Actions",
+      "priority-map.json": "Sistema de Prioridades",
+      "zoe-chore.mdc": "Regras Principais",
+      "context/projects/zoe/*": "Funcionalidades"
+    }
+  },
+
+  "integration": {
+    "files_read": [
+      ".zoe/rules/commands/*",
+      ".zoe/rules/actions/*",
+      ".zoe/rules/priority-map.json",
+      ".zoe/rules/zoe-chore.mdc",
+      ".zoe/rules/context/projects/zoe/*"
+    ],
+    "files_write": [
+      ".zoe/rules/how-zoe-works.md",
+      ".zoe/rules/how-zoe-works-backup-[timestamp].md"
+    ],
+    "related_actions": [
+      "auto-documentation",
+      "update-docs"
+    ]
+  },
+
+  "validation": {
+    "required_conditions": [
+      "Projeto zoe deve existir",
+      "Arquivos de sistema devem estar acessíveis",
+      "Permissões de escrita devem estar disponíveis"
+    ],
+    "success_criteria": [
+      "Documentação atualizada com mudanças",
+      "Backup criado com sucesso",
+      "Linguagem humanizada aplicada",
+      "Estrutura markdown válida"
+    ]
+  },
+
+  "objective": {
+    "primary": "Manter documentação sempre atualizada com mudanças no sistema",
+    "goals": [
+      "Traduzir complexidade técnica para linguagem acessível",
+      "Facilitar onboarding de novos usuários",
+      "Documentar automaticamente novas funcionalidades",
+      "Preservar histórico com backups automáticos"
+    ]
+  },
+
+  "logging": {
+    "log_format": "📚 ZOE DOCS UPDATER:\n- Arquivos alterados: [lista]\n- Seções atualizadas: [lista]\n- Backup criado: [filename]\n- Status: [sucesso|erro]",
+    "log_location": ".zoe/rules/logs/docs-updates.log"
+  }
+} 
