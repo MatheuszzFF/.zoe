@@ -1,0 +1,89 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "project_name": "kess-system",
+    "description": "Sistema de gestão de sinistros KESS - Plataforma completa para controle de sinistros",
+    "created_at": "2025-01-20T12:00:00Z",
+    "last_updated": "2025-01-20T12:00:00Z",
+    "status": "active_development"
+  },
+  "stack": {
+    "frontend": {
+      "framework": "Next.js 15",
+      "typescript": "^5",
+      "ui_library": "Radix UI",
+      "styling": "Tailwind CSS v4",
+      "state_management": "React Hook Form + Zod",
+      "icons": "Lucide React",
+      "toasts": "Sonner",
+      "charts": "Recharts"
+    },
+    "backend": {
+      "runtime": "Next.js API Routes",
+      "database": "Prisma ORM",
+      "auth": "Supabase Auth",
+      "file_generation": "PDFKit + jsPDF"
+    },
+    "development": {
+      "language": "TypeScript",
+      "linting": "ESLint",
+      "package_manager": "npm",
+      "bundler": "Turbopack"
+    }
+  },
+  "architecture": {
+    "type": "Full-stack Next.js Application",
+    "routing": "App Router (src/app)",
+    "structure": {
+      "auth": "(auth) - Login e autenticação",
+      "internal": "(internal) - Dashboard e gestão",
+      "api": "API Routes",
+      "components": "Componentes reutilizáveis",
+      "lib": "Utilitários e configurações",
+      "types": "Definições TypeScript"
+    }
+  },
+  "features": {
+    "implemented": [
+      "Sistema de autenticação",
+      "Dashboard principal",
+      "Gestão de sinistros",
+      "Fluxo de aprovação por etapas",
+      "Relatórios em PDF",
+      "Interface de administração",
+      "Controle de usuários e permissões"
+    ],
+    "in_progress": [],
+    "planned": [
+      "Melhorias na UX",
+      "Otimizações de performance",
+      "Testes automatizados"
+    ]
+  },
+  "context_memory": {
+    "user_preferences": {
+      "language": "Portuguese (BR)",
+      "coding_style": "Clean Code + TypeScript strict",
+      "ui_preference": "Modern, minimal, professional",
+      "documentation": "Always required"
+    },
+    "established_patterns": [
+      "Component.component.tsx - Lógica",
+      "Component.template.tsx - JSX",
+      "Component.types.ts - Tipos",
+      "Documentação obrigatória"
+    ],
+    "learning_insights": [
+      "Usuário prefere isolamento de responsabilidades",
+      "Documentação é crítica para o projeto",
+      "Performance e UX são prioridades"
+    ]
+  },
+  "current_phase": "context_ready",
+  "next_actions": [
+    "Aguardar comandos específicos do usuário",
+    "Responder a solicitações de desenvolvimento",
+    "Aplicar contexto em futuras interações",
+    "Manter isolamento do projeto ativo"
+  ]
+} 

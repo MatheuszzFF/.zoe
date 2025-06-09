@@ -9,6 +9,18 @@
   "priority": [
     {
       "type": "action",
+      "name": "project-name-extractor",
+      "file": "actions/project-name-extractor.json", 
+      "trigger": "IMEDIATO: Comandos com 'iniciar [projeto]', 'set project [projeto]' ou similar",
+      "description": "Extração automática de nome de projeto e correção de contexto - ANTES do context-checker",
+      "level": 0,
+      "category": "context-management",
+      "mandatory": true,
+      "blocking": true,
+      "run_before": ["context-checker"]
+    },
+    {
+      "type": "action",
       "name": "context-checker",
       "file": "actions/context-checker.json",
       "trigger": "IMEDIATO: Qualquer comando que mencione projeto ou 'zoe iniciar'",
@@ -16,7 +28,8 @@
       "level": 0,
       "category": "context-management",
       "mandatory": true,
-      "blocking": true
+      "blocking": true,
+      "run_after": ["project-name-extractor"]
     },
     {
       "type": "action",

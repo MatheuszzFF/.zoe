@@ -34,9 +34,22 @@
         "patterns": [
           "zoe, iniciar [nome-projeto]",
           "zoe iniciar [nome-projeto]",
+          "iniciar [nome-projeto]", 
           "Qualquer comando que mencione nome de projeto",
           "Comandos em projeto diferente do ativo"
-        ]
+        ],
+        "project_extraction": {
+          "regex_patterns": [
+            "(?:zoe,?\\s+)?iniciar\\s+([a-zA-Z0-9-_]+)",
+            "(?:zoe,?\\s+)?iniciar\\s+([a-zA-Z0-9-_]+)(?:\\s|$)",
+            "set project\\s+([a-zA-Z0-9-_]+)",
+            "projeto\\s+([a-zA-Z0-9-_]+)"
+          ],
+          "fallback_detection": [
+            "Verificar package.json se não houver nome explícito",
+            "Usar nome da pasta atual como último recurso"
+          ]
+        }
       },
       {
         "step": 2,
@@ -56,15 +69,26 @@
         "description": "Correção automática se necessário",
         "conditions": [
           "Se projeto solicitado ≠ projeto ativo",
-          "OU estrutura não existe"
+          "OU estrutura não existe",
+          "OU comando explícito de mudança de projeto"
         ],
         "corrections": [
-          "Atualizar active-project.json com novo projeto",
-          "CRIAR ESTRUTURA OBRIGATORIAMENTE context/projects/[novo-projeto]/",
-          "CRIAR project-context.json básico SEMPRE",
-          "CRIAR pasta progress para hoje SEMPRE",
-          "Analisar package.json do projeto para detectar stack",
-          "Log da mudança no progresso"
+          "1. EXTRAIR nome do projeto do comando usando regex",
+          "2. COMPARAR com active-project.json atual",
+          "3. SE DIFERENTE: Atualizar active-project.json com novo projeto",
+          "4. CRIAR ESTRUTURA OBRIGATORIAMENTE context/projects/[novo-projeto]/",
+          "5. CRIAR project-context.json básico SEMPRE",
+          "6. CRIAR pasta progress para hoje SEMPRE",
+          "7. ANALISAR package.json para detectar stack automaticamente",
+          "8. LOG da mudança no progresso",
+          "9. CONFIRMAR que contexto foi alterado com sucesso"
+        ],
+        "mandatory_actions": [
+          "NUNCA ignorar mudança de projeto detectada",
+          "SEMPRE criar contexto mesmo se projeto já existe",
+          "SEMPRE atualizar active-project.json",
+          "SEMPRE criar estrutura de pastas",
+          "SEMPRE registrar mudança em logs"
         ]
       },
       {
@@ -107,18 +131,31 @@
         "version": "1.0",
         "created": "[timestamp]",
         "project_name": "[nome-projeto]",
-        "description": "Auto-gerado pelo context-checker"
+        "description": "Auto-gerado pelo context-checker",
+        "detection_method": "command_parsing + package.json_analysis"
       },
       "project_overview": {
         "name": "[nome-projeto]",
-        "type": "A ser definido",
-        "objectives": ["Detectar automaticamente"],
-        "current_phase": "Inicialização",
-        "priority_focus": "Setup inicial"
+        "type": "Detectado automaticamente",
+        "objectives": ["Extraído do package.json ou definir manualmente"],
+        "current_phase": "Context criado automaticamente",
+        "priority_focus": "Setup e inicialização"
       },
       "tech_stack": {
         "auto_detected": true,
-        "detection_source": "package.json analysis"
+        "detection_source": "package.json analysis",
+        "detection_patterns": [
+          "next: Next.js detectado",
+          "react: React detectado", 
+          "typescript: TypeScript detectado",
+          "prisma: Prisma ORM detectado",
+          "@supabase: Supabase detectado"
+        ]
+      },
+      "context_creation": {
+        "triggered_by": "context-checker automatic detection",
+        "project_name_source": "[comando_usuario | package.json | folder_name]",
+        "needs_validation": true
       }
     },
     "folder_structure": {

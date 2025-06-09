@@ -19,7 +19,25 @@
       "Context-checker deve retornar status CONTEXT_READY"
     ],
     "priority_level": 3,
-    "category": "initialization"
+    "category": "initialization",
+    "RESTRICTIONS": {
+      "NEVER_DO": [
+        "run_terminal_cmd",
+        "execute npm commands",
+        "check node_modules",
+        "validate dependencies",
+        "run prisma commands",
+        "verify environment setup",
+        "install packages",
+        "check system status"
+      ],
+      "ONLY_DO": [
+        "read/write context files",
+        "show project summary",
+        "suggest next actions",
+        "update progress files"
+      ]
+    }
   },
 
   "prerequisites": {
@@ -44,7 +62,14 @@
       {
         "phase": 1,
         "name": "load_active_context",
-        "description": "Carregamento do contexto ativo",
+        "description": "Carregamento do contexto ativo (SOMENTE ARQUIVOS, SEM TERMINAL)",
+        "forbidden_actions": [
+          "run_terminal_cmd",
+          "execute_commands",
+          "check_npm",
+          "validate_dependencies",
+          "verify_environment"
+        ],
         "steps": [
           {
             "step": 1,
@@ -136,7 +161,14 @@
       {
         "phase": 4,
         "name": "suggest_next_actions",
-        "description": "Sugerir próximas ações baseadas no contexto",
+        "description": "Sugerir próximas ações baseadas no contexto (SOMENTE SUGESTÕES, SEM EXECUÇÃO)",
+        "forbidden_actions": [
+          "auto_execute_suggestions",
+          "run_terminal_cmd",
+          "execute_commands",
+          "validate_environment"
+        ],
+        "note": "APENAS apresentar sugestões, NUNCA executar comandos automaticamente",
         "logic": [
           {
             "condition": "components_created.length === 0",

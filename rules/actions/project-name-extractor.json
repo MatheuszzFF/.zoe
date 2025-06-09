@@ -1,0 +1,259 @@
+{
+  "_metadata": {
+    "action_name": "project-name-extractor",
+    "version": "1.0",
+    "format": "json",
+    "description": "Extração automática de nomes de projeto de comandos e correção de contexto",
+    "created": "2025-06-09",
+    "purpose": "Resolver problema de detecção de mudanças de projeto em comandos",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "ANTES do context-checker quando comando contém nome de projeto",
+      "zoe iniciar [projeto]",
+      "zoe, iniciar [projeto]", 
+      "iniciar [projeto]",
+      "set project [projeto]",
+      "projeto [projeto]"
+    ],
+    "automatic": true,
+    "priority_level": 0,
+    "category": "context-management", 
+    "mandatory": true,
+    "blocking": true,
+    "run_before": ["context-checker"]
+  },
+
+  "behavior": {
+    "description": "Extração inteligente de nomes de projeto e correção automática de contexto",
+    "extraction_methods": [
+      {
+        "method": 1,
+        "name": "regex_extraction",
+        "patterns": [
+          "(?:zoe,?\\s+)?iniciar\\s+([a-zA-Z0-9-_]+)(?:\\s|$)",
+          "(?:zoe,?\\s+)?iniciar\\s+([a-zA-Z0-9-_]+)",
+          "set\\s+project\\s+([a-zA-Z0-9-_]+)",
+          "projeto\\s+([a-zA-Z0-9-_]+)"
+        ],
+        "flags": "gi"
+      },
+      {
+        "method": 2,
+        "name": "package_json_fallback",
+        "description": "Se não extrair do comando, usar package.json",
+        "file": "package.json",
+        "extract": "name"
+      },
+      {
+        "method": 3,
+        "name": "folder_name_fallback",
+        "description": "Último recurso: nome da pasta atual",
+        "command": "basename $(pwd)"
+      }
+    ],
+    "validation_steps": [
+      {
+        "step": 1,
+        "action": "extract_project_name",
+        "methods": ["regex", "package_json", "folder_name"],
+        "required": true
+      },
+      {
+        "step": 2,
+        "action": "compare_with_active",
+        "file": ".zoe/rules/context/active-project.json",
+        "field": "active_project",
+        "required": true
+      },
+      {
+        "step": 3,
+        "action": "determine_action_needed",
+        "conditions": [
+          "extracted_name != active_project",
+          "extracted_name is valid",
+          "project change is explicit"
+        ]
+      }
+    ],
+    "correction_actions": [
+      {
+        "action": "update_active_project",
+        "file": ".zoe/rules/context/active-project.json",
+        "update_fields": [
+          "active_project",
+          "activated_at", 
+          "session_id",
+          "last_command",
+          "last_command_at",
+          "commands_count"
+        ]
+      },
+      {
+        "action": "create_project_structure",
+        "paths": [
+          ".zoe/rules/context/projects/[project_name]/",
+          ".zoe/rules/context/projects/[project_name]/progress/",
+          ".zoe/rules/context/projects/[project_name]/progress/[today]/"
+        ]
+      },
+      {
+        "action": "create_project_context",
+        "file": ".zoe/rules/context/projects/[project_name]/project-context.json",
+        "based_on": "package.json analysis + template"
+      },
+      {
+        "action": "create_daily_progress",
+        "file": ".zoe/rules/context/projects/[project_name]/progress/[today]/README.md",
+        "template": ".zoe/rules/context/daily-progress-template.md"
+      }
+    ]
+  },
+
+  "regex_patterns": {
+    "project_extraction": [
+      {
+        "pattern": "(?:zoe,?\\s+)?iniciar\\s+([a-zA-Z0-9-_]+)(?:\\s|$)",
+        "description": "Captura: 'zoe iniciar projeto-nome' ou 'iniciar projeto-nome'",
+        "group": 1,
+        "examples": [
+          "zoe iniciar kess-system → kess-system",
+          "zoe, iniciar meu-projeto → meu-projeto", 
+          "iniciar blog-pessoal → blog-pessoal"
+        ]
+      },
+      {
+        "pattern": "set\\s+project\\s+([a-zA-Z0-9-_]+)",
+        "description": "Captura: 'set project nome'",
+        "group": 1,
+        "examples": [
+          "set project loja-virtual → loja-virtual"
+        ]
+      },
+      {
+        "pattern": "projeto\\s+([a-zA-Z0-9-_]+)",
+        "description": "Captura: 'projeto nome'",
+        "group": 1,
+        "examples": [
+          "projeto ecommerce → ecommerce"
+        ]
+      }
+    ]
+  },
+
+  "package_json_analysis": {
+    "detection_rules": [
+      {
+        "field": "name",
+        "use_as": "project_name",
+        "required": true
+      },
+      {
+        "field": "dependencies.next",
+        "detect": "Next.js",
+        "version_extract": true
+      },
+      {
+        "field": "dependencies.react",
+        "detect": "React",
+        "version_extract": true
+      },
+      {
+        "field": "dependencies.typescript",
+        "detect": "TypeScript"
+      },
+      {
+        "field": "devDependencies.typescript",
+        "detect": "TypeScript"
+      },
+      {
+        "field": "dependencies.prisma",
+        "detect": "Prisma ORM"
+      },
+      {
+        "field": "dependencies.@supabase/supabase-js",
+        "detect": "Supabase"
+      },
+      {
+        "field": "dependencies.tailwindcss",
+        "detect": "Tailwind CSS"
+      },
+      {
+        "field": "devDependencies.tailwindcss", 
+        "detect": "Tailwind CSS"
+      }
+    ]
+  },
+
+  "output": {
+    "success_message": "🎯 **Projeto detectado e contexto corrigido automaticamente**\n📍 **Projeto ativo**: [project_name]\n🔧 **Detecção via**: [detection_method]\n✅ **Context Memory**: Carregado e funcional",
+    "variables": [
+      "project_name",
+      "detection_method",
+      "active_project_previous",
+      "context_created",
+      "stack_detected"
+    ]
+  },
+
+  "integration": {
+    "triggers_before": ["context-checker"],
+    "updates_files": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/context/projects/[project]/project-context.json"
+    ],
+    "creates_structure": [
+      ".zoe/rules/context/projects/[project]/",
+      ".zoe/rules/context/projects/[project]/progress/[today]/"
+    ],
+    "logs_to": [
+      ".zoe/rules/context/projects/[project]/progress/[today]/README.md"
+    ]
+  },
+
+  "validation": {
+    "success_criteria": [
+      "Nome do projeto extraído com sucesso",
+      "active-project.json atualizado",
+      "Estrutura de contexto criada",
+      "Context Memory funcional para novo projeto"
+    ],
+    "error_handling": [
+      {
+        "error": "no_project_name_found",
+        "fallback": "usar package.json name ou folder name"
+      },
+      {
+        "error": "invalid_project_name",
+        "fallback": "validar e corrigir caracteres inválidos"
+      },
+      {
+        "error": "permission_denied",
+        "fallback": "solicitar permissões ou modo manual"
+      }
+    ]
+  },
+
+  "examples": {
+    "successful_extraction": {
+      "input": "zoe iniciar kess-system",
+      "extracted": "kess-system",
+      "method": "regex_extraction",
+      "result": "active-project.json updated, context created"
+    },
+    "package_json_fallback": {
+      "input": "zoe iniciar",
+      "extracted": "kess-system",
+      "method": "package_json_fallback", 
+      "result": "using package.json name field"
+    },
+    "no_change_needed": {
+      "input": "otimizar performance",
+      "extracted": null,
+      "method": "no_extraction_needed",
+      "result": "keeping current active project"
+    }
+  }
+} 
