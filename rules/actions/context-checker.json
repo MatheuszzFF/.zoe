@@ -1,11 +1,12 @@
 {
   "_metadata": {
     "action_name": "context-checker",
-    "version": "1.0",
+    "version": "2.0",
     "format": "json",
-    "description": "Verificação AUTOMÁTICA de contexto antes de qualquer comando - SEMPRE executada",
+    "description": "Verificação AUTOMÁTICA e INTELIGENTE de contexto - SEMPRE executada",
     "created": "2025-01-20",
-    "converted_from": "context-checker.mdc",
+    "updated": "2025-06-10",
+    "phase": "2.0 - Smart Detection",
     "ai_optimized": true
   },
   
@@ -23,104 +24,159 @@
     "blocking": true
   },
 
-  "behavior": {
-    "description": "Verificação automática e criação obrigatória de estrutura de contexto",
-    "critical_rule": "SEMPRE CRIAR ESTRUTURA COMPLETA, MESMO SE JÁ EXISTIR PROJETO",
-    "execution_steps": [
+  "smart_detection": {
+    "description": "Sistema inteligente de detecção automática - 90% menos perguntas",
+    "auto_analysis": [
       {
-        "step": 1,
-        "action": "analyze_command",
-        "description": "Detectar padrões de comando e projeto solicitado",
-        "patterns": [
-          "zoe, iniciar [nome-projeto]",
-          "zoe iniciar [nome-projeto]",
-          "iniciar [nome-projeto]", 
-          "Qualquer comando que mencione nome de projeto",
-          "Comandos em projeto diferente do ativo"
-        ],
-        "project_extraction": {
-          "regex_patterns": [
-            "(?:zoe,?\\s+)?iniciar\\s+([a-zA-Z0-9-_]+)",
-            "(?:zoe,?\\s+)?iniciar\\s+([a-zA-Z0-9-_]+)(?:\\s|$)",
-            "set project\\s+([a-zA-Z0-9-_]+)",
-            "projeto\\s+([a-zA-Z0-9-_]+)"
-          ],
-          "fallback_detection": [
-            "Verificar package.json se não houver nome explícito",
-            "Usar nome da pasta atual como último recurso"
-          ]
+        "source": "package.json",
+        "fields": ["name", "description", "dependencies", "devDependencies"],
+        "detection_rules": {
+          "project_name": "name field or folder name",
+          "framework": "next in deps = Next.js, react = React",
+          "language": "typescript in deps = TypeScript, @types/* = TypeScript",
+          "styling": "tailwindcss = Tailwind, styled-components = Styled Components",
+          "database": "prisma = Prisma ORM, @supabase = Supabase",
+          "testing": "jest = Jest, vitest = Vitest, @testing-library = Testing Library"
         }
       },
       {
+        "source": "file_structure",
+        "patterns": {
+          "src/app/": "Next.js App Router",
+          "src/pages/": "Next.js Pages Router",
+          "prisma/": "Prisma ORM detected",
+          "tailwind.config.js": "Tailwind CSS detected",
+          "tsconfig.json": "TypeScript detected"
+        }
+      },
+      {
+        "source": "existing_context",
+        "check": ".zoe/rules/context/projects/*/project-context.json",
+        "merge_strategy": "extend existing, don't overwrite"
+      }
+    ],
+    "intelligence_rules": [
+      "NUNCA perguntar sobre stack já detectada automaticamente",
+      "APENAS perguntar sobre objetivos se não conseguir inferir",
+      "Usar nomes de pastas como fallback para nome do projeto",
+      "Inferir tipo de projeto baseado na estrutura de pastas",
+      "Manter contexto existente, apenas complementar"
+    ]
+  },
+
+  "behavior": {
+    "description": "Verificação automática e criação inteligente de estrutura de contexto",
+    "critical_rule": "DETECTAR MÁXIMO AUTOMATICAMENTE, PERGUNTAR MÍNIMO",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "smart_project_detection",
+        "description": "Detecção inteligente do projeto e contexto",
+        "auto_detection": [
+          "1. EXTRACT project name from command using improved regex",
+          "2. IF no explicit project: analyze current working directory",
+          "3. CHECK package.json for project name and stack info",
+          "4. SCAN file structure for framework/technology patterns",
+          "5. LOAD existing project-context.json if exists",
+          "6. MERGE detected info with existing context (don't overwrite)"
+        ],
+        "improved_regex": [
+          "(?:zoe,?\\s+)?iniciar\\s+([a-zA-Z0-9-_]+)",
+          "(?:set project|projeto)\\s+([a-zA-Z0-9-_]+)",
+          "working on\\s+([a-zA-Z0-9-_]+)",
+          "projeto\\s+([a-zA-Z0-9-_]+)"
+        ]
+      },
+      {
         "step": 2,
-        "action": "verify_context",
-        "description": "Verificar estado atual do contexto",
-        "validations": [
-          "Projeto solicitado == active-project.json",
-          "Estrutura context/projects/[projeto]/ existe",
-          "project-context.json existe e está atualizado",
-          "Pasta progress/[hoje]/ existe",
-          "Contexto carregado está correto"
+        "action": "intelligent_stack_detection",
+        "description": "Detecção automática completa da stack tecnológica",
+        "detection_methods": [
+          {
+            "method": "package_json_analysis",
+            "confidence": "high",
+            "patterns": {
+              "next": {"framework": "Next.js", "version": "extract from package.json"},
+              "react": {"framework": "React", "version": "extract from package.json"},
+              "typescript": {"language": "TypeScript"},
+              "@types/": {"language": "TypeScript"},
+              "tailwindcss": {"styling": "Tailwind CSS"},
+              "styled-components": {"styling": "Styled Components"},
+              "prisma": {"database": "Prisma ORM"},
+              "@supabase/supabase-js": {"auth": "Supabase", "database": "Supabase"},
+              "jest": {"testing": "Jest"},
+              "vitest": {"testing": "Vitest"},
+              "@testing-library": {"testing": "Testing Library"}
+            }
+          },
+          {
+            "method": "file_structure_scan",
+            "confidence": "medium",
+            "scan_patterns": [
+              "src/app/ → Next.js App Router",
+              "src/pages/ → Next.js Pages Router",
+              "prisma/schema.prisma → Prisma ORM",
+              "tailwind.config.js → Tailwind CSS",
+              "supabase/ → Supabase integration"
+            ]
+          }
         ]
       },
       {
         "step": 3,
-        "action": "automatic_correction",
-        "description": "Correção automática se necessário",
-        "conditions": [
-          "Se projeto solicitado ≠ projeto ativo",
-          "OU estrutura não existe",
-          "OU comando explícito de mudança de projeto"
-        ],
-        "corrections": [
-          "1. EXTRAIR nome do projeto do comando usando regex",
-          "2. COMPARAR com active-project.json atual",
-          "3. SE DIFERENTE: Atualizar active-project.json com novo projeto",
-          "4. CRIAR ESTRUTURA OBRIGATORIAMENTE context/projects/[novo-projeto]/",
-          "5. CRIAR project-context.json básico SEMPRE",
-          "6. CRIAR pasta progress para hoje SEMPRE",
-          "7. ANALISAR package.json para detectar stack automaticamente",
-          "8. LOG da mudança no progresso",
-          "9. CONFIRMAR que contexto foi alterado com sucesso"
-        ],
-        "mandatory_actions": [
-          "NUNCA ignorar mudança de projeto detectada",
-          "SEMPRE criar contexto mesmo se projeto já existe",
-          "SEMPRE atualizar active-project.json",
-          "SEMPRE criar estrutura de pastas",
-          "SEMPRE registrar mudança em logs"
+        "action": "context_sync_and_merge",
+        "description": "Sincronização inteligente de contexto",
+        "merge_strategy": {
+          "existing_context": "Load and preserve existing project-context.json",
+          "detected_info": "Merge detected stack info without overwriting user data",
+          "user_objectives": "Keep existing objectives, only suggest if empty",
+          "created_components": "Preserve component history and decisions",
+          "architectural_decisions": "Keep all existing decisions"
+        },
+        "smart_updates": [
+          "Update tech_stack only if detection confidence > existing",
+          "Add new detected technologies to existing stack",
+          "Preserve user-defined project objectives and preferences",
+          "Update last_updated timestamp only",
+          "Log detection method and confidence level"
         ]
       },
       {
         "step": 4,
-        "action": "create_mandatory_structure",
-        "description": "Criação automática obrigatória",
-        "always_verify_and_create": [
-          ".zoe/rules/context/projects/[projeto]/",
-          ".zoe/rules/context/projects/[projeto]/progress/",
-          ".zoe/rules/context/projects/[projeto]/progress/[hoje]/",
-          ".zoe/rules/context/projects/[projeto]/project-context.json",
-          ".zoe/rules/context/projects/[projeto]/progress/[hoje]/README.md"
+        "action": "minimal_user_interaction",
+        "description": "Reduzir interação com usuário ao mínimo essencial",
+        "interaction_rules": [
+          "ONLY ask if detection confidence < 70%",
+          "ONLY ask about objectives if completely empty and can't infer",  
+          "NEVER ask about detected stack technologies",
+          "NEVER ask about project name if extracted from command/folder",
+          "AUTO-CONFIRM detected information with user"
         ],
-        "commands": [
-          "mkdir -p \".zoe/rules/context/projects/[projeto]/progress/$(date +%Y-%m-%d)\"",
-          "Copy template se project-context.json não existir",
-          "Copy template se README.md progress não existir"
+        "fallback_questions": [
+          {
+            "condition": "objectives.length === 0 && cannot_infer_from_structure",
+            "question": "🎯 Qual o objetivo principal deste projeto?",
+            "optional": true,
+            "default": "Projeto em desenvolvimento"
+          }
         ]
       },
       {
         "step": 5,
-        "action": "final_validation",
-        "description": "Validação final obrigatória",
-        "mandatory_checks": [
-          "active-project.json aponta para projeto correto",
-          "project-context.json existe e é válido",
-          "Estrutura de pastas está criada",
-          "Pasta de progresso diário existe",
-          "README.md de progresso existe",
-          "Sistema pronto para operar no contexto correto"
+        "action": "create_enhanced_structure",
+        "description": "Criação automática de estrutura melhorada",
+        "always_create": [
+          ".zoe/rules/context/projects/[projeto]/",
+          ".zoe/rules/context/projects/[projeto]/progress/",
+          ".zoe/rules/context/projects/[projeto]/progress/[hoje]/",
+          ".zoe/rules/context/projects/[projeto]/project-context.json"
         ],
-        "fail_action": "PARAR execução, CRIAR estrutura faltante, REPETIR validação"
+        "enhanced_features": [
+          "Auto-populate project-context.json with detected info",
+          "Create daily progress with detected stack context",
+          "Generate suggested next actions based on project type",
+          "Create component tracking if design system detected"
+        ]
       }
     ]
   },

@@ -1,0 +1,177 @@
+{
+  "_metadata": {
+    "command_name": "zoe-health",
+    "version": "1.0",
+    "format": "json",
+    "description": "Diagnóstico automático da saúde do Sistema Zoe",
+    "created": "2025-06-10",
+    "phase": "2.0 - Health Check",
+    "ai_optimized": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "zoe health",
+      "zoe health check", 
+      "zoe diagnóstico",
+      "zoe status"
+    ],
+    "priority_level": 4,
+    "category": "system-maintenance"
+  },
+
+  "behavior": {
+    "description": "Análise completa da integridade do sistema Zoe",
+    "checks": [
+      {
+        "category": "structural_integrity",
+        "name": "Verificação Estrutural",
+        "validations": [
+          {
+            "check": "active-project.json exists and valid",
+            "file": ".zoe/rules/context/active-project.json",
+            "validation": "JSON válido com active_project definido"
+          },
+          {
+            "check": "priority-map.json consistent",
+            "file": ".zoe/rules/priority-map.json", 
+            "validation": "Todos os arquivos referenciados existem"
+          },
+          {
+            "check": "no orphaned .mdc files",
+            "scan": ".zoe/rules/actions/",
+            "validation": "Sem arquivos .mdc redundantes de 47 bytes"
+          },
+          {
+            "check": "no deprecated progress structure",
+            "path": ".zoe/rules/progress/",
+            "validation": "Pasta não deve existir (depreciada)"
+          }
+        ]
+      },
+      {
+        "category": "project_consistency",
+        "name": "Consistência de Projetos",
+        "validations": [
+          {
+            "check": "active project exists in context",
+            "validation": "Projeto ativo tem pasta em context/projects/"
+          },
+          {
+            "check": "project contexts valid",
+            "scan": ".zoe/rules/context/projects/*/project-context.json",
+            "validation": "Todos os project-context.json são JSON válidos"
+          },
+          {
+            "check": "no ghost projects",
+            "validation": "Projetos em context/ existem no workspace real"
+          }
+        ]
+      },
+      {
+        "category": "workspace_sync",
+        "name": "Sincronização com Workspace",
+        "validations": [
+          {
+            "check": "detect new projects",
+            "scan": "*/package.json",
+            "validation": "Identificar projetos não mapeados na Zoe"
+          },
+          {
+            "check": "removed projects cleanup",
+            "validation": "Remover contextos de projetos que não existem mais"
+          }
+        ]
+      },
+      {
+        "category": "system_performance",
+        "name": "Performance do Sistema",
+        "metrics": [
+          {
+            "metric": "command_response_time",
+            "target": "< 2 segundos para comandos básicos"
+          },
+          {
+            "metric": "file_size_efficiency",
+            "scan": ".zoe/rules/",
+            "validation": "Arquivos > 100KB precisam revisão"
+          }
+        ]
+      }
+    ],
+    
+    "reporting": {
+      "format": "structured_report",
+      "sections": [
+        {
+          "section": "health_summary",
+          "content": "🏥 **HEALTH CHECK SUMMARY**\n✅ Checks Passed: [count]\n❌ Issues Found: [count]\n⚠️ Warnings: [count]"
+        },
+        {
+          "section": "detailed_results", 
+          "content": "Per-category breakdown with specific issues"
+        },
+        {
+          "section": "auto_fixes",
+          "content": "Lista de problemas que podem ser corrigidos automaticamente"
+        },
+        {
+          "section": "manual_actions",
+          "content": "Ações que requerem intervenção manual"
+        },
+        {
+          "section": "recommendations",
+          "content": "Sugestões de melhorias baseadas na análise"
+        }
+      ]
+    },
+
+    "auto_fixes": {
+      "enabled": true,
+      "safe_fixes": [
+        {
+          "issue": "missing project structure",
+          "fix": "Create missing folders and basic project-context.json"
+        },
+        {
+          "issue": "invalid active-project reference",
+          "fix": "Reset to first valid project or prompt user to choose"
+        },
+        {
+          "issue": "orphaned .mdc files",
+          "fix": "Remove redundant .mdc files if .json version exists"
+        }
+      ],
+      "manual_fixes": [
+        {
+          "issue": "corrupted project-context.json",
+          "suggestion": "Review and manually fix JSON syntax"
+        },
+        {
+          "issue": "workspace-context mismatch",
+          "suggestion": "Run 'zoe sync' to synchronize projects"
+        }
+      ]
+    }
+  },
+
+  "integration": {
+    "files_read": [
+      ".zoe/rules/context/active-project.json",
+      ".zoe/rules/priority-map.json",
+      ".zoe/rules/context/projects/*/project-context.json",
+      "*/package.json"
+    ],
+    "workspace_scan": true,
+    "performance_monitoring": true
+  },
+
+  "output_templates": {
+    "healthy_system": {
+      "format": "🟢 **SISTEMA ZOE SAUDÁVEL**\n\n✅ Estrutura: Íntegra\n✅ Projetos: Sincronizados\n✅ Performance: Ótima\n\n🎯 **Próximas sugestões:** [based on analysis]"
+    },
+    "issues_found": {
+      "format": "🟡 **PROBLEMAS DETECTADOS**\n\n❌ **Críticos:** [count]\n⚠️ **Avisos:** [count]\n\n🔧 **Auto-correções disponíveis:** [list]\n📝 **Ações manuais:** [list]"
+    }
+  }
+} 

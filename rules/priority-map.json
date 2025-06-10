@@ -61,12 +61,22 @@
       "format": "json"
     },
     {
+      "type": "command",
+      "name": "zoe-health",
+      "file": "commands/zoe-health.json",
+      "trigger": ["zoe health", "zoe health check", "zoe diagnóstico", "zoe status"],
+      "description": "Diagnóstico automático da saúde do Sistema Zoe",
+      "level": 4,
+      "category": "system-maintenance",
+      "format": "json"
+    },
+    {
       "type": "action",
       "name": "feedback-capture-2.0",
-      "file": "actions/feedback-capture-2.0.mdc",
+      "file": "actions/feedback-capture-2.0.json",
       "trigger": "Usuário demonstra frustração, crítica, confusão ou feedback explícito",
       "description": "Sistema aprimorado de captura e análise de feedback",
-      "level": 4,
+      "level": 5,
       "category": "learning"
     },
     {
@@ -75,7 +85,7 @@
       "file": "commands/fix-bugs.json",
       "trigger": "fix bugs",
       "description": "Correção de bugs identificados",
-      "level": 5,
+      "level": 6,
       "category": "maintenance",
       "format": "json"
     },
@@ -85,7 +95,7 @@
       "file": "commands/optimize-performance.json",
       "trigger": "otimizar performance",
       "description": "Otimizações de performance",
-      "level": 6,
+      "level": 7,
       "category": "maintenance",
       "format": "json"
     },
@@ -291,11 +301,24 @@
     },
     {
       "type": "action",
+      "name": "mcp-auto-storage",
+      "file": "actions/mcp-auto-storage.json",
+      "trigger": "AUTOMÁTICO: Após qualquer mudança crítica no sistema",
+      "description": "Armazenamento automático de ajustes críticos e fundamentais no MCP",
+      "level": 25,
+      "category": "knowledge-preservation",
+      "mandatory": true,
+      "always_execute": true,
+      "post_execution": true,
+      "format": "json"
+    },
+    {
+      "type": "action",
       "name": "context-updater",
-      "file": "actions/context-updater.mdc",
+      "file": "actions/context-updater.json",
       "trigger": "Qualquer mudança importante no projeto",
       "description": "Atualização automática do contexto",
-      "level": 25,
+      "level": 26,
       "category": "system",
       "post_execution": true
     },
@@ -397,6 +420,13 @@
     "project-setup": {
       "description": "Configuração e detecção de projetos",
       "priority_range": [20, 30]
+    },
+    "knowledge-preservation": {
+      "description": "Preservação automática de conhecimento no MCP",
+      "priority_range": [25, 30],
+      "mandatory": true,
+      "always_execute": true,
+      "post_execution": true
     },
     "documentation": {
       "description": "Documentação automática",

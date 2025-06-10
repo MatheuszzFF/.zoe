@@ -1,0 +1,190 @@
+{
+  "_metadata": {
+    "action_name": "mcp-auto-storage",
+    "version": "1.0",
+    "format": "json",
+    "description": "Armazenamento automático de ajustes críticos e fundamentais no MCP",
+    "created": "2025-06-10",
+    "requested_by": "Math",
+    "critical_importance": "MÁXIMA - preservação de conhecimento"
+  },
+  
+  "trigger": {
+    "patterns": [
+      "AUTOMÁTICO: Após qualquer mudança crítica no sistema",
+      "SEMPRE após implementação de melhorias",
+      "SEMPRE após criação/modificação de comandos",
+      "SEMPRE após ajustes arquiteturais", 
+      "SEMPRE após correções importantes"
+    ],
+    "automatic": true,
+    "priority_level": 25,
+    "category": "knowledge-preservation",
+    "mandatory": true,
+    "always_execute": true,
+    "post_execution": true
+  },
+
+  "behavior": {
+    "description": "Captura e armazena TODA informação relevante de mudanças no MCP",
+    "critical_rule": "NADA PODE SER PERDIDO - TODO AJUSTE DEVE SER DOCUMENTADO",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "detect_changes",
+        "description": "Detectar tipos de mudanças realizadas",
+        "detection_categories": [
+          "arquivo_criado",
+          "arquivo_modificado", 
+          "comando_implementado",
+          "action_criada",
+          "estrutura_alterada",
+          "regra_estabelecida",
+          "melhoria_implementada",
+          "correção_aplicada",
+          "decisão_arquitetural"
+        ]
+      },
+      {
+        "step": 2,
+        "action": "extract_information",
+        "description": "Extrair TODA informação relevante da mudança",
+        "extraction_targets": [
+          "Nome e tipo da mudança",
+          "Objetivo e motivação",
+          "Implementação detalhada",
+          "Impacto no sistema",
+          "Benefícios obtidos",
+          "Configurações alteradas",
+          "Dependências criadas",
+          "Padrões estabelecidos",
+          "Decisões tomadas",
+          "Próximos passos sugeridos"
+        ]
+      },
+      {
+        "step": 3,
+        "action": "categorize_storage",
+        "description": "Categorizar informação para armazenamento estruturado",
+        "storage_categories": {
+          "funcionalidades": "Novos comandos, actions, recursos",
+          "melhorias_sistema": "Upgrades, otimizações, modernizações",
+          "decisões_arquiteturais": "Padrões, estruturas, organizações",
+          "correções_críticas": "Bugs resolvidos, problemas corrigidos",
+          "configurações": "Settings, parâmetros, regras estabelecidas",
+          "integracoes": "Conexões entre sistemas, dependências",
+          "patterns_descobertos": "Padrões identificados, boas práticas"
+        }
+      },
+      {
+        "step": 4,
+        "action": "store_in_mcp",
+        "description": "Armazenar informação estruturada no MCP",
+        "storage_methods": [
+          {
+            "method": "create_entities",
+            "for": "Novas funcionalidades, sistemas, conceitos",
+            "format": "Entidade com observações detalhadas"
+          },
+          {
+            "method": "add_observations", 
+            "for": "Updates em entidades existentes",
+            "format": "Novas observações com contexto completo"
+          },
+          {
+            "method": "create_relations",
+            "for": "Conexões entre mudanças e sistemas",
+            "format": "Relações que explicam dependências"
+          }
+        ]
+      },
+      {
+        "step": 5,
+        "action": "ensure_completeness",
+        "description": "Garantir que NADA foi perdido",
+        "validation_checks": [
+          "Toda informação técnica capturada",
+          "Contexto completo preservado",
+          "Relações entre mudanças documentadas",
+          "Impacto no sistema registrado",
+          "Benefícios e objetivos claros",
+          "Próximos passos identificados"
+        ]
+      }
+    ]
+  },
+
+  "mcp_templates": {
+    "funcionalidade_nova": {
+      "entityType": "Funcionalidade Sistema",
+      "observations_template": [
+        "Descrição completa da funcionalidade",
+        "Como ativar/usar",
+        "Parâmetros e opções disponíveis",
+        "Integração com outros sistemas",
+        "Benefícios e casos de uso",
+        "Data de implementação",
+        "Versão e melhorias"
+      ]
+    },
+    "melhoria_sistema": {
+      "entityType": "Melhorias Sistema", 
+      "observations_template": [
+        "Problema original identificado",
+        "Solução implementada",
+        "Método de implementação",
+        "Impacto na performance/UX",
+        "Métricas de melhoria",
+        "Configurações alteradas",
+        "Compatibilidade e dependências"
+      ]
+    },
+    "decisao_arquitetural": {
+      "entityType": "Decisão Arquitetural",
+      "observations_template": [
+        "Contexto da decisão",
+        "Opções consideradas",
+        "Decisão tomada e rationale",
+        "Impacto na arquitetura",
+        "Benefícios esperados",
+        "Riscos identificados",
+        "Implementação realizada"
+      ]
+    }
+  },
+
+  "automation_rules": {
+    "when_to_execute": [
+      "SEMPRE após criar/modificar arquivo em .zoe/rules/",
+      "SEMPRE após implementar novo comando",
+      "SEMPRE após fazer mudança estrutural",
+      "SEMPRE após resolver problema crítico",
+      "SEMPRE após estabelecer nova regra",
+      "SEMPRE após otimização importante"
+    ],
+    "what_to_capture": [
+      "TUDO relacionado à mudança",
+      "Contexto completo da decisão",
+      "Impacto em outros sistemas",
+      "Benefícios obtidos",
+      "Configurações alteradas",
+      "Padrões estabelecidos",
+      "Dependências criadas"
+    ],
+    "how_to_store": [
+      "Usar português para entidades e observações",
+      "Ser específico e detalhado",
+      "Incluir datas e versões",
+      "Referenciar arquivos alterados",
+      "Conectar com entidades relacionadas",
+      "Preservar contexto técnico completo"
+    ]
+  },
+
+  "integration": {
+    "related_systems": ["MCP Memory", "Project Context", "Priority System"],
+    "files_monitored": [".zoe/rules/**/*.json", ".zoe/rules/**/*.mdc"],
+    "triggers_integration": ["post_command_execution", "post_action_execution"],
+    "mandatory_execution": true
+  }
+} 
