@@ -124,6 +124,28 @@
       },
       {
         "step": 3,
+        "action": "mcp_context_enrichment",
+        "description": "Enriquecimento do contexto com conhecimento MCP",
+        "mcp_integration": {
+          "search_queries": [
+            "Buscar informações sobre projeto [nome_projeto]",
+            "Buscar padrões e decisões arquiteturais do projeto",
+            "Buscar histórico de desenvolvimento e componentes criados",
+            "Buscar stack tecnológica e configurações estabelecidas",
+            "Buscar problemas resolvidos e soluções aplicadas"
+          ],
+          "knowledge_application": [
+            "Enriquecer tech_stack com informações MCP",
+            "Complementar objectives com conhecimento histórico",
+            "Adicionar component_history se disponível no MCP",
+            "Incluir architectural_decisions conhecidas",
+            "Preservar learning_insights acumulados"
+          ],
+          "merge_strategy": "MCP conhecimento + detecção automática + contexto existente"
+        }
+      },
+      {
+        "step": 4,
         "action": "context_sync_and_merge",
         "description": "Sincronização inteligente de contexto",
         "merge_strategy": {
@@ -142,7 +164,7 @@
         ]
       },
       {
-        "step": 4,
+        "step": 5,
         "action": "minimal_user_interaction",
         "description": "Reduzir interação com usuário ao mínimo essencial",
         "interaction_rules": [
@@ -162,7 +184,7 @@
         ]
       },
       {
-        "step": 5,
+        "step": 6,
         "action": "create_enhanced_structure",
         "description": "Criação automática de estrutura melhorada",
         "always_create": [

@@ -1,0 +1,222 @@
+{
+  "_metadata": {
+    "action_name": "mcp-context-loader",
+    "version": "1.0",
+    "format": "json",
+    "description": "Consulta AUTOMÁTICA e OBRIGATÓRIA do MCP antes de qualquer resposta",
+    "created": "2025-06-10",
+    "requested_by": "Math",
+    "critical_importance": "MÁXIMA - conhecimento portável e persistente",
+    "universal_access": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "AUTOMÁTICO: ANTES de qualquer resposta ou comando",
+      "SEMPRE ao inicializar conversa",
+      "SEMPRE ao detectar nova sessão",
+      "SEMPRE que usuário enviar mensagem"
+    ],
+    "automatic": true,
+    "priority_level": 0,
+    "category": "universal-context",
+    "mandatory": true,
+    "blocking": true,
+    "execution_order": "PRIMEIRO - antes de qualquer outra action"
+  },
+
+  "behavior": {
+    "description": "Carrega conhecimento universal do MCP para contexto de qualquer conversa",
+    "critical_rule": "SEMPRE CONSULTAR MCP - INDEPENDENTE DE PROJETO, MÁQUINA OU CONTEXTO",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "detect_session_context",
+        "description": "Detectar contexto da sessão atual",
+        "detection_points": [
+          "Primeiro acesso da sessão",
+          "Projeto mencionado pelo usuário",
+          "Comando específico solicitado",
+          "Contexto técnico identificado",
+          "Referência a trabalho anterior"
+        ]
+      },
+      {
+        "step": 2,
+        "action": "universal_mcp_search",
+        "description": "Busca inteligente no MCP baseada no contexto",
+        "search_strategies": [
+          {
+            "strategy": "context_based_search",
+            "queries": [
+              "Buscar informações sobre Math e suas preferências",
+              "Buscar conhecimento sobre projetos mencionados",
+              "Buscar padrões e decisões arquiteturais relevantes",
+              "Buscar funcionalidades e melhorias do Sistema Zoe",
+              "Buscar histórico de problemas resolvidos"
+            ]
+          },
+          {
+            "strategy": "recent_knowledge_search",
+            "queries": [
+              "Buscar últimas mudanças e melhorias implementadas",
+              "Buscar decisões recentes e configurações",
+              "Buscar novos comandos e funcionalidades",
+              "Buscar problemas recentes e soluções aplicadas"
+            ]
+          },
+          {
+            "strategy": "project_specific_search",
+            "condition": "IF project mentioned in user message",
+            "queries": [
+              "Buscar contexto específico do projeto [nome_projeto]",
+              "Buscar stack tecnológica do projeto",
+              "Buscar componentes criados e padrões estabelecidos",
+              "Buscar histórico de desenvolvimento do projeto"
+            ]
+          }
+        ]
+      },
+      {
+        "step": 3,
+        "action": "knowledge_synthesis",
+        "description": "Sintetizar conhecimento encontrado para aplicação",
+        "synthesis_categories": [
+          {
+            "category": "user_preferences",
+            "content": "Preferências do Math, estilo de comunicação, linguagem",
+            "application": "Personalizar resposta e abordagem"
+          },
+          {
+            "category": "project_context",
+            "content": "Stack, objetivos, padrões, componentes, decisões",
+            "application": "Fornecer contexto específico do projeto"
+          },
+          {
+            "category": "system_knowledge",
+            "content": "Funcionalidades Zoe, comandos, melhorias, configurações",
+            "application": "Sugerir ferramentas e recursos disponíveis"
+          },
+          {
+            "category": "historical_solutions",
+            "content": "Problemas resolvidos, padrões descobertos, lições aprendidas",
+            "application": "Evitar repetir problemas, aplicar soluções conhecidas"
+          }
+        ]
+      },
+      {
+        "step": 4,
+        "action": "context_integration",
+        "description": "Integrar conhecimento MCP ao contexto da conversa",
+        "integration_methods": [
+          "Aplicar preferências do usuário automaticamente",
+          "Carregar contexto de projeto mencionado",
+          "Sugerir comandos/funcionalidades relevantes",
+          "Referenciar decisões e padrões estabelecidos",
+          "Mencionar melhorias e recursos disponíveis"
+        ]
+      },
+      {
+        "step": 5,
+        "action": "adaptive_response_preparation",
+        "description": "Preparar resposta adaptada com conhecimento carregado",
+        "adaptation_rules": [
+          "SEMPRE usar conhecimento sobre Math e preferências",
+          "SEMPRE referenciar contexto relevante quando aplicável",
+          "SEMPRE sugerir ferramentas Zoe quando útil",
+          "SEMPRE aplicar padrões e decisões conhecidas",
+          "SEMPRE mencionar histórico relevante quando pertinente"
+        ]
+      }
+    ]
+  },
+
+  "mcp_search_patterns": {
+    "general_context": [
+      "Math desenvolvedor preferências sistema",
+      "Sistema Zoe funcionalidades comandos",
+      "projetos stack tecnologia padrões"
+    ],
+    "project_specific": [
+      "[nome_projeto] stack objetivos componentes",
+      "[nome_projeto] decisões arquiteturais padrões",
+      "[nome_projeto] problemas soluções histórico"
+    ],
+    "technical_context": [
+      "React Next.js TypeScript padrões componentes",
+      "Prisma Supabase configurações integração",
+      "testes patterns desenvolvimento qualidade"
+    ],
+    "system_updates": [
+      "últimas melhorias funcionalidades Zoe",
+      "comandos recentes actions implementadas",
+      "correções problemas sistema otimizações"
+    ]
+  },
+
+  "knowledge_application": {
+    "immediate_application": [
+      "Personalizar tom e abordagem baseado em preferências Math",
+      "Aplicar contexto de projeto automaticamente",
+      "Sugerir comandos Zoe relevantes para situação",
+      "Referenciar padrões e decisões estabelecidas"
+    ],
+    "contextual_enhancement": [
+      "Enriquecer respostas com conhecimento histórico",
+      "Conectar situação atual com experiências passadas",
+      "Sugerir melhorias baseadas em lições aprendidas",
+      "Antecipar necessidades baseado em padrões conhecidos"
+    ],
+    "proactive_assistance": [
+      "Mencionar funcionalidades úteis não solicitadas",
+      "Alertar sobre problemas conhecidos e soluções",
+      "Sugerir próximos passos baseado em contexto",
+      "Oferecer otimizações e melhorias relevantes"
+    ]
+  },
+
+  "fallback_strategies": {
+    "mcp_unavailable": [
+      "Continuar com conhecimento base disponível",
+      "Informar que contexto personalizado não foi carregado",
+      "Solicitar informações essenciais se necessário"
+    ],
+    "no_relevant_context": [
+      "Buscar padrões gerais no MCP",
+      "Aplicar preferências básicas conhecidas",
+      "Usar conhecimento geral do Sistema Zoe"
+    ],
+    "partial_context": [
+      "Aplicar contexto parcial disponível",
+      "Complementar com busca adicional se possível",
+      "Mencionar limitações do contexto carregado"
+    ]
+  },
+
+  "performance_optimization": {
+    "search_efficiency": [
+      "Priorizar buscas baseadas em palavras-chave da mensagem",
+      "Limitar número de queries simultâneas",
+      "Cache de resultados para sessão ativa"
+    ],
+    "response_speed": [
+      "Executar buscas em paralelo quando possível",
+      "Timeout máximo de 3 segundos para carregamento",
+      "Fallback rápido se MCP não responder"
+    ]
+  },
+
+  "integration": {
+    "related_systems": ["MCP Memory", "Context-Checker", "Project Management"],
+    "execution_guarantee": "MUST execute before any other action or response",
+    "failure_handling": "Continue with available context, log failure",
+    "success_metrics": "Knowledge successfully applied to response"
+  },
+
+  "output_integration": {
+    "silent_operation": "Carregamento deve ser transparente ao usuário",
+    "context_indication": "Mencionar sutilmente quando aplicar contexto específico",
+    "knowledge_citation": "Referenciar discretamente conhecimento aplicado",
+    "continuous_learning": "Registrar novos insights descobertos durante interação"
+  }
+} 

@@ -9,11 +9,24 @@
   "priority": [
     {
       "type": "action",
+      "name": "mcp-context-loader",
+      "file": "actions/mcp-context-loader.json",
+      "trigger": "AUTOMÁTICO: ANTES de qualquer resposta ou comando",
+      "description": "Consulta AUTOMÁTICA e OBRIGATÓRIA do MCP antes de qualquer resposta",
+      "level": 0,
+      "category": "universal-context",
+      "mandatory": true,
+      "blocking": true,
+      "execution_order": "PRIMEIRO - antes de qualquer outra action",
+      "format": "json"
+    },
+    {
+      "type": "action", 
       "name": "context-checker",
-      "file": "actions/context-checker.mdc",
+      "file": "actions/context-checker.json",
       "trigger": "IMEDIATO: Qualquer comando que mencione projeto ou 'zoe iniciar'",
       "description": "Verificação AUTOMÁTICA de contexto antes de qualquer comando - SEMPRE executada",
-      "level": 0,
+      "level": 1,
       "category": "context-management",
       "mandatory": true,
       "blocking": true
@@ -324,6 +337,19 @@
     },
     {
       "type": "action",
+      "name": "mcp-context-sync",
+      "file": "actions/mcp-context-sync.json",
+      "trigger": "AUTOMÁTICO: Após qualquer mudança em contexto/progresso",
+      "description": "Sincronização contínua MCP ↔ Contexto Local",
+      "level": 27,
+      "category": "context-maintenance",
+      "mandatory": true,
+      "post_execution": true,
+      "frequency": "continuous",
+      "format": "json"
+    },
+    {
+      "type": "action",
       "name": "auto-documentation",
       "file": "actions/auto-documentation.mdc",
       "trigger": "Fiz qualquer ajuste no código",
@@ -377,6 +403,13 @@
   ],
 
   "categories": {
+    "universal-context": {
+      "description": "Contexto universal e conhecimento MCP - SEMPRE primeiro",
+      "priority_range": [0, 0],
+      "mandatory": true,
+      "blocking": true,
+      "execution_order": "ABSOLUTA PRIORIDADE"
+    },
     "security": {
       "description": "Ações de segurança e proteção do sistema",
       "priority_range": [1, 10],
@@ -427,6 +460,13 @@
       "mandatory": true,
       "always_execute": true,
       "post_execution": true
+    },
+    "context-maintenance": {
+      "description": "Manutenção contínua de contexto e sincronização MCP",
+      "priority_range": [27, 27],
+      "mandatory": true,
+      "post_execution": true,
+      "frequency": "continuous"
     },
     "documentation": {
       "description": "Documentação automática",

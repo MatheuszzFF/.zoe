@@ -1,0 +1,226 @@
+{
+  "_metadata": {
+    "action_name": "mcp-context-sync",
+    "version": "1.0",
+    "format": "json",
+    "description": "Sincronização contínua entre MCP e contexto/progresso local",
+    "created": "2025-06-10",
+    "requested_by": "Math",
+    "critical_importance": "ALTA - manter contexto sempre atualizado",
+    "continuous_sync": true
+  },
+  
+  "trigger": {
+    "patterns": [
+      "AUTOMÁTICO: Após qualquer mudança em contexto/progresso",
+      "SEMPRE após atualização de project-context.json",
+      "SEMPRE após criação de progresso diário",
+      "SEMPRE após comandos que alterem contexto",
+      "PERIÓDICO: Verificação de sincronização"
+    ],
+    "automatic": true,
+    "priority_level": 27,
+    "category": "context-maintenance",
+    "mandatory": true,
+    "post_execution": true,
+    "frequency": "continuous"
+  },
+
+  "behavior": {
+    "description": "Mantém sincronização bidirecional entre MCP e contexto local",
+    "critical_rule": "CONTEXTO SEMPRE ATUALIZADO COM CONHECIMENTO MCP",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "detect_context_changes",
+        "description": "Detectar mudanças em contexto e progresso",
+        "monitoring_targets": [
+          "project-context.json modifications",
+          "daily progress updates",
+          "component creation/changes",
+          "architectural decisions made",
+          "tech stack updates",
+          "objectives changes"
+        ]
+      },
+      {
+        "step": 2,
+        "action": "bidirectional_sync",
+        "description": "Sincronização bidirecional MCP ↔ Contexto Local",
+        "sync_directions": [
+          {
+            "direction": "MCP → Local Context",
+            "description": "Enriquecer contexto local com conhecimento MCP",
+            "process": [
+              "Search MCP for project-specific knowledge",
+              "Extract relevant information (patterns, decisions, components)",
+              "Merge with existing context without overwriting user data",
+              "Update tech_stack with MCP insights",
+              "Add historical context and lessons learned"
+            ]
+          },
+          {
+            "direction": "Local Context → MCP", 
+            "description": "Atualizar MCP com mudanças locais",
+            "process": [
+              "Detect new information in local context",
+              "Format for MCP storage",
+              "Create/update entities with new knowledge",
+              "Establish relations between concepts",
+              "Tag with timestamps and project context"
+            ]
+          }
+        ]
+      },
+      {
+        "step": 3,
+        "action": "progress_enhancement",
+        "description": "Enriquecer progresso diário com contexto MCP",
+        "enhancement_methods": [
+          "Add suggested next actions based on MCP knowledge",
+          "Include relevant patterns from similar projects",
+          "Reference architectural decisions from MCP",
+          "Suggest components based on project history",
+          "Include performance insights and optimizations",
+          "Add testing strategies from MCP knowledge"
+        ]
+      },
+      {
+        "step": 4,
+        "action": "intelligent_suggestions",
+        "description": "Gerar sugestões inteligentes baseadas em MCP",
+        "suggestion_types": [
+          {
+            "type": "next_actions",
+            "source": "MCP project patterns + current context",
+            "format": "📋 Próximas ações sugeridas baseadas no histórico"
+          },
+          {
+            "type": "architectural_guidance",
+            "source": "MCP architectural decisions + project type",
+            "format": "🏗️ Padrões arquiteturais recomendados"
+          },
+          {
+            "type": "component_suggestions",
+            "source": "MCP component library + project needs",
+            "format": "🧩 Componentes que podem ser úteis"
+          },
+          {
+            "type": "optimization_opportunities",
+            "source": "MCP performance insights + current stack",
+            "format": "⚡ Oportunidades de otimização identificadas"
+          }
+        ]
+      },
+      {
+        "step": 5,
+        "action": "continuous_learning",
+        "description": "Aprender continuamente das interações",
+        "learning_aspects": [
+          "Track successful patterns and decisions",
+          "Identify recurring problems and solutions",
+          "Monitor component usage and effectiveness",
+          "Analyze project evolution patterns",
+          "Capture user preferences and feedback",
+          "Document performance improvements"
+        ]
+      }
+    ]
+  },
+
+  "sync_strategies": {
+    "project_context_sync": {
+      "mcp_to_local": [
+        "Enrich tech_stack with historical configurations",
+        "Add architectural_decisions from MCP knowledge",
+        "Include component_history if available",
+        "Merge learning_insights from similar projects",
+        "Update preferences based on user behavior"
+      ],
+      "local_to_mcp": [
+        "Store new tech_stack discoveries",
+        "Document architectural decisions made",
+        "Record component creation and patterns",
+        "Save problem-solution pairs",
+        "Update project evolution timeline"
+      ]
+    },
+    "progress_sync": {
+      "mcp_enhancement": [
+        "Add context-aware task suggestions",
+        "Include relevant historical references",
+        "Suggest optimizations based on patterns",
+        "Reference similar project solutions",
+        "Provide proactive guidance"
+      ],
+      "mcp_updates": [
+        "Record daily achievements",
+        "Document decisions and rationale",
+        "Track component development",
+        "Monitor problem resolution",
+        "Capture learning moments"
+      ]
+    }
+  },
+
+  "intelligent_features": {
+    "adaptive_suggestions": {
+      "description": "Sugestões que se adaptam ao contexto atual",
+      "algorithms": [
+        "Match current project phase with historical patterns",
+        "Identify similar projects and suggest proven approaches",
+        "Recommend components based on project type and stack",
+        "Suggest optimizations based on performance insights"
+      ]
+    },
+    "proactive_assistance": {
+      "description": "Assistência proativa baseada em padrões conhecidos",
+      "triggers": [
+        "Detect common problem patterns early",
+        "Suggest preventive measures based on history",
+        "Recommend tools and practices for current phase",
+        "Alert about potential issues before they occur"
+      ]
+    },
+    "context_preservation": {
+      "description": "Preservação inteligente de contexto crítico",
+      "strategies": [
+        "Automatically backup critical decisions",
+        "Preserve architectural rationale and trade-offs",
+        "Maintain component evolution history",
+        "Document performance optimization history"
+      ]
+    }
+  },
+
+  "performance_optimization": {
+    "sync_efficiency": [
+      "Incremental updates only (detect changes)",
+      "Parallel processing for multiple sync operations",
+      "Intelligent caching to avoid redundant queries",
+      "Background execution to avoid blocking user"
+    ],
+    "resource_management": [
+      "Limit concurrent MCP operations",
+      "Implement exponential backoff for failures",
+      "Use compression for large context transfers",
+      "Clean up stale cache entries"
+    ]
+  },
+
+  "integration": {
+    "related_systems": ["MCP Memory", "Context-Checker", "Auto-Storage", "Project Management"],
+    "execution_timing": "post_execution - after main actions complete",
+    "failure_tolerance": "Continue with available data if MCP unavailable",
+    "success_metrics": "Context enrichment successfully applied"
+  },
+
+  "output_templates": {
+    "sync_success": {
+      "format": "🔄 Contexto sincronizado com MCP\n📊 {enrichments_count} melhorias aplicadas\n🎯 {suggestions_count} sugestões geradas"
+    },
+    "sync_partial": {
+      "format": "🔄 Sincronização parcial realizada\n⚠️ {issues_count} limitações encontradas\n✅ {successes_count} atualizações aplicadas"
+    }
+  }
+} 
