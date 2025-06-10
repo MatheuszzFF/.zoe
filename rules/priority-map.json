@@ -9,32 +9,19 @@
   "priority": [
     {
       "type": "action",
-      "name": "project-name-extractor",
-      "file": "actions/project-name-extractor.json", 
-      "trigger": "IMEDIATO: Comandos com 'iniciar [projeto]', 'set project [projeto]' ou similar",
-      "description": "Extração automática de nome de projeto e correção de contexto - ANTES do context-checker",
-      "level": 0,
-      "category": "context-management",
-      "mandatory": true,
-      "blocking": true,
-      "run_before": ["context-checker"]
-    },
-    {
-      "type": "action",
       "name": "context-checker",
-      "file": "actions/context-checker.json",
+      "file": "actions/context-checker.mdc",
       "trigger": "IMEDIATO: Qualquer comando que mencione projeto ou 'zoe iniciar'",
       "description": "Verificação AUTOMÁTICA de contexto antes de qualquer comando - SEMPRE executada",
       "level": 0,
       "category": "context-management",
       "mandatory": true,
-      "blocking": true,
-      "run_after": ["project-name-extractor"]
+      "blocking": true
     },
     {
       "type": "action",
       "name": "rule-change-guard",
-      "file": "actions/rule-change-guard.json",
+      "file": "actions/rule-change-guard.mdc",
       "trigger": "Vou alterar qualquer regra do sistema",
       "description": "Proteção obrigatória antes de alterações em regras",
       "level": 1,
@@ -44,7 +31,7 @@
     {
       "type": "action",
       "name": "progress-path-corrector",
-      "file": "actions/progress-path-corrector.json",
+      "file": "actions/progress-path-corrector.mdc",
       "trigger": "Detecção de uso de caminho progress depreciado",
       "description": "Correção automática de caminhos de progress para isolamento por projeto",
       "level": 2,
@@ -76,7 +63,7 @@
     {
       "type": "action",
       "name": "feedback-capture-2.0",
-      "file": "actions/feedback-capture-2.0.json",
+      "file": "actions/feedback-capture-2.0.mdc",
       "trigger": "Usuário demonstra frustração, crítica, confusão ou feedback explícito",
       "description": "Sistema aprimorado de captura e análise de feedback",
       "level": 4,
@@ -105,7 +92,7 @@
     {
       "type": "action",
       "name": "execute-direct",
-      "file": "actions/execute-direct.json",
+      "file": "actions/execute-direct.mdc",
       "trigger": "Usuário enviou código (TSX, JSX, React)",
       "description": "Execução direta de código React enviado",
       "level": 7,
@@ -265,7 +252,7 @@
     {
       "type": "command",
       "name": "detect-stack",
-      "file": "actions/stack-autodetection.json",
+      "file": "actions/stack-autodetection.mdc",
       "trigger": ["detect stack", "autodetect", "detectar stack"],
       "description": "Autodetecção inteligente de stack tecnológica",
       "level": 23,
@@ -274,7 +261,7 @@
     {
       "type": "action",
       "name": "project-context-manager",
-      "file": "actions/project-context-manager.json",
+      "file": "actions/project-context-manager.mdc",
       "trigger": "SEMPRE antes de qualquer comando que afete progresso/contexto",
       "description": "Gerenciamento de contexto ativo do projeto com isolamento total",
       "level": 0,
@@ -285,7 +272,7 @@
     {
       "type": "action",
       "name": "project-creator",
-      "file": "actions/project-creator.json",
+      "file": "actions/project-creator.mdc",
       "trigger": "Context-checker determina que projeto não existe",
       "description": "Criação física automática de estrutura de projeto com templates",
       "level": 1,
@@ -296,7 +283,7 @@
     {
       "type": "action",
       "name": "stack-autodetection",
-      "file": "actions/stack-autodetection.json",
+      "file": "actions/stack-autodetection.mdc",
       "trigger": "Criação de novo projeto sem contexto ou comando detect stack",
       "description": "Detecção automática de stack baseada em arquivos de configuração",
       "level": 24,
@@ -305,7 +292,7 @@
     {
       "type": "action",
       "name": "context-updater",
-      "file": "actions/context-updater.json",
+      "file": "actions/context-updater.mdc",
       "trigger": "Qualquer mudança importante no projeto",
       "description": "Atualização automática do contexto",
       "level": 25,
@@ -315,7 +302,7 @@
     {
       "type": "action",
       "name": "auto-documentation",
-      "file": "actions/auto-documentation.json",
+      "file": "actions/auto-documentation.mdc",
       "trigger": "Fiz qualquer ajuste no código",
       "description": "Documentação automática de mudanças",
       "level": 50,
@@ -325,7 +312,7 @@
     {
       "type": "action",
       "name": "update-docs",
-      "file": "actions/update-docs.json",
+      "file": "actions/update-docs.mdc",
       "trigger": "Alterei qualquer regra/comando/action",
       "description": "Atualização da documentação do sistema",
       "level": 51,
@@ -335,7 +322,7 @@
     {
       "type": "action",
       "name": "zoe-docs-updater",
-      "file": "actions/zoe-docs-updater.json",
+      "file": "actions/zoe-docs-updater.mdc",
       "trigger": "Mudanças no projeto 'zoe' ou comando 'update zoe docs'",
       "description": "Atualização automática do how-zoe-works.md para humanos",
       "level": 52,
@@ -345,7 +332,7 @@
     {
       "type": "action",
       "name": "priority-logger",
-      "file": "actions/priority-logger.json",
+      "file": "actions/priority-logger.mdc",
       "trigger": "Sistema de prioridades toma decisão",
       "description": "Logging de decisões de prioridade",
       "level": 0,
@@ -356,7 +343,7 @@
     {
       "type": "action",
       "name": "moderate-formatting",
-      "file": "actions/moderate-formatting.json",
+      "file": "actions/moderate-formatting.mdc",
       "trigger": "Qualquer resposta ou criação",
       "description": "Formatação moderada e consistente",
       "level": 99,

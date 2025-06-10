@@ -1,136 +1,184 @@
 {
   "_metadata": {
-    "version": "2.0",
-    "created": "2025-01-09",
-    "last_updated": "2025-01-09",
-    "project_name": "Zoe",
-    "project_type": "AI Assistant Development",
-    "description": "Contexto específico do desenvolvimento da assistente Zoe"
+    "version": "1.0",
+    "created": "2025-06-09",
+    "last_updated": "2025-06-09T17:00:00Z",
+    "project_name": "zoe",
+    "description": "Contexto específico do projeto Zoe - Sistema inteligente de desenvolvimento"
   },
   "project_overview": {
-    "name": "Zoe",
-    "type": "AI Assistant Development",
+    "name": "zoe",
+    "type": "AI Development System",
     "objectives": [
-      "Desenvolver sistema de regras e contexto para assistente IA",
-      "Implementar padrões de desenvolvimento consistentes",
-      "Criar templates reutilizáveis para projetos",
-      "Estabelecer workflows de desenvolvimento eficientes"
+      "Sistema inteligente de desenvolvimento React/Next.js",
+      "Context Memory avançado com isolamento por projeto",
+      "Autodetecção de stack e configurações",
+      "Documentação automática e progresso por projeto",
+      "Sistema de prioridades e comandos contextuais"
     ],
-    "current_phase": "Desenvolvimento Ativo",
-    "priority_focus": "Sistema de Padrões e Templates",
-    "location": ".zoe/",
-    "mono_repo": false
+    "current_phase": "Sistema de Contexto por Projeto v2.0",
+    "priority_focus": "Multi-project context management"
   },
   "tech_stack": {
     "detected_automatically": false,
     "detection_confidence": "manual",
-    "detection_method": "manual configuration",
-    "primary": {
-      "language": "JSON",
-      "configuration": "Markdown",
-      "templates": "JSON/Markdown",
-      "rules": "Markdown"
+    "detection_method": "manual_configuration",
+    "frontend": {
+      "language": "TypeScript",
+      "framework": "React",
+      "meta_framework": "Next.js",
+      "css_framework": "Tailwind CSS"
+    },
+    "backend": {
+      "runtime": "Node.js",
+      "database": "File-based (JSON/Markdown)",
+      "orm": "Custom file system"
     },
     "development": {
-      "version_control": "Git",
-      "documentation": "Markdown",
-      "structure": "Hierarchical JSON"
-    }
-  },
-  "architectural_patterns": {
-    "rule_system": {
-      "separation_pattern": "Contexto por projeto",
-      "file_structure": {
-        "rules_file": "zoe-chore.mdc",
-        "context_files": "project-context.json",
-        "progress_files": "daily progress in markdown",
-        "pattern_files": "JSON pattern definitions"
-      },
-      "responsibility_separation": {
-        "rules_layer": "Regras gerais de comportamento",
-        "context_layer": "Contexto específico do projeto",
-        "progress_layer": "Acompanhamento de progresso diário"
-      }
+      "testing": "Vitest",
+      "bundler": "Webpack (via Next.js)",
+      "linting": "ESLint",
+      "ai_system": "Claude Sonnet (Cursor integration)"
     },
-    "template_patterns": {
-      "project_templates": "Templates JSON para novos projetos",
-      "progress_templates": "Templates Markdown para progresso",
-      "pattern_templates": "Templates para definição de padrões"
+    "zoe_specific": {
+      "rules_system": "Markdown-based commands and actions",
+      "priority_system": "JSON-based level management",
+      "context_memory": "JSON-based project isolation",
+      "documentation": "Auto-generated markdown"
     }
   },
-  "development_workflow": {
-    "rule_creation_process": [
-      "Identificar necessidade de nova regra",
-      "Documentar no arquivo apropriado",
-      "Testar implementação",
-      "Atualizar templates se necessário"
-    ],
-    "context_management": [
-      "Manter contexto por projeto",
-      "Atualizar progresso diariamente",
-      "Documentar padrões descobertos"
-    ],
-    "template_workflow": [
-      "Criar template base",
-      "Testar com projeto real",
-      "Refinar baseado no uso",
-      "Documentar uso correto"
-    ]
+  "architectural_decisions": [
+    {
+      "date": "2025-06-08",
+      "decision": "Context Memory System implementation",
+      "rationale": "Allow intelligent project-specific context loading",
+      "impact": "Never repeat stack questions for known projects"
+    },
+    {
+      "date": "2025-06-08",
+      "decision": "Priority System for command resolution",
+      "rationale": "Prevent conflicts between multiple triggered commands",
+      "impact": "Predictable and scalable command execution"
+    },
+    {
+      "date": "2025-06-09",
+      "decision": "Multi-project isolation system",
+      "rationale": "Complete context separation between different projects",
+      "impact": "Never mix logs/progress/stack between projects"
+    },
+    {
+      "date": "2025-06-09",
+      "decision": "Stack autodetection with file analysis",
+      "rationale": "Reduce manual configuration for new projects",
+      "impact": "Intelligent project setup with minimal user input"
+    }
+  ],
+  "code_patterns": {
+    "component_structure": {
+      "naming": "kebab-case for files, PascalCase for components",
+      "patterns": "Separation of concerns: .component.tsx (logic) + .template.tsx (visual)"
+    },
+    "zoe_system_patterns": {
+      "commands": "Markdown files with trigger detection and phase-based execution",
+      "actions": "Level-based priority system with mandatory/blocking categories",
+      "context": "JSON-based with template system for new projects",
+      "documentation": "Auto-generated with template placeholders"
+    }
   },
+  "components_created": [
+    {
+      "name": "Project Context Manager",
+      "date": "2025-06-09",
+      "type": "System Action",
+      "features": ["Project isolation", "Context validation", "Command blocking"],
+      "status": "Completed"
+    },
+    {
+      "name": "Stack Autodetection",
+      "date": "2025-06-09", 
+      "type": "System Action",
+      "features": ["File analysis", "Dependency detection", "Confidence scoring"],
+      "status": "Completed"
+    },
+    {
+      "name": "Multi-project Commands",
+      "date": "2025-06-09",
+      "type": "Command System",
+      "features": ["set-project", "list-projects", "export/import"],
+      "status": "Completed"
+    }
+  ],
   "preferences": {
     "math_preferences": {
-      "communication_style": "Direto e prático",
+      "communication_style": "Direct and practical",
       "nickname": "Math",
-      "language": "Português",
-      "feedback_style": "Honesto e específico"
+      "language": "Portuguese",
+      "feedback_style": "Honest and specific",
+      "celebration_phrase": "ficou chave!"
     },
-    "development_style": {
-      "file_naming": "Inglês para código, Português para documentação",
-      "comments": "Português",
-      "structure": "Hierárquica e organizada",
-      "documentation": "Português"
+    "coding_style": {
+      "file_naming": "English",
+      "comments": "Portuguese",
+      "variables": "English preferred", 
+      "documentation": "Portuguese"
     },
     "project_style": {
-      "priority": "Funcionalidade sobre complexidade",
-      "maintenance": "Templates atualizados regularmente",
-      "documentation": "Clara e prática"
+      "component_priority": "System reliability over features",
+      "test_coverage": "Critical for system commands",
+      "documentation": "Auto-generated and always current",
+      "architecture": "Modular and extensible"
+    },
+    "zoe_development": {
+      "auto_update_docs": true,
+      "backup_before_changes": true,
+      "validate_priority_conflicts": true,
+      "maintain_backwards_compatibility": true
     }
   },
   "current_context": {
-    "last_session_summary": "Implementação de padrões JSON para design system",
-    "active_work": "Criação de projeto específico para Zoe",
+    "last_session_summary": "Implemented complete multi-project context system v2.0",
+    "active_work": "System validation and how-zoe-works.md update",
     "next_suggested": [
-      "Criar estrutura de progresso para Zoe",
-      "Documentar melhorias implementadas",
-      "Testar novos templates"
+      "Test multi-project workflows",
+      "Validate export/import functionality", 
+      "Create user documentation",
+      "Performance optimization for large project counts"
     ],
     "pending_tasks": [
-      "Atualizar progresso da Zoe corretamente",
-      "Testar regras do zoe-chore atualizadas"
+      "Update how-zoe-works.md for human users",
+      "Create automatic update rule for zoe project changes",
+      "Test all new commands with real scenarios"
     ],
-    "blockers": [],
-    "recent_changes": [
-      "Criação de padrões JSON para design system",
-      "Atualização do template de contexto",
-      "Criação de projeto específico para Zoe"
-    ],
-    "next_priorities": [
-      "Estruturar progresso da Zoe",
-      "Documentar padrões implementados"
-    ]
+    "blockers": []
   },
   "learning_insights": [
-    "Separação de contexto por projeto melhora organização",
-    "Templates JSON são mais estruturados que Markdown",
-    "Progresso deve ser específico por projeto/ferramenta"
+    {
+      "date": "2025-06-09",
+      "insight": "Complex system changes require comprehensive documentation updates",
+      "application": "Always update how-zoe-works.md when adding major features",
+      "confidence": "very_high"
+    },
+    {
+      "date": "2025-06-09", 
+      "insight": "User prefers automatic context management over manual configuration",
+      "application": "Prioritize autodetection and intelligent defaults",
+      "confidence": "high"
+    },
+    {
+      "date": "2025-06-09",
+      "insight": "System modularity enables rapid feature addition without breaking existing functionality",
+      "application": "Maintain clean separation between commands, actions, and context",
+      "confidence": "high"
+    }
   ],
   "project_metrics": {
-    "rules_created": 1,
-    "templates_updated": 1,
-    "projects_supported": 3,
-    "sessions_count": 1,
-    "days_worked": 1,
-    "creation_date": "2025-01-09",
-    "last_activity": "2025-01-09"
+    "commands_completed": 13,
+    "actions_completed": 8,
+    "system_updates": 3,
+    "documentation_files": 4,
+    "sessions_count": 5,
+    "days_worked": 3,
+    "creation_date": "2025-06-07",
+    "major_versions": ["Context Memory 1.0", "Priority System 1.0", "Multi-Project System 2.0"]
   }
 } 

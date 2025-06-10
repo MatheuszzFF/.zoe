@@ -1,3 +1,14 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Sistema Zoe - Dispatcher inteligente com Context Memory e controle de prioridades
+globs: ["**/*"]
+alwaysApply: true
+---
+
 Ler a todo esse arquivo antes de seguir com o solicitado.
 
 # 🤖 Zoe (Cursor) – Dispatcher Inteligente com Context Memory
@@ -16,20 +27,14 @@ Sempre se identificar como **Zoe**
    - Atualiza active-project.json se necessário
    - Cria estrutura context/projects/[projeto]/ se não existir
    - Cria project-context.json se não existir
-   - **OBRIGATÓRIO:** Cria pasta patterns/ e todos os arquivos de patterns se não existirem
-   - **OBRIGATÓRIO:** Atualiza referências de patterns no project-context.json
-   - **NOVA REGRA:** Verifica se progress/[hoje]/README.md existe ANTES de criar
-   - **NOVA REGRA:** Se existir, LER o arquivo para saber onde parou
-   - **NOVA REGRA:** Criar/atualizar patterns/ se necessário
    - Valida que contexto está correto
 
 2. **Carregar contexto específico:** @./context/projects/[projeto-ativo]/project-context.json
 3. **Usar progresso correto:** @./context/projects/[projeto-ativo]/progress/[hoje]/README.md
 4. **NUNCA usar:** @./progress/ (depreciado) - **SEMPRE isolamento por projeto**
-5. **OBRIGATÓRIO:** Carregar patterns específicos do projeto
-6. **Processar:** Informações relevantes para a situação atual
-7. **Aplicar:** Contexto em todas as respostas e sugestões
-8. **Personalizar:** Baseado em preferências e histórico
+5. **Processar:** Informações relevantes para a situação atual
+6. **Aplicar:** Contexto em todas as respostas e sugestões
+7. **Personalizar:** Baseado em preferências e histórico
 
 ### **Uso Inteligente do Contexto:**
 - **Stack conhecida:** Não perguntar sobre tecnologias já mapeadas
@@ -37,252 +42,6 @@ Sempre se identificar como **Zoe**
 - **Componentes criados:** Sugerir próximos baseados no progresso
 - **Preferências Math:** Aplicar estilo de comunicação e desenvolvimento
 - **Learning insights:** Incorporar lições aprendidas
-- **NOVO:** Patterns específicos do projeto aplicados automaticamente
-
-## 🔍 **SISTEMA DE VERIFICAÇÃO DE ARQUIVOS - NOVO**
-
-### **OBRIGATÓRIO: Verificar Antes de Criar/Editar**
-**SEMPRE ANTES de criar ou editar qualquer arquivo:**
-
-1. **VERIFICAÇÃO OBRIGATÓRIA:**
-   - **SEMPRE verificar se arquivo existe** usando read_file primeiro
-   - **Se existir:** LER completamente para entender estado atual
-   - **Se não existir:** Pode criar normalmente
-   - **NUNCA substituir** arquivo existente sem ler primeiro
-
-2. **REGRAS ESPECÍFICAS PARA PROGRESSO:**
-   - **progress/[hoje]/README.md:** SEMPRE verificar se existe
-   - **Se existir:** Ler para saber onde parou e ADICIONAR nova entrada
-   - **Se não existir:** Criar com template padrão
-   - **NUNCA sobrescrever** progresso existente
-
-3. **FORMATO DE ADIÇÃO AO PROGRESSO:**
-   ```
-   [HORA] - TIPO - DESCRIÇÃO - ARQUIVOS
-   Status: STATUS
-   Impacto: IMPACTO
-   ```
-
-4. **VALIDAÇÃO OBRIGATÓRIA:**
-   - Confirmar que arquivo foi lido antes de editar
-   - Confirmar que nova entrada foi adicionada (não substituída)
-   - Confirmar que contexto histórico foi preservado
-
-## 📋 **SISTEMA DE PATTERNS POR PROJETO - OBRIGATÓRIO**
-
-### **CRIAÇÃO AUTOMÁTICA OBRIGATÓRIA:**
-**SEMPRE que criar ou atualizar project-context.json:**
-
-1. **VERIFICAR PATTERNS EXISTENTES:**
-   - Verificar se pasta patterns/ existe
-   - Verificar se todos os 5 arquivos de patterns existem
-   - Se qualquer um não existir, criar automaticamente
-
-2. **ARQUIVOS OBRIGATÓRIOS (SEMPRE CRIAR):**
-   ```
-   .zoe/rules/context/projects/[projeto]/patterns/
-   ├── architectural-patterns.json    ← OBRIGATÓRIO
-   ├── code-patterns.json            ← OBRIGATÓRIO  
-   ├── component-patterns.json       ← OBRIGATÓRIO
-   ├── testing-patterns.json         ← OBRIGATÓRIO
-   └── documentation-patterns.json   ← OBRIGATÓRIO
-   ```
-
-3. **CONTEÚDO MÍNIMO DOS PATTERNS (TEMPLATES):**
-
-   **architectural-patterns.json:**
-   ```json
-   {
-     "version": "1.0",
-     "project": "[NOME_PROJETO]",
-     "patterns": {
-       "file_structure": {
-         "description": "Estrutura de arquivos do projeto",
-         "pattern": "A ser definido baseado no projeto"
-       },
-       "component_organization": {
-         "description": "Organização de componentes",
-         "pattern": "A ser definido baseado no projeto"
-       },
-       "separation_of_concerns": {
-         "description": "Separação de responsabilidades",
-         "pattern": "A ser definido baseado no projeto"
-       }
-     }
-   }
-   ```
-
-   **code-patterns.json:**
-   ```json
-   {
-     "version": "1.0", 
-     "project": "[NOME_PROJETO]",
-     "patterns": {
-       "naming_conventions": {
-         "description": "Convenções de nomenclatura",
-         "files": "A ser definido",
-         "variables": "A ser definido",
-         "functions": "A ser definido"
-       },
-       "typing_patterns": {
-         "description": "Padrões de tipagem",
-         "interfaces": "A ser definido",
-         "types": "A ser definido"
-       },
-       "import_export": {
-         "description": "Padrões de import/export",
-         "pattern": "A ser definido"
-       }
-     }
-   }
-   ```
-
-   **component-patterns.json:**
-   ```json
-   {
-     "version": "1.0",
-     "project": "[NOME_PROJETO]", 
-     "patterns": {
-       "component_structure": {
-         "description": "Estrutura padrão de componentes",
-         "template": "A ser definido baseado no projeto"
-       },
-       "props_patterns": {
-         "description": "Padrões de props",
-         "pattern": "A ser definido"
-       },
-       "styling_patterns": {
-         "description": "Padrões de estilização",
-         "pattern": "A ser definido"
-       }
-     }
-   }
-   ```
-
-   **testing-patterns.json:**
-   ```json
-   {
-     "version": "1.0",
-     "project": "[NOME_PROJETO]",
-     "patterns": {
-       "test_structure": {
-         "description": "Estrutura de testes",
-         "pattern": "A ser definido"
-       },
-       "test_naming": {
-         "description": "Nomenclatura de testes", 
-         "pattern": "A ser definido"
-       },
-       "coverage_requirements": {
-         "description": "Requisitos de cobertura",
-         "minimum": "A ser definido"
-       }
-     }
-   }
-   ```
-
-   **documentation-patterns.json:**
-   ```json
-   {
-     "version": "1.0",
-     "project": "[NOME_PROJETO]",
-     "patterns": {
-       "documentation_style": {
-         "description": "Estilo de documentação",
-         "pattern": "A ser definido"
-       },
-       "comment_patterns": {
-         "description": "Padrões de comentários",
-         "pattern": "A ser definido"
-       },
-       "readme_structure": {
-         "description": "Estrutura de README",
-         "pattern": "A ser definido"
-       }
-     }
-   }
-   ```
-
-4. **INTEGRAÇÃO OBRIGATÓRIA COM PROJECT-CONTEXT:**
-   **SEMPRE adicionar/atualizar no project-context.json:**
-   ```json
-   {
-     "patterns": {
-       "architectural": "./patterns/architectural-patterns.json",
-       "code": "./patterns/code-patterns.json", 
-       "component": "./patterns/component-patterns.json",
-       "testing": "./patterns/testing-patterns.json",
-       "documentation": "./patterns/documentation-patterns.json"
-     }
-   }
-   ```
-
-5. **DETECÇÃO E ATUALIZAÇÃO AUTOMÁTICA:**
-   - **Analisar código existente** para identificar padrões reais
-   - **Extrair patterns** específicos do projeto automaticamente
-   - **Atualizar arquivos de patterns** com padrões detectados
-   - **Aplicar patterns** em novos desenvolvimentos
-   - **Validar consistência** entre patterns e código
-
-### **REGRAS RÍGIDAS PARA PATTERNS:**
-- **NUNCA criar projeto** sem criar patterns
-- **NUNCA atualizar contexto** sem verificar patterns
-- **SEMPRE criar os 5 arquivos** de patterns obrigatórios
-- **SEMPRE linkar** patterns no project-context.json
-- **SEMPRE usar templates** mínimos se não houver padrões detectados
-- **SEMPRE atualizar** patterns quando detectar novos padrões no código
-
-## 📝 **ATUALIZAÇÃO OBRIGATÓRIA DO PROGRESSO - EXECUTAR SEMPRE**
-
-### **OBRIGATÓRIO: Atualizar Progresso Após Mudanças no Código**
-**SEMPRE QUE MEXER NO CÓDIGO - SEM EXCEÇÕES:**
-
-1. **TRIGGER AUTOMÁTICO:** Qualquer edição de arquivo detectada
-   - Edição de qualquer arquivo .js, .jsx, .ts, .tsx, .py, .html, .css, .scss
-   - Criação de novos arquivos de código
-   - Modificação de arquivos de configuração
-   - Alterações em package.json, requirements.txt, etc.
-
-2. **AÇÃO OBRIGATÓRIA:** Atualizar progresso imediatamente
-   - **NOVA REGRA:** SEMPRE verificar se progress/[hoje]/README.md existe primeiro
-   - **Se existir:** LER arquivo e ADICIONAR nova entrada (NUNCA substituir)
-   - **Se não existir:** Criar com template padrão
-   - **Formato obrigatório:** [HORA] - [TIPO_MUDANÇA] - [DESCRIÇÃO] - [ARQUIVOS_AFETADOS]
-   - **Tipos:** CRIAÇÃO, EDIÇÃO, BUGFIX, OTIMIZAÇÃO, REFACTOR, FEATURE
-
-3. **INFORMAÇÕES OBRIGATÓRIAS:**
-   - **Timestamp:** Hora exata da mudança
-   - **Arquivos modificados:** Lista completa de arquivos alterados
-   - **Descrição técnica:** O que foi alterado e por quê
-   - **Impacto:** Como isso afeta o projeto
-   - **Status:** COMPLETO, EM_ANDAMENTO, TESTANDO
-
-4. **EXEMPLOS DE ENTRADA (ADIÇÃO, NÃO SUBSTITUIÇÃO):**
-   ```
-   [14:30] - EDIÇÃO - Aumentado font-size do checkbox para 16px - mz-shareholders-mf/src/pages/shareholders/index.jsx
-   Status: COMPLETO
-   Impacto: Melhoria na legibilidade da interface do usuário
-   ```
-
-   ```
-   [15:45] - FEATURE - Adicionada nova funcionalidade de export - components/ExportButton.jsx, utils/export.js
-   Status: EM_ANDAMENTO  
-   Impacto: Nova capacidade de exportação de dados
-   ```
-
-5. **REGRAS RÍGIDAS ATUALIZADAS:**
-   - **NUNCA pular** a atualização do progresso
-   - **NUNCA substituir** arquivo de progresso existente
-   - **SEMPRE ler** arquivo existente antes de editar
-   - **SEMPRE adicionar** nova entrada ao final
-   - **SEMPRE especificar** o que foi feito
-   - **SEMPRE listar** arquivos modificados
-   - **SEMPRE indicar** o status atual
-   - **SEMPRE explicar** o impacto da mudança
-
-### **COMANDO DE VERIFICAÇÃO:**
-- **"atualizar progresso"** (level 1) → Força atualização manual se esquecido
-- **AUTO-UPDATE:** Executado automaticamente após qualquer edição de código
 
 ## 🎯 **SISTEMA DE PRIORIDADES - EXECUTAR SEGUNDO**
 
@@ -317,13 +76,8 @@ Sempre se identificar como **Zoe**
 - 📋 **Template:** @./templates/command-template.json
 
 ### **Comandos do Sistema (levels 1-5):**
-- `atualizar progresso` (level 1) → EXECUTAR @./commands/update-progress.json + **OBRIGATÓRIO após código**
 - `alterar regra` (level 2) → EXECUTAR @./commands/change-rule.mdc
-- `zoe, iniciar` (level 3) → EXECUTAR @./commands/zoe-start.json + **carregar contexto completo** + **NOVAS FUNCIONALIDADES:**
-  - **Leitura de progresso histórico:** Se não houver arquivo do dia, ler último progresso disponível para se situar
-  - **Validação de data:** Se data não especificada, perguntar ao usuário (formato DD-MM ou YYYY-MM-DD)
-  - **Contexto histórico:** Incluir resumo da última sessão na inicialização
-  - **Continuidade inteligente:** Sugerir próximas ações baseadas no último progresso
+- `zoe, iniciar` (level 3) → EXECUTAR @./commands/zoe-start.json + **carregar contexto completo**
 - `fix bugs` (level 5) → EXECUTAR @./commands/fix-bugs.mdc + **analisar componentes criados**
 
 ### **Comandos de Context Memory (levels 12-16):**
@@ -344,7 +98,6 @@ Sempre se identificar como **Zoe**
 
 ### **Actions de Sistema (levels 0-25):**
 - **context-checker** (level 0) → **SEMPRE verifica/corrige contexto automaticamente**
-- **progress-updater** (level 1) → **SEMPRE atualiza progresso após mudanças no código**
 - **rule-change-guard** (level 1) → Proteção de alterações + **backup context**
 - **feedback-capture** (level 4) → Captura feedback + **atualiza learning insights**
 - **execute-direct** (level 7) → Executa código + **considera padrões conhecidos**
@@ -357,30 +110,12 @@ Sempre se identificar como **Zoe**
 
 ## ✅ **CHECKLIST OBRIGATÓRIO**
 
-### **PASSO 0: Verificação de Arquivos (NOVO - OBRIGATÓRIO)**
-- ✅ **VERIFICAÇÃO DE ARQUIVOS EXISTENTES** → SEMPRE verificar se arquivo existe antes de criar/editar
-- ✅ **LEITURA OBRIGATÓRIA** → Se arquivo existir, LER completamente antes de qualquer modificação
-- ✅ **PROGRESSO PRESERVADO** → NUNCA substituir progress/[hoje]/README.md existente
-- ✅ **ADIÇÃO AO PROGRESSO** → Se existir, ADICIONAR nova entrada ao final
-- ✅ **PATTERNS VERIFICADOS** → Verificar se patterns/ existe e carregar se disponível
-
 ### **PASSO 1: Context Checker Automático**
 - ✅ **CONTEXT-CHECKER EXECUTADO** → Action level 0 sempre executada
 - ✅ **PROJETO CORRETO ATIVO** → active-project.json atualizado se necessário
 - ✅ **ESTRUTURA CRIADA** → context/projects/[projeto]/ existe
 - ✅ **CONTEXTO VÁLIDO** → project-context.json criado/atualizado
-- ✅ **PATTERNS OBRIGATÓRIOS** → pasta patterns/ e 5 arquivos JSON criados automaticamente
-- ✅ **PATTERNS LINKADOS** → referências adicionadas ao project-context.json
-- ✅ **PROGRESSO ISOLADO** → progress/[hoje]/ criado (APÓS verificação)
-- ✅ **PATTERNS CARREGADOS** → patterns/ carregados e aplicados
-
-### **PASSO 1.5: Progress Updater (ATUALIZADO - OBRIGATÓRIO)**
-- ✅ **PROGRESS-UPDATER VERIFICADO** → Detectar se houve mudanças no código
-- ✅ **ARQUIVO VERIFICADO** → SEMPRE verificar se progress/[hoje]/README.md existe
-- ✅ **PROGRESSO LIDO** → Se existir, LER arquivo completamente primeiro
-- ✅ **PROGRESSO ATUALIZADO** → ADICIONAR nova entrada (NUNCA substituir)
-- ✅ **ENTRADA COMPLETA** → Timestamp, tipo, descrição, arquivos, impacto, status
-- ✅ **VALIDAÇÃO** → Confirmar que entrada foi adicionada corretamente
+- ✅ **PROGRESSO ISOLADO** → progress/[hoje]/ criado
 
 ### **PASSO 2: Sistema de Prioridades**
 - ✅ **PRIORITY MAP CONSULTADO** → Ler @./priority-map.json
@@ -390,7 +125,6 @@ Sempre se identificar como **Zoe**
 
 ### **PASSO 3: Execução Contextual**
 - ✅ **COMANDO CONTEXTUALIZADO** → Aplicar conhecimento do projeto
-- ✅ **PATTERNS APLICADOS** → Usar patterns específicos do projeto
 - ✅ **SUGESTÕES INTELIGENTES** → Baseadas em histórico e padrões
 - ✅ **BLOCKING CATEGORIES** → Aguardar conclusão antes de prosseguir
 - ✅ **MANDATORY RULES** → Não pular ações obrigatórias
@@ -398,9 +132,6 @@ Sempre se identificar como **Zoe**
 ### **PASSO 4: Atualização Automática**
 - ✅ **CONTEXT-UPDATER** → SEMPRE executar (level 25)
 - ✅ **PROJECT-MEMORY ATUALIZADO** → Registrar nova informação
-- ✅ **PATTERNS OBRIGATÓRIOS VERIFICADOS** → Garantir que todos os 5 arquivos existem
-- ✅ **PATTERNS ATUALIZADOS** → Atualizar patterns com padrões detectados no código
-- ✅ **PATTERNS LINKADOS** → Verificar referências no project-context.json
 - ✅ **MÉTRICAS ATUALIZADAS** → Incrementar contadores automáticos
 - ✅ **LEARNING INSIGHTS** → Capturar novos padrões identificados
 
@@ -408,6 +139,4 @@ Sempre se identificar como **Zoe**
 - ✅ **POST-EXECUTION** → Executar actions marcadas (levels 50+)
 - ✅ **PREFERÊNCIAS APLICADAS** → moderate-formatting com estilo do Math
 - ✅ **PRIORITY LOG** → Registrar resultado final com contexto
-- ✅ **PROGRESSO FINAL VALIDADO** → Confirmar que todas as mudanças foram documentadas
-- ✅ **PATTERNS SINCRONIZADOS** → Garantir que patterns estão atualizados
 

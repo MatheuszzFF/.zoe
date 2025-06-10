@@ -1,11 +1,10 @@
 {
   "_metadata": {
     "command_name": "zoe-start",
-    "version": "2.1",
+    "version": "2.0",
     "format": "json",
-    "description": "Comando inteligente de inicialização com context memory, isolamento por projeto e leitura de progresso histórico",
+    "description": "Comando inteligente de inicialização com context memory e isolamento por projeto",
     "created": "2025-06-09",
-    "updated": "2025-06-10",
     "ai_optimized": true
   },
   
@@ -13,60 +12,14 @@
     "patterns": [
       "zoe iniciar",
       "zoe, iniciar", 
-      "zoe iniciar [nome-do-projeto]",
-      "zoe iniciar [nome-do-projeto] [data]"
+      "zoe iniciar [nome-do-projeto]"
     ],
     "requirements": [
       "Deve executar APÓS action context-checker (level 0)",
       "Context-checker deve retornar status CONTEXT_READY"
     ],
     "priority_level": 3,
-    "category": "initialization",
-    "RESTRICTIONS": {
-      "NEVER_DO": [
-        "run_terminal_cmd",
-        "execute npm commands",
-        "check node_modules",
-        "validate dependencies",
-        "run prisma commands",
-        "verify environment setup",
-        "install packages",
-        "check system status"
-      ],
-      "ONLY_DO": [
-        "read/write context files",
-        "show project summary",
-        "suggest next actions",
-        "update progress files",
-        "read historical progress files"
-      ]
-    }
-  },
-
-  "date_handling": {
-    "description": "NOVA FUNCIONALIDADE: Gestão inteligente de datas",
-    "rules": [
-      {
-        "condition": "data não especificada pelo usuário",
-        "action": "ask_for_date",
-        "message": "📅 **Data necessária:** Qual data você quer usar para esta sessão? (formato: DD-MM ou YYYY-MM-DD)",
-        "validation": [
-          "Aceitar formato DD-MM (assumir ano atual)",
-          "Aceitar formato YYYY-MM-DD",
-          "Validar se data é válida",
-          "Converter para formato YYYY-MM-DD interno"
-        ]
-      },
-      {
-        "condition": "data especificada",
-        "action": "use_specified_date",
-        "format_conversion": {
-          "input_formats": ["DD-MM", "YYYY-MM-DD"],
-          "output_format": "YYYY-MM-DD",
-          "current_year_assumption": true
-        }
-      }
-    ]
+    "category": "initialization"
   },
 
   "prerequisites": {
@@ -91,14 +44,7 @@
       {
         "phase": 1,
         "name": "load_active_context",
-        "description": "Carregamento do contexto ativo (SOMENTE ARQUIVOS, SEM TERMINAL)",
-        "forbidden_actions": [
-          "run_terminal_cmd",
-          "execute_commands",
-          "check_npm",
-          "validate_dependencies",
-          "verify_environment"
-        ],
+        "description": "Carregamento do contexto ativo",
         "steps": [
           {
             "step": 1,
@@ -117,72 +63,15 @@
             "action": "check_today_progress",
             "file": ".zoe/rules/context/projects/[active_project]/progress/[YYYY-MM-DD]/README.md",
             "create_if_missing": true,
-            "template": ".zoe/rules/context/daily-progress-template.md",
-            "NOVA_FUNCIONALIDADE": {
-              "when_missing": "read_last_available_progress",
-              "description": "Se arquivo do dia não existir, ler último progresso disponível para se situar",
-              "fallback_strategy": {
-                "step_1": "Listar arquivos de progress do projeto",
-                "step_2": "Identificar última data disponível",
-                "step_3": "Ler último arquivo para entender onde parou",
-                "step_4": "Incluir resumo do último progresso na inicialização",
-                "step_5": "Criar novo arquivo do dia com referência ao contexto anterior"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "phase": 1.5,
-        "name": "historical_context_recovery",
-        "description": "NOVA FASE: Recuperação de contexto histórico quando necessário",
-        "when_to_execute": "Quando arquivo de progresso do dia não existir",
-        "steps": [
-          {
-            "step": 1,
-            "action": "find_last_progress",
-            "method": "list_progress_directory",
-            "path": ".zoe/rules/context/projects/[active_project]/progress/",
-            "sort": "descending_date"
-          },
-          {
-            "step": 2,
-            "action": "read_last_progress",
-            "file": "[last_progress_file_found]",
-            "extract": [
-              "Última atividade realizada",
-              "Status dos componentes",
-              "Próximas ações planejadas",
-              "Bloqueadores pendentes",
-              "Decisões tomadas"
-            ]
-          },
-          {
-            "step": 3,
-            "action": "summarize_gap",
-            "description": "Resumir o que aconteceu desde a última sessão",
-            "output_format": "📅 **Última sessão:** [data] - [resumo_atividades]\n🎯 **Onde paramos:** [última_atividade]\n📋 **Pendências:** [lista_pendencias]"
+            "template": ".zoe/rules/context/daily-progress-template.md"
           }
         ]
       },
       {
         "phase": 2,
         "name": "intelligent_summary",
-        "description": "Mostrar resumo inteligente do estado atual (ATUALIZADO com contexto histórico)",
+        "description": "Mostrar resumo inteligente do estado atual",
         "output_templates": {
-          "existing_context_with_history": {
-            "format": "📍 **Localização Zoe:** Projeto '[project_name]' (contexto desde [creation_date])\n📊 **Stack conhecida:** [tech_stack_summary]\n🎯 **Objetivo atual:** [project_objectives]\n📅 **Última sessão:** [last_session_date] - [last_session_summary]\n🔄 **Onde paramos:** [last_activity]\n📈 **Progresso hoje:** [today_activities_summary]",
-            "variables": {
-              "project_name": "project_overview.name",
-              "creation_date": "_metadata.created", 
-              "tech_stack_summary": "tech_stack.frontend.framework + tech_stack.frontend.language",
-              "project_objectives": "project_overview.objectives[0]",
-              "last_session_date": "[extracted_from_last_progress]",
-              "last_session_summary": "[extracted_from_last_progress]",
-              "last_activity": "[extracted_from_last_progress]",
-              "today_activities_summary": "current_context.active_work"
-            }
-          },
           "existing_context": {
             "format": "📍 **Localização Zoe:** Projeto '[project_name]' (contexto existente desde [creation_date])\n📊 **Stack conhecida:** [tech_stack_summary]\n🎯 **Objetivo atual:** [project_objectives]\n📈 **Progresso hoje:** [today_activities_summary]",
             "variables": {
@@ -206,7 +95,7 @@
       {
         "phase": 3,
         "name": "update_daily_progress",
-        "description": "Atualizar progresso diário do projeto (ATUALIZADO com contexto histórico)",
+        "description": "Atualizar progresso diário do projeto",
         "file_path": ".zoe/rules/context/projects/[active_project]/progress/[YYYY-MM-DD]/README.md",
         "template_structure": {
           "header": "# Progresso - [project_name] - [date]",
@@ -218,14 +107,13 @@
                 "Como me localizei: [localization_method]",
                 "Projeto: [project_name]", 
                 "Stack: [stack_summary]",
-                "Sessão iniciada: [timestamp]",
-                "NOVA_LINHA: Última sessão: [last_session_context_if_available]"
+                "Sessão iniciada: [timestamp]"
               ]
             },
             {
               "name": "daily_tasks",
               "title": "📋 Tarefas do Dia",
-              "content": "- [ ] [baseadas no contexto, último progresso ou objetivos definidos]"
+              "content": "- [ ] [baseadas no contexto ou objetivos definidos]"
             },
             {
               "name": "activities",
@@ -240,7 +128,7 @@
             {
               "name": "next_actions",
               "title": "🚀 Próximas Ações",
-              "content": "[Baseado no último progresso ou será preenchido durante o dia]"
+              "content": "[Será preenchido durante o dia]"
             }
           ]
         }
@@ -248,23 +136,8 @@
       {
         "phase": 4,
         "name": "suggest_next_actions",
-        "description": "Sugerir próximas ações baseadas no contexto (SOMENTE SUGESTÕES, SEM EXECUÇÃO) - ATUALIZADO com contexto histórico",
-        "forbidden_actions": [
-          "auto_execute_suggestions",
-          "run_terminal_cmd",
-          "execute_commands",
-          "validate_environment"
-        ],
-        "note": "APENAS apresentar sugestões, NUNCA executar comandos automaticamente",
+        "description": "Sugerir próximas ações baseadas no contexto",
         "logic": [
-          {
-            "condition": "last_progress_available && pending_tasks_found",
-            "suggestion": "Continuar tarefas da última sessão: [list_pending_from_last_session]"
-          },
-          {
-            "condition": "last_progress_available && next_actions_found",
-            "suggestion": "Implementar próximas ações planejadas: [list_next_actions_from_last_session]"
-          },
           {
             "condition": "components_created.length === 0",
             "suggestion": "Criar primeiro componente baseado no objetivo do projeto"
@@ -330,15 +203,10 @@
   },
 
   "examples": {
-    "existing_project_with_history": {
-      "input": "zoe iniciar loja-virtual",
-      "context_state": "project exists, no progress today, last progress available",
-      "expected_output": "📍 **Contexto encontrado:** Projeto 'loja-virtual' localizado e carregado\n📊 **Stack:** Next.js 14, TypeScript, Tailwind, Prisma\n🎯 **Objetivo:** E-commerce completo com admin\n📅 **Última sessão:** 08-06-2025 - Componente ProductCard criado\n🔄 **Onde paramos:** Testes do ProductCard finalizados\n📋 **Pendências:** ProductList e implementar carrinho\n🚀 **Sugestão:** Continuar com ProductList conforme planejado na última sessão?"
-    },
     "existing_project": {
       "input": "zoe iniciar loja-virtual",
-      "context_state": "project exists, progress today available",
-      "expected_output": "📍 **Contexto encontrado:** Projeto 'loja-virtual' localizado e carregado\n📊 **Stack:** Next.js 14, TypeScript, Tailwind, Prisma\n🎯 **Objetivo:** E-commerce completo com admin\n📈 **Progresso hoje:** ProductCard em desenvolvimento\n🚀 **Sugestão:** Continuar com ProductList ou implementar carrinho?"
+      "context_state": "project exists",
+      "expected_output": "📍 **Contexto encontrado:** Projeto 'loja-virtual' localizado e carregado\n📊 **Stack:** Next.js 14, TypeScript, Tailwind, Prisma\n🎯 **Objetivo:** E-commerce completo com admin\n📈 **Última sessão:** Ontem - Componente ProductCard criado\n🚀 **Sugestão:** Continuar com ProductList ou implementar carrinho?"
     },
     "new_project": {
       "input": "zoe iniciar blog-pessoal",
@@ -349,16 +217,6 @@
       "input": "zoe iniciar",
       "context_state": "no project name",
       "expected_output": "❓ **Nome do projeto não especificado**\n📍 **Projeto atual:** [projeto-ativo-atual]\n📋 **Projetos disponíveis:** [lista]\n💡 **Para mudar projeto:** zoe iniciar [nome-do-projeto]\n💡 **Para criar novo:** zoe iniciar [nome-novo-projeto]"
-    },
-    "date_not_specified": {
-      "input": "zoe iniciar loja-virtual",
-      "context_state": "project exists, but user didn't specify date",
-      "expected_output": "📅 **Data necessária:** Qual data você quer usar para esta sessão? (formato: DD-MM ou YYYY-MM-DD)\n💡 **Exemplo:** 10-06 ou 2025-06-10"
-    },
-    "with_date_specified": {
-      "input": "zoe iniciar loja-virtual 08-06",
-      "context_state": "project exists, date specified",
-      "expected_output": "📍 **Contexto encontrado:** Projeto 'loja-virtual' para 08-06-2025\n📊 **Stack:** Next.js 14, TypeScript, Tailwind, Prisma\n🎯 **Objetivo:** E-commerce completo com admin\n📅 **Progresso 08-06:** [carregar/criar arquivo específico da data]\n🚀 **Pronto para trabalhar na data especificada!**"
     }
   },
 
@@ -373,8 +231,7 @@
     ],
     "reads_files": [
       ".zoe/rules/context/active-project.json",
-      ".zoe/rules/context/projects/[active_project]/project-context.json",
-      ".zoe/rules/context/projects/[active_project]/progress/[last_available_date]/README.md"
+      ".zoe/rules/context/projects/[active_project]/project-context.json"
     ]
   },
 
@@ -387,17 +244,9 @@
       "action": "show validation error",
       "message": "❌ **Nome de projeto inválido**\n✅ **Use:** letras, números, hífens apenas"
     },
-    "invalid_date_format": {
-      "action": "show validation error",
-      "message": "❌ **Formato de data inválido**\n✅ **Use:** DD-MM ou YYYY-MM-DD\n💡 **Exemplo:** 10-06 ou 2025-06-10"
-    },
     "permission_error": {
       "action": "show permission error",
       "message": "❌ **Erro de permissão ao acessar projeto**\n🔍 **Verificar:** permissões da pasta .zoe/"
-    },
-    "no_historical_progress": {
-      "action": "continue without history",
-      "message": "ℹ️ **Nenhum progresso histórico encontrado**\n🆕 **Iniciando nova sessão sem contexto anterior**"
     }
   }
 } 

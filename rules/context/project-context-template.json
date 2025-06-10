@@ -1,10 +1,9 @@
 {
   "_metadata": {
-    "version": "2.0",
+    "version": "1.0",
     "created": "{{DATE}}",
     "last_updated": "{{DATE}}",
     "project_name": "{{PROJECT_NAME}}",
-    "project_type": "{{PROJECT_TYPE}}",
     "description": "Contexto específico do projeto {{PROJECT_NAME}}"
   },
   "project_overview": {
@@ -12,9 +11,7 @@
     "type": "{{PROJECT_TYPE}}",
     "objectives": ["{{OBJECTIVE}}"],
     "current_phase": "Setup",
-    "priority_focus": "Initial Development",
-    "location": "{{PROJECT_LOCATION}}",
-    "mono_repo": "{{MONO_REPO}}"
+    "priority_focus": "Initial Development"
   },
   "tech_stack": {
     "detected_automatically": true,
@@ -24,11 +21,7 @@
       "language": "{{LANGUAGE}}",
       "framework": "{{FRAMEWORK}}",
       "meta_framework": "{{META_FRAMEWORK}}",
-      "css_framework": "{{CSS_FRAMEWORK}}",
-      "styling": "{{STYLING_SOLUTION}}",
-      "documentation": "{{DOCUMENTATION_TOOL}}",
-      "testing": "{{TESTING_FRAMEWORK}}",
-      "build": "{{BUILD_TOOL}}"
+      "css_framework": "{{CSS_FRAMEWORK}}"
     },
     "backend": {
       "runtime": "{{RUNTIME}}",
@@ -38,115 +31,7 @@
     "development": {
       "testing": "{{TESTING}}",
       "bundler": "{{BUNDLER}}",
-      "linting": "{{LINTING}}",
-      "package_manager": "{{PACKAGE_MANAGER}}",
-      "type_checking": "{{TYPE_CHECKING}}"
-    }
-  },
-  "architectural_patterns": {
-    "component_architecture": {
-      "separation_pattern": "{{SEPARATION_PATTERN}}",
-      "file_structure": {
-        "component_file": "{{COMPONENT_FILE_PATTERN}}",
-        "template_file": "{{TEMPLATE_FILE_PATTERN}}",
-        "types_file": "{{TYPES_FILE_PATTERN}}",
-        "stories_file": "{{STORIES_FILE_PATTERN}}",
-        "test_files": "{{TEST_FILES_PATTERN}}"
-      },
-      "responsibility_separation": {
-        "logic_layer": "{{LOGIC_LAYER_DESCRIPTION}}",
-        "presentation_layer": "{{PRESENTATION_LAYER_DESCRIPTION}}",
-        "type_layer": "{{TYPE_LAYER_DESCRIPTION}}"
-      }
-    },
-    "export_patterns": {
-      "individual_exports": "{{INDIVIDUAL_EXPORT_PATTERN}}",
-      "grouped_exports": "{{GROUPED_EXPORT_PATTERN}}",
-      "namespace_exports": "{{NAMESPACE_EXPORT_PATTERN}}"
-    },
-    "composition_patterns": {
-      "composite_components": "{{COMPOSITE_PATTERN}}",
-      "sub_components": "{{SUB_COMPONENT_PATTERN}}",
-      "compound_components": "{{COMPOUND_COMPONENT_PATTERN}}"
-    }
-  },
-  "code_patterns": {
-    "typing_conventions": {
-      "pattern": "{{TYPE_NAMING_PATTERN}}",
-      "rules": ["{{TYPE_RULES}}"],
-      "prefix_usage": "{{TYPE_PREFIX}}",
-      "interface_vs_type": "{{INTERFACE_VS_TYPE_PREFERENCE}}"
-    },
-    "props_structure": {
-      "pattern": "{{PROPS_PATTERN}}",
-      "destructuring_style": "{{DESTRUCTURING_STYLE}}",
-      "rules": ["{{PROPS_RULES}}"]
-    },
-    "styling_patterns": {
-      "transient_props": "{{TRANSIENT_PROPS_USAGE}}",
-      "prop_forwarding": "{{PROP_FORWARDING_PATTERN}}",
-      "theme_usage": "{{THEME_USAGE_PATTERN}}",
-      "responsive_patterns": "{{RESPONSIVE_PATTERNS}}"
-    },
-    "component_patterns": {
-      "state_management": "{{STATE_MANAGEMENT_PATTERN}}",
-      "effect_usage": "{{EFFECT_USAGE_PATTERN}}",
-      "ref_patterns": "{{REF_PATTERNS}}",
-      "async_handling": "{{ASYNC_HANDLING_PATTERN}}"
-    },
-    "testing_patterns": {
-      "test_structure": "{{TEST_STRUCTURE}}",
-      "user_interaction_testing": "{{USER_INTERACTION_PATTERN}}",
-      "accessibility_testing": "{{A11Y_TESTING_PATTERN}}",
-      "coverage_requirements": "{{COVERAGE_REQUIREMENTS}}"
-    },
-    "documentation_patterns": {
-      "storybook_structure": "{{STORYBOOK_STRUCTURE}}",
-      "story_naming": "{{STORY_NAMING_PATTERN}}",
-      "controls_usage": "{{CONTROLS_PATTERN}}",
-      "documentation_requirements": "{{DOCS_REQUIREMENTS}}"
-    }
-  },
-  "component_organization": {
-    "directory_structure": {
-      "component_folders": "{{COMPONENT_FOLDER_PATTERN}}",
-      "sub_component_organization": "{{SUB_COMPONENT_ORG}}",
-      "shared_components": "{{SHARED_COMPONENT_PATTERN}}"
-    },
-    "naming_conventions": {
-      "file_naming": "{{FILE_NAMING_CONVENTION}}",
-      "component_naming": "{{COMPONENT_NAMING_CONVENTION}}",
-      "export_naming": "{{EXPORT_NAMING_CONVENTION}}"
-    },
-    "categorization": {
-      "component_categories": ["{{COMPONENT_CATEGORIES}}"],
-      "complexity_levels": ["{{COMPLEXITY_LEVELS}}"],
-      "usage_patterns": ["{{USAGE_PATTERNS}}"]
-    }
-  },
-  "quality_standards": {
-    "testing": {
-      "framework": "{{TESTING_FRAMEWORK}}",
-      "required_tests": ["{{REQUIRED_TESTS}}"],
-      "coverage_targets": "{{COVERAGE_TARGETS}}",
-      "testing_utilities": ["{{TESTING_UTILITIES}}"]
-    },
-    "documentation": {
-      "storybook_required": "{{STORYBOOK_REQUIRED}}",
-      "story_descriptions": "{{STORY_DESCRIPTIONS_REQUIRED}}",
-      "playground_stories": "{{PLAYGROUND_STORIES_PATTERN}}",
-      "documentation_completeness": "{{DOCS_COMPLETENESS_STANDARD}}"
-    },
-    "code_quality": {
-      "linting": "{{LINTING_STANDARD}}",
-      "type_checking": "{{TYPE_CHECKING_STANDARD}}",
-      "formatting": "{{FORMATTING_STANDARD}}",
-      "performance_considerations": ["{{PERFORMANCE_STANDARDS}}"]
-    },
-    "accessibility": {
-      "a11y_requirements": ["{{A11Y_REQUIREMENTS}}"],
-      "keyboard_navigation": "{{KEYBOARD_NAV_STANDARD}}",
-      "screen_reader_support": "{{SCREEN_READER_STANDARD}}"
+      "linting": "{{LINTING}}"
     }
   },
   "architectural_decisions": [
@@ -157,61 +42,38 @@
       "impact": "Foundation for all future development"
     }
   ],
-  "components_created": [],
-  "component_inventory": {
-    "by_category": {
-      "{{CATEGORY_NAME}}": {
-        "components": ["{{COMPONENT_LIST}}"],
-        "complexity": "{{CATEGORY_COMPLEXITY}}",
-        "status": "{{CATEGORY_STATUS}}"
-      }
-    },
-    "by_status": {
-      "completed": ["{{COMPLETED_COMPONENTS}}"],
-      "in_progress": ["{{IN_PROGRESS_COMPONENTS}}"],
-      "planned": ["{{PLANNED_COMPONENTS}}"]
+  "code_patterns": {
+    "component_structure": {
+      "naming": "{{NAMING_CONVENTION}}",
+      "patterns": "{{CODE_PATTERNS}}"
     }
   },
-  "development_workflow": {
-    "component_creation_process": ["{{CREATION_STEPS}}"],
-    "testing_workflow": ["{{TESTING_STEPS}}"],
-    "documentation_workflow": ["{{DOCS_STEPS}}"],
-    "review_process": ["{{REVIEW_STEPS}}"]
-  },
+  "components_created": [],
   "preferences": {
     "math_preferences": {
-      "communication_style": "Direto e prático",
+      "communication_style": "Direct and practical",
       "nickname": "Math",
-      "language": "Português",
-      "feedback_style": "Honesto e específico"
+      "language": "Portuguese",
+      "feedback_style": "Honest and specific"
     },
     "coding_style": {
-      "file_naming": "Inglês",
-      "comments": "Português", 
-      "variables": "Inglês preferido",
-      "documentation": "Português"
+      "file_naming": "English",
+      "comments": "Portuguese", 
+      "variables": "English preferred",
+      "documentation": "Portuguese"
     },
     "project_style": {
-      "component_priority": "Qualidade sobre quantidade",
-      "test_coverage": "Conforme definido pelo projeto",
-      "documentation": "Padrões específicos do projeto"
+      "component_priority": "Quality over quantity",
+      "test_coverage": "As defined by project",
+      "documentation": "Project-specific standards"
     }
   },
-  "patterns": {
-    "architectural": "./patterns/architectural-patterns.json",
-    "code": "./patterns/code-patterns.json",
-    "component": "./patterns/component-patterns.json",
-    "testing": "./patterns/testing-patterns.json",
-    "documentation": "./patterns/documentation-patterns.json"
-  },
   "current_context": {
-    "last_session_summary": "Projeto criado e configurado",
-    "active_work": "Configuração inicial",
-    "next_suggested": ["Definir estrutura do projeto", "Configurar ambiente de desenvolvimento"],
+    "last_session_summary": "Project created and configured",
+    "active_work": "Initial setup",
+    "next_suggested": ["Define project structure", "Setup development environment"],
     "pending_tasks": [],
-    "blockers": [],
-    "recent_changes": [],
-    "next_priorities": []
+    "blockers": []
   },
   "learning_insights": [],
   "project_metrics": {
@@ -219,7 +81,6 @@
     "tests_created": 0,
     "sessions_count": 1,
     "days_worked": 1,
-    "creation_date": "{{DATE}}",
-    "last_activity": "{{DATE}}"
+    "creation_date": "{{DATE}}"
   }
 } 

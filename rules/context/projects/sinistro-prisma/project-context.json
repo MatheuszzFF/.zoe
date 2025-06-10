@@ -1,0 +1,67 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "created": "2025-06-10",
+    "last_updated": "2025-06-10T12:00:00Z",
+    "project_name": "sinistro-prisma",
+    "description": "Sistema de gestão de sinistros com Prisma e Next.js"
+  },
+
+  "project_overview": {
+    "name": "SinistroPrisma", 
+    "type": "Sistema de Gestão",
+    "objectives": [
+      "Sistema completo de gestão de sinistros",
+      "Fluxo automatizado de processos",
+      "Interface administrativa robusta",
+      "Controle de usuários e permissões"
+    ],
+    "current_phase": "Desenvolvimento Avançado",
+    "priority_focus": "Funcionalidades Core"
+  },
+
+  "tech_stack": {
+    "frontend": {
+      "framework": "React 18+",
+      "meta_framework": "Next.js 14+",
+      "language": "TypeScript",
+      "styling": "Tailwind CSS"
+    },
+    "backend": {
+      "orm": "Prisma",
+      "database": "PostgreSQL",
+      "auth": "Supabase Auth"
+    },
+    "deployment": "Vercel",
+    "testing": {
+      "runner": "Jest",
+      "library": "@testing-library/react"
+    }
+  },
+
+  "project_structure": {
+    "root": "sinistro-0-to-prisma/sinistro-flow-prisma/",
+    "src_path": "src/",
+    "app_router": true,
+    "database": "prisma/",
+    "components": "src/components/",
+    "api": "src/app/api/"
+  },
+
+  "key_features": [
+    "Dashboard de sinistros por estágios",
+    "Sistema de claims completo",
+    "Gestão de usuários e permissões",
+    "Relatórios e analytics",
+    "API REST completa",
+    "Autenticação Supabase"
+  ],
+
+  "current_context": {
+    "last_session_summary": "Sistema em desenvolvimento avançado",
+    "active_work": "Manutenção e melhorias", 
+    "next_suggested": ["Otimizar performance", "Implementar testes", "Melhorar UX"],
+    "pending_tasks": [],
+    "blockers": []
+  }
+} 
