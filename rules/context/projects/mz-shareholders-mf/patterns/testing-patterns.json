@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "project": "mz-shareholders-mf",
+  "patterns": {
+    "test_structure": {
+      "description": "Estrutura de testes com Vitest",
+      "pattern": "src/__tests__/ com mirror da estrutura src/"
+    },
+    "test_naming": {
+      "description": "Nomenclatura de testes", 
+      "pattern": "[component-name].test.tsx ou [hook-name].test.ts"
+    },
+    "coverage_requirements": {
+      "description": "Requisitos de cobertura",
+      "minimum": "80% para componentes críticos"
+    },
+    "testing_tools": {
+      "description": "Ferramentas de teste utilizadas",
+      "pattern": "Vitest 3.1.2 + Testing Library + React Testing Library"
+    },
+    "test_patterns": {
+      "description": "Padrões de escrita de testes",
+      "pattern": "AAA pattern (Arrange, Act, Assert) + mocks para APIs"
+    }
+  }
+} 

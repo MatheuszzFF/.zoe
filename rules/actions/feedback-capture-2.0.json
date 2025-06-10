@@ -27,7 +27,23 @@
       "feedback",
       "sugestão",
       "opinião",
-      "achei que"
+      "achei que",
+      "perfeita",
+      "perfeito",
+      "muito bom",
+      "excelente",
+      "ficou ótimo",
+      "adorei",
+      "gostei",
+      "queremos mais",
+      "mais nesse formato",
+      "continue assim",
+      "está errado",
+      "não era isso",
+      "confuso",
+      "não deu certo",
+      "falhou",
+      "precisa ajustar"
     ],
     "automatic": true,
     "priority_level": 4,
@@ -39,10 +55,10 @@
     "description": "Captura inteligente de feedback com análise automática e aprendizado",
     "detection_engine": {
       "sentiment_analysis": {
-        "positive": ["legal", "bacana", "bom", "gostei", "perfeito", "show"],
-        "negative": ["ruim", "péssimo", "não funciona", "problema", "erro"],
-        "confusion": ["não entendi", "como", "o que", "?", "hein"],
-        "suggestion": ["poderia", "deveria", "sugiro", "seria bom", "melhor"]
+        "positive": ["legal", "bacana", "bom", "gostei", "perfeito", "show", "perfeita", "excelente", "ótimo", "adorei", "ficou bom", "muito bom", "queremos mais", "continue assim", "top", "massa", "sensacional"],
+        "negative": ["ruim", "péssimo", "não funciona", "problema", "erro", "bugado", "está errado", "não era isso", "falhou", "não deu certo", "precisa ajustar", "não está certo"],
+        "confusion": ["não entendi", "como", "o que", "?", "hein", "confuso", "como assim", "explicar"],
+        "suggestion": ["poderia", "deveria", "sugiro", "seria bom", "melhor", "falta", "poderia ter", "seria legal", "que tal"]
       },
       "context_clues": {
         "repetition": "Usuário repete o mesmo problema",

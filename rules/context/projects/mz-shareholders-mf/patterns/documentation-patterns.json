@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "project": "mz-shareholders-mf",
+  "patterns": {
+    "documentation_style": {
+      "description": "Estilo de documentação técnica",
+      "pattern": "JSDoc para funções, comentários explicativos para lógica complexa"
+    },
+    "comment_patterns": {
+      "description": "Padrões de comentários no código",
+      "pattern": "// para comentários de linha, /** */ para JSDoc"
+    },
+    "readme_structure": {
+      "description": "Estrutura de README",
+      "pattern": "Setup, Scripts, Arquitetura, Deployment, Troubleshooting"
+    },
+    "feature_documentation": {
+      "description": "Documentação de features",
+      "pattern": "Descrição, implementação técnica, testes, exemplos de uso"
+    },
+    "api_documentation": {
+      "description": "Documentação de APIs e serviços",
+      "pattern": "Endpoints, parâmetros, responses, error handling"
+    }
+  }
+} 

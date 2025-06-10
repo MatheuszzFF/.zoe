@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "project": "mz-shareholders-mf",
+  "patterns": {
+    "file_structure": {
+      "description": "Estrutura de arquivos do microfrontend React com Module Federation",
+      "pattern": "src/ (components/, pages/, routes/, types/, utils/, services/, hooks/, contexts/, valtio/, translate/, __tests__/, assets/)"
+    },
+    "component_organization": {
+      "description": "Organização de componentes em estrutura hierárquica",
+      "pattern": "src/components/ com subpastas por funcionalidade (modals/, shared/, etc.)"
+    },
+    "separation_of_concerns": {
+      "description": "Separação clara entre apresentação, lógica e estado",
+      "pattern": "Components (UI) + Hooks (lógica) + Valtio (estado global) + Services (API)"
+    },
+    "module_federation": {
+      "description": "Arquitetura de microfrontend com Module Federation",
+      "pattern": "Vite + Module Federation para integração com outros MFs (mz-navbar-sub-mf, etc.)"
+    },
+    "routing_architecture": {
+      "description": "Estrutura de roteamento com lazy loading",
+      "pattern": "React Router v6 com lazy loading e routes configuradas em src/routes/"
+    }
+  }
+} 

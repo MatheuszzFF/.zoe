@@ -114,5 +114,13 @@
     "Utiliza design system próprio da MZ",
     "Integração com múltiplos microfrontends",
     "Foco em qualidade de código com linting e testes"
-  ]
+  ],
+
+  "patterns": {
+    "architectural": "./patterns/architectural-patterns.json",
+    "code": "./patterns/code-patterns.json", 
+    "component": "./patterns/component-patterns.json",
+    "testing": "./patterns/testing-patterns.json",
+    "documentation": "./patterns/documentation-patterns.json"
+  }
 } 

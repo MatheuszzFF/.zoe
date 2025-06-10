@@ -1,0 +1,343 @@
+{
+  "_metadata": {
+    "command_name": "create-documentation",
+    "version": "1.0",
+    "format": "json",
+    "description": "Criação automática de documentação para JIRA e PRs usando templates padrão",
+    "created": "2025-06-10",
+    "ai_optimized": true
+  },
+
+  "trigger": {
+    "patterns": [
+      "criar documentação jira",
+      "criar descrição pr",
+      "criar documentação jira [titulo]",
+      "criar descrição pr [titulo]",
+      "documentar jira",
+      "documentar pr"
+    ],
+    "parameters": {
+      "tipo": {
+        "type": "enum",
+        "values": ["jira", "pr"],
+        "required": true,
+        "auto_detect": true,
+        "description": "Tipo de documentação a ser criada"
+      },
+      "titulo": {
+        "type": "string",
+        "required": false,
+        "description": "Título personalizado para a documentação"
+      }
+    },
+    "priority_level": 7,
+    "category": "documentation"
+  },
+
+  "behavior": {
+    "phases": [
+      {
+        "phase": 1,
+        "name": "load_context_and_rules",
+        "description": "Carregar contexto do projeto e regras de documentação",
+        "steps": [
+          {
+            "step": 1,
+            "action": "read_active_project",
+            "file": ".zoe/rules/context/active-project.json"
+          },
+          {
+            "step": 2,
+            "action": "read_project_context",
+            "file": ".zoe/rules/context/projects/[active_project]/project-context.json",
+            "extract": ["tech_stack", "current_feature", "recent_changes"]
+          },
+          {
+            "step": 3,
+            "action": "load_documentation_rules",
+            "files": [
+              ".zoe/rules/documentation/rule-jira-card.txt",
+              ".zoe/rules/documentation/rule-pr-description.txt"
+            ]
+          },
+          {
+            "step": 4,
+            "action": "read_progress_files",
+            "pattern": ".zoe/rules/context/projects/[active_project]/progress/**/README.md",
+            "description": "Extrair informações das últimas sessões para contexto"
+          }
+        ]
+      },
+      {
+        "phase": 2,
+        "name": "analyze_recent_changes",
+        "description": "Analisar mudanças recentes no projeto para gerar conteúdo",
+        "steps": [
+          {
+            "step": 1,
+            "action": "search_recent_commits",
+            "timeframe": "last 7 days",
+            "extract": ["feature_names", "file_changes", "commit_messages"]
+          },
+          {
+            "step": 2,
+            "action": "identify_current_feature",
+            "sources": ["branch_name", "progress_files", "recent_commits"],
+            "pattern": "SSER-\\d+|FEAT-\\d+|BUG-\\d+|TASK-\\d+"
+          },
+          {
+            "step": 3,
+            "action": "extract_technical_details",
+            "include": [
+              "modified_components",
+              "new_dependencies",
+              "architectural_changes",
+              "testing_coverage"
+            ]
+          }
+        ]
+      },
+      {
+        "phase": 3,
+        "name": "generate_documentation",
+        "description": "Gerar documentação baseada no tipo solicitado",
+        "conditional_execution": {
+          "jira": {
+            "template": "jira_card_template",
+            "output_format": "markdown",
+            "sections": [
+              "titulo_e_objetivo",
+              "merge_requests",
+              "componentes_afetados",
+              "estrutura_arquivos",
+              "regras_implementacao",
+              "testes_necessarios",
+              "tipagens_typescript",
+              "aversoes_restricoes",
+              "observacoes_dependencias"
+            ]
+          },
+          "pr": {
+            "template": "pr_description_template",
+            "output_format": "markdown",
+            "sections": [
+              "titulo_descricao",
+              "principais_funcionalidades",
+              "mudancas_tecnicas",
+              "testes_implementados",
+              "screenshots_demos",
+              "checklist_validacao"
+            ]
+          }
+        }
+      },
+      {
+        "phase": 4,
+        "name": "save_and_update_progress",
+        "description": "Salvar documentação e atualizar progresso",
+        "steps": [
+          {
+            "step": 1,
+            "action": "save_documentation",
+            "path": ".zoe/rules/context/projects/[active_project]/documentation/",
+            "filename": "[tipo]-[timestamp]-[feature_id].md"
+          },
+          {
+            "step": 2,
+            "action": "update_progress_file",
+            "file": ".zoe/rules/context/projects/[active_project]/progress/[current_date]/README.md",
+            "section": "documentation_created"
+          },
+          {
+            "step": 3,
+            "action": "copy_to_clipboard",
+            "description": "Copiar documentação gerada para área de transferência"
+          }
+        ]
+      }
+    ]
+  },
+
+  "documentation_rules": {
+    "jira_card_structure": {
+      "title_format": "[FEATURE_ID] - [Título da Feature]",
+      "sections": {
+        "objetivo": {
+          "required": true,
+          "format": "Descrição clara do propósito da implementação",
+          "context_sources": ["progress_files", "commit_messages"]
+        },
+        "merge_requests": {
+          "required": true,
+          "format": "DEV: [link do PR]",
+          "auto_detect": "current branch name"
+        },
+        "componentes": {
+          "required": true,
+          "format": "🧩 [Nome do Componente] | [Sistema]",
+          "source": "modified_files analysis"
+        },
+        "estrutura": {
+          "required": true,
+          "format": "Tree structure of modified/new files",
+          "source": "file_system_analysis"
+        },
+        "regras_implementacao": {
+          "required": true,
+          "source": "project patterns + coding standards",
+          "include": ["TypeScript rules", "React patterns", "testing requirements"]
+        },
+        "testes": {
+          "required": true,
+          "format": "Testing strategy based on project patterns",
+          "source": "testing_patterns.json"
+        },
+        "tipagens": {
+          "required": true,
+          "format": "TypeScript conventions from code patterns",
+          "source": "code_patterns.json"
+        },
+        "aversoes": {
+          "required": true,
+          "format": "Restrictions from architectural patterns",
+          "source": "architectural_patterns.json"
+        }
+      }
+    },
+    "pr_description_structure": {
+      "title_format": "[FEATURE_ID] - [Título Descritivo]",
+      "sections": {
+        "descricao": {
+          "required": true,
+          "format": "Contexto e propósito das mudanças",
+          "source": "feature analysis + progress files"
+        },
+        "funcionalidades": {
+          "required": true,
+          "format": "Lista de funcionalidades implementadas",
+          "source": "commit analysis + file changes"
+        },
+        "mudancas_tecnicas": {
+          "required": true,
+          "format": "Detalhes arquiteturais e padrões",
+          "source": "architectural analysis"
+        },
+        "testes": {
+          "required": true,
+          "format": "Cobertura e tipos de testes",
+          "source": "test_files analysis"
+        },
+        "screenshots": {
+          "required": false,
+          "format": "Placeholders para evidências visuais",
+          "condition": "UI changes detected"
+        },
+        "checklist": {
+          "required": true,
+          "format": "Lista de validações padrão",
+          "source": "project patterns + best practices"
+        }
+      }
+    }
+  },
+
+  "content_generation": {
+    "context_analysis": {
+      "priority_sources": [
+        "current_feature_branch",
+        "latest_progress_file",
+        "recent_commit_messages",
+        "modified_files_structure"
+      ],
+      "analysis_depth": {
+        "file_changes": "detailed analysis of modified files",
+        "architectural_impact": "impact on overall system architecture",
+        "testing_strategy": "testing approach based on changes",
+        "dependencies": "new or modified dependencies"
+      }
+    },
+    "intelligent_content": {
+      "feature_detection": {
+        "pattern_matching": "SSER-\\d+|FEAT-\\d+|BUG-\\d+",
+        "fallback": "latest progress entry",
+        "title_generation": "Based on feature type and scope"
+      },
+      "technical_details": {
+        "component_analysis": "React components modified/created",
+        "service_analysis": "API services and hooks affected",
+        "style_analysis": "Styling and UI changes",
+        "test_analysis": "Test coverage and types"
+      },
+      "best_practices": {
+        "formatting": "Use project-specific emoji patterns",
+        "structure": "Follow established documentation hierarchy",
+        "language": "Portuguese (pt-BR) as default",
+        "links": "Auto-generate relevant links when possible"
+      }
+    }
+  },
+
+  "output_configuration": {
+    "save_location": ".zoe/rules/context/projects/[active_project]/documentation/",
+    "filename_pattern": "[type]-[date]-[feature_id].md",
+    "backup_location": ".zoe/rules/context/projects/[active_project]/documentation/backup/",
+    "clipboard_copy": true,
+    "progress_update": {
+      "enabled": true,
+      "section": "📋 DOCUMENTAÇÃO",
+      "format": "### [timestamp] - CRIAÇÃO - Documentação [type] gerada - [feature_id]"
+    }
+  },
+
+  "validation_rules": {
+    "required_context": [
+      "active_project must be set",
+      "project_context must exist",
+      "at least one progress file must exist"
+    ],
+    "content_validation": [
+      "title must not be empty",
+      "at least 3 sections must be populated",
+      "technical details must be present"
+    ],
+    "quality_checks": [
+      "check for placeholder text",
+      "validate markdown formatting",
+      "ensure links are properly formatted"
+    ]
+  },
+
+  "error_handling": {
+    "missing_context": {
+      "action": "request_user_input",
+      "message": "Contexto insuficiente. Por favor, forneça mais detalhes sobre a feature."
+    },
+    "no_recent_changes": {
+      "action": "generate_template",
+      "message": "Nenhuma mudança recente detectada. Gerando template base."
+    },
+    "invalid_project": {
+      "action": "list_available_projects",
+      "message": "Projeto ativo não encontrado. Selecione um projeto válido."
+    }
+  },
+
+  "integration": {
+    "progress_tracking": {
+      "enabled": true,
+      "auto_update": true,
+      "metrics": ["documentation_created", "time_spent", "sections_generated"]
+    },
+    "project_patterns": {
+      "use_existing_patterns": true,
+      "apply_coding_standards": true,
+      "respect_architectural_rules": true
+    },
+    "clipboard_integration": {
+      "enabled": true,
+      "format": "ready_to_paste",
+      "notification": "Documentação copiada para área de transferência"
+    }
+  }
+} 

@@ -1,0 +1,29 @@
+{
+  "version": "1.0", 
+  "project": "mz-shareholders-mf",
+  "patterns": {
+    "naming_conventions": {
+      "description": "Convenções de nomenclatura do projeto",
+      "files": "kebab-case para arquivos (upload-modal.component.tsx)",
+      "variables": "camelCase para variáveis JavaScript/TypeScript",
+      "functions": "camelCase para funções (handleImportTypeChange)"
+    },
+    "typing_patterns": {
+      "description": "Padrões de tipagem TypeScript",
+      "interfaces": "Interfaces para props de componentes (.types.ts)",
+      "types": "Union types para estados (importType: 'replace' | 'merge')"
+    },
+    "import_export": {
+      "description": "Padrões de import/export",
+      "pattern": "Named exports para componentes, default exports para páginas"
+    },
+    "component_structure": {
+      "description": "Estrutura padrão de componentes",
+      "pattern": "Functional components com TypeScript, hooks para lógica"
+    },
+    "state_management": {
+      "description": "Padrões de gerenciamento de estado",
+      "pattern": "useState para estado local, Valtio para estado global"
+    }
+  }
+} 

@@ -1,0 +1,189 @@
+# Template de Documentação - MZ MF Shareholders
+
+## Filosofia
+Este template segue o princípio de **colocation** (proximidade com o código) e visa criar documentações técnicas precisas, atualizadas e úteis para desenvolvedores. Toda documentação deve refletir apenas componentes e funcionalidades reais existentes no codebase.
+
+## Estrutura Padrão
+
+### Template Base para Documentação de Página
+```markdown
+# [Nome da Página]
+
+## Visão Geral
+- **Propósito**: [Descrição clara do objetivo da página]
+- **Público-alvo**: [Usuários finais, tipo de acesso]
+- **Contexto**: [Quando e como é acessada]
+
+## Componentes Técnicos
+### Componentes Principais
+- **[NomeDoComponente]** - [Descrição da responsabilidade]
+- **[OutroComponente]** - [Função específica]
+
+### Serviços Utilizados
+- **[NomeDoServico]** - [API ou serviço consumido]
+- **[OutroServico]** - [Função do serviço]
+
+### Hooks Customizados
+- **[nomeDoHook]** - [Responsabilidade do hook]
+
+## Fluxo de Dados
+1. **Carregamento inicial**: [Como os dados são obtidos]
+2. **Atualização**: [Triggers para refresh dos dados]
+3. **Cache/Estado**: [Como é gerenciado o estado]
+
+## Estados e Interações
+### Estados Possíveis
+- **Loading**: [Quando acontece]
+- **Success**: [Estado de sucesso]
+- **Error**: [Tratamento de erros]
+- **Empty**: [Estado vazio, se aplicável]
+
+### Interações do Usuário
+- **[Ação]**: [Resultado da interação]
+- **[OutraAção]**: [Comportamento esperado]
+
+## Integrações
+### APIs Consumidas
+- **[Endpoint]**: [Propósito da chamada]
+- **[OutroEndpoint]**: [Dados retornados]
+
+### Dependências Externas
+- **[Biblioteca]**: [Uso específico]
+- **[Ferramenta]**: [Integração]
+
+## Considerações Técnicas
+- **Performance**: [Otimizações aplicadas]
+- **Responsividade**: [Adaptações mobile/desktop]
+- **Acessibilidade**: [Recursos implementados]
+- **Segurança**: [Validações e proteções]
+```
+
+## Regras de Nomenclatura
+
+### Arquivos
+- **Formato**: `kebab-case` obrigatório
+- **Sufixo padrão**: `-documentation.md`
+- **Páginas com variações**: usar sufixos específicos
+  - Exemplo: `shareholder-overview-simple.md`
+  - Exemplo: `shareholder-overview-grouped.md`
+
+### Localização
+- **Diretório**: `src/pages/[nome-da-pagina]/`
+- **Princípio**: Manter próximo ao código que documenta
+- **Estrutura**: Seguir organização por domínio/feature
+
+## Processo de Criação
+
+### 1. Análise do Código
+- [ ] Identificar todos os componentes reais utilizados
+- [ ] Verificar serviços e APIs consumidas
+- [ ] Mapear hooks customizados
+- [ ] Documentar fluxo de dados real
+
+### 2. Verificação de Veracidade
+- [ ] Todos os componentes mencionados existem no codebase
+- [ ] APIs documentadas estão implementadas
+- [ ] Hooks mencionados são reais
+- [ ] Estados documentados são possíveis
+
+### 3. Estruturação
+- [ ] Aplicar template padrão
+- [ ] Nomenclatura kebab-case
+- [ ] Localização em src/pages/
+- [ ] Links relativos funcionais
+
+### 4. Integração
+- [ ] Atualizar DOCUMENTATION.md
+- [ ] Adicionar à categoria correta
+- [ ] Testar navegação entre docs
+- [ ] Validar links relativos
+
+## Categorias no Índice Central
+
+### Organização por Funcionalidade
+- **Autenticação e Acesso**
+- **Visualizações e Relatórios**
+- **Gestão de Acionistas**
+- **Histórico e Monitoramento**
+- **Sistema**
+
+### Seções Especiais
+- **ShareholderOverview**: Para páginas com múltiplas variações
+- **Utilitários**: Para componentes auxiliares
+
+## Checklist de Qualidade
+
+### Antes de Finalizar
+- [ ] Componentes verificados no codebase real
+- [ ] Nenhum componente fictício incluído
+- [ ] Estrutura padrão aplicada completamente
+- [ ] Links relativos testados e funcionais
+- [ ] Nomenclatura kebab-case aplicada
+- [ ] DOCUMENTATION.md atualizado
+- [ ] Categoria apropriada definida
+
+### Manutenção Contínua
+- [ ] Revisar quando componentes são alterados
+- [ ] Atualizar quando novas features são adicionadas
+- [ ] Verificar links após reestruturações
+- [ ] Manter sincronizado com código
+
+## Exemplos Práticos
+
+### Nomenclatura Correta
+✅ `auth-documentation.md`
+✅ `charts-documentation.md`
+✅ `shareholder-overview-simple.md`
+
+### Nomenclatura Incorreta
+❌ `Auth.md`
+❌ `authDocumentation.md`
+❌ `auth_documentation.md`
+
+### Localização Correta
+✅ `src/pages/auth/auth-documentation.md`
+✅ `src/pages/charts/charts-documentation.md`
+
+### Localização Incorreta
+❌ `.markdowns/auth-documentation.md`
+❌ `docs/auth.md`
+❌ `src/auth-documentation.md`
+
+## Aversões e Restrições
+
+### NÃO Fazer
+- ❌ Incluir componentes ou funcionalidades inexistentes
+- ❌ Criar documentação genérica ou template sem verificação
+- ❌ Usar nomenclatura em camelCase ou PascalCase
+- ❌ Centralizar todos os markdowns em pasta única
+- ❌ Criar dependências desnecessárias entre documentos
+- ❌ Documentar APIs ou endpoints não implementados
+
+### Sempre Fazer
+- ✅ Verificar existência real de todos os componentes mencionados
+- ✅ Manter documentação próxima ao código
+- ✅ Usar nomenclatura kebab-case consistente
+- ✅ Atualizar índice central quando adicionar nova doc
+- ✅ Testar todos os links relativos
+- ✅ Seguir estrutura padronizada completamente
+
+## Preparação para Migração iQ
+
+### Considerações Futuras
+- Estrutura preparada para migração ao repositório centralizado
+- Links relativos facilitam transição
+- Organização por domínio mantém contexto
+- Padrão consistente facilita automação de migração
+
+### Metadados Recomendados
+```yaml
+---
+project: mz-mf-shareholders
+page: [nome-da-pagina]
+category: [categoria-funcional]
+last_updated: [data]
+verified_components: true
+---
+```
+
+Este template garante documentação técnica precisa, organizada e facilmente mantida, seguindo os princípios de arquitetura e qualidade da Fênix. 

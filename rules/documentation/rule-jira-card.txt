@@ -1,0 +1,103 @@
+# Regras para Descrição de Cards Jira
+
+## Estrutura Básica
+O card do Jira deve seguir a seguinte estrutura:
+
+```markdown
+# Título do Card
+
+## Objetivo
+Descrição clara e concisa do objetivo da tarefa.
+
+## Merge Requests
+DEV: [link do PR]
+
+## Componentes
+- 🧩 [Nome do Componente] | [Sistema]
+- [Outros componentes relacionados]
+
+## 📁 Estrutura
+```
+[Estrutura de diretórios e arquivos]
+```
+
+## ⚙️ Regras de Implementação
+- Lista de regras específicas
+- Requisitos técnicos
+- Padrões a serem seguidos
+
+## 🧪 Testes
+- Tipos de testes necessários
+- Cobertura esperada
+- Ferramentas a serem utilizadas
+
+## 📏 Tipagens
+- Estrutura de tipos
+- Convenções de nomenclatura
+- Restrições de tipagem
+
+## 🔒 Aversões e Restrições
+- O que não deve ser feito
+- Limitações técnicas
+- Restrições de implementação
+
+## 📘 Observações
+- Notas adicionais
+- Considerações importantes
+- Dependências
+
+## 📦 Dependências
+[Lista de dependências necessárias]
+```
+
+## Regras Específicas
+
+### Título
+- Deve ser claro e descritivo
+- Incluir o tipo da tarefa (feature, bug, etc)
+- Usar verbos no infinitivo
+
+### Objetivo
+- Contextualizar a necessidade
+- Explicar o "porquê" da implementação
+- Mencionar benefícios esperados
+
+### Estrutura
+- Usar emojis para categorização
+- Manter hierarquia clara
+- Incluir todos os arquivos relevantes
+
+### Regras de Implementação
+- Listar requisitos técnicos
+- Especificar padrões a seguir
+- Mencionar restrições importantes
+
+### Testes
+- Definir tipos de testes
+- Especificar cobertura mínima
+- Listar ferramentas necessárias
+
+### Tipagens
+- Definir convenções
+- Especificar restrições
+- Mencionar padrões de nomenclatura
+
+### Aversões e Restrições
+- Listar o que não deve ser feito
+- Mencionar limitações técnicas
+- Especificar restrições de implementação
+
+### Observações
+- Incluir notas relevantes
+- Mencionar considerações importantes
+- Listar dependências
+
+## Boas Práticas
+1. Manter a descrição organizada e estruturada
+2. Usar emojis para melhor visualização
+3. Incluir links para recursos relevantes
+4. Manter o foco no objetivo principal
+5. Documentar dependências claramente
+
+## Exemplos
+[Incluir exemplos de bons cards] 

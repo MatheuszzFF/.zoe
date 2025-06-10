@@ -1,0 +1,85 @@
+# Regras para Descrição de Pull Requests
+
+## Estrutura Básica
+A descrição do PR deve seguir a seguinte estrutura:
+
+```markdown
+# Título do PR
+
+## Descrição
+Breve descrição do propósito e contexto das mudanças.
+
+## Principais Funcionalidades
+- Lista das principais funcionalidades implementadas
+- Pontos-chave das mudanças
+- Benefícios para o usuário/sistema
+
+## Mudanças Técnicas
+- Detalhes técnicos relevantes
+- Arquitetura e padrões utilizados
+- Dependências e impactos
+
+## Testes
+- Cobertura de testes
+- Tipos de testes implementados
+- Cenários testados
+
+## Screenshots
+[Incluir screenshots relevantes quando aplicável]
+
+## Checklist
+- [ ] Implementação
+- [ ] Testes unitários
+- [ ] Testes de integração
+- [ ] Documentação
+- [ ] Cobertura de testes
+- [ ] Linting
+- [ ] Revisão de código
+```
+
+## Regras Específicas
+
+### Título
+- Deve ser claro e descritivo
+- Incluir o número da issue quando aplicável
+- Usar verbos no presente
+
+### Descrição
+- Contextualizar as mudanças
+- Explicar o "porquê" das alterações
+- Mencionar impactos em outras áreas
+
+### Funcionalidades
+- Listar apenas funcionalidades relevantes
+- Focar em benefícios para o usuário
+- Destacar inovações
+
+### Mudanças Técnicas
+- Detalhar arquitetura e padrões
+- Mencionar dependências
+- Explicar decisões técnicas importantes
+
+### Testes
+- Especificar cobertura
+- Listar tipos de testes
+- Mencionar cenários críticos
+
+### Screenshots
+- Incluir apenas screenshots relevantes
+- Mostrar antes/depois quando aplicável
+- Destacar mudanças visuais
+
+### Checklist
+- Manter atualizado
+- Incluir todos os itens relevantes
+- Marcar apenas quando concluído
+
+## Boas Práticas
+1. Manter a descrição concisa mas informativa
+2. Usar markdown para formatação
+3. Incluir links para issues relacionadas
+4. Mencionar reviewers relevantes
+5. Atualizar a descrição conforme feedback
+
+## Exemplos
+[Incluir exemplos de boas descrições de PR] 

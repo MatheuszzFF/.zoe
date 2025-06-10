@@ -1,0 +1,25 @@
+{
+  "command": "test-feedback",
+  "trigger": ["testar feedback", "test feedback", "validar feedback"],
+  "priority": 3,
+  "description": "Testa o funcionamento do sistema de feedback melhorado",
+  "action": {
+    "type": "execute",
+    "function": "test_feedback_system",
+    "params": {
+      "test_patterns": true,
+      "check_sentiment": true,
+      "validate_storage": true
+    }
+  },
+  "response": {
+    "success": "✅ Sistema de feedback testado com sucesso!\n\n📊 **Resultados dos testes:**\n- Padrões de trigger: {trigger_patterns_status}\n- Análise de sentimento: {sentiment_analysis_status}\n- Armazenamento: {storage_status}\n\n🎯 **Estatísticas atuais:**\n- Total de feedbacks capturados: {total_feedbacks}\n- Feedbacks positivos: {positive_count}\n- Feedbacks negativos: {negative_count}\n- Sugestões: {suggestions_count}\n\n📋 **Últimos feedbacks:**\n{recent_feedbacks}",
+    "error": "❌ Erro ao testar sistema de feedback: {error_message}"
+  },
+  "metadata": {
+    "category": "system",
+    "created_at": "2024-12-19",
+    "version": "1.0",
+    "author": "feedback-system-v2"
+  }
+} 

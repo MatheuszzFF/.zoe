@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "project": "mz-shareholders-mf", 
+  "patterns": {
+    "component_structure": {
+      "description": "Estrutura padrão de componentes React",
+      "template": "Functional component + TypeScript + Styled Components"
+    },
+    "props_patterns": {
+      "description": "Padrões de props e interfaces",
+      "pattern": "Interfaces específicas em arquivos .types.ts separados"
+    },
+    "styling_patterns": {
+      "description": "Padrões de estilização",
+      "pattern": "Styled Components com tema do @mz-codes/design-system"
+    },
+    "modal_patterns": {
+      "description": "Padrão específico para modais",
+      "pattern": "Separação component.tsx + template.tsx + types.ts"
+    },
+    "hook_patterns": {
+      "description": "Padrões para custom hooks",
+      "pattern": "Prefixo 'use' + lógica encapsulada (useSpreadsheetGrouping)"
+    },
+    "error_handling": {
+      "description": "Tratamento de erros em componentes",
+      "pattern": "Error Boundaries para componentes críticos"
+    }
+  }
+} 

@@ -2,21 +2,21 @@
   "_metadata": {
     "version": "1.0",
     "description": "Controle do projeto ativo para isolamento de contexto",
-    "last_updated": "2025-06-09T16:50:00Z"
+    "last_updated": "2025-06-10T15:00:00Z"
   },
-  "active_project": "design-system",
-  "project_path": ".zoe/rules/context/projects/design-system/",
-  "last_updated": "2025-06-09T16:50:00Z",
+  "active_project": "mz-shareholders-mf",
+  "project_path": ".zoe/rules/context/projects/mz-shareholders-mf/",
+  "last_updated": "2025-06-10T15:00:00Z",
   "session_info": {
-    "current_session": 2,
-    "session_start": "2025-06-09T16:50:00Z",
-    "last_activity": "2025-06-09T16:50:00Z"
+    "current_session": 4,
+    "session_start": "2025-06-10T15:00:00Z",
+    "last_activity": "2025-06-10T15:00:00Z"
   },
-  "activated_at": "2025-06-09T16:50:00Z",
-  "session_id": "sess_design_system_restart",
-  "last_command": "zoe, iniciar design-system",
-  "last_command_at": "2025-06-09T16:50:00Z",
+  "activated_at": "2025-06-10T15:00:00Z",
+  "session_id": "sess_mz_shareholders_mf_20250610",
+  "last_command": "zoe, iniciar mz-mf-shareholders 10 de junho de 2025",
+  "last_command_at": "2025-06-10T15:00:00Z",
   "commands_count": 1,
   "session_duration": "started",
-  "notes": "Projeto DESIGN-SYSTEM reativado. Sistema de design com componentes React documentados no Storybook. Sessão anterior: desenvolvimento de funcionalidade de scroll no Table."
+  "notes": "Projeto MZ-SHAREHOLDERS-MF reativado para sessão de 10/06/2025. Microfrontend para gestão de acionistas com Module Federation. Feature SSER-1305 (Incremental Grouping Checkbox) implementada na última sessão. Context memory e patterns sendo carregados."
 } 
