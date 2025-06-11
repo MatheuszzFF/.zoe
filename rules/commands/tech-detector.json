@@ -1,0 +1,181 @@
+{
+  "_metadata": {
+    "command_name": "tech-detector",
+    "version": "1.0",
+    "format": "json",
+    "description": "Sistema MODULAR de detecção automática de tecnologias para qualquer projeto",
+    "created": "2025-06-10",
+    "scope": "GLOBAL - funciona em qualquer projeto",
+    "priority": "CRITICAL"
+  },
+
+  "detection_strategy": {
+    "step_1": "Analisar package.json para dependências",
+    "step_2": "Verificar arquivos de configuração presentes",
+    "step_3": "Analisar estrutura de pastas",
+    "step_4": "Verificar imports em arquivos existentes",
+    "step_5": "Determinar template mais apropriado"
+  },
+
+  "package_json_patterns": {
+    "react_web": {
+      "dependencies": ["react", "@types/react"],
+      "devDependencies": ["@types/react"],
+      "scripts_hint": ["build", "dev", "start"]
+    },
+    "react_native": {
+      "dependencies": ["react-native", "expo"],
+      "scripts_hint": ["android", "ios", "start"]
+    },
+    "typescript": {
+      "dependencies": ["typescript"],
+      "devDependencies": ["typescript", "@types/"],
+      "files_required": ["tsconfig.json"]
+    },
+    "tailwindcss": {
+      "dependencies": ["tailwindcss"],
+      "devDependencies": ["tailwindcss"],
+      "files_required": ["tailwind.config.js", "tailwind.config.ts"]
+    },
+    "shadcn": {
+      "dependencies": ["@radix-ui", "class-variance-authority", "lucide-react"],
+      "files_required": ["components.json"]
+    },
+    "nextjs": {
+      "dependencies": ["next"],
+      "folder_structure": ["app/", "pages/"]
+    }
+  },
+
+  "file_detection": {
+    "config_files": [
+      {
+        "file": "package.json",
+        "required": true,
+        "analysis": "dependencies + scripts"
+      },
+      {
+        "file": "tsconfig.json", 
+        "technology": "typescript",
+        "confidence": "high"
+      },
+      {
+        "file": "tailwind.config.js",
+        "technology": "tailwindcss",
+        "confidence": "high"
+      },
+      {
+        "file": "components.json",
+        "technology": "shadcn-ui",
+        "confidence": "high"
+      },
+      {
+        "file": "next.config.js",
+        "technology": "nextjs",
+        "confidence": "high"
+      },
+      {
+        "file": "expo.json",
+        "technology": "expo",
+        "confidence": "high"
+      }
+    ]
+  },
+
+  "folder_structure_analysis": {
+    "patterns": [
+      {
+        "path": "src/app",
+        "indicates": "nextjs_app_router"
+      },
+      {
+        "path": "pages/",
+        "indicates": "nextjs_pages_router"
+      },
+      {
+        "path": "src/components",
+        "indicates": "react_project"
+      },
+      {
+        "path": "components/ui",
+        "indicates": "design_system_likely"
+      },
+      {
+        "path": "android/",
+        "indicates": "react_native"
+      },
+      {
+        "path": "ios/",
+        "indicates": "react_native"
+      }
+    ]
+  },
+
+  "template_matching": {
+    "web_react_typescript_tailwind_shadcn": {
+      "required": ["react", "typescript", "tailwindcss", "shadcn-ui"],
+      "template": "create-component-web-shadcn.json",
+      "confidence": "perfect_match",
+      "description": "Projeto web moderno completo"
+    },
+    "react_native_expo_typescript": {
+      "required": ["react-native", "expo", "typescript"],
+      "template": "create-component-rn-expo.json", 
+      "confidence": "perfect_match",
+      "description": "Projeto React Native com Expo"
+    },
+    "web_react_typescript_tailwind": {
+      "required": ["react", "typescript", "tailwindcss"],
+      "optional": ["nextjs"],
+      "template": "create-component-web-tailwind.json",
+      "confidence": "good_match",
+      "description": "Projeto web com Tailwind"
+    },
+    "web_react_typescript": {
+      "required": ["react", "typescript"],
+      "template": "create-component-web-basic.json",
+      "confidence": "basic_match", 
+      "description": "Projeto React básico"
+    },
+    "form_specialized": {
+      "trigger": "when creating forms specifically",
+      "required": ["react", "typescript"],
+      "recommended": ["tailwindcss", "shadcn-ui"],
+      "template": "create-form-shadcn.json",
+      "confidence": "specialized_match"
+    }
+  },
+
+  "fallback_strategy": {
+    "unknown_stack": {
+      "action": "ask_user",
+      "options": [
+        "create-component-web-shadcn.json - Web moderno",
+        "create-component-rn-expo.json - React Native",
+        "create-component-web-basic.json - Web básico",
+        "skip - Não aplicar templates"
+      ]
+    },
+    "legacy_project": {
+      "detection": "no_typescript_or_modern_tooling",
+      "action": "warn_and_ask",
+      "message": "Projeto parece ser legacy. Deseja modernizar com templates atuais?"
+    }
+  },
+
+  "modular_execution": {
+    "project_agnostic": true,
+    "no_hardcoded_paths": true,
+    "works_anywhere": true,
+    "adapts_to_structure": true,
+    "respects_existing_patterns": true
+  },
+
+  "zoe_behavior": {
+    "on_any_project": "Executar detecção automática sem assumir nada",
+    "on_component_request": "Detectar stack → Escolher template → Aplicar",
+    "on_detection_failure": "Perguntar qual template usar",
+    "on_legacy_detection": "Avisar e pedir permissão antes de modernizar",
+    "never_assume": "Sempre confirmar antes de aplicar em projetos existentes"
+  }
+} 

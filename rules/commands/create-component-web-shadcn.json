@@ -1,0 +1,87 @@
+{
+  "_metadata": {
+    "command_name": "create-component-web-shadcn",
+    "version": "1.0",
+    "description": "Template para componentes web com React + TypeScript + Tailwind + Shadcn/ui",
+    "based_on": "Modern UI patterns extracted from successful projects",
+    "created": "2025-06-10"
+  },
+
+  "requirements": {
+    "technologies": ["react", "typescript", "tailwindcss", "shadcn"],
+    "files_must_exist": ["components.json", "tailwind.config.js"],
+    "auto_detect": true
+  },
+
+  "files_to_create": [
+    {
+      "file": "[name].component.tsx",
+      "template": "component_logic_shadcn",
+      "description": "Lógica do componente com hooks e estado"
+    },
+    {
+      "file": "[name].template.tsx", 
+      "template": "component_template_shadcn",
+      "description": "Template visual com Shadcn/ui e Tailwind"
+    },
+    {
+      "file": "[name].types.ts",
+      "template": "component_types_shadcn", 
+      "description": "Types com padrão T[ComponentName]"
+    },
+    {
+      "file": "[name].test.tsx",
+      "template": "component_test_modern",
+      "description": "Testes com testing-library"
+    }
+  ],
+
+  "templates": {
+    "component_logic_shadcn": {
+      "imports": [
+        "import React, { useState, useEffect, useCallback } from 'react'",
+        "import { T[ComponentName] } from './[name].types'",
+        "import { [ComponentName]Template } from './[name].template'"
+      ],
+      "structure": "export const [ComponentName]: React.FC<T[ComponentName]> = (props) => {\n  const { PROPS_DESTRUCTURE } = props\n  \n  // Estado local\n  const [state, setState] = useState()\n  \n  // Efeitos\n  useEffect(() => {\n    // Lógica de inicialização\n  }, [])\n  \n  // Handlers\n  const handleClick = useCallback(() => {\n    // Lógica do click\n  }, [])\n  \n  // Props para template\n  const templateProps = {\n    ...props,\n    onAction: handleClick,\n    state\n  }\n  \n  return <[ComponentName]Template {...templateProps} />\n}"
+    },
+    "component_template_shadcn": {
+      "imports": [
+        "import React from 'react'",
+        "import { cn } from '@/lib/utils'",
+        "import { Card, CardHeader, CardContent } from '@/components/ui/card'",
+        "import { Button } from '@/components/ui/button'",
+        "import { LUCIDE_ICONS } from 'lucide-react'",
+        "import { T[ComponentName]Template } from './[name].types'"
+      ],
+      "structure": "export const [ComponentName]Template: React.FC<T[ComponentName]Template> = (props) => {\n  const { className, variant, children, ...rest } = props\n  \n  return (\n    <Card className={cn(\n      'shadow-xl border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm',\n      variant === 'elevated' && 'shadow-2xl',\n      className\n    )} {...rest}>\n      <CardHeader className=\"border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700\">\n        <div className=\"flex items-center gap-3\">\n          <div className=\"p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg\">\n            <ICON className=\"h-5 w-5 text-white\" />\n          </div>\n          <h3 className=\"text-xl font-semibold text-slate-900 dark:text-slate-100\">\n            TITLE\n          </h3>\n        </div>\n      </CardHeader>\n      <CardContent className=\"pt-6 pb-6\">\n        {children}\n      </CardContent>\n    </Card>\n  )\n}"
+    },
+    "component_types_shadcn": {
+      "structure": "import { ReactNode } from 'react'\n\nexport type T[ComponentName] = {\n  children?: ReactNode\n  className?: string\n  variant?: 'default' | 'elevated' | 'compact'\n  onAction?: () => void\n}\n\nexport type T[ComponentName]Template = {\n  children?: ReactNode\n  className?: string\n  variant?: 'default' | 'elevated' | 'compact'\n  onAction?: () => void\n  state?: any\n}"
+    },
+    "component_test_modern": {
+      "imports": [
+        "import { render, screen } from '@testing-library/react'",
+        "import userEvent from '@testing-library/user-event'",
+        "import { [ComponentName] } from './[name].component'"
+      ],
+      "structure": "describe('[ComponentName]', () => {\n  const user = userEvent.setup()\n  \n  it('should render correctly', () => {\n    render(<[ComponentName]>Test content</[ComponentName]>)\n    expect(screen.getByText('Test content')).toBeInTheDocument()\n  })\n  \n  it('should handle user interactions', async () => {\n    const onAction = jest.fn()\n    render(<[ComponentName] onAction={onAction}>Click me</[ComponentName]>)\n    \n    await user.click(screen.getByText('Click me'))\n    expect(onAction).toHaveBeenCalled()\n  })\n  \n  it('should apply variant styles', () => {\n    render(<[ComponentName] variant=\"elevated\">Content</[ComponentName]>)\n    expect(screen.getByText('Content').closest('.card')).toHaveClass('shadow-2xl')\n  })\n})"
+    }
+  },
+
+  "modern_ui_patterns": {
+    "card_structure": "Card com header gradiente + ícone + conteúdo espaçado",
+    "spacing": "Espaçamento generoso: p-6, py-8, space-y-6",
+    "colors": "Gradientes sutis + cores temáticas por seção", 
+    "typography": "text-xl para títulos, text-slate-900/100 para contraste",
+    "shadows": "shadow-xl para elevação, backdrop-blur-sm para modernidade",
+    "icons": "Lucide React em containers com gradiente"
+  },
+
+  "ai_improvements": {
+    "auto_icon_selection": "Zoe deve sugerir ícone Lucide apropriado baseado no nome do componente",
+    "auto_color_theme": "Zoe deve sugerir cor temática baseada no propósito (user=purple, data=cyan, etc)",
+    "responsive_variants": "Adicionar variantes responsivas automaticamente",
+    "accessibility_defaults": "Incluir ARIA labels e navegação por teclado por padrão"
+  }
+} 

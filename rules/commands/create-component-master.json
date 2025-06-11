@@ -1,0 +1,136 @@
+{
+  "_metadata": {
+    "command_name": "create-component-master", 
+    "version": "1.0",
+    "format": "json",
+    "description": "COMANDO MASTER - Detecta stack e aplica template apropriado modularmente",
+    "created": "2025-06-10",
+    "scope": "UNIVERSAL - funciona em qualquer projeto"
+  },
+
+  "execution_flow": {
+    "step_1": {
+      "action": "run_tech_detector",
+      "file": ".zoe/rules/commands/tech-detector.json",
+      "purpose": "Analisar projeto atual e detectar stack tecnológico"
+    },
+    "step_2": {
+      "action": "match_template", 
+      "logic": "Baseado na detecção, escolher template mais apropriado",
+      "fallback": "Sempre garantir que um template seja aplicado"
+    },
+    "step_3": {
+      "action": "apply_template",
+      "process": "Executar template escolhido com parâmetros do projeto"
+    },
+    "step_4": {
+      "action": "post_process",
+      "tasks": ["Verificar arquivos criados", "Sugerir melhorias específicas"]
+    }
+  },
+
+  "template_priorities": [
+    {
+      "priority": 1,
+      "template": "create-component-web-shadcn.json",
+      "conditions": ["react", "typescript", "tailwindcss", "shadcn"],
+      "description": "Projeto web moderno completo"
+    },
+    {
+      "priority": 2,
+      "template": "create-component-rn-expo.json", 
+      "conditions": ["react-native", "expo", "typescript"],
+      "description": "Projeto React Native moderno"
+    },
+    {
+      "priority": 3,
+      "template": "create-form-shadcn.json",
+      "conditions": ["react", "typescript", "form_request"],
+      "trigger": "when user specifically requests form",
+      "description": "Formulário moderno com validação"
+    },
+    {
+      "priority": 4,
+      "template": "create-component-web-tailwind.json",
+      "conditions": ["react", "typescript", "tailwindcss"],
+      "description": "Projeto web com Tailwind"
+    },
+    {
+      "priority": 5,
+      "template": "create-component-web-basic.json",
+      "conditions": ["react", "typescript"],
+      "description": "Projeto React básico (fallback universal)"
+    }
+  ],
+
+  "modular_features": {
+    "project_agnostic": true,
+    "no_hardcoded_paths": true,
+    "adapts_to_existing_structure": true,
+    "respects_conventions": true,
+    "universal_compatibility": true
+  },
+
+  "smart_suggestions": {
+    "icon_suggestions": {
+      "component_name_patterns": {
+        "User": "User, UserCheck, Users",
+        "Button": "Click, MousePointer, Hand",
+        "Card": "Square, Rectangle, Layout",
+        "Modal": "Window, Popup, Overlay",
+        "Form": "FileText, Edit, PenTool",
+        "Table": "Table, Grid, List",
+        "Chart": "BarChart, LineChart, PieChart"
+      }
+    },
+    "color_themes": {
+      "by_purpose": {
+        "user": "purple - from-purple-500 to-purple-600",
+        "data": "cyan - from-cyan-500 to-cyan-600", 
+        "actions": "blue - from-blue-500 to-blue-600",
+        "settings": "indigo - from-indigo-500 to-indigo-600",
+        "reports": "teal - from-teal-500 to-teal-600",
+        "forms": "emerald - from-emerald-500 to-emerald-600"
+      }
+    }
+  },
+
+  "zoe_instructions": {
+    "always_start_with": "Executar detecção automática de tecnologias",
+    "never_assume": "Nunca assumir stack ou estrutura do projeto",
+    "always_fallback": "Sempre ter um template básico funcionando",
+    "respect_existing": "Nunca alterar padrões existentes sem permissão",
+    "be_helpful": "Sugerir melhorias mas não forçar",
+    "modular_approach": "Cada projeto é único, adaptar-se a ele"
+  },
+
+  "compatibility_matrix": {
+    "works_with": [
+      "Create React App",
+      "Next.js (App Router)",
+      "Next.js (Pages Router)", 
+      "Vite + React",
+      "React Native CLI",
+      "Expo",
+      "Legacy React projects",
+      "Custom React setups"
+    ],
+    "styling_compatibility": [
+      "Tailwind CSS + Shadcn/ui",
+      "Tailwind CSS standalone", 
+      "CSS Modules",
+      "Styled Components",
+      "Emotion",
+      "CSS puro",
+      "SASS/SCSS"
+    ]
+  },
+
+  "usage_examples": {
+    "new_modern_project": "Auto-detecta Shadcn → Aplica template moderno",
+    "legacy_project": "Detecta ausência de moderno → Pergunta antes de aplicar",
+    "react_native": "Detecta RN → Aplica template mobile",
+    "unknown_stack": "Não consegue detectar → Lista opções para usuário escolher",
+    "form_request": "Usuário pede formulário → Prioriza template de form"
+  }
+} 

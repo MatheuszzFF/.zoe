@@ -1,0 +1,98 @@
+{
+  "_metadata": {
+    "rule_type": "global_development_mandatory",
+    "scope": "all_projects",
+    "created": "2025-06-10",
+    "priority": "CRITICAL",
+    "description": "Regras globais do Sistema Zoe para desenvolvimento"
+  },
+
+  "COMPONENT_CREATION_GLOBAL_RULES": {
+    "APLICABILIDADE": "Qualquer projeto React/React Native que aceite essa arquitetura",
+    "REGRA_OBRIGATÓRIA": "SEMPRE usar .zoe/rules/commands/create-component.json",
+    "DETECÇÃO_AUTOMÁTICA": "Verificar se projeto suporta essa arquitetura antes de aplicar",
+    "ESTRUTURA_PADRÃO": {
+      "arquivos": [
+        "[name].component.tsx - lógica e state",
+        "[name].template.tsx - estrutura visual", 
+        "[name].types.ts - types com padrão T[ComponentName]",
+        "[name].test.tsx - testes obrigatórios"
+      ],
+      "patterns": {
+        "props": "receber como objeto único, desestruturar internamente",
+        "types": "type T[ComponentName] = {...}",
+        "forbidden": "NUNCA interfaces TypeScript manuais"
+      }
+    }
+  },
+
+  "PAGE_CREATION_GLOBAL_RULES": {
+    "APLICABILIDADE": "Qualquer projeto web/mobile que aceite essa arquitetura",
+    "REGRA_OBRIGATÓRIA": "SEMPRE usar .zoe/rules/commands/create-page.json",
+    "ESTRUTURA_PADRÃO": {
+      "arquivos": [
+        "[name].page.tsx - página principal + SEO",
+        "[name].template.tsx - estrutura visual",
+        "[name].types.ts - interfaces da página",
+        "[name].classes.ts - classes organizadas"
+      ]
+    }
+  },
+
+  "PROJECT_RESPECT_RULES": {
+    "REGRA_FUNDAMENTAL": "NUNCA mexer em projetos existentes sem solicitação explícita",
+    "PRINCÍPIOS": [
+      "Respeitar arquitetura existente dos projetos",
+      "Não propor mudanças não solicitadas",
+      "Não refatorar código funcionando sem pedido",
+      "Sempre perguntar antes de alterar padrões estabelecidos"
+    ],
+    "EXCEÇÕES": [
+      "Correção de bugs críticos",
+      "Solicitação explícita do usuário",
+      "Melhorias de segurança urgentes"
+    ]
+  },
+
+  "DETECTION_LOGIC": {
+    "COMPATIBLE_PROJECTS": [
+      "Projetos React com TypeScript",
+      "Projetos React Native com TypeScript", 
+      "Projetos Next.js",
+      "Novos projetos sendo criados do zero"
+    ],
+    "INCOMPATIBLE_PROJECTS": [
+      "Projetos legacy sem TypeScript",
+      "Projetos com arquitetura muito específica",
+      "Projetos em outras linguagens/frameworks"
+    ],
+    "AUTO_DETECT": "Verificar package.json, tsconfig.json, estrutura de pastas"
+  },
+
+  "TEMPLATE_SELECTION": {
+    "AUTO_DETECTION": "Usar tech-detector.json para escolher template apropriado",
+    "AVAILABLE_TEMPLATES": [
+      "create-component-web-shadcn.json - Web moderno com Shadcn/ui",
+      "create-component-rn-expo.json - React Native com Expo",
+      "create-form-shadcn.json - Formulários modernos com validação",
+      "create-component.json - Template básico/fallback",
+      "create-page.json - Páginas básicas/fallback"
+    ],
+    "SELECTION_LOGIC": "Perfect match > Good match > Ask user > Basic fallback"
+  },
+
+  "UI_PATTERNS_INTEGRATION": {
+    "MODERN_UI_STANDARDS": "Baseado em frontend/modern-ui.mdc - Gradientes, cards, espaçamento generoso",
+    "COMPONENT_ARCHITECTURE": "Baseado em frontend/components.mdc - Separação lógica/template",
+    "FORM_PATTERNS": "Baseado em frontend/forms.mdc - React Hook Form + Zod + validação",
+    "STYLING_PATTERNS": "Baseado em frontend/styling.mdc - Tailwind + design system moderno"
+  },
+
+  "ZOE_ENFORCEMENT": {
+    "VERIFICAÇÃO_AUTOMÁTICA": "Detectar tipo de projeto antes de aplicar regras",
+    "PERGUNTA_OBRIGATÓRIA": "Sempre perguntar se deve aplicar templates em projetos existentes",
+    "APLICAÇÃO_AUTOMÁTICA": "Apenas em projetos novos ou quando explicitamente solicitado",
+    "TEMPLATE_INTELLIGENCE": "Escolher template baseado em detecção automática de tecnologias",
+    "UI_SUGGESTIONS": "Sugerir ícones, cores e padrões baseados no contexto"
+  }
+} 

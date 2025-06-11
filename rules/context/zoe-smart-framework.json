@@ -1,0 +1,184 @@
+{
+  "_metadata": {
+    "system_name": "zoe-smart-framework",
+    "version": "1.0",
+    "description": "Sistema inteligente que aplica automaticamente padrões de arquitetura",
+    "created": "2025-06-10",
+    "created_by": "Math",
+    "purpose": "Automatizar aplicação de padrões durante milestones e criação de projetos"
+  },
+
+  "auto_triggers": {
+    "milestone_start": {
+      "description": "Aplica padrões automaticamente ao iniciar milestones",
+      "conditions": [
+        "milestone contains 'component' keywords",
+        "milestone contains 'page' keywords", 
+        "milestone involves 'architecture' changes",
+        "milestone creates new features"
+      ],
+      "auto_apply": true
+    },
+    "project_creation": {
+      "description": "Aplica padrões ao criar projetos do zero",
+      "conditions": [
+        "new project initialization",
+        "folder structure creation",
+        "React/Next.js projects"
+      ],
+      "auto_apply": true
+    },
+    "code_modifications": {
+      "description": "Detecta quando aplicar padrões durante modificações",
+      "conditions": [
+        "user mentions 'criar componente'",
+        "user mentions 'criar página'",
+        "user requests 'seguir padrões'",
+        "milestone involves UI creation"
+      ],
+      "auto_apply": true
+    }
+  },
+
+  "smart_detection": {
+    "keywords_component": [
+      "componente", "component", "criar componente", "novo componente",
+      "button", "modal", "form", "input", "UI", "interface"
+    ],
+    "keywords_page": [
+      "página", "page", "criar página", "nova página", "screen", "view",
+      "dashboard", "login", "home", "about"
+    ],
+    "keywords_architecture": [
+      "arquitetura", "structure", "organizar", "padrões", "patterns",
+      "folder structure", "file organization"
+    ]
+  },
+
+  "framework_rules": {
+    "priority_order": [
+      "1. Sempre verificar projeto ativo (.zoe/rules/context/active-project.json)",
+      "2. Ler contexto do projeto para detectar stack tecnológica", 
+      "3. Aplicar padrões baseados no stack (React/Next.js/React Native)",
+      "4. Seguir conventions de create-component.json e create-page.json",
+      "5. Integrar com sistema de roadmap quando aplicável",
+      "6. Atualizar MCP memory com padrões aplicados"
+    ],
+    "mandatory_patterns": {
+      "typescript_types": {
+        "pattern": "type T[ComponentName] = {...}",
+        "rule": "SEMPRE usar 'type' com prefixo 'T'",
+        "apply_to": ["components", "pages", "utilities"]
+      },
+      "props_destructuring": {
+        "pattern": "const Component = (props) => { const { variant, size } = props",
+        "rule": "NUNCA desestruturar diretamente nos parâmetros",
+        "apply_to": ["all React components"]
+      },
+      "file_separation": {
+        "pattern": ".component.tsx (lógica) + .template.tsx (visual) + .types.ts",
+        "rule": "Separar responsabilidades em arquivos específicos",
+        "apply_to": ["complex components", "pages"]
+      }
+    }
+  },
+
+  "stack_specific_rules": {
+    "react_native": {
+      "patterns": ["create-component patterns adapted for RN", "StyleSheet usage", "native components"],
+      "file_extensions": [".tsx", ".ts", ".styles.ts"],
+      "folder_structure": "components/ui/, components/common/, screens/",
+      "testing": "Jest + @testing-library/react-native"
+    },
+    "next_js": {
+      "patterns": ["create-page patterns", "SEO optimization", "server components"],
+      "file_extensions": [".tsx", ".ts", ".page.tsx"],
+      "folder_structure": "pages/ or app/, components/",
+      "testing": "Vitest + @testing-library/react"
+    },
+    "react_spa": {
+      "patterns": ["create-component patterns", "routing integration"],
+      "file_extensions": [".tsx", ".ts", ".component.tsx"],
+      "folder_structure": "src/components/, src/pages/",
+      "testing": "Vitest + @testing-library/react"
+    }
+  },
+
+  "automatic_actions": {
+    "on_milestone_start": [
+      {
+        "action": "read_milestone_description",
+        "purpose": "Detectar se precisa aplicar padrões"
+      },
+      {
+        "action": "analyze_keywords", 
+        "purpose": "Identificar tipo de trabalho (component/page/architecture)"
+      },
+      {
+        "action": "apply_matching_patterns",
+        "purpose": "Aplicar padrões relevantes automaticamente"
+      },
+      {
+        "action": "update_roadmap_tracker",
+        "purpose": "Registrar padrões aplicados no tracker"
+      }
+    ],
+    "on_code_creation": [
+      {
+        "action": "detect_creation_type",
+        "purpose": "Identificar se é componente, página ou outro"
+      },
+      {
+        "action": "apply_architecture_standards",
+        "purpose": "Aplicar padrões de create-component.json ou create-page.json"
+      },
+      {
+        "action": "create_required_files",
+        "purpose": "Criar todos os arquivos necessários (.component, .template, .types, etc)"
+      },
+      {
+        "action": "setup_testing_structure",
+        "purpose": "Criar arquivos de teste seguindo os padrões"
+      }
+    ]
+  },
+
+  "integration_points": {
+    "roadmap_system": {
+      "file": ".zoe/rules/context/projects/[project]/roadmap-tracker.json",
+      "action": "Adicionar notas sobre padrões aplicados em cada task",
+      "update_field": "implementation_notes"
+    },
+    "mcp_memory": {
+      "action": "Registrar padrões aplicados para aprendizado futuro",
+      "entity_type": "Architecture Pattern Applied",
+      "track_success": true
+    },
+    "project_context": {
+      "file": ".zoe/rules/context/projects/[project]/project-context.json", 
+      "action": "Atualizar code_patterns com novos padrões aplicados"
+    }
+  },
+
+  "behavior_modes": {
+    "silent_application": {
+      "description": "Aplica padrões sem perguntar quando óbvio",
+      "conditions": ["milestone clearly indicates component/page creation", "user explicitly asks for standards"]
+    },
+    "confirmation_mode": {
+      "description": "Pergunta antes de aplicar quando ambíguo",
+      "conditions": ["unclear context", "multiple pattern options available"]
+    },
+    "learning_mode": {
+      "description": "Observa padrões do Math e adapta sistema",
+      "conditions": ["Math suggests improvements", "new patterns detected"]
+    }
+  },
+
+  "success_metrics": {
+    "track_patterns_applied": true,
+    "measure_code_consistency": true,
+    "count_successful_implementations": true,
+    "record_time_saved": true
+  }
+} 

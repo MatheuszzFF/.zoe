@@ -1,0 +1,425 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "created": "2025-06-10",
+    "last_updated": "2025-06-10",
+    "description": "Sistema de tracking automático do roadmap do Code Evolution Tracker",
+    "roadmap_file": "ROADMAP.md",
+    "auto_update": true
+  },
+  "project_info": {
+    "name": "Code Evolution Tracker",
+    "status": "active_development",
+    "current_phase": "phase_1",
+    "start_date": "2025-06-08",
+    "last_activity": "2025-06-10"
+  },
+  "phases": {
+    "phase_1": {
+      "name": "FUNDAÇÃO PROFISSIONAL",
+      "status": "active",
+      "total_milestones": 4,
+      "completed_milestones": 1,
+      "estimated_weeks": "1-2",
+      "milestones": {
+        "1_1_architecture": {
+          "id": "1.1",
+          "name": "Reestruturação de Arquitetura",
+          "status": "completed",
+          "complexity": "medium",
+          "estimated_hours": "2-3",
+          "dependencies": [],
+          "tasks": [
+            {
+              "id": "1.1.1",
+              "description": "Criar nova estrutura de pastas",
+              "completed": true,
+              "notes": "Estrutura profissional criada: components/ui, components/common, components/forms, hooks, services, utils, types, constants, theme"
+            },
+            {
+              "id": "1.1.2", 
+              "description": "Mover componentes existentes",
+              "completed": true,
+              "notes": "Componentes mantidos em suas pastas originais (screens/, navigation/, context/) seguindo padrão React Native"
+            },
+            {
+              "id": "1.1.3",
+              "description": "Atualizar imports",
+              "completed": true,
+              "notes": "Imports atualizados para usar tipos centralizados e constantes. TaskContext, Navigation e telas usando novos tipos."
+            },
+            {
+              "id": "1.1.4",
+              "description": "Validar funcionamento",
+              "completed": true,
+              "notes": "TypeScript compila sem erros. App está funcionando corretamente com nova estrutura."
+            }
+          ],
+          "completion_criteria": [
+            "Estrutura profissional implementada",
+            "Imports atualizados e funcionando",
+            "App roda sem erros",
+            "Documentação atualizada"
+          ],
+          "started_at": "2025-06-10T15:45:00Z",
+          "completed_at": "2025-06-10T16:15:00Z"
+        },
+        "1_2_design_tokens": {
+          "id": "1.2",
+          "name": "Sistema de Design Tokens",
+          "status": "pending",
+          "complexity": "medium",
+          "estimated_hours": "3-4",
+          "dependencies": ["1.1"],
+          "tasks": [
+            {
+              "id": "1.2.1",
+              "description": "Criar theme/tokens.ts",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.2.2",
+              "description": "Implementar theme/colors.ts",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.2.3",
+              "description": "Definir theme/typography.ts",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.2.4",
+              "description": "Configurar theme/spacing.ts",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.2.5",
+              "description": "Criar hook useTheme()",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.2.6",
+              "description": "Migrar componentes para tokens",
+              "completed": false,
+              "notes": ""
+            }
+          ],
+          "completion_criteria": [
+            "Sistema de tokens completo e tipado",
+            "Hook useTheme() funcionando",
+            "Componentes usando tokens",
+            "Consistência visual mantida"
+          ],
+          "started_at": null,
+          "completed_at": null
+        },
+        "1_3_async_storage": {
+          "id": "1.3",
+          "name": "Implementação AsyncStorage",
+          "status": "pending",
+          "complexity": "medium-high",
+          "estimated_hours": "4-5",
+          "dependencies": ["1.1"],
+          "tasks": [
+            {
+              "id": "1.3.1",
+              "description": "Instalar @react-native-async-storage",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.3.2",
+              "description": "Criar services/StorageService.ts",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.3.3",
+              "description": "Implementar serialização/deserialização",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.3.4",
+              "description": "Atualizar TaskContext",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.3.5",
+              "description": "Sistema de migração de dados",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.3.6",
+              "description": "Tratamento de erros",
+              "completed": false,
+              "notes": ""
+            },
+            {
+              "id": "1.3.7",
+              "description": "Loading states",
+              "completed": false,
+              "notes": ""
+            }
+          ],
+          "completion_criteria": [
+            "Tarefas persistem entre sessões",
+            "Performance mantida",
+            "Tratamento de erros implementado",
+            "Loading states funcionando"
+          ],
+          "started_at": null,
+          "completed_at": null
+        },
+        "1_4_base_components": {
+          "id": "1.4",
+          "name": "Componentes Base Reutilizáveis + Framework Zoe",
+          "status": "ready",
+          "complexity": "high",
+          "estimated_hours": "6-8",
+          "dependencies": ["1.1", "1.2"],
+          "description": "Implementar componentes reutilizáveis usando o Framework Inteligente da Zoe para aplicação automática de padrões arquiteturais",
+          "zoe_framework_integration": {
+            "enabled": true,
+            "auto_apply_patterns": true,
+            "templates_to_use": ["react-native-component.json"],
+            "expected_pattern_applications": 6
+          },
+          "tasks": [
+            {
+              "id": "1.4.1",
+              "description": "Ativar Framework Inteligente da Zoe",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Enable smart pattern detection and automatic template application"
+            },
+            {
+              "id": "1.4.2",
+              "description": "Criar Button component (padrão completo)",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Apply react-native-component template: .component.tsx + .template.tsx + .styles.ts + .types.ts + .test.tsx"
+            },
+            {
+              "id": "1.4.3",
+              "description": "Desenvolver Input component (padrão completo)",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Apply T[InputField] typing pattern, props destructuring, StyleSheet organization"
+            },
+            {
+              "id": "1.4.4",
+              "description": "Implementar Card component (padrão completo)",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Apply component separation pattern with visual/logic split"
+            },
+            {
+              "id": "1.4.5",
+              "description": "Criar Badge component (padrão completo)",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Apply variant system pattern with proper TypeScript typing"
+            },
+            {
+              "id": "1.4.6",
+              "description": "Desenvolver ProgressBar component (padrão completo)",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Apply animation patterns with proper state management"
+            },
+            {
+              "id": "1.4.7",
+              "description": "Implementar LoadingSpinner (padrão completo)",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Apply loading state patterns with accessibility features"
+            },
+            {
+              "id": "1.4.8",
+              "description": "Criar componentes/index.ts (exportação centralizada)",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Setup centralized exports following established patterns"
+            },
+            {
+              "id": "1.4.9",
+              "description": "Validar Framework Patterns aplicados",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Verify all components follow T[ComponentName] typing, props destructuring, file separation"
+            },
+            {
+              "id": "1.4.10",
+              "description": "Migrar telas existentes para novos componentes",
+              "completed": false,
+              "notes": "",
+              "framework_action": "Update screens to use new components maintaining functionality"
+            }
+          ],
+          "completion_criteria": [
+            "6+ componentes base criados seguindo Framework Zoe",
+            "Todos components seguem padrão: .component + .template + .styles + .types + .test",
+            "Typing pattern T[ComponentName] aplicado consistentemente",
+            "Props destructuring pattern implementado em todos",
+            "Telas migradas sem regressões",
+            "Framework Inteligente validado e funcionando",
+            "Exportação centralizada configurada"
+          ],
+          "framework_success_metrics": {
+            "pattern_consistency": "100% components follow established patterns",
+            "auto_application_rate": "Track how many patterns were auto-applied vs manual",
+            "time_saved_estimate": "Measure efficiency gain from automatic pattern application",
+            "code_quality_improvement": "Assess consistency and maintainability improvements"
+          },
+          "started_at": null,
+          "completed_at": null
+        }
+      }
+    },
+    "phase_2": {
+      "name": "CORE FEATURES AVANÇADAS",
+      "status": "blocked",
+      "total_milestones": 4,
+      "completed_milestones": 0,
+      "estimated_weeks": "2-3",
+      "blocked_by": "phase_1",
+      "milestones": {
+        "2_1_user_system": {
+          "id": "2.1",
+          "name": "Sistema de Usuários Robusto",
+          "status": "blocked",
+          "complexity": "high",
+          "estimated_hours": "8-10",
+          "dependencies": ["phase_1_complete"]
+        },
+        "2_2_complex_tasks": {
+          "id": "2.2", 
+          "name": "Tarefas Complexas & Categorização",
+          "status": "blocked",
+          "complexity": "high",
+          "estimated_hours": "10-12",
+          "dependencies": ["2.1"]
+        },
+        "2_3_gamification": {
+          "id": "2.3",
+          "name": "Sistema de Progresso Gamificado",
+          "status": "blocked",
+          "complexity": "high",
+          "estimated_hours": "8-10",
+          "dependencies": ["2.2"]
+        },
+        "2_4_notifications": {
+          "id": "2.4",
+          "name": "Notificações & Comunicação",
+          "status": "blocked",
+          "complexity": "medium",
+          "estimated_hours": "6-8",
+          "dependencies": ["2.3"]
+        }
+      }
+    },
+    "phase_3": {
+      "name": "EXPERIÊNCIA AVANÇADA",
+      "status": "blocked",
+      "total_milestones": 4,
+      "completed_milestones": 0,
+      "estimated_weeks": "3-4",
+      "blocked_by": "phase_2"
+    },
+    "phase_4": {
+      "name": "QUALIDADE & DEPLOY",
+      "status": "blocked",
+      "total_milestones": 3,
+      "completed_milestones": 0,
+      "estimated_weeks": "1-2",
+      "blocked_by": "phase_3"
+    }
+  },
+  "statistics": {
+    "total_milestones": 15,
+    "completed_milestones": 1,
+    "completion_percentage": 6.7,
+    "estimated_total_hours": "70-90",
+    "hours_worked": 2.5,
+    "current_velocity": 1,
+    "projected_completion": "2025-07-15",
+    "framework_integration": {
+      "enabled": true,
+      "milestones_with_framework": 1,
+      "expected_efficiency_gain": "25-30%",
+      "pattern_applications_planned": 6
+    }
+  },
+  "tracking_rules": {
+    "auto_update_roadmap": true,
+    "update_triggers": [
+      "milestone_started",
+      "milestone_completed", 
+      "task_completed",
+      "phase_progression",
+      "blocking_resolved"
+    ],
+    "markdown_sync": {
+      "enabled": true,
+      "file_path": "ROADMAP.md",
+      "last_sync": "2025-06-10",
+      "sync_sections": [
+        "phase_status",
+        "completion_checkboxes", 
+        "progress_percentage",
+        "next_steps"
+      ]
+    }
+  },
+  "zoe_commands": {
+    "start_milestone": {
+      "command": "zoe start milestone [milestone_id]",
+      "description": "Iniciar trabalho em um milestone específico",
+      "updates": ["milestone.status", "milestone.started_at", "markdown_file"]
+    },
+    "complete_task": {
+      "command": "zoe complete task [task_id]",
+      "description": "Marcar uma tarefa como concluída",
+      "updates": ["task.completed", "milestone.progress", "markdown_file"]
+    },
+    "complete_milestone": {
+      "command": "zoe complete milestone [milestone_id]",
+      "description": "Finalizar um milestone completamente",
+      "updates": ["milestone.status", "milestone.completed_at", "phase.progress", "unlock_dependencies"]
+    },
+    "roadmap_status": {
+      "command": "zoe roadmap status",
+      "description": "Mostrar status atual do roadmap",
+      "returns": "summary_of_current_progress"
+    },
+    "roadmap_next": {
+      "command": "zoe roadmap next",
+      "description": "Mostrar próximas tarefas disponíveis",
+      "returns": "available_tasks_list"
+    }
+  },
+  "automation": {
+    "enabled": true,
+    "features": {
+      "auto_unlock_dependencies": true,
+      "auto_update_markdown": true,
+      "auto_calculate_progress": true,
+      "auto_suggest_next_tasks": true,
+      "auto_detect_completion": true
+    },
+    "notifications": {
+      "milestone_completed": true,
+      "phase_completed": true,
+      "dependencies_unlocked": true,
+      "roadmap_updated": true
+    }
+  }
+} 

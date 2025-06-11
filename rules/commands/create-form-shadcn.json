@@ -1,0 +1,95 @@
+{
+  "_metadata": {
+    "command_name": "create-form-shadcn",
+    "version": "1.0",
+    "description": "Template para formulários modernos com React Hook Form + Zod + Shadcn/ui",
+    "based_on": "Modern form patterns with validation extracted from successful projects",
+    "created": "2025-06-10"
+  },
+
+  "requirements": {
+    "technologies": ["react", "typescript", "tailwindcss", "shadcn"],
+    "dependencies": ["react-hook-form", "zod", "@hookform/resolvers"],
+    "auto_detect": true
+  },
+
+  "files_to_create": [
+    {
+      "file": "[name]-form.component.tsx",
+      "template": "form_logic_modern",
+      "description": "Lógica do formulário com React Hook Form + Zod"
+    },
+    {
+      "file": "[name]-form.template.tsx",
+      "template": "form_template_shadcn",
+      "description": "Template visual do formulário com Shadcn/ui"
+    },
+    {
+      "file": "[name]-form.types.ts",
+      "template": "form_types_zod",
+      "description": "Schema Zod + types TypeScript"
+    },
+    {
+      "file": "[name]-form.test.tsx",
+      "template": "form_test_modern",
+      "description": "Testes para formulário"
+    }
+  ],
+
+  "templates": {
+    "form_logic_modern": {
+      "imports": [
+        "import React from 'react'",
+        "import { useForm } from 'react-hook-form'",
+        "import { zodResolver } from '@hookform/resolvers/zod'",
+        "import { [FormName]Schema, T[FormName]Data } from './[name]-form.types'",
+        "import { [FormName]Template } from './[name]-form.template'"
+      ],
+      "structure": "export const [FormName]Form: React.FC = () => {\n  const form = useForm<T[FormName]Data>({\n    resolver: zodResolver([FormName]Schema),\n    defaultValues: {\n      // Valores padrão\n    }\n  })\n  \n  const { handleSubmit, formState: { errors, isSubmitting } } = form\n  \n  const onSubmit = async (data: T[FormName]Data) => {\n    try {\n      // Lógica de envio\n      console.log('Form data:', data)\n    } catch (error) {\n      console.error('Error submitting form:', error)\n    }\n  }\n  \n  const templateProps = {\n    form,\n    onSubmit: handleSubmit(onSubmit),\n    errors,\n    isSubmitting\n  }\n  \n  return <[FormName]Template {...templateProps} />\n}"
+    },
+    "form_template_shadcn": {
+      "imports": [
+        "import React from 'react'",
+        "import { UseFormReturn } from 'react-hook-form'",
+        "import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card'",
+        "import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'",
+        "import { Input } from '@/components/ui/input'",
+        "import { Button } from '@/components/ui/button'",
+        "import { Textarea } from '@/components/ui/textarea'",
+        "import { FORM_ICON } from 'lucide-react'",
+        "import { T[FormName]Data } from './[name]-form.types'"
+      ],
+      "structure": "interface [FormName]TemplateProps {\n  form: UseFormReturn<T[FormName]Data>\n  onSubmit: () => void\n  errors: any\n  isSubmitting: boolean\n}\n\nexport const [FormName]Template: React.FC<[FormName]TemplateProps> = ({\n  form,\n  onSubmit,\n  errors,\n  isSubmitting\n}) => {\n  return (\n    <Card className=\"shadow-xl border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm max-w-2xl mx-auto\">\n      <CardHeader className=\"border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700\">\n        <div className=\"flex items-center gap-3\">\n          <div className=\"p-2 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg\">\n            <FORM_ICON className=\"h-5 w-5 text-white\" />\n          </div>\n          <h2 className=\"text-2xl font-bold text-slate-900 dark:text-slate-100\">\n            FORM_TITLE\n          </h2>\n        </div>\n      </CardHeader>\n      \n      <Form {...form}>\n        <form onSubmit={onSubmit}>\n          <CardContent className=\"pt-8 pb-6 space-y-6\">\n            {/* Form Fields */}\n            <FormField\n              control={form.control}\n              name=\"FIELD_NAME\"\n              render={({ field }) => (\n                <FormItem>\n                  <FormLabel className=\"text-slate-700 dark:text-slate-300 font-medium\">\n                    FIELD_LABEL\n                  </FormLabel>\n                  <FormControl>\n                    <Input\n                      {...field}\n                      placeholder=\"FIELD_PLACEHOLDER\"\n                      className=\"h-12 border-slate-300 focus:border-blue-500 focus:ring-blue-500/20\"\n                    />\n                  </FormControl>\n                  <FormMessage className=\"text-red-500\" />\n                </FormItem>\n              )}\n            />\n            \n            {/* Adicionar mais campos aqui */}\n          </CardContent>\n          \n          <CardFooter className=\"bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700\">\n            <Button\n              type=\"submit\"\n              disabled={isSubmitting}\n              className=\"w-full h-12 text-base font-medium bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg\"\n            >\n              {isSubmitting ? (\n                <div className=\"flex items-center gap-2\">\n                  <div className=\"w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin\" />\n                  Enviando...\n                </div>\n              ) : (\n                'SUBMIT_TEXT'\n              )}\n            </Button>\n          </CardFooter>\n        </form>\n      </Form>\n    </Card>\n  )\n}"
+    },
+    "form_types_zod": {
+      "imports": [
+        "import { z } from 'zod'"
+      ],
+      "structure": "// Schema de validação Zod\nexport const [FormName]Schema = z.object({\n  // Exemplo de campos\n  name: z.string().min(2, 'Nome deve ter no mínimo 2 caracteres'),\n  email: z.string().email('Email inválido'),\n  message: z.string().min(10, 'Mensagem deve ter no mínimo 10 caracteres').optional()\n})\n\n// Type inferido do schema\nexport type T[FormName]Data = z.infer<typeof [FormName]Schema>\n\n// Props do componente\nexport type T[FormName]Form = {\n  onSuccess?: (data: T[FormName]Data) => void\n  onError?: (error: Error) => void\n  initialData?: Partial<T[FormName]Data>\n}"
+    },
+    "form_test_modern": {
+      "imports": [
+        "import { render, screen, waitFor } from '@testing-library/react'",
+        "import userEvent from '@testing-library/user-event'",
+        "import { [FormName]Form } from './[name]-form.component'"
+      ],
+      "structure": "describe('[FormName]Form', () => {\n  const user = userEvent.setup()\n  \n  it('should render form fields', () => {\n    render(<[FormName]Form />)\n    \n    expect(screen.getByLabelText(/name/i)).toBeInTheDocument()\n    expect(screen.getByLabelText(/email/i)).toBeInTheDocument()\n    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument()\n  })\n  \n  it('should validate required fields', async () => {\n    render(<[FormName]Form />)\n    \n    const submitButton = screen.getByRole('button', { name: /submit/i })\n    await user.click(submitButton)\n    \n    await waitFor(() => {\n      expect(screen.getByText(/nome deve ter no mínimo/i)).toBeInTheDocument()\n    })\n  })\n  \n  it('should submit valid form data', async () => {\n    const mockSubmit = jest.fn()\n    render(<[FormName]Form onSuccess={mockSubmit} />)\n    \n    await user.type(screen.getByLabelText(/name/i), 'João Silva')\n    await user.type(screen.getByLabelText(/email/i), 'joao@example.com')\n    \n    const submitButton = screen.getByRole('button', { name: /submit/i })\n    await user.click(submitButton)\n    \n    await waitFor(() => {\n      expect(mockSubmit).toHaveBeenCalledWith({\n        name: 'João Silva',\n        email: 'joao@example.com'\n      })\n    })\n  })\n  \n  it('should show loading state during submission', async () => {\n    render(<[FormName]Form />)\n    \n    await user.type(screen.getByLabelText(/name/i), 'João Silva')\n    await user.type(screen.getByLabelText(/email/i), 'joao@example.com')\n    \n    const submitButton = screen.getByRole('button', { name: /submit/i })\n    await user.click(submitButton)\n    \n    expect(screen.getByText(/enviando/i)).toBeInTheDocument()\n    expect(submitButton).toBeDisabled()\n  })\n})"
+    }
+  },
+
+  "modern_form_patterns": {
+    "validation": "Zod schema + React Hook Form para validação robusta",
+    "ui_components": "Shadcn/ui Form components para consistência visual",
+    "layout": "Card com header gradiente + seções bem definidas",
+    "feedback": "Loading states + mensagens de erro inline",
+    "accessibility": "Labels, ARIA, navegação por teclado, focus management",
+    "styling": "Inputs maiores (h-12) + espaçamento generoso + gradientes"
+  },
+
+  "ai_improvements": {
+    "auto_field_generation": "Gerar campos baseado no nome do formulário (ContactForm -> name, email, message)",
+    "validation_suggestions": "Sugerir validações Zod apropriadas por tipo de campo",
+    "icon_matching": "Sugerir ícone Lucide apropriado para o tipo de formulário",
+    "responsive_layout": "Adicionar breakpoints responsivos automaticamente"
+  }
+} 

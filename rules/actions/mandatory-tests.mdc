@@ -1,0 +1,41 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 🧪 Testes Obrigatórios
+
+## Trigger
+- Criar componente
+- Criar página
+
+## Comportamento
+**SEMPRE que criar componente/página:**
+
+1. **Gerar arquivo** `.test.tsx` usando `templates/react-component-test.mdc`
+2. **userEvent OBRIGATÓRIO** → `const user = userEvent.setup()`
+3. **Nunca fireEvent** → Sempre userEvent
+4. **Estrutura de teste:**
+   - Renderização 
+   - Interações com userEvent (cliques, digitação, formulários)
+   - Estados (loading, erro, sucesso)
+   - Acessibilidade (ARIA, navegação por teclado)
+
+## Padrões userEvent
+```tsx
+// ✅ Setup obrigatório
+const user = userEvent.setup();
+
+// ✅ Interações realistas
+await user.click(button);
+await user.type(input, 'texto');
+await user.tab();
+await user.keyboard('{Enter}');
+```
+
+## Ferramentas
+- Vitest (test runner)
+- @testing-library/react (renderização)
+- @testing-library/user-event (interações realistas)
+- @testing-library/jest-dom (matchers)
+

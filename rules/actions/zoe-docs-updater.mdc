@@ -1,0 +1,179 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 📚 Zoe Docs Updater - Action Automática de Documentação
+
+## Trigger
+- Qualquer alteração no projeto "zoe" (comandos, actions, regras)
+- Mudanças em arquivos .mdc dentro de .zoe/rules/
+- Atualizações no context do projeto "zoe"
+- Comando específico: `update zoe docs`
+
+## Comportamento
+
+### **FASE 1: Detecção de Alterações no Projeto Zoe**
+
+**Monitorar alterações em:**
+- `.zoe/rules/commands/*.mdc` → Novos comandos ou modificações
+- `.zoe/rules/actions/*.mdc` → Novas actions ou modificações  
+- `.zoe/rules/priority-map.json` → Mudanças no sistema de prioridades
+- `.zoe/rules/context/projects/zoe/*` → Atualizações no contexto do projeto zoe
+- `.zoe/rules/zoe-chore.mdc` → Alterações nas regras principais
+
+### **FASE 2: Análise das Mudanças**
+
+**Para cada arquivo alterado:**
+1. **Identificar tipo de mudança:**
+   - Novo comando adicionado
+   - Action modificada
+   - Prioridade alterada
+   - Contexto atualizado
+
+2. **Extrair informações relevantes:**
+   - Triggers dos comandos
+   - Descrições das funcionalidades
+   - Exemplos de uso
+   - Integrações com sistema
+
+### **FASE 3: Atualização Inteligente do how-zoe-works.md**
+
+#### **Seções a atualizar automaticamente:**
+
+**1. Comandos Principais:**
+```markdown
+### **[Nome do Comando]**
+```bash
+[trigger do comando]
+```
+
+**Descrição:** [descrição extraída do arquivo]
+
+**Exemplo de uso:**
+```bash
+[exemplo prático]
+```
+
+**Resultado:** [o que o comando produz]
+```
+
+**2. Sistema de Prioridades:**
+- Atualizar níveis e categorias quando priority-map.json mudar
+- Documentar novas actions e seus levels
+- Explicar ordem de execução
+
+**3. Funcionalidades do Sistema:**
+- Listar comandos disponíveis com exemplos
+- Documentar workflow de uso
+- Incluir troubleshooting comum
+
+### **FASE 4: Geração de Conteúdo para Humanos**
+
+**Transformar documentação técnica em guia para usuários:**
+
+#### **Linguagem Acessível:**
+- Trocar termos técnicos por linguagem simples
+- Adicionar explicações de conceitos
+- Incluir exemplos práticos do dia a dia
+
+#### **Estrutura Didática:**
+```markdown
+## 🚀 Como Usar a Zoe - Guia Prático
+
+### **Primeiros Passos**
+1. Como iniciar um projeto
+2. Como alternar entre projetos  
+3. Como ver o progresso
+
+### **Comandos Essenciais**
+[Lista dos comandos mais usados com exemplos]
+
+### **Fluxos Comuns**
+[Cenários típicos de uso]
+
+### **Resolução de Problemas**
+[Troubleshooting básico]
+```
+
+### **FASE 5: Validação e Backup**
+
+1. **Backup automático** do how-zoe-works.md atual
+2. **Validação da estrutura** markdown
+3. **Verificação de links** internos
+4. **Teste de legibilidade** 
+
+### **FASE 6: Notificação das Mudanças**
+
+```
+📚 **DOCUMENTAÇÃO ATUALIZADA AUTOMATICAMENTE**
+
+🔄 **Mudanças detectadas no projeto 'zoe':**
+- [lista das alterações detectadas]
+
+📝 **Seções atualizadas em how-zoe-works.md:**
+- [lista das seções modificadas]
+
+✅ **Backup criado:** how-zoe-works-backup-[timestamp].md
+
+📖 **Documentação pronta para humanos:** Linguagem acessível aplicada
+```
+
+## Mapeamento de Alterações
+
+### **Tipos de Mudança → Ação na Documentação:**
+
+| Arquivo Alterado | Seção Atualizada | Ação |
+|------------------|------------------|------|
+| `commands/*.mdc` | Comandos Principais | Adicionar/atualizar comando |
+| `actions/*.mdc` | Sistema de Actions | Documentar nova action |
+| `priority-map.json` | Sistema de Prioridades | Atualizar levels e categorias |
+| `zoe-chore.mdc` | Regras Principais | Sincronizar regras |
+| `context/projects/zoe/*` | Funcionalidades | Atualizar capacidades |
+
+### **Transformações para Humanos:**
+
+| Termo Técnico | Linguagem Humana |
+|---------------|------------------|
+| "Action level 0" | "Executa automaticamente antes de tudo" |
+| "Priority map" | "Sistema que decide qual comando executar primeiro" |
+| "Context isolation" | "Cada projeto tem suas próprias configurações" |
+| "Stack autodetection" | "Descobre automaticamente as tecnologias do projeto" |
+
+## Integração com Priority System
+
+- **Level:** 52 (executar após mudanças serem aplicadas)
+- **Categoria:** "documentation"
+- **Post-execution:** true
+- **Trigger específico:** Mudanças no projeto "zoe"
+
+## Template de Atualização
+
+```markdown
+---
+⚠️ **DOCUMENTAÇÃO ATUALIZADA AUTOMATICAMENTE EM [timestamp]**
+**Mudanças detectadas:** [lista]
+---
+
+# 🤖 Como Usar a Zoe - Guia Completo para Humanos
+
+## 🎯 O que é a Zoe?
+
+A Zoe é sua assistente inteligente para desenvolvimento React/Next.js que:
+- **Entende automaticamente** seu projeto (nunca pergunta a mesma coisa)
+- **Trabalha com múltiplos projetos** sem misturar informações
+- **Cria código completo** com testes automáticos
+- **Documenta tudo** que você faz
+
+[resto da documentação atualizada...]
+```
+
+## Objetivo
+- **Manter documentação sempre atualizada** com mudanças no sistema
+- **Traduzir complexidade técnica** para linguagem acessível  
+- **Facilitar onboarding** de novos usuários
+- **Documentar automaticamente** novas funcionalidades
+- **Preservar histórico** com backups automáticos
+
+*Este arquivo será atualizado automaticamente pela Zoe*
+

@@ -1,0 +1,35 @@
+{
+  "_metadata": {
+    "project": "code-evolution-tracker",
+    "rule_type": "development_mandatory",
+    "created": "2025-06-10",
+    "priority": "CRITICAL"
+  },
+
+  "GLOBAL_RULES_REFERENCE": {
+    "NOTA": "Regras de criação de componentes e páginas estão em .zoe/rules/global-development-rules.json",
+    "APLICÁVEL_AQUI": "Este projeto React Native + TypeScript aceita a arquitetura dos templates JSON"
+  },
+
+  "UI_LIBRARY_RULES": {
+    "BIBLIOTECA_ESCOLHIDA": "React Native Reusables",
+    "INSTALAÇÃO_REALIZADA": {
+      "NativeWind": "v4.0.1",
+      "TailwindCSS": "3.3.2", 
+      "react-native-reanimated": "latest",
+      "react-native-svg": "latest"
+    },
+    "CONFIGURAÇÃO_COMPLETA": {
+      "tailwind.config.js": "configurado para React Native",
+      "metro.config.js": "configurado com NativeWind",
+      "babel.config.js": "plugin nativewind/babel adicionado",
+      "global.css": "criado com @tailwind directives"
+    }
+  },
+
+  "ZOEL_ENFORCEMENT": {
+    "VERIFICAÇÃO_AUTOMÁTICA": "Zoe deve sempre verificar se templates estão sendo seguidos",
+    "CORREÇÃO_AUTOMÁTICA": "Zoe deve corrigir automaticamente se detectar padrões incorretos",
+    "LEMBRANÇA_CONSTANTE": "Sempre mencionar os templates antes de criar qualquer componente/página"
+  }
+} 

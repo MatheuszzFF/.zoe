@@ -1,0 +1,93 @@
+{
+  "_metadata": {
+    "command_name": "create-component-web-basic",
+    "version": "1.0",
+    "description": "Template básico para componentes web React + TypeScript (sem Shadcn/ui)",
+    "based_on": "Universal React patterns that work anywhere",
+    "created": "2025-06-10",
+    "scope": "FALLBACK - funciona em qualquer projeto React"
+  },
+
+  "requirements": {
+    "technologies": ["react", "typescript"],
+    "optional": ["css-modules", "styled-components", "emotion"],
+    "auto_detect": true,
+    "fallback": true
+  },
+
+  "files_to_create": [
+    {
+      "file": "[name].component.tsx",
+      "template": "component_logic_basic",
+      "description": "Lógica do componente React básico"
+    },
+    {
+      "file": "[name].template.tsx",
+      "template": "component_template_basic",
+      "description": "Template visual básico compatível com qualquer CSS"
+    },
+    {
+      "file": "[name].types.ts",
+      "template": "component_types_basic",
+      "description": "Types TypeScript básicos"
+    },
+    {
+      "file": "[name].module.css",
+      "template": "component_styles_basic",
+      "description": "Estilos CSS Modules (opcional)",
+      "conditional": true
+    },
+    {
+      "file": "[name].test.tsx",
+      "template": "component_test_basic",
+      "description": "Testes básicos"
+    }
+  ],
+
+  "templates": {
+    "component_logic_basic": {
+      "imports": [
+        "import React, { useState, useEffect, useCallback } from 'react'",
+        "import { T[ComponentName] } from './[name].types'",
+        "import { [ComponentName]Template } from './[name].template'"
+      ],
+      "structure": "export const [ComponentName]: React.FC<T[ComponentName]> = (props) => {\n  const { PROPS_DESTRUCTURE } = props\n  \n  // Estado local\n  const [state, setState] = useState()\n  \n  // Efeitos\n  useEffect(() => {\n    // Lógica de inicialização\n  }, [])\n  \n  // Handlers\n  const handleAction = useCallback(() => {\n    // Lógica da ação\n  }, [])\n  \n  // Props para template\n  const templateProps = {\n    ...props,\n    onAction: handleAction,\n    state\n  }\n  \n  return <[ComponentName]Template {...templateProps} />\n}"
+    },
+    "component_template_basic": {
+      "imports": [
+        "import React from 'react'",
+        "import { T[ComponentName]Template } from './[name].types'"
+      ],
+      "structure": "export const [ComponentName]Template: React.FC<T[ComponentName]Template> = (props) => {\n  const { className, variant, children, onAction, ...rest } = props\n  \n  const baseClasses = 'component-container'\n  const variantClasses = variant ? `component-container--${variant}` : ''\n  const combinedClasses = [baseClasses, variantClasses, className].filter(Boolean).join(' ')\n  \n  return (\n    <div className={combinedClasses} {...rest}>\n      {/* Header */}\n      <div className=\"component-header\">\n        <h3 className=\"component-title\">TITLE</h3>\n      </div>\n      \n      {/* Content */}\n      <div className=\"component-content\">\n        {children}\n      </div>\n      \n      {/* Actions */}\n      {onAction && (\n        <div className=\"component-actions\">\n          <button\n            type=\"button\"\n            onClick={onAction}\n            className=\"component-button component-button--primary\"\n          >\n            Action\n          </button>\n        </div>\n      )}\n    </div>\n  )\n}"
+    },
+    "component_types_basic": {
+      "structure": "import { ReactNode, HTMLAttributes } from 'react'\n\nexport type T[ComponentName] = {\n  children?: ReactNode\n  className?: string\n  variant?: 'default' | 'primary' | 'secondary'\n  onAction?: () => void\n} & HTMLAttributes<HTMLDivElement>\n\nexport type T[ComponentName]Template = {\n  children?: ReactNode\n  className?: string\n  variant?: 'default' | 'primary' | 'secondary'\n  onAction?: () => void\n  state?: any\n} & HTMLAttributes<HTMLDivElement>"
+    },
+    "component_styles_basic": {
+      "structure": "/* [ComponentName] Styles */\n.component-container {\n  padding: 1rem;\n  border: 1px solid #e5e7eb;\n  border-radius: 0.5rem;\n  background-color: #ffffff;\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);\n}\n\n.component-container--primary {\n  border-color: #3b82f6;\n  background-color: #eff6ff;\n}\n\n.component-container--secondary {\n  border-color: #6b7280;\n  background-color: #f9fafb;\n}\n\n.component-header {\n  margin-bottom: 1rem;\n  padding-bottom: 0.5rem;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.component-title {\n  margin: 0;\n  font-size: 1.25rem;\n  font-weight: 600;\n  color: #1f2937;\n}\n\n.component-content {\n  margin-bottom: 1rem;\n}\n\n.component-actions {\n  display: flex;\n  gap: 0.5rem;\n  justify-content: flex-end;\n}\n\n.component-button {\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.25rem;\n  font-weight: 500;\n  cursor: pointer;\n  transition: all 0.2s;\n}\n\n.component-button--primary {\n  background-color: #3b82f6;\n  color: #ffffff;\n}\n\n.component-button--primary:hover {\n  background-color: #2563eb;\n}\n\n.component-button:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}"
+    },
+    "component_test_basic": {
+      "imports": [
+        "import React from 'react'",
+        "import { render, screen, fireEvent } from '@testing-library/react'",
+        "import { [ComponentName] } from './[name].component'"
+      ],
+      "structure": "describe('[ComponentName]', () => {\n  it('should render correctly', () => {\n    render(<[ComponentName]>Test content</[ComponentName]>)\n    expect(screen.getByText('Test content')).toBeInTheDocument()\n  })\n  \n  it('should handle action clicks', () => {\n    const onAction = jest.fn()\n    render(<[ComponentName] onAction={onAction}>Content</[ComponentName]>)\n    \n    const button = screen.getByText('Action')\n    fireEvent.click(button)\n    \n    expect(onAction).toHaveBeenCalled()\n  })\n  \n  it('should apply variant classes', () => {\n    const { container } = render(\n      <[ComponentName] variant=\"primary\">Content</[ComponentName]>\n    )\n    \n    expect(container.firstChild).toHaveClass('component-container--primary')\n  })\n  \n  it('should apply custom className', () => {\n    const { container } = render(\n      <[ComponentName] className=\"custom-class\">Content</[ComponentName]>\n    )\n    \n    expect(container.firstChild).toHaveClass('custom-class')\n  })\n})"
+    }
+  },
+
+  "compatibility": {
+    "css_frameworks": "Funciona com CSS Modules, Styled Components, Emotion, CSS puro",
+    "styling_approach": "Classes CSS genéricas + variantes com BEM-like naming",
+    "no_dependencies": "Não depende de bibliotecas específicas de UI",
+    "universal_patterns": "Padrões que funcionam em qualquer setup React"
+  },
+
+  "usage_scenarios": [
+    "Projetos sem Tailwind CSS",
+    "Projetos sem Shadcn/ui",
+    "Projetos legacy que precisam de componentes novos",
+    "Prototipagem rápida",
+    "Quando o usuário prefere CSS tradicional"
+  ]
+} 

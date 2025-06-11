@@ -1,0 +1,76 @@
+{
+  "_metadata": {
+    "template_name": "react-native-component",
+    "version": "1.0", 
+    "description": "Templates para criação de componentes React Native seguindo padrões da Zoe",
+    "based_on": "create-component.json",
+    "adapted_for": "React Native / Expo"
+  },
+
+  "templates": {
+    "component_logic": {
+      "file_name": "[name].component.tsx",
+      "template": "import React, { useState, useEffect } from 'react'\nimport { T[ComponentName] } from './[name].types'\nimport { [ComponentName]Template } from './[name].template'\n\nexport const [ComponentName]: React.FC<T[ComponentName]> = (props) => {\n  const { variant = 'default', size = 'medium', onPress, children } = props\n  \n  // Estado local\n  const [isPressed, setIsPressed] = useState(false)\n  \n  // Handlers\n  const handlePress = () => {\n    setIsPressed(true)\n    onPress?.()\n    setTimeout(() => setIsPressed(false), 150)\n  }\n  \n  // Props para template\n  const templateProps = {\n    variant,\n    size,\n    isPressed,\n    onPress: handlePress,\n    children\n  }\n  \n  return <[ComponentName]Template {...templateProps} />\n}",
+      "purpose": "Lógica do componente - state, handlers, effects"
+    },
+
+    "component_template": {
+      "file_name": "[name].template.tsx", 
+      "template": "import React from 'react'\nimport { TouchableOpacity, View, Text } from 'react-native'\nimport { T[ComponentName]Template } from './[name].types'\nimport { [name]Styles } from './[name].styles'\n\nexport const [ComponentName]Template: React.FC<T[ComponentName]Template> = (props) => {\n  const { variant, size, isPressed, onPress, children } = props\n  \n  const styles = [name]Styles({ variant, size, isPressed })\n  \n  return (\n    <TouchableOpacity\n      style={styles.container}\n      onPress={onPress}\n      activeOpacity={0.8}\n    >\n      <View style={styles.content}>\n        {typeof children === 'string' ? (\n          <Text style={styles.text}>{children}</Text>\n        ) : (\n          children\n        )}\n      </View>\n    </TouchableOpacity>\n  )\n}",
+      "purpose": "Estrutura visual - JSX e layout"
+    },
+
+    "component_styles": {
+      "file_name": "[name].styles.ts",
+      "template": "import { StyleSheet } from 'react-native'\nimport { T[ComponentName]StyleProps } from './[name].types'\n\nexport const [name]Styles = (props: T[ComponentName]StyleProps) => {\n  const { variant, size, isPressed } = props\n  \n  const baseStyles = StyleSheet.create({\n    container: {\n      alignItems: 'center',\n      justifyContent: 'center',\n      borderRadius: 8,\n      opacity: isPressed ? 0.8 : 1,\n    },\n    content: {\n      flexDirection: 'row',\n      alignItems: 'center',\n    },\n    text: {\n      fontWeight: '600',\n    },\n  })\n  \n  const variantStyles = StyleSheet.create({\n    primary: {\n      backgroundColor: '#007AFF',\n      color: '#FFFFFF',\n    },\n    secondary: {\n      backgroundColor: '#F2F2F7',\n      color: '#000000',\n    },\n  })\n  \n  const sizeStyles = StyleSheet.create({\n    small: {\n      paddingHorizontal: 12,\n      paddingVertical: 6,\n      fontSize: 14,\n    },\n    medium: {\n      paddingHorizontal: 16,\n      paddingVertical: 8,\n      fontSize: 16,\n    },\n    large: {\n      paddingHorizontal: 20,\n      paddingVertical: 12,\n      fontSize: 18,\n    },\n  })\n  \n  return StyleSheet.create({\n    container: [\n      baseStyles.container,\n      variantStyles[variant],\n      sizeStyles[size],\n    ],\n    content: baseStyles.content,\n    text: [\n      baseStyles.text,\n      { color: variantStyles[variant].color },\n      { fontSize: sizeStyles[size].fontSize },\n    ],\n  })\n}",
+      "purpose": "Estilos React Native organizados"
+    },
+
+    "component_types": {
+      "file_name": "[name].types.ts", 
+      "template": "import { ReactNode } from 'react'\n\nexport type T[ComponentName] = {\n  variant?: 'primary' | 'secondary'\n  size?: 'small' | 'medium' | 'large'\n  onPress?: () => void\n  children?: ReactNode\n  disabled?: boolean\n}\n\nexport type T[ComponentName]Template = T[ComponentName] & {\n  isPressed: boolean\n}\n\nexport type T[ComponentName]StyleProps = {\n  variant: T[ComponentName]['variant']\n  size: T[ComponentName]['size']\n  isPressed: boolean\n}",
+      "purpose": "Definições TypeScript com padrão T[Nome]"
+    },
+
+    "component_test": {
+      "file_name": "[name].test.tsx",
+      "template": "import React from 'react'\nimport { render, fireEvent } from '@testing-library/react-native'\nimport { [ComponentName] } from './[name].component'\n\ndescribe('[ComponentName]', () => {\n  it('should render correctly', () => {\n    const { getByText } = render(\n      <[ComponentName]>Test Button</[ComponentName]>\n    )\n    \n    expect(getByText('Test Button')).toBeTruthy()\n  })\n  \n  it('should handle press events', () => {\n    const mockOnPress = jest.fn()\n    const { getByText } = render(\n      <[ComponentName] onPress={mockOnPress}>Press Me</[ComponentName]>\n    )\n    \n    fireEvent.press(getByText('Press Me'))\n    expect(mockOnPress).toHaveBeenCalledTimes(1)\n  })\n  \n  it('should apply variant styles correctly', () => {\n    const { getByTestId } = render(\n      <[ComponentName] variant=\"primary\" testID=\"button\">\n        Primary Button\n      </[ComponentName]>\n    )\n    \n    const button = getByTestId('button')\n    expect(button).toBeTruthy()\n  })\n  \n  it('should handle disabled state', () => {\n    const mockOnPress = jest.fn()\n    const { getByText } = render(\n      <[ComponentName] onPress={mockOnPress} disabled>\n        Disabled Button\n      </[ComponentName]>\n    )\n    \n    fireEvent.press(getByText('Disabled Button'))\n    expect(mockOnPress).not.toHaveBeenCalled()\n  })\n})",
+      "purpose": "Testes React Native Testing Library"
+    }
+  },
+
+  "folder_structure": {
+    "base_path": "src/components/[category]/[ComponentName]/",
+    "files": [
+      "[name].component.tsx",
+      "[name].template.tsx", 
+      "[name].styles.ts",
+      "[name].types.ts",
+      "[name].test.tsx"
+    ],
+    "categories": {
+      "ui": "Componentes básicos de interface",
+      "common": "Componentes reutilizáveis específicos do app",
+      "forms": "Componentes relacionados a formulários"
+    }
+  },
+
+  "naming_conventions": {
+    "component_name": "PascalCase (Button, InputField, UserCard)",
+    "file_names": "kebab-case (button, input-field, user-card)",
+    "types": "T[ComponentName] pattern",
+    "style_functions": "[componentName]Styles"
+  },
+
+  "integration_rules": {
+    "auto_apply_when": [
+      "milestone mentions creating UI components",
+      "user says 'criar componente [name]'",
+      "roadmap tasks involve component creation",
+      "project is React Native/Expo"
+    ],
+    "create_all_files": true,
+    "update_exports": "src/components/index.ts",
+    "register_in_storybook": false
+  }
+} 

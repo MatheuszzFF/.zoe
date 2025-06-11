@@ -1,0 +1,94 @@
+{
+  "_metadata": {
+    "command_name": "create-component-rn-expo",
+    "version": "1.0", 
+    "description": "Template para componentes React Native + Expo + TypeScript + NativeWind",
+    "based_on": "Modern React Native patterns extracted from successful projects",
+    "created": "2025-06-10"
+  },
+
+  "requirements": {
+    "technologies": ["react-native", "expo", "typescript"],
+    "optional": ["nativewind", "react-native-reusables"],
+    "files_must_exist": ["package.json"],
+    "auto_detect": true
+  },
+
+  "files_to_create": [
+    {
+      "file": "[name].component.tsx",
+      "template": "component_logic_rn",
+      "description": "Lógica do componente React Native"
+    },
+    {
+      "file": "[name].template.tsx",
+      "template": "component_template_rn", 
+      "description": "Template visual React Native"
+    },
+    {
+      "file": "[name].types.ts",
+      "template": "component_types_rn",
+      "description": "Types com padrão T[ComponentName]"
+    },
+    {
+      "file": "[name].test.tsx",
+      "template": "component_test_rn",
+      "description": "Testes para React Native"
+    }
+  ],
+
+  "templates": {
+    "component_logic_rn": {
+      "imports": [
+        "import React, { useState, useEffect, useCallback } from 'react'",
+        "import { T[ComponentName] } from './[name].types'",
+        "import { [ComponentName]Template } from './[name].template'"
+      ],
+      "structure": "export const [ComponentName]: React.FC<T[ComponentName]> = (props) => {\n  const { PROPS_DESTRUCTURE } = props\n  \n  // Estado local\n  const [state, setState] = useState()\n  \n  // Efeitos\n  useEffect(() => {\n    // Lógica de inicialização\n  }, [])\n  \n  // Handlers  \n  const handlePress = useCallback(() => {\n    // Lógica do press\n  }, [])\n  \n  // Props para template\n  const templateProps = {\n    ...props,\n    onPress: handlePress,\n    state\n  }\n  \n  return <[ComponentName]Template {...templateProps} />\n}"
+    },
+    "component_template_rn": {
+      "imports": [
+        "import React from 'react'",
+        "import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'",
+        "import { LinearGradient } from 'expo-linear-gradient'",
+        "import { LUCIDE_ICON } from 'lucide-react-native'",
+        "import { T[ComponentName]Template } from './[name].types'"
+      ],
+      "structure": "export const [ComponentName]Template: React.FC<T[ComponentName]Template> = (props) => {\n  const { variant, onPress, children, testID, style } = props\n  \n  return (\n    <View style={[styles.container, style]} testID={testID}>\n      <LinearGradient\n        colors={['#ffffff', 'rgba(255, 255, 255, 0.8)']}\n        style={styles.gradient}\n      >\n        {/* Header */}\n        <View style={styles.header}>\n          <View style={styles.iconContainer}>\n            <LUCIDE_ICON size={20} color=\"#ffffff\" />\n          </View>\n          <Text style={styles.title}>TITLE</Text>\n        </View>\n        \n        {/* Content */}\n        <View style={styles.content}>\n          {children}\n        </View>\n        \n        {/* Actions */}\n        {onPress && (\n          <TouchableOpacity\n            style={styles.button}\n            onPress={onPress}\n            activeOpacity={0.8}\n          >\n            <Text style={styles.buttonText}>Action</Text>\n          </TouchableOpacity>\n        )}\n      </LinearGradient>\n    </View>\n  )\n}"
+    },
+    "component_types_rn": {
+      "structure": "import { ReactNode } from 'react'\nimport { ViewStyle } from 'react-native'\n\nexport type T[ComponentName] = {\n  children?: ReactNode\n  variant?: 'default' | 'elevated' | 'compact'\n  onPress?: () => void\n  testID?: string\n  style?: ViewStyle\n}\n\nexport type T[ComponentName]Template = {\n  children?: ReactNode\n  variant?: 'default' | 'elevated' | 'compact'\n  onPress?: () => void\n  testID?: string\n  style?: ViewStyle\n  state?: any\n}"
+    },
+    "component_test_rn": {
+      "imports": [
+        "import React from 'react'",
+        "import { render, fireEvent } from '@testing-library/react-native'",
+        "import { [ComponentName] } from './[name].component'"
+      ],
+      "structure": "describe('[ComponentName]', () => {\n  it('should render correctly', () => {\n    const { getByText } = render(<[ComponentName]>Test content</[ComponentName]>)\n    expect(getByText('Test content')).toBeTruthy()\n  })\n  \n  it('should handle press events', () => {\n    const onPress = jest.fn()\n    const { getByTestId } = render(\n      <[ComponentName] onPress={onPress} testID=\"test-component\" />\n    )\n    \n    fireEvent.press(getByTestId('test-component'))\n    expect(onPress).toHaveBeenCalled()\n  })\n  \n  it('should apply custom styles', () => {\n    const customStyle = { backgroundColor: 'red' }\n    const { getByTestId } = render(\n      <[ComponentName] style={customStyle} testID=\"test-component\" />\n    )\n    \n    expect(getByTestId('test-component')).toHaveStyle(customStyle)\n  })\n})"
+    }
+  },
+
+  "react_native_patterns": {
+    "layout": "LinearGradient como base + View containers estruturados",
+    "styling": "StyleSheet.create para performance + styles inline quando necessário",
+    "interactions": "TouchableOpacity com activeOpacity=0.8 padrão",
+    "icons": "Lucide React Native com sizes consistentes (16, 20, 24)",
+    "spacing": "Múltiplos de 4: padding: 12, 16, 20, 24",
+    "colors": "Gradientes sutis + cores sólidas para ícones e acentos",
+    "testIDs": "Sempre incluir testID para testes automatizados"
+  },
+
+  "nativewind_integration": {
+    "conditional": "Se NativeWind detectado, usar className ao invés de StyleSheet",
+    "className_structure": "className=\"bg-white/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg\"",
+    "style_fallback": "Manter StyleSheet como fallback se NativeWind não disponível"
+  },
+
+  "ai_improvements": {
+    "auto_icon_suggestion": "Sugerir ícone Lucide React Native baseado no nome",
+    "auto_gradient_colors": "Sugerir cores de gradiente baseadas no propósito",
+    "testID_generation": "Gerar testIDs automáticos baseados no nome do componente",
+    "accessibility_labels": "Incluir accessibilityLabel e accessibilityRole automaticamente"
+  }
+} 

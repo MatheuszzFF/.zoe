@@ -1,0 +1,265 @@
+{
+  "_metadata": {
+    "command_name": "roadmap-manager",
+    "version": "1.0",
+    "format": "json",
+    "description": "Sistema de gestão automática de roadmap para projetos complexos",
+    "created": "2025-06-10",
+    "ai_optimized": true
+  },
+  
+  "triggers": {
+    "patterns": [
+      "zoe start milestone [milestone_id]",
+      "zoe complete task [task_id]", 
+      "zoe complete milestone [milestone_id]",
+      "zoe roadmap status",
+      "zoe roadmap next",
+      "zoe roadmap update"
+    ],
+    "auto_triggers": [
+      "project_milestone_completion_detected",
+      "project_phase_progression_detected",
+      "dependency_unlock_detected"
+    ],
+    "priority_level": 15,
+    "category": "project-management"
+  },
+
+  "behavior": {
+    "commands": {
+      "start_milestone": {
+        "pattern": "zoe start milestone {milestone_id}",
+        "description": "Iniciar trabalho em um milestone específico",
+        "actions": [
+          {
+            "action": "read_roadmap_tracker",
+            "file": ".zoe/rules/context/projects/[active_project]/roadmap-tracker.json"
+          },
+          {
+            "action": "update_milestone_status", 
+            "milestone_id": "{milestone_id}",
+            "status": "in_progress",
+            "started_at": "{current_timestamp}"
+          },
+          {
+            "action": "sync_markdown_file",
+            "file": "ROADMAP.md",
+            "updates": ["milestone_status", "progress_indicators"]
+          },
+          {
+            "action": "update_daily_progress",
+            "file": ".zoe/rules/context/projects/[active_project]/progress/[YYYY-MM-DD]/README.md",
+            "add_entry": "🚀 Iniciado milestone {milestone_id}: {milestone_name}"
+          }
+        ]
+      },
+      
+      "complete_task": {
+        "pattern": "zoe complete task {task_id}",
+        "description": "Marcar uma tarefa específica como concluída",
+        "actions": [
+          {
+            "action": "read_roadmap_tracker",
+            "file": ".zoe/rules/context/projects/[active_project]/roadmap-tracker.json"
+          },
+          {
+            "action": "update_task_status",
+            "task_id": "{task_id}",
+            "completed": true,
+            "completed_at": "{current_timestamp}"
+          },
+          {
+            "action": "calculate_milestone_progress",
+            "milestone_id": "{parent_milestone}",
+            "auto_complete_if": "all_tasks_completed"
+          },
+          {
+            "action": "sync_markdown_file",
+            "file": "ROADMAP.md", 
+            "updates": ["task_checkboxes", "milestone_progress"]
+          }
+        ]
+      },
+
+      "complete_milestone": {
+        "pattern": "zoe complete milestone {milestone_id}",
+        "description": "Finalizar completamente um milestone",
+        "actions": [
+          {
+            "action": "read_roadmap_tracker",
+            "file": ".zoe/rules/context/projects/[active_project]/roadmap-tracker.json"
+          },
+          {
+            "action": "validate_completion_criteria",
+            "milestone_id": "{milestone_id}",
+            "require_all_tasks": true
+          },
+          {
+            "action": "update_milestone_status",
+            "milestone_id": "{milestone_id}",
+            "status": "completed",
+            "completed_at": "{current_timestamp}"
+          },
+          {
+            "action": "unlock_dependencies",
+            "milestone_id": "{milestone_id}",
+            "unlock_blocked_milestones": true
+          },
+          {
+            "action": "check_phase_completion",
+            "phase": "{parent_phase}",
+            "auto_unlock_next_phase": true
+          },
+          {
+            "action": "update_project_statistics",
+            "increment": "completed_milestones",
+            "recalculate": "completion_percentage"
+          },
+          {
+            "action": "sync_markdown_file",
+            "file": "ROADMAP.md",
+            "updates": ["milestone_status", "phase_progress", "global_progress"]
+          },
+          {
+            "action": "celebrate_milestone",
+            "type": "completion_message",
+            "include_next_suggestions": true
+          }
+        ]
+      },
+
+      "roadmap_status": {
+        "pattern": "zoe roadmap status",
+        "description": "Mostrar status completo do roadmap atual",
+        "actions": [
+          {
+            "action": "read_roadmap_tracker",
+            "file": ".zoe/rules/context/projects/[active_project]/roadmap-tracker.json"
+          },
+          {
+            "action": "generate_status_report",
+            "include": [
+              "current_phase",
+              "active_milestones", 
+              "completion_percentage",
+              "estimated_remaining_time",
+              "blocked_items",
+              "available_next_tasks"
+            ]
+          },
+          {
+            "action": "display_visual_progress",
+            "format": "markdown_table_with_icons"
+          }
+        ]
+      },
+
+      "roadmap_next": {
+        "pattern": "zoe roadmap next",
+        "description": "Mostrar próximas tarefas disponíveis para trabalho",
+        "actions": [
+          {
+            "action": "read_roadmap_tracker",
+            "file": ".zoe/rules/context/projects/[active_project]/roadmap-tracker.json"
+          },
+          {
+            "action": "calculate_available_tasks",
+            "filter_by": ["dependencies_met", "not_started", "current_phase"]
+          },
+          {
+            "action": "suggest_optimal_next_task",
+            "criteria": ["priority", "estimated_time", "complexity", "dependencies"]
+          },
+          {
+            "action": "display_task_suggestions",
+            "format": "prioritized_list_with_context"
+          }
+        ]
+      }
+    }
+  },
+
+  "automation": {
+    "auto_detection": {
+      "milestone_completion": {
+        "enabled": true,
+        "triggers": [
+          "all_tasks_in_milestone_completed",
+          "completion_criteria_met"
+        ],
+        "actions": [
+          "auto_complete_milestone",
+          "unlock_dependencies",
+          "update_roadmap_file"
+        ]
+      },
+      "phase_progression": {
+        "enabled": true,
+        "triggers": [
+          "all_milestones_in_phase_completed"
+        ],
+        "actions": [
+          "unlock_next_phase",
+          "update_phase_status",
+          "celebrate_phase_completion"
+        ]
+      }
+    },
+    
+    "markdown_sync": {
+      "enabled": true,
+      "sync_triggers": [
+        "milestone_status_change",
+        "task_completion",
+        "phase_progression", 
+        "statistics_update"
+      ],
+      "sync_rules": {
+        "checkbox_format": "- [x] Task completed",
+        "status_indicators": {
+          "pending": "[ ]",
+          "in_progress": "[~]", 
+          "completed": "[x]",
+          "blocked": "[!]"
+        },
+        "progress_format": "`[{completed}/{total} concluído]`"
+      }
+    }
+  },
+
+  "integration": {
+    "project_context": {
+      "update_on_milestone_completion": true,
+      "track_components_created": true,
+      "update_architectural_decisions": true,
+      "sync_learning_insights": true
+    },
+    
+    "daily_progress": {
+      "auto_log_milestones": true,
+      "auto_log_completions": true,
+      "suggest_daily_tasks": true,
+      "track_velocity": true
+    },
+
+    "mcp_memory": {
+      "auto_update_entities": true,
+      "track_project_evolution": true,
+      "save_important_decisions": true,
+      "learn_from_patterns": true
+    }
+  },
+
+  "output_templates": {
+    "milestone_started": "🚀 **Milestone Iniciado:** {milestone_name}\n📋 **Tarefas:** {task_count} tarefas para completar\n⏱️ **Estimativa:** {estimated_hours} horas\n🎯 **Objetivo:** {objective}",
+    
+    "milestone_completed": "✅ **Milestone Concluído:** {milestone_name}\n🎉 **Parabéns!** Todas as tarefas foram finalizadas\n📈 **Progresso:** {completion_percentage}% do projeto concluído\n🚀 **Próximo:** {next_available_milestones}",
+    
+    "phase_completed": "🎊 **FASE CONCLUÍDA:** {phase_name}\n🏆 **Conquista desbloqueada!** Você completou uma fase inteira\n📊 **Estatísticas:** {milestones_completed} milestones concluídos\n🔓 **Desbloqueado:** Fase {next_phase_name}",
+    
+    "status_report": "📊 **Status do Roadmap - {project_name}**\n\n🎯 **Fase Atual:** {current_phase} ({phase_progress}%)\n📈 **Progresso Global:** {global_progress}% concluído\n⏱️ **Tempo Restante:** ~{estimated_remaining} horas\n🚀 **Próximo Milestone:** {next_milestone}\n\n**Estatísticas:**\n- Milestones concluídos: {completed_milestones}/{total_milestones}\n- Horas trabalhadas: {hours_worked}\n- Velocidade atual: {current_velocity} milestones/semana",
+    
+    "next_tasks": "🎯 **Próximas Tarefas Disponíveis:**\n\n{available_tasks_list}\n\n💡 **Recomendação:** Comece com [{recommended_task}] (Complexidade: {complexity}, Tempo: {estimated_time})\n\n📋 Para iniciar: `zoe start milestone {milestone_id}`"
+  }
+} 

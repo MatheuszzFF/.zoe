@@ -1,0 +1,187 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "created": "2025-06-10",
+    "last_updated": "2025-06-10",
+    "project_name": "code-evolution-tracker",
+    "description": "Contexto específico do projeto Code Evolution Tracker - App React Native para acompanhamento de evolução de estudantes"
+  },
+  "project_overview": {
+    "name": "Code Evolution Tracker",
+    "type": "React Native Mobile App",
+    "objectives": [
+      "Sistema de acompanhamento da evolução do aluno em programação",
+      "Interface para professores criarem tarefas de estudo",
+      "Interface para alunos marcarem tarefas como concluídas",
+      "Visualização de progresso para professores"
+    ],
+    "current_phase": "Enhancement",
+    "priority_focus": "Melhorias e novas funcionalidades"
+  },
+  "tech_stack": {
+    "detected_automatically": true,
+    "detection_confidence": "High",
+    "detection_method": "package.json analysis",
+    "frontend": {
+      "language": "TypeScript",
+      "framework": "React Native",
+      "meta_framework": "Expo SDK ~53.0.0",
+      "ui_library": "Native Components + LinearGradient",
+      "navigation": "React Navigation v7"
+    },
+    "backend": {
+      "runtime": "None (Mobile App)",
+      "database": "In-memory (para persistência futura: AsyncStorage)",
+      "orm": "None"
+    },
+    "development": {
+      "testing": "Not implemented yet",
+      "bundler": "Expo/Metro",
+      "linting": "Not configured"
+    }
+  },
+  "architectural_decisions": [
+    {
+      "date": "2025-06-08",
+      "decision": "Context API para gerenciamento de estado",
+      "rationale": "Solução simples e eficaz para o escopo atual do projeto",
+      "impact": "TaskContext centraliza todo o gerenciamento de tarefas"
+    },
+    {
+      "date": "2025-06-08", 
+      "decision": "Design moderno com LinearGradient",
+      "rationale": "UI atrativa e profissional para melhor experiência do usuário",
+      "impact": "Interface visualmente agradável e moderna"
+    },
+    {
+      "date": "2025-06-08",
+      "decision": "Armazenamento em memória",
+      "rationale": "Implementação rápida para MVP, com planos para persistência futura",
+      "impact": "Dados perdidos ao reiniciar app, mas funcional para testes"
+    }
+  ],
+  "code_patterns": {
+    "component_structure": {
+      "naming": "PascalCase para componentes, camelCase para functions",
+      "patterns": "Functional components com hooks, TypeScript interfaces bem definidas"
+    },
+    "zoe_smart_framework": {
+      "enabled": true,
+      "version": "1.0",
+      "auto_apply_patterns": true,
+      "templates_available": [
+        "react-native-component.json",
+        "create-component.json (adapted)",
+        "create-page.json (adapted)"
+      ],
+      "mandatory_conventions": {
+        "typescript_types": "type T[ComponentName] = {...}",
+        "props_destructuring": "const Component = (props) => { const { ... } = props",
+        "file_separation": ".component.tsx + .template.tsx + .styles.ts + .types.ts + .test.tsx"
+      }
+    }
+  },
+  "components_created": [
+    {
+      "name": "TaskContext",
+      "type": "Context Provider",
+      "location": "src/context/TaskContext.tsx",
+      "description": "Gerenciamento central de estado das tarefas"
+    },
+    {
+      "name": "HomePage",
+      "type": "Page Component", 
+      "location": "src/pages/home-page/",
+      "description": "Tela inicial com navegação - Framework Zoe + ícones Lucide (BookOpen, User, GraduationCap)",
+      "status": "FUNCTIONAL_WITH_LUCIDE_ICONS"
+    },
+    {
+      "name": "TeacherPage",
+      "type": "Page Component",
+      "location": "src/pages/teacher-page/", 
+      "description": "Interface para professores - Framework Zoe + ícones Lucide (User, Plus, Clipboard)",
+      "status": "FUNCTIONAL_WITH_LUCIDE_ICONS"
+    },
+    {
+      "name": "StudentPage",
+      "type": "Page Component",
+      "location": "src/pages/student-page/",
+      "description": "Interface para alunos - RECRIADO 10/06/2025 + ícones Lucide (GraduationCap, Check, Clock, BarChart3, FileText)",
+      "status": "FUNCTIONAL_WITH_LUCIDE_ICONS",
+      "components_included": ["StudentStatsCard", "StudentTaskCard", "StudentPageTemplate"]
+    },
+    {
+      "name": "Navigation",
+      "type": "Navigation Component",
+      "location": "src/navigation/Navigation.tsx",
+      "description": "Configuração de navegação entre telas - atualizado para kebab-case imports"
+    }
+  ],
+  "preferences": {
+    "math_preferences": {
+      "communication_style": "Direct and practical",
+      "nickname": "Math",
+      "language": "Portuguese",
+      "feedback_style": "Honest and specific"
+    },
+    "coding_style": {
+      "file_naming": "English",
+      "comments": "Portuguese", 
+      "variables": "English preferred",
+      "documentation": "Portuguese"
+    },
+    "project_style": {
+      "component_priority": "Quality over quantity",
+      "test_coverage": "As needed",
+      "documentation": "Detailed progress tracking in appProgress/"
+    }
+  },
+  "current_context": {
+    "last_session_summary": "SESSÃO 10-06-2025 NOTURNA: student-page-template.tsx corrompido foi recriado com sucesso. Todas as 3 páginas agora funcionais com ícones Lucide React Native corretos.",
+    "active_work": "Projeto 100% funcional - pronto para próximos milestones do roadmap",
+    "critical_fixes_completed": [
+      "student-page-template.tsx recriado com ícones Lucide: GraduationCap, Check, Clock, BarChart3, FileText",
+      "TypeScript compilando sem erros (npx tsc --noEmit)",
+      "UI completa: StudentStatsCard + StudentTaskCard + dashboard de progresso",
+      "Framework Zoe Smart aplicado corretamente com padrões kebab-case"
+    ],
+    "next_suggested": [
+      "Implementar AsyncStorage para persistência de dados",
+      "Iniciar Milestone 1.2 - Sistema de Design Tokens",
+      "Criar componentes reutilizáveis com Framework Zoe",
+      "Melhorar sistema de identificação de usuários"
+    ],
+    "pending_tasks": [],
+    "blockers": [],
+    "current_status": "ALL_PAGES_FUNCTIONAL"
+  },
+  "learning_insights": [
+    {
+      "date": "2025-06-10",
+      "insight": "Projeto bem estruturado com UI moderna e funcionalidades core implementadas",
+      "application": "Base sólida permite focar em melhorias específicas"
+    }
+  ],
+  "project_metrics": {
+    "components_completed": 5,
+    "pages_functional": 3,
+    "lucide_icons_implemented": "ALL_PAGES",
+    "framework_zoe_applied": true,
+    "typescript_errors": 0,
+    "tests_created": 0,
+    "sessions_count": 3,
+    "days_worked": 2,
+    "creation_date": "2025-06-08",
+    "last_worked": "2025-06-10",
+    "critical_fixes_completed": 1,
+    "status": "100_PERCENT_FUNCTIONAL"
+  },
+  "coding_patterns": {
+    "global_rules_reference": "Segue regras globais em .zoe/rules/global-development-rules.json",
+    "ui_library": {
+      "selected": "React Native Reusables (Shadcn-inspired)",
+      "installation": "NativeWind v4 + TailwindCSS instalado em 10/06/2025",
+      "configuration": "tailwind.config.js + metro.config.js + babel.config.js configurados"
+    }
+  }
+} 

@@ -1,0 +1,188 @@
+{
+  "_metadata": {
+    "integration_name": "smart-framework-integration", 
+    "version": "1.0",
+    "description": "Conecta o Zoe Smart Framework com o sistema de roadmap para aplicação automática de padrões",
+    "project": "code-evolution-tracker",
+    "created": "2025-06-10"
+  },
+
+  "milestone_pattern_mapping": {
+    "1.2_design_tokens": {
+      "auto_apply": true,
+      "patterns": ["theme system", "constants organization"],
+      "templates": ["theme.types.ts", "design-tokens.ts"],
+      "framework_actions": [
+        "create centralized theme system",
+        "apply consistent naming patterns",
+        "setup design token structure"
+      ]
+    },
+    "1.3_async_storage": {
+      "auto_apply": true,
+      "patterns": ["service layer", "data persistence"],
+      "templates": ["storage.service.ts", "storage.types.ts"],
+      "framework_actions": [
+        "create service pattern for AsyncStorage",
+        "setup proper error handling",
+        "implement data serialization patterns"
+      ]
+    },
+    "1.4_reusable_components": {
+      "auto_apply": true,
+      "patterns": ["react-native-component template"],
+      "templates": ["button.component.tsx", "input.component.tsx", "card.component.tsx"],
+      "framework_actions": [
+        "apply full component architecture (.component + .template + .styles + .types + .test)",
+        "follow T[ComponentName] typing pattern",
+        "setup proper props destructuring",
+        "create comprehensive test coverage"
+      ]
+    },
+    "2.1_advanced_user_system": {
+      "auto_apply": true,
+      "patterns": ["context pattern", "user management"],
+      "templates": ["user-context.tsx", "auth.service.ts"],
+      "framework_actions": [
+        "apply context pattern for user management",
+        "create typed interfaces for user system",
+        "setup proper state management"
+      ]
+    },
+    "component_creation": {
+      "auto_apply": true,
+      "patterns": ["react-native-component"],
+      "detect_keywords": ["componente", "component", "UI", "button", "input", "modal"],
+      "framework_actions": [
+        "automatically create all required files",
+        "apply consistent naming conventions",
+        "setup proper folder structure",
+        "create comprehensive tests"
+      ]
+    }
+  },
+
+  "smart_detection_rules": {
+    "milestone_analysis": {
+      "scan_title": true,
+      "scan_description": true,
+      "scan_tasks": true,
+      "keyword_patterns": {
+        "component_creation": ["criar", "component", "UI", "interface", "botão", "formulário"],
+        "architecture_work": ["estrutura", "organizar", "padrão", "pattern", "arquitetura"],
+        "service_creation": ["service", "api", "storage", "data", "persistência"]
+      }
+    },
+    "auto_suggestions": {
+      "when_milestone_starts": [
+        "Analyze milestone content for pattern opportunities",
+        "Suggest specific templates based on content",
+        "Auto-apply obvious patterns (components, services)",
+        "Update implementation notes with patterns applied"
+      ]
+    }
+  },
+
+  "integration_commands": {
+    "on_milestone_start": {
+      "sequence": [
+        {
+          "step": 1,
+          "action": "read_milestone_content",
+          "source": "roadmap-tracker.json",
+          "extract": ["title", "description", "tasks"]
+        },
+        {
+          "step": 2,
+          "action": "analyze_keywords",
+          "apply": "smart_detection_rules.keyword_patterns"
+        },
+        {
+          "step": 3,
+          "action": "identify_applicable_patterns",
+          "use": "milestone_pattern_mapping"
+        },
+        {
+          "step": 4,
+          "action": "auto_apply_patterns",
+          "condition": "auto_apply === true"
+        },
+        {
+          "step": 5,
+          "action": "update_roadmap_tracker",
+          "field": "implementation_notes",
+          "content": "patterns_applied"
+        }
+      ]
+    },
+    "on_component_request": {
+      "sequence": [
+        {
+          "step": 1,
+          "action": "extract_component_name",
+          "from": "user_message"
+        },
+        {
+          "step": 2,
+          "action": "apply_react_native_template",
+          "template": "react-native-component.json"
+        },
+        {
+          "step": 3,
+          "action": "create_all_required_files",
+          "files": [".component.tsx", ".template.tsx", ".styles.ts", ".types.ts", ".test.tsx"]
+        },
+        {
+          "step": 4,
+          "action": "update_component_exports",
+          "file": "src/components/index.ts"
+        }
+      ]
+    }
+  },
+
+  "automatic_behaviors": {
+    "silent_mode": {
+      "description": "Aplica padrões automaticamente sem perguntar",
+      "conditions": [
+        "milestone clearly indicates component creation",
+        "user explicitly requests following standards",
+        "obvious template application scenarios"
+      ],
+      "examples": [
+        "Milestone 1.4: Criar componentes reutilizáveis -> auto-apply component template",
+        "User: 'criar componente Button' -> auto-apply react-native template",
+        "Milestone mentions 'AsyncStorage' -> auto-apply service pattern"
+      ]
+    },
+    "confirmation_mode": {
+      "description": "Pergunta antes de aplicar quando não óbvio",
+      "conditions": [
+        "ambiguous context",
+        "multiple pattern options",
+        "complex architectural decisions"
+      ]
+    }
+  },
+
+  "success_tracking": {
+    "metrics": [
+      "patterns_applied_count",
+      "time_saved_estimate", 
+      "consistency_improvements",
+      "milestone_completion_speed"
+    ],
+    "update_locations": [
+      "roadmap-tracker.json (implementation_notes)",
+      "project-context.json (code_patterns)",
+      "MCP memory (patterns applied)"
+    ]
+  },
+
+  "framework_status": {
+    "active": true,
+    "auto_apply_enabled": true,
+    "learning_mode": true,
+    "last_updated": "2025-06-10"
+  }
+} 
