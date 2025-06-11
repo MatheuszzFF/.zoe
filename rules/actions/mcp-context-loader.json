@@ -43,36 +43,54 @@
       },
       {
         "step": 2,
-        "action": "universal_mcp_search",
-        "description": "Busca inteligente no MCP baseada no contexto",
+        "action": "mandatory_structured_search",
+        "description": "OBRIGATÓRIO: Busca estruturada com prefixos no MCP",
+        "critical_rule": "SEMPRE usar formato estruturado com prefixos",
+        "structured_search": {
+          "priority": "MÁXIMA - Executar ANTES de qualquer processamento",
+          "format": "cmd-, proj-, tech-, pattern-, issue-, fix-, rule-, user-",
+          "keyword_detection": {
+            "zoe": "cmd-zoe-[comando detectado]",
+            "iniciar": "cmd-zoe-iniciar", 
+            "criar": "cmd-criar-[tipo]",
+            "fix": "cmd-fix-[problema]",
+            "kess": "proj-kess-system",
+            "code evolution": "proj-code-evolution-tracker",
+            "react": "tech-react",
+            "typescript": "tech-typescript",
+            "UNKNOWN": "user-math-prefs"
+          },
+          "backup_searches": [
+            "user-math-prefs",
+            "rule-mcp-query-protocol"
+          ]
+        },
         "search_strategies": [
           {
-            "strategy": "context_based_search",
+            "strategy": "structured_exact_search",
+            "priority": 1,
             "queries": [
-              "Buscar informações sobre Math e suas preferências",
-              "Buscar conhecimento sobre projetos mencionados",
-              "Buscar padrões e decisões arquiteturais relevantes",
-              "Buscar funcionalidades e melhorias do Sistema Zoe",
-              "Buscar histórico de problemas resolvidos"
+              "Detectar comando específico e buscar cmd-[comando]",
+              "Detectar projeto mencionado e buscar proj-[projeto]", 
+              "Detectar tecnologia e buscar tech-[tecnologia]",
+              "Detectar padrão e buscar pattern-[padrão]"
             ]
           },
           {
-            "strategy": "recent_knowledge_search",
+            "strategy": "category_search",
+            "priority": 2,
             "queries": [
-              "Buscar últimas mudanças e melhorias implementadas",
-              "Buscar decisões recentes e configurações",
-              "Buscar novos comandos e funcionalidades",
-              "Buscar problemas recentes e soluções aplicadas"
+              "Se comando, buscar por prefixo cmd-",
+              "Se projeto, buscar por prefixo proj-",
+              "Se tecnologia, buscar por prefixo tech-"
             ]
           },
           {
-            "strategy": "project_specific_search",
-            "condition": "IF project mentioned in user message",
+            "strategy": "backup_context_search", 
+            "priority": 3,
             "queries": [
-              "Buscar contexto específico do projeto [nome_projeto]",
-              "Buscar stack tecnológica do projeto",
-              "Buscar componentes criados e padrões estabelecidos",
-              "Buscar histórico de desenvolvimento do projeto"
+              "user-math-prefs para carregar contexto básico",
+              "rule-mcp-query-protocol para protocolo"
             ]
           }
         ]

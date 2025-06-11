@@ -9,15 +9,29 @@
   "priority": [
     {
       "type": "action",
+      "name": "mandatory-mcp-search",
+      "file": "actions/mandatory-mcp-search.json",
+      "trigger": "EVERY Math message - INDEPENDENTE do contexto",
+      "description": "Action OBRIGATÓRIA que força busca MCP estruturada antes de qualquer resposta",
+      "level": -1,
+      "category": "mandatory-system",
+      "mandatory": true,
+      "blocking": true,
+      "execution_order": "ANTES DE QUALQUER PROCESSAMENTO",
+      "format": "json",
+      "critical_rule": "VIOLAÇÃO DESTA REGRA = FALHA CRÍTICA DO SISTEMA"
+    },
+    {
+      "type": "action",
       "name": "mcp-context-loader",
       "file": "actions/mcp-context-loader.json",
       "trigger": "AUTOMÁTICO: ANTES de qualquer resposta ou comando",
-      "description": "Consulta AUTOMÁTICA e OBRIGATÓRIA do MCP antes de qualquer resposta",
+      "description": "Consulta AUTOMÁTICA e OBRIGATÓRIA do MCP antes de qualquer resposta - ATUALIZADO com busca estruturada",
       "level": 0,
       "category": "universal-context",
       "mandatory": true,
       "blocking": true,
-      "execution_order": "PRIMEIRO - antes de qualquer outra action",
+      "execution_order": "SEGUNDO - após mandatory-mcp-search",
       "format": "json"
     },
     {

@@ -1,0 +1,144 @@
+{
+  "_metadata": {
+    "action_name": "mandatory-mcp-search",
+    "version": "1.0",
+    "format": "json",
+    "description": "Action OBRIGATÓRIA que força busca MCP estruturada antes de qualquer resposta",
+    "created": "2025-06-11",
+    "requested_by": "Math",
+    "critical_importance": "MÁXIMA - Sistema inescapável",
+    "execution_order": "ANTES DE QUALQUER PROCESSAMENTO"
+  },
+  
+  "trigger": {
+    "patterns": [
+      "EVERY Math message",
+      "TODA mensagem recebida",
+      "INDEPENDENTE do contexto",
+      "MESMO sem conhecer o assunto"
+    ],
+    "automatic": true,
+    "priority_level": -1,
+    "category": "mandatory-system",
+    "mandatory": true,
+    "blocking": true,
+    "execution_order": "PRIMEIRO - antes de tudo"
+  },
+
+  "behavior": {
+    "description": "Força execução de busca MCP estruturada obrigatoriamente",
+    "critical_rule": "VIOLAÇÃO DESTA REGRA = FALHA CRÍTICA DO SISTEMA",
+    "execution_steps": [
+      {
+        "step": 1,
+        "action": "analyze_message_keywords",
+        "description": "Analisar mensagem do Math para detectar keywords",
+        "keyword_patterns": {
+          "commands": ["zoe", "iniciar", "criar", "fix", "health", "set"],
+          "projects": ["kess", "code-evolution", "sinistro", "tms", "design-system"],
+          "technologies": ["react", "typescript", "next", "prisma", "supabase", "expo"],
+          "patterns": ["kebab-case", "component", "template", "lucide"],
+          "unknown": "trigger backup search"
+        }
+      },
+      {
+        "step": 2,
+        "action": "execute_structured_search",
+        "description": "OBRIGATÓRIO: Executar busca com formato estruturado",
+        "search_protocol": {
+          "format": "SEMPRE usar prefixos: cmd-, proj-, tech-, pattern-, issue-, fix-, rule-, user-",
+          "strategy": [
+            "1º: Busca exata com keyword detectada",
+            "2º: Busca por categoria se não encontrar",
+            "3º: Busca backup user-math-prefs",
+            "4º: Busca backup rule-mcp-query-protocol"
+          ]
+        }
+      },
+      {
+        "step": 3,
+        "action": "load_context_mandatory",
+        "description": "Carregar contexto encontrado obrigatoriamente",
+        "context_loading": {
+          "user_preferences": "SEMPRE carregar user-math-prefs",
+          "command_context": "Se comando detectado, carregar protocolo",
+          "project_context": "Se projeto detectado, carregar status",
+          "technical_context": "Se tecnologia detectada, carregar padrões"
+        }
+      },
+      {
+        "step": 4,
+        "action": "validate_compliance",
+        "description": "Validar que busca estruturada foi executada",
+        "compliance_check": {
+          "structured_search_executed": "OBRIGATÓRIO",
+          "context_loaded": "OBRIGATÓRIO se disponível", 
+          "backup_executed": "OBRIGATÓRIO se nada específico",
+          "format_correct": "OBRIGATÓRIO prefixos estruturados"
+        }
+      },
+      {
+        "step": 5,
+        "action": "proceed_with_response",
+        "description": "SÓ AGORA processar mensagem do usuário",
+        "final_check": "Confirmar que todas as buscas obrigatórias foram executadas"
+      }
+    ]
+  },
+
+  "keyword_detection_rules": {
+    "command_patterns": {
+      "zoe iniciar": "cmd-zoe-iniciar",
+      "zoe health": "cmd-zoe-health",
+      "criar componente": "cmd-criar-componente",
+      "fix bugs": "cmd-fix-bugs",
+      "set project": "cmd-set-project"
+    },
+    "project_patterns": {
+      "kess": "proj-kess-system",
+      "code evolution": "proj-code-evolution-tracker",
+      "sinistro": "proj-sinistro-prisma",
+      "tms": "proj-tms-top-techno"
+    },
+    "technology_patterns": {
+      "react native": "tech-react-native",
+      "typescript": "tech-typescript",
+      "next": "tech-nextjs",
+      "prisma": "tech-prisma",
+      "expo": "tech-expo"
+    },
+    "fallback_pattern": "user-math-prefs"
+  },
+
+  "mandatory_searches": {
+    "description": "Buscas que DEVEM ser executadas sempre",
+    "primary_search": "Baseada em keyword detection",
+    "backup_searches": [
+      "user-math-prefs",
+      "rule-mcp-query-protocol"
+    ],
+    "execution_rule": "NUNCA pular, SEMPRE executar pelo menos backup"
+  },
+
+  "compliance_enforcement": {
+    "description": "Como garantir que a regra nunca seja violada",
+    "checks": [
+      "Busca MCP estruturada foi executada?",
+      "Formato com prefixos foi usado?",
+      "Contexto foi carregado se disponível?",
+      "Backup foi executado se necessário?"
+    ],
+    "violation_handling": {
+      "log_violation": "Registrar falha crítica",
+      "force_execution": "Forçar execução antes de prosseguir",
+      "block_response": "Não responder até compliance"
+    }
+  },
+
+  "integration": {
+    "with_mcp_context_loader": "Integra com level 0 existente",
+    "with_priority_map": "Level -1 executa antes de tudo",
+    "with_cursor_memories": "Reforçado por memórias core",
+    "universal_application": "Funciona em qualquer chat/contexto"
+  }
+} 
