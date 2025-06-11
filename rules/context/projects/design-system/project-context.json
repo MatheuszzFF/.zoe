@@ -1,17 +1,70 @@
 {
   "_metadata": {
-    "version": "1.0",
+    "version": "1.1",
     "created": "2025-06-10",
+    "updated": "2025-06-11",
     "project_name": "design-system"
   },
   "project_overview": {
-    "name": "DesignSystem",
-    "type": "Biblioteca de Componentes",
-    "objectives": ["Componentes reutilizáveis", "Padrões de design"],
-    "current_phase": "Desenvolvimento"
+    "name": "@mz-codes/design-system",
+    "type": "Component Library",
+    "description": "Professional React component library for MZiQ ecosystem",
+    "location": "mzpkg/packages/design-system/",
+    "objectives": [
+      "Standardize UI components across MZiQ applications",
+      "Accelerate development with reusable components", 
+      "Maintain design consistency and quality",
+      "Provide comprehensive documentation via Storybook"
+    ],
+    "current_phase": "Active Development",
+    "version": "2.1.3-preview-ss-1501.3"
   },
   "tech_stack": {
-    "frontend": {"framework": "React", "language": "TypeScript", "styling": "Tailwind CSS"},
-    "documentation": "Storybook"
+    "frontend": {
+      "framework": "React",
+      "version": "18.2.0",
+      "language": "TypeScript",
+      "language_version": "5.4.5",
+      "styling": "Styled Components",
+      "styling_version": "6.1.8"
+    },
+    "build": {
+      "bundler": "Vite",
+      "version": "5.2.0",
+      "compiler": "TypeScript + tsc-alias"
+    },
+    "testing": {
+      "framework": "Vitest",
+      "version": "2.1.9",
+      "library": "Testing Library",
+      "coverage": "@vitest/coverage-v8"
+    },
+    "documentation": {
+      "tool": "Storybook",
+      "version": "8.1.9",
+      "port": 6006,
+      "addons": ["essentials", "interactions", "links", "themes"]
+    },
+    "linting": {
+      "config": "@mz-codes/eslint-config",
+      "version": "1.2.2"
+    }
+  },
+  "components": {
+    "available": [
+      "buttons", "inputs", "charts", "tables", "modals", 
+      "dropdowns", "tabs", "icons", "menus", "toast", 
+      "tooltip", "tour", "windowing-view", "portal", 
+      "loading", "datepickers", "boxes"
+    ],
+    "total_count": 17,
+    "documentation_status": "Storybook configured"
+  },
+  "current_context": {
+    "active_work": "System reactivated - ready for component development",
+    "environment": "Development ready",
+    "monorepo": "Part of mzpkg monorepo structure",
+    "package_manager": "npm",
+    "publish_target": "GitHub Packages"
   }
 } 
