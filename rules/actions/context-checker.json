@@ -69,6 +69,22 @@
     "critical_rule": "DETECTAR MÁXIMO AUTOMATICAMENTE, PERGUNTAR MÍNIMO",
     "execution_steps": [
       {
+        "step": 0,
+        "action": "get_current_date",
+        "description": "Obter data atual automaticamente via comando date",
+        "auto_execution": [
+          "1. EXECUTE command 'date +%Y-%m-%d' in terminal",
+          "2. CAPTURE current date from output", 
+          "3. SET global variable [CURRENT_DATE] for use in all operations",
+          "4. LOG date capture for context reference"
+        ],
+        "command": "date +%Y-%m-%d",
+        "purpose": "Sempre saber a data atual antes de iniciar qualquer operação",
+        "output_format": "YYYY-MM-DD",
+        "required": true,
+        "blocking": false
+      },
+      {
         "step": 1,
         "action": "smart_project_detection",
         "description": "Detecção inteligente do projeto e contexto",
@@ -316,7 +332,7 @@
   },
 
   "logging": {
-    "log_format": "🔍 CONTEXT CHECKER EXECUTADO:\n- Projeto solicitado: [nome]\n- Projeto ativo: [nome-atual]\n- Ação: [nenhuma | atualizado | criado]\n- Status: ✅ Contexto correto",
+    "log_format": "🔍 CONTEXT CHECKER EXECUTADO:\n- Data atual: [CURRENT_DATE] (via comando date)\n- Projeto solicitado: [nome]\n- Projeto ativo: [nome-atual]\n- Ação: [nenhuma | atualizado | criado]\n- Status: ✅ Contexto correto",
     "log_location": ".zoe/rules/context/projects/[projeto]/progress/[hoje]/README.md"
   }
 } 

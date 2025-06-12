@@ -2,17 +2,17 @@
   "_metadata": {
     "version": "1.1",
     "description": "Controle do projeto ativo para isolamento de contexto",
-    "last_updated": "2025-06-12T21:15:00Z"
+    "last_updated": "2025-06-12T21:30:00Z"
   },
-  "active_project": "design-system",
-  "activated_at": "2025-06-12T21:15:00Z",
-  "session_id": "sess_design_system_june12",
-  "last_command": "zoe iniciar design-system",
-  "last_command_at": "2025-06-12T21:15:00Z",
+  "active_project": "mz-shareholders-mf",
+  "activated_at": "2025-06-12T21:30:00Z",
+  "session_id": "sess_shareholders_june12",
+  "last_command": "zoe iniciar mz-mf-shareholders",
+  "last_command_at": "2025-06-12T21:30:00Z",
   "commands_count": 1,
-  "session_duration": "reiniciando",
+  "session_duration": "iniciando",
   "discovery_status": "PROJETO EXISTENTE REATIVADO",
-  "project_type": "design-system",
-  "project_path": "./mzpkg/packages/design-system",
-  "notes": "REATIVADO: design-system em 12 de junho de 2025. @mz-codes/design-system - Biblioteca de componentes React profissional para MZiQ."
+  "project_type": "microfrontend",
+  "project_path": "./mz-shareholders-mf",
+  "notes": "REATIVADO: mz-shareholders-mf em 12 de junho de 2025. Microfrontend React para gestão de acionistas, versão 2.0.0."
 } 
