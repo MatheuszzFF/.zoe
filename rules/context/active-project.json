@@ -2,17 +2,17 @@
   "_metadata": {
     "version": "1.1",
     "description": "Controle do projeto ativo para isolamento de contexto",
-    "last_updated": "2025-06-12T21:30:00Z"
+    "last_updated": "2025-06-13T00:00:00Z"
   },
   "active_project": "mz-shareholders-mf",
-  "activated_at": "2025-06-12T21:30:00Z",
-  "session_id": "sess_shareholders_june12",
+  "activated_at": "2025-06-13T00:00:00Z",
+  "session_id": "sess_shareholders_june13",
   "last_command": "zoe iniciar mz-mf-shareholders",
-  "last_command_at": "2025-06-12T21:30:00Z",
+  "last_command_at": "2025-06-13T00:00:00Z",
   "commands_count": 1,
   "session_duration": "iniciando",
   "discovery_status": "PROJETO EXISTENTE REATIVADO",
   "project_type": "microfrontend",
   "project_path": "./mz-shareholders-mf",
-  "notes": "REATIVADO: mz-shareholders-mf em 12 de junho de 2025. Microfrontend React para gestão de acionistas, versão 2.0.0."
+  "notes": "REATIVADO: mz-shareholders-mf em 13 de junho de 2025. Microfrontend React para gestão de acionistas, versão 2.0.0. Todas as migrações Design System concluídas no dia 12/06."
 } 
