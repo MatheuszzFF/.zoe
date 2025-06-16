@@ -1,0 +1,54 @@
+{
+  "_metadata": {
+    "category": "maintenance",
+    "version": "2.0",
+    "description": "Actions para manutenção - carregadas periodicamente",
+    "created": "2025-06-13",
+    "priority": "low"
+  },
+  "actions": {
+    "mcp-auto-storage": {
+      "level": 25,
+      "type": "action",
+      "post_execution": true,
+      "description": "Armazenamento automático MCP",
+      "file": "../mcp-auto-storage.json"
+    },
+    "feedback-capture-2.0": {
+      "level": 5,
+      "type": "action",
+      "description": "Captura de feedback melhorada",
+      "file": "../feedback-capture-2.0.json"
+    },
+    "priority-logger": {
+      "level": 10,
+      "type": "action",
+      "description": "Log de prioridades do sistema",
+      "file": "../priority-logger.json"
+    },
+    "progress-path-corrector": {
+      "level": 15,
+      "type": "action",
+      "description": "Correção de caminhos de progresso",
+      "file": "../progress-path-corrector.json"
+    },
+    "context-updater": {
+      "level": 20,
+      "type": "action",
+      "description": "Atualização de contexto automática",
+      "file": "../context-updater.json"
+    }
+  },
+  "loading_strategy": {
+    "when": "periodic",
+    "priority": "background",
+    "cache": "persistent",
+    "failure_handling": "log_and_continue"
+  },
+  "schedule": {
+    "auto_storage": "post_command",
+    "feedback_capture": "on_interaction",
+    "cleanup": "daily",
+    "context_sync": "session_end"
+  }
+} 

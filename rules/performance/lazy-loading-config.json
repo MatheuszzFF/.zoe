@@ -1,0 +1,110 @@
+{
+  "_metadata": {
+    "system_name": "Lazy Loading Optimizer",
+    "version": "3.0",
+    "description": "Sistema de carregamento otimizado para actions",
+    "created": "2025-06-13",
+    "phase": "3_performance_optimization"
+  },
+  "loading_strategy": {
+    "enabled": true,
+    "preload_critical": true,
+    "background_loading": true,
+    "memory_threshold": "80%",
+    "unload_unused": true
+  },
+  "action_categories": {
+    "critical": {
+      "loading": "immediate",
+      "priority": "highest",
+      "cache": "permanent",
+      "actions": [
+        "mandatory-mcp-search",
+        "mcp-context-loader", 
+        "context-checker",
+        "rule-change-guard"
+      ]
+    },
+    "frequent": {
+      "loading": "on_first_use",
+      "priority": "high",
+      "cache": "session",
+      "actions": [
+        "execute-direct",
+        "project-name-extractor",
+        "stack-autodetection"
+      ]
+    },
+    "occasional": {
+      "loading": "on_demand",
+      "priority": "medium",
+      "cache": "temporary",
+      "actions": [
+        "auto-documentation",
+        "feedback-capture-2.0",
+        "priority-logger"
+      ]
+    },
+    "maintenance": {
+      "loading": "background",
+      "priority": "low",
+      "cache": "persistent",
+      "actions": [
+        "mcp-auto-storage",
+        "progress-path-corrector",
+        "context-updater"
+      ]
+    }
+  },
+  "performance_optimizations": {
+    "preloading": {
+      "enabled": true,
+      "triggers": ["system_startup", "project_change"],
+      "max_concurrent": 3,
+      "timeout": 5000
+    },
+    "memory_management": {
+      "enabled": true,
+      "max_loaded_actions": 15,
+      "unload_threshold": 300,
+      "gc_interval": 600
+    },
+    "caching": {
+      "enabled": true,
+      "action_cache": "memory",
+      "result_cache": "disk",
+      "compression": true
+    }
+  },
+  "loading_metrics": {
+    "track_performance": true,
+    "metrics": [
+      "load_time",
+      "memory_usage",
+      "cache_hit_ratio",
+      "action_usage_frequency"
+    ],
+    "optimization_targets": {
+      "load_time": "< 100ms",
+      "memory_usage": "< 20MB",
+      "cache_hit_ratio": "> 85%"
+    }
+  },
+  "smart_features": {
+    "usage_prediction": {
+      "enabled": true,
+      "algorithm": "frequency_based",
+      "learning_window": "7_days"
+    },
+    "adaptive_loading": {
+      "enabled": true,
+      "adjust_based_on": ["usage_patterns", "system_performance"],
+      "rebalance_interval": "daily"
+    },
+    "dependency_resolution": {
+      "enabled": true,
+      "auto_load_dependencies": true,
+      "circular_detection": true
+    }
+  }
+} 

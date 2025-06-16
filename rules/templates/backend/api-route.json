@@ -1,0 +1,44 @@
+{
+  "_metadata": {
+    "template_name": "api-route",
+    "category": "backend",
+    "version": "2.0",
+    "description": "Template escalável para rotas de API",
+    "created": "2025-06-13",
+    "compatibility": ["Next.js API Routes", "Express", "Fastify", "Node.js"]
+  },
+  "template_config": {
+    "naming_convention": "kebab-case",
+    "file_structure": "route + controller + service + types",
+    "validation": "Zod schema validation",
+    "error_handling": "Standardized error responses",
+    "authentication": "JWT/Session ready"
+  },
+  "file_templates": {
+    "route_file": {
+      "filename": "route.ts",
+      "template": "import { NextRequest, NextResponse } from 'next/server';\nimport { [PascalName]Controller } from './[name]-controller';\nimport { [PascalName]Schema } from './[name]-types';\n\nexport async function GET(request: NextRequest) {\n  try {\n    const result = await [PascalName]Controller.get();\n    return NextResponse.json(result);\n  } catch (error) {\n    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });\n  }\n}\n\nexport async function POST(request: NextRequest) {\n  try {\n    const body = await request.json();\n    const validatedData = [PascalName]Schema.parse(body);\n    const result = await [PascalName]Controller.create(validatedData);\n    return NextResponse.json(result, { status: 201 });\n  } catch (error) {\n    return NextResponse.json({ error: 'Bad Request' }, { status: 400 });\n  }\n}"
+    },
+    "controller_file": {
+      "filename": "[name]-controller.ts",
+      "template": "import { [PascalName]Service } from './[name]-service';\nimport { [PascalName]Data, [PascalName]Response } from './[name]-types';\n\nexport class [PascalName]Controller {\n  static async get(): Promise<[PascalName]Response[]> {\n    return await [PascalName]Service.findAll();\n  }\n\n  static async getById(id: string): Promise<[PascalName]Response | null> {\n    return await [PascalName]Service.findById(id);\n  }\n\n  static async create(data: [PascalName]Data): Promise<[PascalName]Response> {\n    return await [PascalName]Service.create(data);\n  }\n\n  static async update(id: string, data: Partial<[PascalName]Data>): Promise<[PascalName]Response | null> {\n    return await [PascalName]Service.update(id, data);\n  }\n\n  static async delete(id: string): Promise<boolean> {\n    return await [PascalName]Service.delete(id);\n  }\n}"
+    },
+    "service_file": {
+      "filename": "[name]-service.ts",
+      "template": "import { [PascalName]Data, [PascalName]Response } from './[name]-types';\n// Import your database/ORM here (Prisma, MongoDB, etc.)\n\nexport class [PascalName]Service {\n  static async findAll(): Promise<[PascalName]Response[]> {\n    // Implement database query\n    throw new Error('Not implemented');\n  }\n\n  static async findById(id: string): Promise<[PascalName]Response | null> {\n    // Implement database query\n    throw new Error('Not implemented');\n  }\n\n  static async create(data: [PascalName]Data): Promise<[PascalName]Response> {\n    // Implement database creation\n    throw new Error('Not implemented');\n  }\n\n  static async update(id: string, data: Partial<[PascalName]Data>): Promise<[PascalName]Response | null> {\n    // Implement database update\n    throw new Error('Not implemented');\n  }\n\n  static async delete(id: string): Promise<boolean> {\n    // Implement database deletion\n    throw new Error('Not implemented');\n  }\n}"
+    },
+    "types_file": {
+      "filename": "[name]-types.ts",
+      "template": "import { z } from 'zod';\n\n// Zod schema for validation\nexport const [PascalName]Schema = z.object({\n  // Define your schema here\n  name: z.string().min(1),\n  email: z.string().email().optional(),\n});\n\n// TypeScript types\nexport type [PascalName]Data = z.infer<typeof [PascalName]Schema>;\n\nexport interface [PascalName]Response extends [PascalName]Data {\n  id: string;\n  createdAt: Date;\n  updatedAt: Date;\n}\n\nexport interface [PascalName]Error {\n  message: string;\n  code: string;\n  details?: any;\n}"
+    }
+  },
+  "scalability_features": {
+    "validation": "Zod schema validation",
+    "error_handling": "Standardized error responses",
+    "authentication": "JWT/Session middleware ready",
+    "rate_limiting": "Rate limiting support",
+    "caching": "Redis/Memory cache ready",
+    "logging": "Structured logging",
+    "testing": "Unit and integration test ready"
+  }
+} 

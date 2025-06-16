@@ -1,0 +1,53 @@
+{
+  "_metadata": {
+    "template_name": "react-component",
+    "category": "web",
+    "version": "2.0",
+    "description": "Template escalável para componentes React",
+    "created": "2025-06-13",
+    "compatibility": ["React", "Next.js", "TypeScript"]
+  },
+  "template_config": {
+    "naming_convention": "kebab-case",
+    "file_structure": "component + template + types",
+    "styling": "auto-detect (Tailwind/CSS Modules/Styled Components)",
+    "typescript": "required",
+    "testing": "optional"
+  },
+  "file_templates": {
+    "component_file": {
+      "filename": "[name]-component.tsx",
+      "template": "import React from 'react';\nimport { [PascalName]Props } from './[name]-types';\nimport { [PascalName]Template } from './[name]-template';\n\nexport const [PascalName]Component: React.FC<[PascalName]Props> = (props) => {\n  // Logic here\n  return <[PascalName]Template {...props} />;\n};"
+    },
+    "template_file": {
+      "filename": "[name]-template.tsx",
+      "template": "import React from 'react';\nimport { [PascalName]Props } from './[name]-types';\n\nexport const [PascalName]Template: React.FC<[PascalName]Props> = ({\n  // props destructuring\n}) => {\n  return (\n    <div className=\"[name]-container\">\n      {/* Template JSX */}\n    </div>\n  );\n};"
+    },
+    "types_file": {
+      "filename": "[name]-types.ts",
+      "template": "export interface [PascalName]Props {\n  // Define props here\n}\n\nexport interface [PascalName]State {\n  // Define state here if needed\n}"
+    },
+    "index_file": {
+      "filename": "index.ts",
+      "template": "export { [PascalName]Component } from './[name]-component';\nexport type { [PascalName]Props } from './[name]-types';"
+    }
+  },
+  "auto_detection": {
+    "styling_framework": {
+      "tailwind": "className props",
+      "styled_components": "styled-components import",
+      "css_modules": ".module.css imports"
+    },
+    "state_management": {
+      "zustand": "useStore hooks",
+      "redux": "useSelector/useDispatch",
+      "context": "useContext hooks"
+    }
+  },
+  "scalability_features": {
+    "variants": "Support for component variants",
+    "composition": "Easy component composition",
+    "theming": "Theme-aware components",
+    "accessibility": "ARIA attributes by default"
+  }
+} 

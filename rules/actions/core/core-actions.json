@@ -1,0 +1,48 @@
+{
+  "_metadata": {
+    "category": "core",
+    "version": "2.0",
+    "description": "Actions críticas do sistema - SEMPRE carregadas",
+    "created": "2025-06-13",
+    "priority": "maximum"
+  },
+  "actions": {
+    "mandatory-mcp-search": {
+      "level": -1,
+      "type": "action",
+      "mandatory": true,
+      "blocking": true,
+      "description": "Busca MCP obrigatória antes de qualquer processamento",
+      "file": "../mandatory-mcp-search.json"
+    },
+    "mcp-context-loader": {
+      "level": 0,
+      "type": "action", 
+      "mandatory": true,
+      "blocking": true,
+      "description": "Carregamento de contexto MCP estruturado",
+      "file": "../mcp-context-loader.json"
+    },
+    "context-checker": {
+      "level": 1,
+      "type": "action",
+      "mandatory": true,
+      "blocking": true,
+      "description": "Verificação e validação de contexto",
+      "file": "../context-checker.json"
+    },
+    "rule-change-guard": {
+      "level": 1,
+      "type": "action",
+      "mandatory": true,
+      "description": "Proteção contra mudanças críticas",
+      "file": "../rule-change-guard.json"
+    }
+  },
+  "loading_strategy": {
+    "when": "system_startup",
+    "priority": "immediate",
+    "cache": "never",
+    "failure_handling": "system_halt"
+  }
+} 

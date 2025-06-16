@@ -1,0 +1,172 @@
+{
+  "_metadata": {
+    "system_name": "Smart Detection Engine",
+    "version": "1.0",
+    "description": "Motor de detecção inteligente para auto-identificação de projetos e stacks",
+    "created": "2025-06-13",
+    "phase": "4_intelligent_system"
+  },
+  "auto_detection": {
+    "enabled": true,
+    "confidence_threshold": 0.85,
+    "fallback_strategy": "ask_user_if_confidence_low",
+    "learning_enabled": true
+  },
+  "project_type_detection": {
+    "web_frontend": {
+      "indicators": [
+        "package.json with react/next",
+        "src/pages/ or src/app/ directory",
+        "tailwind.config.js",
+        "components/ directory",
+        ".tsx/.jsx files"
+      ],
+      "confidence_boost": {
+        "next.config.js": 0.3,
+        "app/layout.tsx": 0.4,
+        "src/pages/_app.tsx": 0.3
+      },
+      "suggested_templates": ["nextjs-page", "react-component", "api-route"],
+      "suggested_commands": ["create-component", "create-page", "create-api"]
+    },
+    "mobile_app": {
+      "indicators": [
+        "expo/ directory or app.json",
+        "react-native in package.json",
+        "metro.config.js",
+        "src/screens/ directory",
+        "navigation/ directory"
+      ],
+      "confidence_boost": {
+        "expo/": 0.4,
+        "app.json": 0.3,
+        "src/navigation/": 0.2
+      },
+      "suggested_templates": ["rn-component", "expo-screen", "navigation"],
+      "suggested_commands": ["create-component", "create-screen", "create-navigation"]
+    },
+    "backend_api": {
+      "indicators": [
+        "prisma/ directory",
+        "src/api/ directory",
+        "server.js or app.js",
+        "routes/ directory",
+        "controllers/ directory"
+      ],
+      "confidence_boost": {
+        "prisma/schema.prisma": 0.4,
+        "src/api/": 0.3,
+        "middleware/": 0.2
+      },
+      "suggested_templates": ["api-controller", "prisma-model", "middleware"],
+      "suggested_commands": ["create-api", "create-model", "create-middleware"]
+    },
+    "design_system": {
+      "indicators": [
+        "storybook/ directory",
+        "src/components/ with index exports",
+        "styled-components in package.json",
+        ".stories.tsx files",
+        "design-tokens/ directory"
+      ],
+      "confidence_boost": {
+        ".storybook/": 0.4,
+        "src/components/index.ts": 0.3,
+        "design-tokens/": 0.2
+      },
+      "suggested_templates": ["component-library", "storybook-story", "design-token"],
+      "suggested_commands": ["create-component", "create-story", "create-variant"]
+    }
+  },
+  "stack_detection": {
+    "typescript": {
+      "indicators": ["tsconfig.json", ".ts/.tsx files", "@types/ packages"],
+      "templates_modifier": "add_typescript_support"
+    },
+    "tailwind": {
+      "indicators": ["tailwind.config.js", "tailwindcss in package.json"],
+      "templates_modifier": "add_tailwind_classes"
+    },
+    "styled_components": {
+      "indicators": ["styled-components in package.json"],
+      "templates_modifier": "use_styled_components"
+    },
+    "prisma": {
+      "indicators": ["prisma/ directory", "prisma in package.json"],
+      "templates_modifier": "add_prisma_integration"
+    },
+    "expo": {
+      "indicators": ["expo/ directory", "app.json", "expo in package.json"],
+      "templates_modifier": "use_expo_patterns"
+    }
+  },
+  "intelligent_suggestions": {
+    "context_based": {
+      "enabled": true,
+      "analyze_recent_files": true,
+      "analyze_git_history": true,
+      "analyze_mcp_patterns": true
+    },
+    "usage_patterns": {
+      "track_most_used_commands": true,
+      "suggest_based_on_frequency": true,
+      "learn_user_preferences": true
+    },
+    "smart_defaults": {
+      "component_naming": "kebab-case (Math preference)",
+      "file_structure": "template.tsx + types.ts + test.tsx",
+      "icon_library": "lucide-react (Math preference)",
+      "styling_approach": "based_on_detected_stack"
+    }
+  },
+  "auto_categorization": {
+    "mcp_entities": {
+      "enabled": true,
+      "auto_prefix": true,
+      "prefixes": {
+        "commands": "cmd-",
+        "projects": "proj-",
+        "technologies": "tech-",
+        "patterns": "pattern-",
+        "issues": "issue-",
+        "fixes": "fix-",
+        "rules": "rule-",
+        "users": "user-"
+      },
+      "auto_tags": {
+        "generate_based_on_content": true,
+        "minimum_tags": 2,
+        "maximum_tags": 5,
+        "tag_categories": ["type", "technology", "priority", "status"]
+      }
+    }
+  },
+  "learning_system": {
+    "enabled": true,
+    "learning_sources": [
+      "user_corrections",
+      "successful_detections", 
+      "failed_detections",
+      "usage_patterns",
+      "mcp_feedback"
+    ],
+    "adaptation": {
+      "adjust_confidence_thresholds": true,
+      "improve_detection_patterns": true,
+      "learn_new_project_types": true,
+      "personalize_suggestions": true
+    },
+    "feedback_loop": {
+      "track_suggestion_acceptance": true,
+      "improve_based_on_rejections": true,
+      "adapt_to_math_preferences": true
+    }
+  },
+  "performance_optimization": {
+    "cache_detections": true,
+    "cache_ttl": "1h",
+    "background_analysis": true,
+    "lazy_deep_analysis": "only_when_needed",
+    "parallel_detection": true
+  }
+} 

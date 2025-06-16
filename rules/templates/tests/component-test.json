@@ -1,0 +1,45 @@
+{
+  "_metadata": {
+    "template_name": "component-test",
+    "category": "tests",
+    "version": "2.0",
+    "description": "Template escalável para testes de componentes",
+    "created": "2025-06-13",
+    "compatibility": ["Vitest", "Jest", "React Testing Library", "Playwright"]
+  },
+  "template_config": {
+    "naming_convention": "kebab-case",
+    "file_structure": "test + setup + mocks",
+    "testing_library": "React Testing Library",
+    "assertions": "Vitest/Jest matchers",
+    "coverage": "built-in"
+  },
+  "file_templates": {
+    "test_file": {
+      "filename": "[name]-component.test.tsx",
+      "template": "import { describe, it, expect, beforeEach } from 'vitest';\nimport { render, screen, fireEvent } from '@testing-library/react';\nimport { [PascalName]Component } from '../[name]-component';\nimport { [PascalName]Props } from '../[name]-types';\n\nconst defaultProps: [PascalName]Props = {\n  // Define default props here\n};\n\nconst renderComponent = (props: Partial<[PascalName]Props> = {}) => {\n  return render(<[PascalName]Component {...defaultProps} {...props} />);\n};\n\ndescribe('[PascalName]Component', () => {\n  beforeEach(() => {\n    // Setup before each test\n  });\n\n  it('should render correctly', () => {\n    renderComponent();\n    expect(screen.getByText('[PascalName] Component')).toBeInTheDocument();\n  });\n\n  it('should handle props correctly', () => {\n    const customProps = {\n      // Define custom props for testing\n    };\n    renderComponent(customProps);\n    // Add assertions here\n  });\n\n  it('should handle user interactions', () => {\n    renderComponent();\n    // Test user interactions\n    // fireEvent.click(screen.getByRole('button'));\n    // expect(/* assertion */).toBe(/* expected */);\n  });\n\n  it('should be accessible', () => {\n    renderComponent();\n    // Test accessibility\n    // expect(screen.getByRole('button')).toHaveAccessibleName('Button name');\n  });\n});"
+    },
+    "setup_file": {
+      "filename": "test-setup.ts",
+      "template": "import { beforeAll, afterEach } from 'vitest';\nimport { cleanup } from '@testing-library/react';\nimport '@testing-library/jest-dom';\n\n// Setup before all tests\nbeforeAll(() => {\n  // Global test setup\n});\n\n// Cleanup after each test\nafterEach(() => {\n  cleanup();\n});"
+    },
+    "mocks_file": {
+      "filename": "[name]-mocks.ts",
+      "template": "import { vi } from 'vitest';\nimport { [PascalName]Props } from '../[name]-types';\n\n// Mock functions\nexport const mockFunctions = {\n  onClick: vi.fn(),\n  onChange: vi.fn(),\n  onSubmit: vi.fn(),\n};\n\n// Mock props\nexport const mockProps: [PascalName]Props = {\n  // Define mock props here\n};\n\n// Mock data\nexport const mockData = {\n  // Define mock data here\n};\n\n// Reset all mocks\nexport const resetMocks = () => {\n  Object.values(mockFunctions).forEach(mock => mock.mockReset());\n};"
+    }
+  },
+  "test_categories": {
+    "unit_tests": "Component logic and props",
+    "integration_tests": "Component interactions",
+    "accessibility_tests": "ARIA and screen reader support",
+    "visual_tests": "Snapshot and visual regression",
+    "performance_tests": "Rendering performance"
+  },
+  "scalability_features": {
+    "test_utilities": "Reusable test helpers",
+    "mock_management": "Centralized mock functions",
+    "coverage_reporting": "Detailed coverage reports",
+    "parallel_execution": "Fast test execution",
+    "ci_integration": "GitHub Actions ready"
+  }
+} 

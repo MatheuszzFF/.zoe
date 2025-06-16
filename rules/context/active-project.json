@@ -4,15 +4,15 @@
     "description": "Controle do projeto ativo para isolamento de contexto",
     "last_updated": "2025-06-13T00:00:00Z"
   },
-  "active_project": "mz-shareholders-mf",
+  "active_project": "code-evolution-tracker",
   "activated_at": "2025-06-13T00:00:00Z",
-  "session_id": "sess_shareholders_june13",
-  "last_command": "zoe iniciar mz-mf-shareholders",
+  "session_id": "sess_code_evolution_jun13",
+  "last_command": "zoe iniciar code-evolution-tracker",
   "last_command_at": "2025-06-13T00:00:00Z",
   "commands_count": 1,
   "session_duration": "iniciando",
-  "discovery_status": "PROJETO EXISTENTE REATIVADO",
-  "project_type": "microfrontend",
-  "project_path": "./mz-shareholders-mf",
-  "notes": "REATIVADO: mz-shareholders-mf em 13 de junho de 2025. Microfrontend React para gestão de acionistas, versão 2.0.0. Todas as migrações Design System concluídas no dia 12/06."
+  "discovery_status": "PROJETO CODE-EVOLUTION-TRACKER ATIVADO",
+  "project_type": "frontend",
+  "project_path": "./code-evolution-tracker",
+  "notes": "ATIVADO: Code Evolution Tracker em 13 de junho de 2025. App educacional de React Native para evolução de código com roadmap automatizado. CACHE SYSTEM BULLETPROOF implementado às 15:30 - sistema agora infalível."
 } 

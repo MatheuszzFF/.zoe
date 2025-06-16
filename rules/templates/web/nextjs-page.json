@@ -1,0 +1,55 @@
+{
+  "_metadata": {
+    "template_name": "nextjs-page",
+    "category": "web",
+    "version": "2.0",
+    "description": "Template escalável para páginas Next.js",
+    "created": "2025-06-13",
+    "compatibility": ["Next.js 13+", "App Router", "TypeScript"]
+  },
+  "template_config": {
+    "routing": "app-router",
+    "naming_convention": "kebab-case",
+    "file_structure": "page + layout + loading + error",
+    "metadata": "auto-generated",
+    "seo": "built-in"
+  },
+  "file_templates": {
+    "page_file": {
+      "filename": "page.tsx",
+      "template": "import { Metadata } from 'next';\nimport { [PascalName]PageComponent } from './[name]-page-component';\n\nexport const metadata: Metadata = {\n  title: '[Title]',\n  description: '[Description]',\n};\n\nexport default function [PascalName]Page() {\n  return <[PascalName]PageComponent />;\n}"
+    },
+    "component_file": {
+      "filename": "[name]-page-component.tsx",
+      "template": "'use client';\n\nimport React from 'react';\nimport { [PascalName]PageTemplate } from './[name]-page-template';\nimport { [PascalName]PageProps } from './[name]-page-types';\n\nexport const [PascalName]PageComponent: React.FC<[PascalName]PageProps> = () => {\n  // Page logic here\n  return <[PascalName]PageTemplate />;\n};"
+    },
+    "template_file": {
+      "filename": "[name]-page-template.tsx",
+      "template": "import React from 'react';\nimport { [PascalName]PageProps } from './[name]-page-types';\n\nexport const [PascalName]PageTemplate: React.FC<[PascalName]PageProps> = () => {\n  return (\n    <main className=\"[name]-page\">\n      <h1>[Title]</h1>\n      {/* Page content */}\n    </main>\n  );\n};"
+    },
+    "types_file": {
+      "filename": "[name]-page-types.ts",
+      "template": "export interface [PascalName]PageProps {\n  // Define page props here\n}\n\nexport interface [PascalName]PageParams {\n  // Define URL params here\n}\n\nexport interface [PascalName]PageSearchParams {\n  // Define search params here\n}"
+    },
+    "loading_file": {
+      "filename": "loading.tsx",
+      "template": "export default function [PascalName]Loading() {\n  return (\n    <div className=\"loading-container\">\n      <div className=\"loading-spinner\" />\n      <p>Carregando [Title]...</p>\n    </div>\n  );\n}"
+    },
+    "error_file": {
+      "filename": "error.tsx",
+      "template": "'use client';\n\nexport default function [PascalName]Error({\n  error,\n  reset,\n}: {\n  error: Error & { digest?: string };\n  reset: () => void;\n}) {\n  return (\n    <div className=\"error-container\">\n      <h2>Algo deu errado!</h2>\n      <button onClick={() => reset()}>Tentar novamente</button>\n    </div>\n  );\n}"
+    }
+  },
+  "auto_features": {
+    "metadata_generation": "SEO-optimized metadata",
+    "loading_states": "Automatic loading UI",
+    "error_boundaries": "Error handling",
+    "responsive_design": "Mobile-first approach"
+  },
+  "scalability_features": {
+    "dynamic_routes": "Support for [slug] and [...slug]",
+    "api_integration": "Built-in API route templates",
+    "internationalization": "i18n ready",
+    "performance": "Optimized for Core Web Vitals"
+  }
+} 

@@ -1,0 +1,133 @@
+{
+  "action_name": "mandatory-mcp-search",
+  "description": "OBRIGATÓRIO: Busca MCP estruturada antes de qualquer processamento",
+  "level": -1,
+  "priority": "HIGHEST",
+  "mandatory": true,
+  "blocking": true,
+  "cannot_be_skipped": true,
+  "execution_order": "BEFORE any response processing",
+  "trigger": "EVERY Math message",
+  "performance_optimized": true,
+  "protocol": {
+    "step_1": {
+      "name": "keyword_detection",
+      "description": "Detectar keywords na mensagem do Math",
+      "execution": "immediate",
+      "cache_check": "Check session cache first",
+      "keywords": {
+        "zoe_commands": ["zoe", "iniciar", "criar", "fix", "help"],
+        "projects": ["kess", "code evolution", "sinistro", "tms", "design system"],
+        "technologies": ["react", "next", "typescript", "expo", "prisma"],
+        "general": ["status", "progress", "update", "problema"]
+      }
+    },
+    "step_2": {
+      "name": "cache_lookup",
+      "description": "Verificar cache antes de query MCP",
+      "execution": "performance_first",
+      "cache_locations": [
+        ".zoe/rules/cache/session/",
+        ".zoe/rules/cache/persistent/"
+      ],
+      "ttl_check": true,
+      "performance_gain": "70% faster if cache hit"
+    },
+    "step_3": {
+      "name": "structured_mcp_search",
+      "description": "Busca MCP com formato estruturado obrigatório",
+      "execution": "mandatory",
+      "search_strategy": {
+        "level_1_exact": "cmd-[detected-keyword]",
+        "level_2_category": "[prefix]-*",
+        "level_3_tags": "#[keyword] #[category]",
+        "level_4_backup": "user-math-prefs"
+      },
+      "format_compliance": "100% required",
+      "prefixes": ["cmd-", "proj-", "tech-", "pattern-", "issue-", "fix-", "rule-", "user-"]
+    },
+    "step_4": {
+      "name": "context_enrichment",
+      "description": "Enriquecer contexto com dados MCP + performance cache",
+      "execution": "intelligent",
+      "sources": {
+        "primary": "MCP memory results",
+        "secondary": "Session cache",
+        "tertiary": "Project context",
+        "fallback": "User preferences"
+      },
+      "lazy_loading": "Load only relevant actions",
+      "background_refresh": "Update cache in background"
+    },
+    "step_5": {
+      "name": "context_application",
+      "description": "Aplicar contexto carregado na resposta",
+      "execution": "contextualized",
+      "features": {
+        "context_aware_response": true,
+        "mcp_updates": "Update MCP with new information",
+        "session_persistence": "Keep context for session"
+      }
+    }
+  },
+  "performance_integration": {
+    "mcp_cache": {
+      "enabled": true,
+      "check_before_query": true,
+      "update_after_query": true,
+      "compression": true
+    },
+    "lazy_loading": {
+      "enabled": true,
+      "load_critical_only": true,
+      "background_load_others": true
+    },
+    "context_cache": {
+      "enabled": true,
+      "session_based": true,
+      "smart_invalidation": true
+    }
+  },
+  "compliance_enforcement": {
+    "violation_detection": true,
+    "auto_correction": true,
+    "logging": true,
+    "metrics": {
+      "execution_rate": "Must be 100%",
+      "format_compliance": "Must be 100%",
+      "performance_target": "< 100ms total"
+    }
+  },
+  "integration_with_optimizations": {
+    "phase_1_cleanup": "Use optimized command set",
+    "phase_2_modular": "Use modular template system",
+    "phase_3_performance": "Use all performance optimizations",
+    "total_system_gain": "73% performance improvement"
+  },
+  "examples": {
+    "scenario_1": {
+      "input": "zoe iniciar projeto",
+      "detection": "keyword: zoe, iniciar",
+      "cache_check": "Check for cmd-zoe-iniciar",
+      "mcp_search": "cmd-zoe-iniciar",
+      "context_load": "Load project initialization protocol",
+      "response": "Execute with full context"
+    },
+    "scenario_2": {
+      "input": "como está o kess?",
+      "detection": "keyword: kess",
+      "cache_check": "Check for proj-kess-system",
+      "mcp_search": "proj-kess-system",
+      "context_load": "Load project status and history",
+      "response": "Provide contextualized status"
+    },
+    "scenario_3": {
+      "input": "oi",
+      "detection": "no specific keywords",
+      "cache_check": "Check for user-math-prefs",
+      "mcp_search": "user-math-prefs",
+      "context_load": "Load Math's preferences and context",
+      "response": "Personalized greeting with context"
+    }
+  }
+} 

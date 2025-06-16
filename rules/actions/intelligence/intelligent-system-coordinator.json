@@ -1,0 +1,170 @@
+{
+  "action_name": "intelligent-system-coordinator",
+  "description": "Coordena todos os sistemas inteligentes da Fase 4 com integração total",
+  "level": 2,
+  "priority": "HIGH",
+  "mandatory": false,
+  "execution_trigger": "background_continuous",
+  "phase": "4_intelligent_system",
+  "integration": {
+    "smart_detector": "Auto-detection de projetos e stacks",
+    "analytics_engine": "Monitoramento e métricas",
+    "auto_evolution": "Aprendizado e evolução contínua",
+    "existing_systems": "Integração com Fases 1-3"
+  },
+  "coordination_protocol": {
+    "step_1": {
+      "name": "system_initialization",
+      "description": "Inicializa todos os sistemas inteligentes",
+      "execution": "on_zoe_startup",
+      "components": [
+        "smart-detector.json",
+        "analytics-engine.json", 
+        "auto-evolution-engine.json"
+      ],
+      "integration_check": "Verify all systems are operational"
+    },
+    "step_2": {
+      "name": "continuous_monitoring",
+      "description": "Monitora performance e uso em tempo real",
+      "execution": "background_continuous",
+      "frequency": "every_command_execution",
+      "metrics_collection": {
+        "performance": "Command execution times, cache hits",
+        "usage": "Command frequency, success rates",
+        "intelligence": "Detection accuracy, learning progress"
+      }
+    },
+    "step_3": {
+      "name": "intelligent_detection",
+      "description": "Executa detecção inteligente quando necessário",
+      "execution": "on_demand",
+      "triggers": [
+        "new_project_detected",
+        "unknown_file_structure",
+        "user_requests_suggestion",
+        "context_change_detected"
+      ],
+      "confidence_threshold": 0.85,
+      "fallback_strategy": "ask_user_if_low_confidence"
+    },
+    "step_4": {
+      "name": "learning_and_evolution",
+      "description": "Aplica aprendizado e evolução contínua",
+      "execution": "background_continuous",
+      "learning_triggers": [
+        "user_feedback",
+        "command_success_failure",
+        "pattern_recognition",
+        "performance_metrics"
+      ],
+      "safety_checks": true,
+      "auto_improvement": true
+    },
+    "step_5": {
+      "name": "optimization_application",
+      "description": "Aplica otimizações descobertas automaticamente",
+      "execution": "scheduled_and_triggered",
+      "optimization_areas": [
+        "cache_tuning",
+        "command_prioritization",
+        "template_enhancement",
+        "workflow_improvement"
+      ],
+      "approval_required": "for_major_changes_only"
+    }
+  },
+  "intelligent_features": {
+    "auto_project_detection": {
+      "enabled": true,
+      "analyze_on": ["zoe_start", "set_project", "context_change"],
+      "detection_confidence": "> 85%",
+      "auto_apply_templates": true,
+      "suggest_commands": true
+    },
+    "predictive_assistance": {
+      "enabled": true,
+      "predict_next_commands": true,
+      "preload_resources": true,
+      "suggest_optimizations": true,
+      "anticipate_needs": true
+    },
+    "adaptive_optimization": {
+      "enabled": true,
+      "auto_tune_performance": true,
+      "learn_user_patterns": true,
+      "optimize_workflows": true,
+      "enhance_accuracy": true
+    },
+    "proactive_maintenance": {
+      "enabled": true,
+      "auto_cleanup": true,
+      "prevent_issues": true,
+      "optimize_storage": true,
+      "maintain_health": true
+    }
+  },
+  "integration_with_existing": {
+    "phase_1_cleanup": {
+      "use_optimized_structure": true,
+      "maintain_clean_architecture": true,
+      "prevent_duplications": true
+    },
+    "phase_2_modular": {
+      "use_modular_templates": true,
+      "leverage_organized_commands": true,
+      "enhance_with_intelligence": true
+    },
+    "phase_3_performance": {
+      "integrate_with_cache": true,
+      "enhance_lazy_loading": true,
+      "optimize_context_access": true
+    },
+    "mcp_integration": {
+      "enhance_mcp_queries": true,
+      "improve_entity_creation": true,
+      "optimize_relationships": true,
+      "auto_categorize": true
+    }
+  },
+  "performance_targets": {
+    "system_overhead": "< 5% (vs 8% current)",
+    "detection_accuracy": "> 90%",
+    "learning_effectiveness": "> 85%",
+    "user_satisfaction": "> 95%",
+    "auto_optimization_rate": "> 80%"
+  },
+  "safety_and_reliability": {
+    "change_validation": true,
+    "rollback_capability": true,
+    "user_approval_major_changes": true,
+    "continuous_testing": true,
+    "error_recovery": true
+  },
+  "reporting_and_metrics": {
+    "real_time_dashboard": true,
+    "daily_intelligence_report": true,
+    "weekly_evolution_summary": true,
+    "monthly_improvement_analysis": true,
+    "performance_alerts": true
+  },
+  "math_personalization": {
+    "learn_math_patterns": true,
+    "adapt_to_preferences": {
+      "kebab_case": true,
+      "lucide_icons": true,
+      "typescript_focus": true,
+      "portuguese_communication": true,
+      "efficiency_priority": true
+    },
+    "optimize_for_math_workflow": true,
+    "anticipate_math_needs": true
+  },
+  "future_evolution": {
+    "continuous_improvement": true,
+    "new_feature_detection": true,
+    "technology_trend_adaptation": true,
+    "user_need_anticipation": true,
+    "system_self_optimization": true
+  }
+} 

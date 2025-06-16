@@ -1,0 +1,48 @@
+{
+  "_metadata": {
+    "category": "development",
+    "version": "2.0",
+    "description": "Actions para desenvolvimento - carregadas sob demanda",
+    "created": "2025-06-13",
+    "priority": "medium"
+  },
+  "actions": {
+    "execute-direct": {
+      "level": 7,
+      "type": "action",
+      "trigger": "código React enviado",
+      "description": "Execução direta de código React",
+      "file": "../execute-direct.json"
+    },
+    "auto-documentation": {
+      "level": 50,
+      "type": "action",
+      "post_execution": true,
+      "description": "Documentação automática pós-execução",
+      "file": "../auto-documentation.json"
+    },
+    "stack-autodetection": {
+      "level": 5,
+      "type": "action",
+      "description": "Detecção automática de stack tecnológica",
+      "file": "../stack-autodetection.json"
+    },
+    "project-name-extractor": {
+      "level": 3,
+      "type": "action",
+      "description": "Extração inteligente de nomes de projeto",
+      "file": "../project-name-extractor.json"
+    }
+  },
+  "loading_strategy": {
+    "when": "on_demand",
+    "priority": "normal",
+    "cache": "session",
+    "failure_handling": "graceful_degradation"
+  },
+  "triggers": {
+    "code_detection": ["React", "TypeScript", "JavaScript"],
+    "project_creation": ["criar componente", "criar página"],
+    "documentation": ["documentar", "gerar docs"]
+  }
+} 

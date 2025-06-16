@@ -1,0 +1,100 @@
+{
+  "_metadata": {
+    "system_name": "MCP Intelligent Cache",
+    "version": "3.0",
+    "description": "Cache MCP inteligente para otimização de performance",
+    "created": "2025-06-13",
+    "phase": "3_performance_optimization"
+  },
+  "cache_strategy": {
+    "enabled": true,
+    "ttl_default": 3600,
+    "max_entries": 1000,
+    "cleanup_interval": 300,
+    "compression": true,
+    "persistence": "session"
+  },
+  "cache_categories": {
+    "user_preferences": {
+      "ttl": 86400,
+      "priority": "high",
+      "queries": ["user-math-prefs"],
+      "invalidation": "manual"
+    },
+    "project_context": {
+      "ttl": 7200,
+      "priority": "high", 
+      "queries": ["proj-*"],
+      "invalidation": "on_project_change"
+    },
+    "commands": {
+      "ttl": 3600,
+      "priority": "medium",
+      "queries": ["cmd-*"],
+      "invalidation": "on_command_update"
+    },
+    "rules": {
+      "ttl": 1800,
+      "priority": "medium",
+      "queries": ["rule-*"],
+      "invalidation": "on_rule_change"
+    },
+    "patterns": {
+      "ttl": 7200,
+      "priority": "low",
+      "queries": ["pattern-*", "tech-*"],
+      "invalidation": "daily"
+    }
+  },
+  "performance_features": {
+    "hit_tracking": {
+      "enabled": true,
+      "metrics": ["hits", "misses", "hit_ratio", "response_time"]
+    },
+    "background_refresh": {
+      "enabled": true,
+      "threshold": 0.8,
+      "queries": ["user-math-prefs", "proj-zoe"]
+    },
+    "compression": {
+      "enabled": true,
+      "algorithm": "gzip",
+      "min_size": 1024
+    },
+    "memory_management": {
+      "max_memory": "50MB",
+      "cleanup_threshold": 0.9,
+      "lru_eviction": true
+    }
+  },
+  "cache_structure": {
+    "session_cache": {
+      "location": ".zoe/rules/cache/session/",
+      "format": "json",
+      "encryption": false
+    },
+    "persistent_cache": {
+      "location": ".zoe/rules/cache/persistent/",
+      "format": "json_compressed",
+      "encryption": false
+    },
+    "metrics": {
+      "location": ".zoe/rules/cache/metrics/",
+      "format": "json",
+      "retention": "7_days"
+    }
+  },
+  "optimization_targets": {
+    "before_cache": {
+      "avg_query_time": "250ms",
+      "mcp_overhead": "30%",
+      "repeated_queries": "high"
+    },
+    "after_cache": {
+      "avg_query_time": "75ms",
+      "mcp_overhead": "10%", 
+      "repeated_queries": "eliminated"
+    },
+    "performance_gain": "70% faster MCP queries"
+  }
+} 

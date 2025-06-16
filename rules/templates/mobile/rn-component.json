@@ -1,0 +1,51 @@
+{
+  "_metadata": {
+    "template_name": "rn-component",
+    "category": "mobile",
+    "version": "2.0",
+    "description": "Template escalável para componentes React Native",
+    "created": "2025-06-13",
+    "compatibility": ["React Native", "Expo", "TypeScript"]
+  },
+  "template_config": {
+    "naming_convention": "kebab-case",
+    "file_structure": "component + template + types + styles",
+    "styling": "StyleSheet + optional styled-components",
+    "platform_specific": "auto-detect (.ios.tsx / .android.tsx)",
+    "accessibility": "built-in"
+  },
+  "file_templates": {
+    "component_file": {
+      "filename": "[name]-component.tsx",
+      "template": "import React from 'react';\nimport { [PascalName]Props } from './[name]-types';\nimport { [PascalName]Template } from './[name]-template';\n\nexport const [PascalName]Component: React.FC<[PascalName]Props> = (props) => {\n  // Component logic here\n  return <[PascalName]Template {...props} />;\n};"
+    },
+    "template_file": {
+      "filename": "[name]-template.tsx",
+      "template": "import React from 'react';\nimport { View, Text } from 'react-native';\nimport { [PascalName]Props } from './[name]-types';\nimport { styles } from './[name]-styles';\n\nexport const [PascalName]Template: React.FC<[PascalName]Props> = ({\n  // props destructuring\n}) => {\n  return (\n    <View style={styles.container}>\n      <Text style={styles.text}>[PascalName] Component</Text>\n    </View>\n  );\n};"
+    },
+    "types_file": {
+      "filename": "[name]-types.ts",
+      "template": "import { ViewStyle, TextStyle } from 'react-native';\n\nexport interface [PascalName]Props {\n  // Define props here\n}\n\nexport interface [PascalName]Styles {\n  container: ViewStyle;\n  text: TextStyle;\n  // Add more styles here\n}"
+    },
+    "styles_file": {
+      "filename": "[name]-styles.ts",
+      "template": "import { StyleSheet } from 'react-native';\nimport { [PascalName]Styles } from './[name]-types';\n\nexport const styles = StyleSheet.create<[PascalName]Styles>({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n  },\n  text: {\n    fontSize: 16,\n    fontWeight: '500',\n  },\n});"
+    },
+    "index_file": {
+      "filename": "index.ts",
+      "template": "export { [PascalName]Component } from './[name]-component';\nexport type { [PascalName]Props } from './[name]-types';"
+    }
+  },
+  "platform_features": {
+    "responsive_design": "Dimensions and screen size aware",
+    "accessibility": "AccessibilityInfo and screen readers",
+    "performance": "Optimized for 60fps",
+    "navigation": "React Navigation ready"
+  },
+  "scalability_features": {
+    "theming": "Theme-aware components",
+    "animations": "Reanimated 3 support",
+    "gestures": "React Native Gesture Handler",
+    "platform_specific": "iOS/Android specific implementations"
+  }
+} 

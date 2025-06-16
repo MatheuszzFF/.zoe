@@ -1,0 +1,22 @@
+{
+  "cache_entry": {
+    "query": "user-math-prefs",
+    "timestamp": "2025-06-13T20:45:00Z",
+    "ttl": 86400,
+    "hits": 15,
+    "last_access": "2025-06-13T20:45:00Z",
+    "data": {
+      "user_preferences": {
+        "language": "português",
+        "stack": ["Next.js", "React", "TypeScript"],
+        "naming": "kebab-case",
+        "workspace": "C:/Users/Math/Desktop/Projects"
+      }
+    },
+    "metadata": {
+      "size": "2.1KB",
+      "compressed": false,
+      "source": "mcp_memory_search_nodes"
+    }
+  }
+} 

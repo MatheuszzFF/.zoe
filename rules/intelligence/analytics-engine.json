@@ -1,0 +1,218 @@
+{
+  "_metadata": {
+    "system_name": "Analytics & Metrics Engine",
+    "version": "1.0", 
+    "description": "Sistema de analytics para monitoramento e evolução do Sistema Zoe",
+    "created": "2025-06-13",
+    "phase": "4_intelligent_system"
+  },
+  "performance_metrics": {
+    "enabled": true,
+    "real_time_monitoring": true,
+    "metrics_collection": {
+      "command_execution_time": {
+        "track": true,
+        "target": "< 1s per command",
+        "alert_threshold": "> 2s",
+        "optimization_trigger": "> 1.5s average"
+      },
+      "mcp_query_performance": {
+        "track": true,
+        "target": "< 100ms per query",
+        "cache_hit_ratio": "> 85%",
+        "optimization_trigger": "< 70% cache hits"
+      },
+      "system_overhead": {
+        "track": true,
+        "target": "< 8% total overhead",
+        "current_baseline": "8% (post Phase 3)",
+        "optimization_trigger": "> 12%"
+      }
+    }
+  },
+  "usage_analytics": {
+    "enabled": true,
+    "tracking_categories": {
+      "most_used_commands": {
+        "track": true,
+        "current_leaders": ["zoe-start", "create-component", "set-project"],
+        "optimization_focus": "Optimize top 5 commands",
+        "cache_priority": "Always cache top 10"
+      },
+      "least_used_commands": {
+        "track": true,
+        "archive_threshold": "< 5% usage in 30 days",
+        "removal_threshold": "0% usage in 90 days",
+        "review_frequency": "weekly"
+      },
+      "command_success_rate": {
+        "track": true,
+        "target": "> 95% success rate",
+        "failure_analysis": true,
+        "auto_improvement": true
+      },
+      "user_patterns": {
+        "track_math_preferences": true,
+        "common_workflows": true,
+        "time_of_day_patterns": true,
+        "project_switching_frequency": true
+      }
+    }
+  },
+  "intelligence_metrics": {
+    "auto_detection_accuracy": {
+      "track": true,
+      "target": "> 90% accuracy",
+      "categories": {
+        "project_type_detection": "Current: ~85%",
+        "stack_detection": "Current: ~92%", 
+        "template_suggestions": "Current: ~88%",
+        "command_suggestions": "Current: ~83%"
+      },
+      "improvement_tracking": true
+    },
+    "learning_effectiveness": {
+      "track": true,
+      "metrics": {
+        "suggestion_acceptance_rate": "Target: > 80%",
+        "user_correction_frequency": "Target: < 10%",
+        "pattern_recognition_improvement": "Track monthly",
+        "personalization_accuracy": "Target: > 90%"
+      }
+    },
+    "mcp_quality": {
+      "track": true,
+      "metrics": {
+        "entity_creation_accuracy": "Target: > 95%",
+        "relationship_relevance": "Target: > 90%",
+        "tag_quality": "Target: > 85%",
+        "search_precision": "Target: > 95%"
+      }
+    }
+  },
+  "system_health": {
+    "enabled": true,
+    "health_checks": {
+      "file_system_integrity": {
+        "check_frequency": "daily",
+        "check_duplicates": true,
+        "check_orphaned_files": true,
+        "check_broken_references": true
+      },
+      "mcp_database_health": {
+        "check_frequency": "daily",
+        "check_entity_consistency": true,
+        "check_relationship_validity": true,
+        "check_database_size": true,
+        "optimization_trigger": "> 500KB database"
+      },
+      "cache_efficiency": {
+        "check_frequency": "hourly",
+        "check_hit_ratios": true,
+        "check_cache_size": true,
+        "cleanup_trigger": "> 100MB cache"
+      }
+    },
+    "auto_maintenance": {
+      "enabled": true,
+      "cleanup_orphaned_files": true,
+      "optimize_cache": true,
+      "compress_old_logs": true,
+      "backup_critical_data": true
+    }
+  },
+  "reporting": {
+    "enabled": true,
+    "reports": {
+      "daily_summary": {
+        "enabled": true,
+        "include": [
+          "commands_executed",
+          "performance_metrics",
+          "cache_hit_ratios",
+          "system_health_score"
+        ]
+      },
+      "weekly_analysis": {
+        "enabled": true,
+        "include": [
+          "usage_patterns",
+          "performance_trends",
+          "intelligence_improvements",
+          "optimization_opportunities"
+        ]
+      },
+      "monthly_evolution": {
+        "enabled": true,
+        "include": [
+          "learning_progress",
+          "accuracy_improvements",
+          "system_evolution",
+          "user_satisfaction_metrics"
+        ]
+      }
+    },
+    "dashboard": {
+      "enabled": true,
+      "real_time_metrics": true,
+      "performance_graphs": true,
+      "usage_heatmaps": true,
+      "health_indicators": true
+    }
+  },
+  "optimization_engine": {
+    "enabled": true,
+    "auto_optimization": {
+      "cache_tuning": {
+        "enabled": true,
+        "adjust_ttl_based_on_usage": true,
+        "optimize_cache_size": true,
+        "preload_frequently_used": true
+      },
+      "command_prioritization": {
+        "enabled": true,
+        "adjust_priority_based_on_usage": true,
+        "optimize_loading_order": true,
+        "cache_critical_commands": true
+      },
+      "template_optimization": {
+        "enabled": true,
+        "optimize_based_on_success_rate": true,
+        "improve_based_on_user_feedback": true,
+        "add_new_templates_automatically": true
+      }
+    },
+    "predictive_optimization": {
+      "enabled": true,
+      "predict_usage_patterns": true,
+      "preload_likely_commands": true,
+      "optimize_for_math_workflow": true,
+      "seasonal_adjustments": true
+    }
+  },
+  "alerts_and_notifications": {
+    "enabled": true,
+    "performance_alerts": {
+      "slow_commands": "Alert if > 2s execution",
+      "low_cache_hits": "Alert if < 70% hit ratio",
+      "high_system_overhead": "Alert if > 15%"
+    },
+    "health_alerts": {
+      "file_system_issues": "Alert on duplicates/orphans",
+      "mcp_database_issues": "Alert on corruption/size",
+      "cache_issues": "Alert on cache failures"
+    },
+    "intelligence_alerts": {
+      "low_detection_accuracy": "Alert if < 80%",
+      "high_user_corrections": "Alert if > 15%",
+      "learning_stagnation": "Alert if no improvement"
+    }
+  },
+  "data_retention": {
+    "metrics_retention": "90 days",
+    "logs_retention": "30 days", 
+    "reports_retention": "1 year",
+    "backup_frequency": "daily",
+    "compression": "enabled for data > 7 days"
+  }
+} 
