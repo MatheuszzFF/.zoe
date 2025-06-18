@@ -2,17 +2,17 @@
   "_metadata": {
     "version": "1.1",
     "description": "Controle do projeto ativo para isolamento de contexto",
-    "last_updated": "2025-06-13T00:00:00Z"
+    "last_updated": "2025-06-18T00:00:00Z"
   },
-  "active_project": "code-evolution-tracker",
-  "activated_at": "2025-06-13T00:00:00Z",
-  "session_id": "sess_code_evolution_jun13",
-  "last_command": "zoe iniciar code-evolution-tracker",
-  "last_command_at": "2025-06-13T00:00:00Z",
+  "active_project": "mz-engagement-sub-mf",
+  "activated_at": "2025-06-18T00:00:00Z",
+  "session_id": "sess_mz_engagement_sub_mf_jun18",
+  "last_command": "zoe iniciar mz-engagement-sub-mf",
+  "last_command_at": "2025-06-18T00:00:00Z",
   "commands_count": 1,
   "session_duration": "iniciando",
-  "discovery_status": "PROJETO CODE-EVOLUTION-TRACKER ATIVADO",
-  "project_type": "frontend",
-  "project_path": "./code-evolution-tracker",
-  "notes": "ATIVADO: Code Evolution Tracker em 13 de junho de 2025. App educacional de React Native para evolução de código com roadmap automatizado. CACHE SYSTEM BULLETPROOF implementado às 15:30 - sistema agora infalível."
+  "discovery_status": "PROJETO MZ-ENGAGEMENT-SUB-MF ATIVADO",
+  "project_type": "microfrontend",
+  "project_path": "mz-engagement-sub-mf",
+  "notes": "ATIVADO: Projeto mz-engagement-sub-mf em 18 de junho de 2025. Microfrontend React com Vite, TypeScript, Module Federation, integração @mz-codes/mz-design-system e @mz-codes/mz-auth-kit."
 } 

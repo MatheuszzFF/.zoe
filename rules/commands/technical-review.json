@@ -1,0 +1,127 @@
+{
+  "_metadata": {
+    "command_name": "technical-review",
+    "version": "1.0",
+    "created_at": "2025-06-18",
+    "description": "Comando para executar review técnico padronizado usando template estruturado",
+    "level": 1,
+    "category": "development"
+  },
+  "command": {
+    "name": "technical-review",
+    "aliases": ["review-tecnico", "tech-review"],
+    "description": "Executa review técnico completo usando template padronizado",
+    "usage": "zoe technical-review [feature-name] [branch-name]",
+    "parameters": {
+      "feature_name": {
+        "type": "string",
+        "required": true,
+        "description": "Nome da feature ou componente sendo analisado"
+      },
+      "branch_name": {
+        "type": "string", 
+        "required": false,
+        "description": "Nome da branch (opcional)"
+      }
+    }
+  },
+  "execution": {
+    "steps": [
+      {
+        "step": 1,
+        "action": "load_template",
+        "template": ".zoe/templates/technical-review-template.json",
+        "description": "Carregar template de review técnico"
+      },
+      {
+        "step": 2,
+        "action": "analyze_project_context",
+        "context_files": [
+          "package.json",
+          "progress/current/progress.json",
+          "project-context.json"
+        ],
+        "description": "Analisar contexto do projeto e mudanças recentes"
+      },
+      {
+        "step": 3,
+        "action": "generate_review",
+        "template_sections": [
+          "implemented_analysis",
+          "components_migrated", 
+          "technical_improvements",
+          "additional_changes",
+          "overall_evaluation",
+          "conclusion"
+        ],
+        "description": "Gerar review completo baseado no template"
+      },
+      {
+        "step": 4,
+        "action": "calculate_metrics",
+        "metrics": [
+          "TypeScript Coverage",
+          "Design System Integration",
+          "Hook Reusability", 
+          "Performance Optimizations",
+          "Error Handling",
+          "Testing Coverage"
+        ],
+        "description": "Calcular métricas de qualidade técnica"
+      },
+      {
+        "step": 5,
+        "action": "generate_score",
+        "scoring_criteria": {
+          "architecture": 25,
+          "implementation": 25,
+          "performance": 20,
+          "maintainability": 15,
+          "documentation": 15
+        },
+        "description": "Gerar score final baseado nos critérios"
+      },
+      {
+        "step": 6,
+        "action": "save_review",
+        "output_location": "progress/current/technical-review-[DATE].md",
+        "description": "Salvar review no progresso do projeto"
+      }
+    ]
+  },
+  "template_mapping": {
+    "placeholders": {
+      "[FEATURE_NAME]": "feature_name parameter",
+      "[BRANCH_NAME]": "branch_name parameter", 
+      "[DATE]": "current date YYYY-MM-DD",
+      "[PROJECT_NAME]": "active project name",
+      "[SCORE]": "calculated final score"
+    },
+    "dynamic_sections": {
+      "components_analysis": "Analyze components structure",
+      "architecture_evaluation": "Evaluate architectural patterns",
+      "performance_metrics": "Calculate performance improvements",
+      "integration_analysis": "Analyze third-party integrations"
+    }
+  },
+  "quality_checks": {
+    "required_sections": [
+      "implemented_analysis",
+      "technical_improvements", 
+      "overall_evaluation",
+      "conclusion"
+    ],
+    "minimum_score": 70,
+    "mandatory_metrics": [
+      "TypeScript Coverage",
+      "Design System Integration",
+      "Error Handling"
+    ]
+  },
+  "integration": {
+    "mcp_update": true,
+    "progress_update": true,
+    "context_isolation": true,
+    "template_version_check": true
+  }
+} 

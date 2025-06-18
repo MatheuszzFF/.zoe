@@ -1,0 +1,176 @@
+{
+  "_metadata": {
+    "template_name": "technical-review-template",
+    "version": "1.0",
+    "created_at": "2025-06-18",
+    "description": "Template padronizado para reviews técnicos de features e projetos",
+    "usage": "Usado para análise técnica completa de implementações, migrações e features"
+  },
+  "template_structure": {
+    "header": {
+      "title": "📋 **Review Técnico Completo - [FEATURE_NAME]**",
+      "subtitle": "Baseado na análise detalhada do progresso do projeto e nos pontos solicitados:",
+      "separator": "---"
+    },
+    "sections": {
+      "implemented_analysis": {
+        "title": "## ✨ **O que foi Implementado - Análise Técnica**",
+        "subsections": {
+          "scope": {
+            "title": "### 🎯 **Escopo Completo Entregue**",
+            "items": [
+              "✅ **[MAIN_DELIVERABLE]**",
+              "- [DETAIL_1]",
+              "- [DETAIL_2]",
+              "- [ADDITIONAL_INFO]"
+            ]
+          }
+        }
+      },
+      "components_migrated": {
+        "title": "## 🧩 **Componentes Migrados - Avaliação Arquitetural**",
+        "evaluation_pattern": {
+          "component_category": {
+            "title": "### **📊 [COMPONENT_TYPE]**",
+            "quality_rating": "**QUALIDADE: [RATING]** ⭐⭐⭐⭐⭐",
+            "details": [
+              "- **[ASPECT]**: [EVALUATION]",
+              "- **[TECHNICAL_DETAIL]**: [IMPLEMENTATION_STATUS]"
+            ]
+          }
+        }
+      },
+      "technical_improvements": {
+        "title": "## 🏗️ **Melhorias Técnicas - Avaliação de Arquitetura**",
+        "improvement_pattern": {
+          "improvement_category": {
+            "title": "### **🔀 [IMPROVEMENT_NAME]**",
+            "implementation_rating": "**IMPLEMENTAÇÃO: [RATING]** ⭐⭐⭐⭐⭐",
+            "checklist": [
+              "```",
+              "✅ [ACHIEVEMENT_1]",
+              "✅ [ACHIEVEMENT_2]",
+              "✅ [ACHIEVEMENT_3]",
+              "```"
+            ]
+          }
+        }
+      },
+      "additional_changes": {
+        "title": "## 🔄 **Alterações Adicionais - Análise de Migração**",
+        "change_pattern": {
+          "change_category": {
+            "title": "### **📦 [CHANGE_TYPE]**",
+            "migration_rating": "**MIGRAÇÃO: [STATUS]** ⭐⭐⭐⭐⭐",
+            "details": [
+              "```",
+              "✅ [OLD_STATE] → [NEW_STATE]",
+              "✅ [COMPATIBILITY_STATUS]",
+              "✅ [IMPACT_ANALYSIS]",
+              "```"
+            ]
+          }
+        }
+      },
+      "overall_evaluation": {
+        "title": "## 🎯 **Avaliação Geral**",
+        "metrics": {
+          "title": "### **📈 Métricas de Qualidade**",
+          "items": [
+            "- **[METRIC_NAME]**: [PERCENTAGE]% ⭐⭐⭐⭐⭐",
+            "- **[METRIC_NAME_2]**: [PERCENTAGE]% ⭐⭐⭐⭐⭐"
+          ]
+        },
+        "strengths": {
+          "title": "### **🏆 Pontos Fortes**",
+          "items": [
+            "1. **[STRENGTH_1]**: [DESCRIPTION]",
+            "2. **[STRENGTH_2]**: [DESCRIPTION]"
+          ]
+        },
+        "improvements": {
+          "title": "### **🔧 Oportunidades de Melhoria**",
+          "items": [
+            "1. **[IMPROVEMENT_1]**: [SUGGESTION]",
+            "2. **[IMPROVEMENT_2]**: [SUGGESTION]"
+          ]
+        }
+      },
+      "conclusion": {
+        "title": "## ✅ **Conclusão do Review**",
+        "approval": "**[FEATURE_NAME]: [STATUS]** 🚀",
+        "score": "**Score Geral: [SCORE]/100** ⭐⭐⭐⭐⭐",
+        "summary": "A [TYPE_OF_WORK] foi executada com **[QUALITY_LEVEL]**, seguindo todas as melhores práticas:",
+        "summary_points": [
+          "- [PRACTICE_1]",
+          "- [PRACTICE_2]",
+          "- [PRACTICE_3]"
+        ],
+        "recommendation": "**Recomendação**: [ACTION_RECOMMENDED] ✅"
+      }
+    }
+  },
+  "rating_scales": {
+    "quality_levels": [
+      "RUIM ⭐",
+      "REGULAR ⭐⭐", 
+      "BOM ⭐⭐⭐",
+      "EXCELENTE ⭐⭐⭐⭐",
+      "EXCEPCIONAL ⭐⭐⭐⭐⭐"
+    ],
+    "implementation_status": [
+      "NÃO IMPLEMENTADO",
+      "PARCIALMENTE IMPLEMENTADO", 
+      "BEM-SUCEDIDA",
+      "EXCELENTE",
+      "PERFEITA"
+    ],
+    "score_ranges": {
+      "0-49": "REPROVADO ❌",
+      "50-69": "NECESSITA MELHORIAS ⚠️",
+      "70-84": "APROVADO ✅",
+      "85-94": "EXCELENTE ⭐",
+      "95-100": "EXCEPCIONAL 🚀"
+    }
+  },
+  "common_sections": {
+    "architecture_evaluation": [
+      "Padrão de Componentes",
+      "Separação de Responsabilidades", 
+      "Reutilização de Código",
+      "Type Safety",
+      "Performance",
+      "Error Handling",
+      "Testing Coverage",
+      "Documentation"
+    ],
+    "technical_aspects": [
+      "State Management",
+      "API Integration", 
+      "Design System Integration",
+      "Bundle Optimization",
+      "Accessibility",
+      "Security",
+      "Monitoring",
+      "Scalability"
+    ]
+  },
+  "usage_instructions": {
+    "steps": [
+      "1. Copiar template base",
+      "2. Substituir placeholders [PLACEHOLDER] com valores reais",
+      "3. Avaliar cada seção com ratings apropriados",
+      "4. Adicionar detalhes técnicos específicos",
+      "5. Calcular score geral baseado nas métricas",
+      "6. Definir recomendação final"
+    ],
+    "placeholders": {
+      "[FEATURE_NAME]": "Nome da feature ou projeto analisado",
+      "[RATING]": "Uma das opções de quality_levels",
+      "[PERCENTAGE]": "Valor numérico 0-100",
+      "[SCORE]": "Score final 0-100",
+      "[STATUS]": "Status de aprovação da feature",
+      "[ACTION_RECOMMENDED]": "Ação recomendada (Deploy, Refactor, etc)"
+    }
+  }
+} 

@@ -1,0 +1,75 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "created_at": "2025-06-18T00:00:00Z",
+    "project_name": "mz-engagement-sub-mf",
+    "description": "Microfrontend de engajamento com Module Federation"
+  },
+  "project": {
+    "name": "mz-engagement-sub-mf",
+    "type": "microfrontend",
+    "path": "mz-engagement-sub-mf",
+    "description": "Microfrontend React para funcionalidades de engajamento de usuários",
+    "status": "development",
+    "version": "1.0.0"
+  },
+  "stack": {
+    "frontend": "React 18.3.1",
+    "build": "Vite 5.4.11",
+    "language": "TypeScript 5.6.3",
+    "styling": "Styled Components 6.1.13",
+    "routing": "React Router DOM 6.28.0",
+    "state": "Valtio 2.1.2",
+    "forms": "React Hook Form 7.53.2",
+    "validation": "Zod 3.23.8",
+    "http": "Axios 1.7.7",
+    "query": "TanStack Query 5.60.2",
+    "auth": "@mz-codes/mz-auth-kit 2.1.1",
+    "design_system": "@mz-codes/mz-design-system 1.1.4-next.1",
+    "module_federation": "@module-federation/vite 1.1.5",
+    "testing": "Vitest 2.1.5 + Testing Library",
+    "linting": "ESLint 9.14.0 + Prettier 3.3.3",
+    "bundler": "Vite",
+    "package_manager": "npm"
+  },
+  "architecture": {
+    "pattern": "Microfrontend",
+    "federation": "Module Federation com Vite",
+    "auth": "Logto integration via mz-auth-kit",
+    "api": "TanStack Query + Axios",
+    "styling": "Design System + Styled Components",
+    "routing": "Client-side routing",
+    "state_management": "Valtio proxy state"
+  },
+  "objectives": {
+    "primary": "Desenvolver funcionalidades de engajamento de usuários",
+    "secondary": [
+      "Integração perfeita com Design System",
+      "Autenticação via mz-auth-kit",
+      "Performance otimizada com Module Federation",
+      "Testes automatizados completos"
+    ]
+  },
+  "features": {
+    "main": [
+      "Sistema de engajamento",
+      "Integração de autenticação",
+      "Design System components",
+      "State management"
+    ],
+    "planned": [
+      "Features de engajamento específicas",
+      "Dashboard de métricas",
+      "Notificações push",
+      "Analytics integration"
+    ]
+  },
+  "development": {
+    "environment": "development",
+    "hot_reload": true,
+    "dev_server": "Vite dev server",
+    "build_command": "tsc -b && vite build",
+    "test_command": "vitest --coverage",
+    "lint_fix": "eslint . --fix"
+  }
+} 
