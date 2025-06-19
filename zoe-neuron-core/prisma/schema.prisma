@@ -1,0 +1,463 @@
+// ==============================================
+// ZOE NEURON CORE - PRISMA SCHEMA
+// Sistema MCP exclusivo para IA 10x mais inteligente
+// ==============================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ==============================================
+// MATH PROFILE & CONTEXT
+// ==============================================
+
+model MathProfile {
+  id                    String            @id @default(uuid())
+  name                  String            @default("Math")
+  email                 String?           @unique
+  timezone              String            @default("America/Sao_Paulo")
+  preferredLanguage     String            @default("pt-BR")
+  workingHours          Json?             // {start: "09:00", end: "18:00"}
+  developmentStyle      Json?             // preferences, patterns, etc
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  
+  // Relations
+  contexts              MathContext[]     @relation("ProfileContexts")
+  patterns              MathPattern[]     @relation("ProfilePatterns")
+  projects              ProjectContext[]  @relation("ProfileProjects")
+  sessions              ZoeSession[]      @relation("ProfileSessions")
+  learningData          LearningData[]    @relation("ProfileLearning")
+
+  @@map("math_profile")
+}
+
+model MathContext {
+  id                    String            @id @default(cuid())
+  profileId             String
+  sessionId             String?
+  projectId             String?
+  
+  // Context Data
+  currentFocus          String?           // current task/project
+  mood                  ContextMood       @default(NEUTRAL)
+  energy                Int               @default(5) // 1-10 scale
+  flowState             Boolean           @default(false)
+  
+  // Technical Context
+  activeStack           String[]          // technologies currently using
+  recentCommands        Json?             // last 10 commands executed
+  currentProblem        String?           // problem being solved
+  lastSuccessPattern    String?           // last successful approach
+  
+  // Temporal Context
+  timeOfDay             String?           // morning, afternoon, evening
+  dayOfWeek             String?
+  sessionDuration       Int?              // minutes
+  
+  // Metadata
+  isActive              Boolean           @default(true)
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  
+  // Relations
+  profile               MathProfile       @relation("ProfileContexts", fields: [profileId], references: [id])
+  session               ZoeSession?       @relation("SessionContext", fields: [sessionId], references: [id])
+  project               ProjectContext?   @relation("ProjectContext", fields: [projectId], references: [id])
+  
+  @@index([profileId])
+  @@index([sessionId])
+  @@index([isActive])
+  @@map("math_context")
+}
+
+// ==============================================
+// PATTERN RECOGNITION & LEARNING
+// ==============================================
+
+model MathPattern {
+  id                    String            @id @default(cuid())
+  profileId             String
+  
+  // Pattern Data
+  patternType           PatternType
+  trigger               String            // what triggers this pattern
+  context               String            // when it occurs
+  action                String            // what Math typically does
+  outcome               String            // typical result
+  success               Boolean           @default(true)
+  
+  // Pattern Metadata
+  frequency             Int               @default(1)
+  lastUsed              DateTime          @default(now())
+  confidence            Float             @default(0.5) // 0.0 - 1.0
+  adaptations           Json?             // how pattern evolved
+  
+  // Temporal Data
+  timeOfDay             String?
+  dayOfWeek             String?
+  projectType           String?
+  
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  
+  // Relations
+  profile               MathProfile       @relation("ProfilePatterns", fields: [profileId], references: [id])
+  
+  @@index([profileId])
+  @@index([patternType])
+  @@index([lastUsed])
+  @@map("math_patterns")
+}
+
+model LearningData {
+  id                    String            @id @default(cuid())
+  profileId             String
+  
+  // Learning Event
+  eventType             LearningEventType
+  trigger               String            // what caused the learning
+  context               Json              // full context when learning occurred
+  input                 String            // what was the input/question
+  output                String            // what was the response/action
+  feedback              LearningFeedback? // implicit/explicit feedback
+  
+  // Learning Metrics
+  responseTime          Int?              // ms to respond
+  accuracy              Float?            // 0.0 - 1.0 if measurable
+  satisfaction          Int?              // 1-10 if Math provided feedback
+  
+  // Evolution Data
+  previousVersion       String?           // what was the old behavior
+  improvement           String?           // what improved
+  reasoning             String?           // why this was better
+  
+  createdAt             DateTime          @default(now())
+  
+  // Relations
+  profile               MathProfile       @relation("ProfileLearning", fields: [profileId], references: [id])
+  
+  @@index([profileId])
+  @@index([eventType])
+  @@index([createdAt])
+  @@map("learning_data")
+}
+
+// ==============================================
+// PROJECT INTELLIGENCE
+// ==============================================
+
+model ProjectContext {
+  id                    String            @id @default(cuid())
+  profileId             String
+  
+  // Project Data
+  name                  String
+  description           String?
+  status                ProjectStatus     @default(ACTIVE)
+  priority              Int               @default(5) // 1-10
+  
+  // Technical Data
+  stack                 String[]          // technologies used
+  architecture          String?           // architectural pattern
+  complexity            Int               @default(5) // 1-10
+  
+  // Progress Data
+  phase                 String?           // current phase
+  milestones            Json?             // key milestones
+  blockers              Json?             // current blockers
+  nextSteps             Json?             // planned next steps
+  
+  // Context Data
+  workingDirectory      String?
+  lastCommand           String?
+  recentFiles           String[]          @default([])
+  frequentPatterns      Json?             // commonly used patterns
+  
+  // Intelligence Data
+  successPatterns       Json?             // what works well
+  problemPatterns       Json?             // common issues
+  optimizations         Json?             // performance improvements
+  preferences           Json?             // Math's preferences for this project
+  
+  // Metadata
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  lastAccessed          DateTime          @default(now())
+  
+  // Relations
+  profile               MathProfile       @relation("ProfileProjects", fields: [profileId], references: [id])
+  contexts              MathContext[]     @relation("ProjectContext")
+  sessions              ZoeSession[]      @relation("ProjectSessions")
+  
+  @@index([profileId])
+  @@index([status])
+  @@index([lastAccessed])
+  @@map("project_context")
+}
+
+// ==============================================
+// ZOE SESSION MANAGEMENT
+// ==============================================
+
+model ZoeSession {
+  id                    String            @id @default(cuid())
+  profileId             String
+  projectId             String?
+  
+  // Session Data
+  sessionType           SessionType       @default(DEVELOPMENT)
+  trigger               String            // how session started
+  objective             String?           // session goal
+  
+  // Session State
+  status                SessionStatus     @default(ACTIVE)
+  startTime             DateTime          @default(now())
+  endTime               DateTime?
+  duration              Int?              // seconds
+  
+  // Context Data
+  initialContext        Json?             // context at start
+  finalContext          Json?             // context at end
+  commandsExecuted      Json?             // commands during session
+  filesModified         String[]          @default([])
+  
+  // Performance Data
+  productivity          Int?              // 1-10 subjective score
+  satisfaction          Int?              // 1-10 Math's satisfaction
+  blockers              Json?             // what blocked progress
+  achievements          Json?             // what was accomplished
+  
+  // Intelligence Data
+  predictedActions      Json?             // what Zoe predicted
+  actualActions         Json?             // what actually happened
+  accuracy              Float?            // prediction accuracy
+  improvements          Json?             // lessons learned
+  
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  
+  // Relations
+  profile               MathProfile       @relation("ProfileSessions", fields: [profileId], references: [id])
+  project               ProjectContext?   @relation("ProjectSessions", fields: [projectId], references: [id])
+  contexts              MathContext[]     @relation("SessionContext")
+  
+  @@index([profileId])
+  @@index([projectId])
+  @@index([status])
+  @@index([startTime])
+  @@map("zoe_sessions")
+}
+
+// ==============================================
+// KNOWLEDGE BASE & MEMORY
+// ==============================================
+
+model KnowledgeBase {
+  id                    String            @id @default(cuid())
+  
+  // Knowledge Data
+  type                  KnowledgeType
+  category              String            // general category
+  subcategory           String?           // specific subcategory
+  title                 String
+  content               String            // the actual knowledge
+  summary               String?           // brief summary
+  
+  // Semantic Data
+  keywords              String[]          @default([])
+  tags                  String[]          @default([])
+  embedding             String?           // vector embedding for search
+  
+  // Usage Data
+  relevanceScore        Float             @default(0.5) // 0.0 - 1.0
+  useCount              Int               @default(0)
+  lastUsed              DateTime?
+  successRate           Float             @default(0.5) // how often it helps
+  
+  // Source Data
+  source                String?           // where knowledge came from
+  sourceDate            DateTime?         // when it was created/learned
+  validated             Boolean           @default(false)
+  validatedBy           String?           // Math, system, etc
+  
+  // Evolution Data
+  version               Int               @default(1)
+  previousVersions      Json?             // track changes
+  improvements          Json?             // what was improved
+  
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  
+  @@index([type])
+  @@index([category])
+  @@index([relevanceScore])
+  @@index([lastUsed])
+  @@map("knowledge_base")
+}
+
+// ==============================================
+// ANALYTICS & OPTIMIZATION
+// ==============================================
+
+model QueryAnalytics {
+  id                    String            @id @default(cuid())
+  
+  // Query Data
+  query                 String
+  queryType             String            // search, context, prediction, etc
+  context               Json?             // context when query happened
+  
+  // Performance Data
+  responseTime          Int               // milliseconds
+  resultsCount          Int               // how many results returned
+  relevanceScore        Float?            // avg relevance of results
+  
+  // User Interaction
+  userSatisfaction      Int?              // 1-10 if provided
+  wasUseful             Boolean?          // implicit feedback
+  followupQuery         String?           // what Math asked next
+  
+  // System Data
+  algorithm             String?           // which algorithm used
+  optimizations         Json?             // any optimizations applied
+  cacheHit              Boolean           @default(false)
+  
+  createdAt             DateTime          @default(now())
+  
+  @@index([queryType])
+  @@index([responseTime])
+  @@index([createdAt])
+  @@map("query_analytics")
+}
+
+model PredictiveIntelligence {
+  id                    String            @id @default(cuid())
+  
+  // Prediction Data
+  predictionType        PredictionType
+  trigger               String            // what triggered prediction
+  context               Json              // context when prediction made
+  prediction            String            // what was predicted
+  confidence            Float             // 0.0 - 1.0
+  
+  // Outcome Data
+  actualOutcome         String?           // what actually happened
+  accuracy              Float?            // how accurate was prediction
+  timeToOutcome         Int?              // minutes until outcome
+  
+  // Learning Data
+  correctFactors        Json?             // what led to correct prediction
+  incorrectFactors      Json?             // what led to wrong prediction
+  improvements          Json?             // how to improve next time
+  
+  // Metadata
+  wasActedUpon          Boolean           @default(false)
+  impact                PredictionImpact? // if acted upon, what impact
+  
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+  
+  @@index([predictionType])
+  @@index([confidence])
+  @@index([createdAt])
+  @@map("predictive_intelligence")
+}
+
+// ==============================================
+// ENUMS
+// ==============================================
+
+enum ContextMood {
+  EXCITED
+  FOCUSED
+  NEUTRAL
+  TIRED
+  FRUSTRATED
+  CREATIVE
+  ANALYTICAL
+}
+
+enum PatternType {
+  COMMAND_SEQUENCE
+  PROBLEM_SOLVING
+  PROJECT_WORKFLOW
+  DEBUGGING
+  OPTIMIZATION
+  LEARNING
+  COMMUNICATION
+}
+
+enum LearningEventType {
+  SUCCESSFUL_TASK
+  FAILED_TASK
+  NEW_PATTERN
+  PATTERN_EVOLUTION
+  FEEDBACK
+  CORRECTION
+  DISCOVERY
+}
+
+enum LearningFeedback {
+  POSITIVE
+  NEGATIVE
+  NEUTRAL
+  MIXED
+}
+
+enum ProjectStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  ARCHIVED
+  PLANNING
+}
+
+enum SessionType {
+  DEVELOPMENT
+  DEBUGGING
+  LEARNING
+  PLANNING
+  MAINTENANCE
+  EXPLORATION
+}
+
+enum SessionStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  INTERRUPTED
+}
+
+enum KnowledgeType {
+  TECHNICAL
+  PATTERN
+  PREFERENCE
+  WORKFLOW
+  SOLUTION
+  CONCEPT
+  REFERENCE
+}
+
+enum PredictionType {
+  NEXT_COMMAND
+  LIKELY_PROBLEM
+  NEEDED_RESOURCE
+  WORKFLOW_STEP
+  OPTIMIZATION_OPPORTUNITY
+  LEARNING_MOMENT
+}
+
+enum PredictionImpact {
+  VERY_HELPFUL
+  HELPFUL
+  NEUTRAL
+  UNHELPFUL
+  COUNTERPRODUCTIVE
+} 
